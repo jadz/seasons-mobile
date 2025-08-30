@@ -1,7 +1,7 @@
-import { supabase } from '../../utils/supabase';
-import { userRepository } from '../../db/repositories/UserRepository';
-import { User } from '../../domain/models/user';
-import { SignInRequest, VerifyOtpRequest, OnboardingData } from '../../domain/models/auth';
+import { supabase } from '../../../utils/supabase';
+import { userRepository } from '../../../db/repositories/UserRepository';
+import { User } from '../../models/user';
+import { SignInRequest, VerifyOtpRequest, OnboardingData } from '../../models/auth';
 
 export class AuthService {
   /**

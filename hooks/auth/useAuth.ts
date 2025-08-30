@@ -1,6 +1,6 @@
 import { useObservable } from '@legendapp/state/react';
 import { authStore } from '../../store/auth/authStore';
-import { AuthService } from '../../services/auth/AuthService';
+import { AuthService } from '../../domain/services/auth/AuthService';
 import { SignInRequest, VerifyOtpRequest, OnboardingData } from '../../domain/models/auth';
 
 export const useAuth = () => {

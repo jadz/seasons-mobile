@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { AuthService } from '../../services/auth/AuthService';
+import { AuthService } from '../../domain/services/auth/AuthService';
 import { authStore } from './authStore';
 
 interface AuthProviderProps {
