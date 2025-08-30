@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const supabase = createClient<Database>(
   process.env.EXPO_PUBLIC_SUPABASE_URL,
-  process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY
+  process.env.EXPO_PUBLIC_SUPABASE_KEY
 );
 
 // Provide a function to generate ids locally
