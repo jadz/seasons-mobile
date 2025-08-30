@@ -34,6 +34,3 @@ Local-first Expo App with [Legend-State](https://legendapp.com/open-source/state
 supabase start
 supabase gen types --lang=typescript --local > utils/database.types.ts
 ```
-
-## Setting up users:
-Follow this guide: https://supabase.com/docs/guides/getting-started/tutorials/with-expo-react-native
