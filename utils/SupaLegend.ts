@@ -7,11 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { configureSynced } from '@legendapp/state/sync';
 import { observablePersistAsyncStorage } from '@legendapp/state/persist-plugins/async-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { supabase } from './supabase';
 
-const supabase = createClient<Database>(
-  process.env.EXPO_PUBLIC_SUPABASE_URL,
-  process.env.EXPO_PUBLIC_SUPABASE_KEY
-);
+// const supabase = createClient<Database>(
+//   process.env.EXPO_PUBLIC_SUPABASE_URL,
+//   process.env.EXPO_PUBLIC_SUPABASE_KEY
+// );
 
 // Provide a function to generate ids locally
 const generateId = () => uuidv4();
