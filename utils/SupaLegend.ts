@@ -9,11 +9,6 @@ import { observablePersistAsyncStorage } from '@legendapp/state/persist-plugins/
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from './supabase';
 
-// const supabase = createClient<Database>(
-//   process.env.EXPO_PUBLIC_SUPABASE_URL,
-//   process.env.EXPO_PUBLIC_SUPABASE_KEY
-// );
-
 // Provide a function to generate ids locally
 const generateId = () => uuidv4();
 

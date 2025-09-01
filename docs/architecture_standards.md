@@ -24,12 +24,13 @@ All code organization follows domain-driven design principles with clear separat
 ├── domain/                       # Core domain models and business logic
 │   ├── models/                   # Core domain entities
 │   ├── views/                    # View/DTO types for data hydration
-│   └── mappers/                  # Data transformation utilities
+│   ├── mappers/                  # Data transformation utilities
+│   └── services/                 # Business logic services
+│       ├── auth/                 # Authentication domain services
+│       ├── workout/              # Workout domain services
+│       └── preferences/          # User preference services
 ├── db/                          # Data layer and persistence
 │   ├── repositories/             # Repository pattern implementations
-├── services/                    # Business logic services
-│   ├── workout/                  # Workout domain services
-│   └── preferences/              # User preference services
 ├── hooks/                       # Custom React hooks
 │   └── workout/                  # Domain-specific hooks
 └── store/                       # State management (legend-state)
@@ -284,8 +285,9 @@ export interface UpdateEntityData {
 2. **Single Responsibility**: Each repository manages one aggregate root
 3. **Data vs View Types**: Separate `Data` types for creation/updates and `View` types for queries with joins
 4. **Domain Type Imports**: Import domain types from `domain/models/` when needed (e.g., `SetType`, `SetPerformance`)
-5. **Singleton Export**: Export repository instances as singletons for dependency injection
+5. **Singleton Export**: Export repository instances as singletons for dependency injection into services
 6. **Private Mapping**: Use private mapping methods to transform database results to domain objects
+7. **Interface-based Design**: Always define interfaces to enable mocking for service tests
 
 ---
 
@@ -293,63 +295,145 @@ export interface UpdateEntityData {
 
 ### Service Architecture
 
-Services contain business logic and coordinate between repositories:
+Services are located in `domain/services/` and contain business logic, coordinating between repositories within their domain. **All services must be designed for testability through dependency injection and should avoid static methods.**
 
 ```typescript
 export class UserPreferencesService {
+  constructor(
+    private readonly userRepository: IUserRepository,
+    private readonly preferencesRepository: IUserPreferencesRepository
+  ) {}
+
   /**
    * Get user preferences. Returns default preferences if none exist.
    */
-  static async getUserPreferences(): Promise<UserPreferences> {
-    // Business logic implementation
+  async getUserPreferences(): Promise<UserPreferences> {
+    // Business logic implementation using injected dependencies
   }
 
   /**
    * Update user preferences. Creates new preferences if none exist.
    */
-  static async updateUserPreferences(updates: UserPreferencesUpdate): Promise<UserPreferences> {
+  async updateUserPreferences(updates: UserPreferencesUpdate): Promise<UserPreferences> {
     // Business logic with validation and coordination
+  }
+}
+
+// ❌ Avoid static methods - they make testing difficult
+export class BadUserPreferencesService {
+  static async getUserPreferences(): Promise<UserPreferences> {
+    // Hard to test - cannot mock dependencies
   }
 }
 ```
 
 #### Service Design Principles
 
+1. **Dependency Injection**: Constructor injection for all dependencies to enable testing
+1. **Avoid Static Methods**: Use instance methods to allow for proper mocking and testing
 1. **Clear Contracts**: Explicit input/output types and comprehensive documentation
 1. **Error Handling**: Meaningful error messages and proper error propagation
 1. **Immutability**: Never mutate input parameters, return new objects
 1. **Single Transaction**: Each service method represents one business operation
 1. **Repository Coordination**: Services orchestrate multiple repository calls
 
+### Testability Standards
+
+Services must be designed with testability as a primary concern:
+
+```typescript
+// ✅ Good - Testable service with dependency injection
+export class PhaseAssignmentService {
+  constructor(
+    private readonly phaseDayAssignmentRepository: IPhaseDayAssignmentRepository,
+    private readonly trainingPhaseRepository: ITrainingPhaseRepository
+  ) {}
+
+  async rescheduleAssignment(
+    assignmentId: string,
+    newDate: Date
+  ): Promise<PhaseDayAssignmentFull> {
+    // 1. Load core entity
+    const original = await this.phaseDayAssignmentRepository.findById(assignmentId);
+    if (!original) {
+      throw new Error(`Assignment ${assignmentId} not found`);
+    }
+    
+    // 2. Immutable update
+    const updated = { ...original, assignedDate: newDate, updatedAt: new Date() };
+    
+    // 3. Persist
+    await this.phaseDayAssignmentRepository.update(assignmentId, updated);
+    
+    // 4. Return fresh view
+    return await this.getAssignmentView(assignmentId);
+  }
+
+  async getAssignmentView(id: string): Promise<PhaseDayAssignmentFull | null> {
+    return await this.phaseDayAssignmentRepository.findFullById(id);
+  }
+}
+
+// ❌ Bad - Static methods make testing difficult
+export class BadPhaseAssignmentService {
+  static async rescheduleAssignment(assignmentId: string, newDate: Date): Promise<PhaseDayAssignmentFull> {
+    // Cannot mock repositories, hard to test error conditions
+    const repo = new PhaseDayAssignmentRepository(); // Hard dependency
+    // ... implementation
+  }
+}
+```
+
+#### Testability Guidelines
+
+1. **Constructor Injection**: All dependencies injected through constructor
+2. **Interface Dependencies**: Depend on interfaces, not concrete implementations  
+3. **No Static Methods**: Avoid static methods that prevent dependency injection
+4. **No Hard Dependencies**: Never instantiate dependencies directly within methods
+5. **Integration-Friendly**: Design services to work well with integration tests using real database instances
+6. **Deterministic Methods**: Methods should be predictable and not rely on hidden state
+7. **Selective Mocking**: Mock external APIs and complex dependencies, but prefer integration tests for database operations
+
 ### Command/Query Separation
 
 #### Commands (Mutations)
+Commands should modify state and be implemented as instance methods for testability:
+
 ```typescript
-export async function rescheduleAssignment(
-  assignmentId: string,
-  newDate: Date
-): Promise<PhaseDayAssignmentFull> {
-  // 1. Load core entity
-  const original = await repo.findById(assignmentId);
-  
-  // 2. Immutable update
-  const updated = { ...original, assignedDate: newDate, updatedAt: new Date() };
-  
-  // 3. Persist
-  await repo.save(updated);
-  
-  // 4. Return fresh view
-  return await getAssignmentView(assignmentId);
+export class WorkoutSessionService {
+  constructor(
+    private readonly workoutSessionRepository: IWorkoutSessionRepository,
+    private readonly setLogRepository: ISetLogRepository
+  ) {}
+
+  async completeWorkoutSession(sessionId: string): Promise<WorkoutSessionView> {
+    // Testable command with injected dependencies
+    const session = await this.workoutSessionRepository.findById(sessionId);
+    if (!session) {
+      throw new Error(`Session ${sessionId} not found`);
+    }
+
+    const updatedSession = { 
+      ...session, 
+      completedAt: new Date(),
+      status: 'completed' as const
+    };
+
+    await this.workoutSessionRepository.update(sessionId, updatedSession);
+    return await this.workoutSessionRepository.findById(sessionId);
+  }
 }
 ```
 
 #### Queries (Reads)
+Queries should be side-effect free and easily testable:
+
 ```typescript
-export async function getAssignmentView(
-  id: string
-): Promise<PhaseDayAssignmentFull | null> {
-  // Direct repository query for read operations
-  return await repo.findFullById(id);
+export class WorkoutSessionService {
+  async getSessionWithSets(sessionId: string): Promise<WorkoutSessionWithSets | null> {
+    // Pure query operation - easily testable
+    return await this.workoutSessionRepository.findWithSets(sessionId);
+  }
 }
 ```
 
@@ -605,6 +689,101 @@ describe('SetLogRepository', () => {
 });
 ```
 
+#### Service Testing with Integration Tests
+```typescript
+describe('WorkoutSessionService', () => {
+  let service: WorkoutSessionService;
+  let workoutSessionRepository: WorkoutSessionRepository;
+  let setLogRepository: SetLogRepository;
+
+  beforeEach(async () => {
+    // Setup test database (Docker container)
+    await setupTestDatabase();
+    
+    // Use real repository instances with test database
+    workoutSessionRepository = new WorkoutSessionRepository();
+    setLogRepository = new SetLogRepository();
+    
+    // Inject real dependencies into service
+    service = new WorkoutSessionService(
+      workoutSessionRepository,
+      setLogRepository
+    );
+  });
+
+  afterEach(async () => {
+    // Clean up test data
+    await cleanupTestDatabase();
+  });
+
+  it('should complete workout session with real database', async () => {
+    // Arrange - Create test data in database
+    const sessionData = createTestWorkoutSessionData();
+    const sessionId = await workoutSessionRepository.create(sessionData);
+
+    // Act
+    const result = await service.completeWorkoutSession(sessionId);
+
+    // Assert - Verify against real database state
+    expect(result.status).toBe('completed');
+    expect(result.completedAt).toBeDefined();
+    
+    // Verify data persistence
+    const persistedSession = await workoutSessionRepository.findById(sessionId);
+    expect(persistedSession?.status).toBe('completed');
+  });
+
+  it('should throw error when session not found', async () => {
+    // Act & Assert - Test with non-existent ID
+    await expect(service.completeWorkoutSession('non-existent-id'))
+      .rejects.toThrow('Session non-existent-id not found');
+  });
+});
+
+// ✅ Unit tests with mocks for external dependencies
+describe('WorkoutSessionService - External API Integration', () => {
+  let service: WorkoutSessionService;
+  let workoutSessionRepository: WorkoutSessionRepository;
+  let mockExternalApiService: jest.Mocked<IExternalApiService>;
+
+  beforeEach(async () => {
+    await setupTestDatabase();
+    
+    // Real database dependencies
+    workoutSessionRepository = new WorkoutSessionRepository();
+    
+    // Mock external services that shouldn't hit real APIs in tests
+    mockExternalApiService = {
+      syncWorkoutData: jest.fn(),
+      sendCompletionNotification: jest.fn(),
+    } as jest.Mocked<IExternalApiService>;
+
+    service = new WorkoutSessionService(
+      workoutSessionRepository,
+      mockExternalApiService
+    );
+  });
+
+  it('should sync with external API after completion', async () => {
+    // Test combines real database operations with mocked external calls
+    const sessionId = await workoutSessionRepository.create(createTestWorkoutSessionData());
+    
+    await service.completeWorkoutSession(sessionId);
+    
+    expect(mockExternalApiService.syncWorkoutData).toHaveBeenCalledWith(sessionId);
+  });
+});
+
+// ❌ Bad - Testing static methods is difficult
+describe('BadWorkoutSessionService', () => {
+  it('cannot inject dependencies for testing', () => {
+    // No way to inject test database or mock external services
+    // Cannot isolate unit under test
+    // Cannot control test environment
+  });
+});
+```
+
 #### Hook Testing
 ```typescript
 describe('useWorkoutSession', () => {
@@ -639,7 +818,7 @@ export class UserPreferencesService {
   /**
    * Get user preferences. Returns default preferences if none exist.
    */
-  static async getUserPreferences(): Promise<UserPreferences> {
+  async getUserPreferences(): Promise<UserPreferences> {
     // Implementation
   }
 }
@@ -651,16 +830,16 @@ export class UserPreferencesService {
 
 ### File Naming Standards
 
-1. **PascalCase**: React components (`ExerciseCard.tsx`)
-2. **camelCase**: Utility functions and services (`userPreferenceService.ts`)
+1. **PascalCase**: React components (`ExerciseCard.tsx`) and services (`UserPreferenceService.ts`)
+2. **camelCase**: Utility functions and service instances (`userPreferenceService.ts`)
 3. **kebab-case**: Route files and configuration (`exercise-card.styles.ts`)
 4. **Descriptive**: Names should clearly indicate file purpose
-5. **Domain Prefixes**: Use domain prefixes for disambiguation when needed
+5. **Domain Organization**: Services are organized by domain in `domain/services/{domain}/`
 
 ### Import/Export Standards
 
 ```typescript
-// ✅ Named exports for utilities and services
+// ✅ Named exports for utilities and services (from domain/services/)
 export const userPreferenceService = new UserPreferenceService();
 export { UserPreferencesService };
 
