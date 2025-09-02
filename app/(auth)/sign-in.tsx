@@ -1,19 +1,14 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { SignInForm } from '../../components/auth';
+import { ThemeProvider } from '../../components/ui/ThemeProvider';
+import { Box } from '../../components/ui/Box';
 
 export default function SignInScreen() {
   return (
-    <View style={styles.container}>
-      <SignInForm />
-    </View>
+    <ThemeProvider initialThemeMode="light">
+      <Box flex={1} backgroundColor="background">
+        <SignInForm />
+      </Box>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-});

@@ -1,7 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 import { useAuth } from '../../hooks/auth/useAuth';
+import { ThemeProvider } from '../../components/ui/ThemeProvider';
+import { Box } from '../../components/ui/Box';
+import { Text } from '../../components/ui/Text';
+import { Button } from '../../components/ui/Button';
 
 export default function HomeScreen() {
   const { user, signOut } = useAuth();
@@ -16,42 +19,21 @@ export default function HomeScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Welcome Home</Text>
-      <Text style={styles.subtitle}>Hello, {user?.firstName || 'User'}!</Text>
-      
-      <TouchableOpacity style={styles.button} onPress={handleSignOut}>
-        <Text style={styles.buttonText}>Sign Out</Text>
-      </TouchableOpacity>
-    </View>
+    <ThemeProvider initialThemeMode="light">
+      <Box flex={1} backgroundColor="background" justifyContent="center" alignItems="center" padding="l">
+        <Text variant="title" color="text" textAlign="center" marginBottom="m">
+          Welcome Home
+        </Text>
+        <Text variant="h2" color="textSecondary" textAlign="center" marginBottom="xxl">
+          Hello, {user?.firstName || 'User'}!
+        </Text>
+
+        <Button onPress={handleSignOut}>
+          Sign Out
+        </Button>
+      </Box>
+    </ThemeProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 18,
-    marginBottom: 40,
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-});
+

@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { router } from 'expo-router';
 import { OnboardingForm } from '../components/auth';
+import { ThemeProvider } from '../components/ui/ThemeProvider';
+import { Box } from '../components/ui/Box';
 
 export default function OnboardingScreen() {
   const handleComplete = () => {
@@ -9,15 +10,10 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <OnboardingForm onComplete={handleComplete} />
-    </View>
+    <ThemeProvider initialThemeMode="light">
+      <Box flex={1} backgroundColor="background">
+        <OnboardingForm onComplete={handleComplete} />
+      </Box>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});

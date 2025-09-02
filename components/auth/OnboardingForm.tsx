@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-  TextInput,
-} from 'react-native';
+import { Alert } from 'react-native';
 import { useAuth } from '../../hooks/auth/useAuth';
 import { useUserPreferences } from '../../hooks/userPreferences/useUserPreferences';
 import { 
@@ -15,6 +8,10 @@ import {
   BodyMeasurementUnit, 
   DistanceUnit 
 } from '../../domain/models/userPreferences';
+import { Box } from '../ui/Box';
+import { Text } from '../ui/Text';
+import { Button } from '../ui/Button';
+import { TextInput } from '../ui/TextInput';
 
 interface OnboardingFormProps {
   onComplete: () => void;
@@ -81,42 +78,34 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onComplete }) => {
     selectedValue: any;
     onSelect: (value: any) => void;
   }> = ({ title, options, selectedValue, onSelect }) => (
-    <View style={styles.preferenceSection}>
-      <Text style={styles.preferenceTitle}>{title}</Text>
-      <View style={styles.preferenceOptions}>
+    <Box marginBottom="l">
+      <Text variant="label" color="text" marginBottom="m">{title}</Text>
+      <Box flexDirection="row" gap="m">
         {options.map((option) => (
-          <TouchableOpacity
+          <Button
             key={option.value}
-            style={[
-              styles.preferenceOption,
-              selectedValue === option.value && styles.preferenceOptionSelected,
-            ]}
+            variant={selectedValue === option.value ? "primary" : "secondary"}
             onPress={() => onSelect(option.value)}
             disabled={isLoading}
+            style={{ flex: 1 }}
           >
-            <Text
-              style={[
-                styles.preferenceOptionText,
-                selectedValue === option.value && styles.preferenceOptionTextSelected,
-              ]}
-            >
-              {option.label}
-            </Text>
-          </TouchableOpacity>
+            {option.label}
+          </Button>
         ))}
-      </View>
-    </View>
+      </Box>
+    </Box>
   );
 
   if (currentStep === 'name') {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>What's your name?</Text>
+      <Box flex={1} padding="l" justifyContent="center">
+        <Text variant="h1" color="text" textAlign="center" marginBottom="xl">
+          What's your name?
+        </Text>
         
-        <View style={styles.inputSection}>
-          <Text style={styles.inputLabel}>First Name</Text>
+        <Box marginBottom="xxl">
+          <Text variant="label" color="text" marginBottom="m">First Name</Text>
           <TextInput
-            style={styles.textInput}
             value={firstName}
             onChangeText={setFirstName}
             placeholder="Enter your first name"
@@ -125,22 +114,23 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onComplete }) => {
             returnKeyType="next"
             onSubmitEditing={handleNextStep}
           />
-        </View>
+        </Box>
 
-        <TouchableOpacity
-          style={[styles.button, !firstName.trim() && styles.buttonDisabled]}
+        <Button
           onPress={handleNextStep}
           disabled={!firstName.trim()}
         >
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
-      </View>
+          Continue
+        </Button>
+      </Box>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Set your preferences</Text>
+    <Box flex={1} padding="l" justifyContent="center">
+      <Text variant="h1" color="text" textAlign="center" marginBottom="xl">
+        Set your preferences
+      </Text>
       
       <PreferenceSelector
         title="Body Weight"
@@ -182,100 +172,17 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onComplete }) => {
         onSelect={setDistanceUnit}
       />
 
-      <TouchableOpacity
-        style={[styles.button, isLoading && styles.buttonDisabled]}
+      <Button
         onPress={handleComplete}
         disabled={isLoading}
+        style={{ marginTop: 24 }}
       >
-        <Text style={styles.buttonText}>
-          {isLoading ? 'Setting up...' : 'Complete Setup'}
-        </Text>
-      </TouchableOpacity>
-    </View>
+        {isLoading ? 'Setting up...' : 'Complete Setup'}
+      </Button>
+    </Box>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 30,
-    color: '#333',
-  },
-  inputSection: {
-    marginBottom: 40,
-  },
-  inputLabel: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 12,
-    color: '#333',
-  },
-  textInput: {
-    borderWidth: 2,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 16,
-    fontSize: 16,
-    backgroundColor: '#f8f9fa',
-  },
-  preferenceSection: {
-    marginBottom: 24,
-  },
-  preferenceTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 12,
-    color: '#333',
-  },
-  preferenceOptions: {
-    flexDirection: 'row',
-    gap: 12,
-  },
-  preferenceOption: {
-    flex: 1,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 8,
-    borderWidth: 2,
-    borderColor: '#ddd',
-    backgroundColor: '#f8f9fa',
-    alignItems: 'center',
-  },
-  preferenceOptionSelected: {
-    borderColor: '#007AFF',
-    backgroundColor: '#e7f3ff',
-  },
-  preferenceOptionText: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: '#666',
-  },
-  preferenceOptionTextSelected: {
-    color: '#007AFF',
-    fontWeight: '600',
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    padding: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  buttonDisabled: {
-    backgroundColor: '#ccc',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-});
+
 
 export { OnboardingForm };
