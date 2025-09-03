@@ -81,7 +81,6 @@ INSERT INTO metrics (name, description, unit_type, default_unit, alternative_uni
 ('Steps Per Day', 'Daily step count', 'other', 'count', '[]', 'integer', 'predefined'),
 ('Workout Frequency', 'Number of workouts per week', 'other', 'count', '[]', 'integer', 'predefined'),
 ('Daily Calories', 'Daily caloric intake', 'other', 'count', '[]', 'integer', 'predefined'),
-('Daily Protein', 'Daily protein intake in grams', 'weight', 'count', '[]', 'integer', 'predefined');
 
 -- Wealth Metrics
 INSERT INTO metrics (name, description, unit_type, default_unit, alternative_units, data_type, metric_type) VALUES 

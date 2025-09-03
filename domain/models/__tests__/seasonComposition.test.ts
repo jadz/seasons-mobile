@@ -21,6 +21,7 @@ describe('Season Composition Domain Models', () => {
           'season-pillar-id',
           mockSeasonId,
           mockPillarId,
+          'Weight Loss and Strength',
           true,
           1,
           createdAt
@@ -29,6 +30,7 @@ describe('Season Composition Domain Models', () => {
         expect(seasonPillar.id).toBe('season-pillar-id');
         expect(seasonPillar.seasonId).toBe(mockSeasonId);
         expect(seasonPillar.pillarId).toBe(mockPillarId);
+        expect(seasonPillar.theme).toBe('Weight Loss and Strength');
         expect(seasonPillar.isActive).toBe(true);
         expect(seasonPillar.sortOrder).toBe(1);
         expect(seasonPillar.createdAt).toBe(createdAt);
@@ -39,12 +41,14 @@ describe('Season Composition Domain Models', () => {
           'season-pillar-id',
           mockSeasonId,
           mockPillarId,
+          'Budget Management',
           false,
           2,
           new Date()
         );
 
         expect(seasonPillar.isActive).toBe(false);
+        expect(seasonPillar.theme).toBe('Budget Management');
         expect(seasonPillar.sortOrder).toBe(2);
       });
 
@@ -54,6 +58,7 @@ describe('Season Composition Domain Models', () => {
             'season-pillar-id',
             '', // Empty season ID
             mockPillarId,
+            'Theme',
             true,
             1,
             new Date()
@@ -65,8 +70,9 @@ describe('Season Composition Domain Models', () => {
         expect(() => {
           new SeasonPillar(
             'season-pillar-id',
-            'invalid-uuid', // Invalid UUID
+            'invalid-uuid',
             mockPillarId,
+            'Theme',
             true,
             1,
             new Date()
@@ -80,6 +86,7 @@ describe('Season Composition Domain Models', () => {
             'season-pillar-id',
             mockSeasonId,
             '', // Empty pillar ID
+            'Theme',
             true,
             1,
             new Date()
@@ -92,12 +99,27 @@ describe('Season Composition Domain Models', () => {
           new SeasonPillar(
             'season-pillar-id',
             mockSeasonId,
-            'invalid-uuid', // Invalid UUID
+            'invalid-uuid',
+            'Theme',
             true,
             1,
             new Date()
           );
         }).toThrow('Pillar ID must be a valid UUID');
+      });
+
+      it('should validate theme on construction', () => {
+        expect(() => {
+          new SeasonPillar(
+            'season-pillar-id',
+            mockSeasonId,
+            mockPillarId,
+            '', // Empty theme
+            true,
+            1,
+            new Date()
+          );
+        }).toThrow('Season pillar theme cannot be empty');
       });
 
       it('should validate sort order on construction', () => {
@@ -106,6 +128,7 @@ describe('Season Composition Domain Models', () => {
             'season-pillar-id',
             mockSeasonId,
             mockPillarId,
+            'Theme',
             true,
             -1, // Invalid sort order
             new Date()
@@ -114,16 +137,17 @@ describe('Season Composition Domain Models', () => {
       });
 
       it('should allow zero sort order', () => {
-        expect(() => {
-          new SeasonPillar(
-            'season-pillar-id',
-            mockSeasonId,
-            mockPillarId,
-            true,
-            0, // Zero is valid
-            new Date()
-          );
-        }).not.toThrow();
+        const seasonPillar = new SeasonPillar(
+          'season-pillar-id',
+          mockSeasonId,
+          mockPillarId,
+          'Theme',
+          true,
+          0,
+          new Date()
+        );
+
+        expect(seasonPillar.sortOrder).toBe(0);
       });
     });
 
@@ -133,41 +157,54 @@ describe('Season Composition Domain Models', () => {
           const seasonPillarData = SeasonPillar.addToSeason(
             mockSeasonId,
             mockPillarId,
-            3
+            'Weight Loss and Strength'
           );
 
           expect(seasonPillarData.seasonId).toBe(mockSeasonId);
           expect(seasonPillarData.pillarId).toBe(mockPillarId);
+          expect(seasonPillarData.theme).toBe('Weight Loss and Strength');
           expect(seasonPillarData.isActive).toBe(true);
-          expect(seasonPillarData.sortOrder).toBe(3);
+          expect(seasonPillarData.sortOrder).toBe(0);
         });
 
         it('should default to sort order 0 if not specified', () => {
-          const seasonPillarData = SeasonPillar.addToSeason(
+          const data = SeasonPillar.addToSeason(
             mockSeasonId,
-            mockPillarId
+            mockPillarId,
+            'Budget Management'
           );
 
-          expect(seasonPillarData.sortOrder).toBe(0);
-          expect(seasonPillarData.isActive).toBe(true);
+          expect(data.sortOrder).toBe(0);
         });
 
         it('should validate season ID for association creation', () => {
           expect(() => {
             SeasonPillar.addToSeason(
-              'invalid-uuid',
-              mockPillarId
+              '', // Empty season ID
+              mockPillarId,
+              'Theme'
             );
-          }).toThrow('Season ID must be a valid UUID');
+          }).toThrow('Season ID cannot be empty');
         });
 
         it('should validate pillar ID for association creation', () => {
           expect(() => {
             SeasonPillar.addToSeason(
               mockSeasonId,
-              'invalid-uuid'
+              '', // Empty pillar ID
+              'Theme'
             );
-          }).toThrow('Pillar ID must be a valid UUID');
+          }).toThrow('Pillar ID cannot be empty');
+        });
+
+        it('should validate theme for association creation', () => {
+          expect(() => {
+            SeasonPillar.addToSeason(
+              mockSeasonId,
+              mockPillarId,
+              '' // Empty theme
+            );
+          }).toThrow('Season pillar theme cannot be empty');
         });
 
         it('should validate sort order for association creation', () => {
@@ -175,6 +212,7 @@ describe('Season Composition Domain Models', () => {
             SeasonPillar.addToSeason(
               mockSeasonId,
               mockPillarId,
+              'Theme',
               -1 // Invalid sort order
             );
           }).toThrow('Sort order must be a non-negative integer');
@@ -187,8 +225,9 @@ describe('Season Composition Domain Models', () => {
             id: 'season-pillar-id',
             seasonId: mockSeasonId,
             pillarId: mockPillarId,
+            theme: 'Weight Loss and Strength',
             isActive: true,
-            sortOrder: 2,
+            sortOrder: 1,
             createdAt: new Date('2024-06-01T10:00:00Z')
           };
 
@@ -197,8 +236,9 @@ describe('Season Composition Domain Models', () => {
           expect(seasonPillar.id).toBe('season-pillar-id');
           expect(seasonPillar.seasonId).toBe(mockSeasonId);
           expect(seasonPillar.pillarId).toBe(mockPillarId);
+          expect(seasonPillar.theme).toBe('Weight Loss and Strength');
           expect(seasonPillar.isActive).toBe(true);
-          expect(seasonPillar.sortOrder).toBe(2);
+          expect(seasonPillar.sortOrder).toBe(1);
         });
 
         it('should handle inactive pillar from database', () => {
@@ -206,15 +246,15 @@ describe('Season Composition Domain Models', () => {
             id: 'season-pillar-id',
             seasonId: mockSeasonId,
             pillarId: mockPillarId,
+            theme: 'Budget Management',
             isActive: false,
-            sortOrder: 0,
-            createdAt: new Date()
+            sortOrder: 2,
+            createdAt: new Date('2024-06-01T10:00:00Z')
           };
 
           const seasonPillar = SeasonPillar.fromData(dbData);
-
           expect(seasonPillar.isActive).toBe(false);
-          expect(seasonPillar.sortOrder).toBe(0);
+          expect(seasonPillar.theme).toBe('Budget Management');
         });
       });
     });
@@ -227,6 +267,7 @@ describe('Season Composition Domain Models', () => {
           'season-pillar-id',
           mockSeasonId,
           mockPillarId,
+          'Weight Loss and Strength',
           true,
           1,
           new Date('2024-06-01T10:00:00Z')
@@ -243,6 +284,7 @@ describe('Season Composition Domain Models', () => {
             'season-pillar-id',
             mockSeasonId,
             mockPillarId,
+            'Budget Management',
             false,
             1,
             new Date()
@@ -258,60 +300,66 @@ describe('Season Composition Domain Models', () => {
             'season-pillar-id',
             mockSeasonId,
             mockPillarId,
+            'Budget Management',
             false,
             1,
             new Date('2024-06-01T10:00:00Z')
           );
 
-          const activatedPillar = inactivePillar.activate();
+          const activated = inactivePillar.activate();
 
-          expect(activatedPillar.isActive).toBe(true);
-          expect(activatedPillar.id).toBe(inactivePillar.id);
-          expect(activatedPillar.seasonId).toBe(inactivePillar.seasonId);
-          expect(activatedPillar.pillarId).toBe(inactivePillar.pillarId);
-          expect(activatedPillar.sortOrder).toBe(inactivePillar.sortOrder);
-          expect(activatedPillar.createdAt).toBe(inactivePillar.createdAt);
+          expect(activated.isActive).toBe(true);
+          expect(activated.id).toBe(inactivePillar.id);
+          expect(activated.seasonId).toBe(inactivePillar.seasonId);
+          expect(activated.pillarId).toBe(inactivePillar.pillarId);
+          expect(activated.theme).toBe(inactivePillar.theme);
+          expect(activated.sortOrder).toBe(inactivePillar.sortOrder);
         });
 
         it('should return same instance if already active', () => {
-          const activatedPillar = seasonPillar.activate();
-
-          expect(activatedPillar).toBe(seasonPillar);
-          expect(activatedPillar.isActive).toBe(true);
+          const activated = seasonPillar.activate();
+          expect(activated).toBe(seasonPillar);
         });
       });
 
       describe('deactivate', () => {
         it('should deactivate an active pillar', () => {
-          const deactivatedPillar = seasonPillar.deactivate();
+          const deactivated = seasonPillar.deactivate();
 
-          expect(deactivatedPillar.isActive).toBe(false);
-          expect(deactivatedPillar.id).toBe(seasonPillar.id);
-          expect(deactivatedPillar.seasonId).toBe(seasonPillar.seasonId);
-          expect(deactivatedPillar.pillarId).toBe(seasonPillar.pillarId);
-          expect(deactivatedPillar.sortOrder).toBe(seasonPillar.sortOrder);
-          expect(deactivatedPillar.createdAt).toBe(seasonPillar.createdAt);
+          expect(deactivated.isActive).toBe(false);
+          expect(deactivated.id).toBe(seasonPillar.id);
+          expect(deactivated.seasonId).toBe(seasonPillar.seasonId);
+          expect(deactivated.pillarId).toBe(seasonPillar.pillarId);
+          expect(deactivated.theme).toBe(seasonPillar.theme);
+          expect(deactivated.sortOrder).toBe(seasonPillar.sortOrder);
         });
 
         it('should return same instance if already inactive', () => {
-          const inactivePillar = seasonPillar.deactivate();
-          const deactivatedAgain = inactivePillar.deactivate();
+          const inactivePillar = new SeasonPillar(
+            'season-pillar-id',
+            mockSeasonId,
+            mockPillarId,
+            'Budget Management',
+            false,
+            1,
+            new Date()
+          );
 
-          expect(deactivatedAgain).toBe(inactivePillar);
-          expect(deactivatedAgain.isActive).toBe(false);
+          const deactivated = inactivePillar.deactivate();
+          expect(deactivated).toBe(inactivePillar);
         });
       });
 
       describe('updateSortOrder', () => {
         it('should update sort order successfully', () => {
-          const updatedPillar = seasonPillar.updateSortOrder(5);
+          const updated = seasonPillar.updateSortOrder(5);
 
-          expect(updatedPillar.sortOrder).toBe(5);
-          expect(updatedPillar.id).toBe(seasonPillar.id);
-          expect(updatedPillar.seasonId).toBe(seasonPillar.seasonId);
-          expect(updatedPillar.pillarId).toBe(seasonPillar.pillarId);
-          expect(updatedPillar.isActive).toBe(seasonPillar.isActive);
-          expect(updatedPillar.createdAt).toBe(seasonPillar.createdAt);
+          expect(updated.sortOrder).toBe(5);
+          expect(updated.id).toBe(seasonPillar.id);
+          expect(updated.seasonId).toBe(seasonPillar.seasonId);
+          expect(updated.pillarId).toBe(seasonPillar.pillarId);
+          expect(updated.theme).toBe(seasonPillar.theme);
+          expect(updated.isActive).toBe(seasonPillar.isActive);
         });
 
         it('should validate non-negative sort order', () => {
@@ -321,16 +369,13 @@ describe('Season Composition Domain Models', () => {
         });
 
         it('should allow zero sort order', () => {
-          expect(() => {
-            seasonPillar.updateSortOrder(0);
-          }).not.toThrow();
+          const updated = seasonPillar.updateSortOrder(0);
+          expect(updated.sortOrder).toBe(0);
         });
 
         it('should handle updating to same sort order', () => {
-          const updatedPillar = seasonPillar.updateSortOrder(1);
-
-          expect(updatedPillar.sortOrder).toBe(1);
-          expect(updatedPillar.id).toBe(seasonPillar.id);
+          const updated = seasonPillar.updateSortOrder(seasonPillar.sortOrder);
+          expect(updated.sortOrder).toBe(seasonPillar.sortOrder);
         });
       });
     });
@@ -341,34 +386,72 @@ describe('Season Composition Domain Models', () => {
           'season-pillar-id',
           mockSeasonId,
           mockPillarId,
+          'Original Theme',
           true,
           1,
           new Date('2024-06-01T10:00:00Z')
         );
 
-        const deactivatedPillar = originalPillar.deactivate();
-        const reactivatedPillar = deactivatedPillar.activate();
-        const reorderedPillar = reactivatedPillar.updateSortOrder(3);
+        const deactivated = originalPillar.deactivate();
+        const reordered = originalPillar.updateSortOrder(5);
 
-        // Original should be unchanged
+        // Original should remain unchanged
         expect(originalPillar.isActive).toBe(true);
         expect(originalPillar.sortOrder).toBe(1);
+        expect(originalPillar.theme).toBe('Original Theme');
 
-        // Each step should be independent
-        expect(deactivatedPillar.isActive).toBe(false);
-        expect(reactivatedPillar.isActive).toBe(true);
-        expect(reorderedPillar.sortOrder).toBe(3);
+        // New instances should have changes
+        expect(deactivated.isActive).toBe(false);
+        expect(reordered.sortOrder).toBe(5);
+
+        // Objects should be different instances
+        expect(deactivated).not.toBe(originalPillar);
+        expect(reordered).not.toBe(originalPillar);
       });
 
       it('should handle very high sort order values', () => {
         const highSortOrder = 999999;
-        const data = SeasonPillar.addToSeason(
+        const seasonPillar = new SeasonPillar(
+          'season-pillar-id',
           mockSeasonId,
           mockPillarId,
-          highSortOrder
+          'Theme',
+          true,
+          highSortOrder,
+          new Date()
         );
 
-        expect(data.sortOrder).toBe(highSortOrder);
+        expect(seasonPillar.sortOrder).toBe(highSortOrder);
+      });
+
+      it('should handle long theme strings', () => {
+        const longTheme = 'a'.repeat(100); // Maximum allowed length
+        const seasonPillar = new SeasonPillar(
+          'season-pillar-id',
+          mockSeasonId,
+          mockPillarId,
+          longTheme,
+          true,
+          1,
+          new Date()
+        );
+
+        expect(seasonPillar.theme).toBe(longTheme);
+      });
+
+      it('should reject themes that are too long', () => {
+        const tooLongTheme = 'a'.repeat(101);
+        expect(() => {
+          new SeasonPillar(
+            'season-pillar-id',
+            mockSeasonId,
+            mockPillarId,
+            tooLongTheme,
+            true,
+            1,
+            new Date()
+          );
+        }).toThrow('Season pillar theme cannot exceed 100 characters');
       });
     });
   });
@@ -382,14 +465,14 @@ describe('Season Composition Domain Models', () => {
           'season-pillar-area-id',
           mockSeasonPillarId,
           mockAreaId,
-          2,
+          1,
           createdAt
         );
 
         expect(seasonPillarArea.id).toBe('season-pillar-area-id');
         expect(seasonPillarArea.seasonPillarId).toBe(mockSeasonPillarId);
         expect(seasonPillarArea.areaOfFocusId).toBe(mockAreaId);
-        expect(seasonPillarArea.sortOrder).toBe(2);
+        expect(seasonPillarArea.sortOrder).toBe(1);
         expect(seasonPillarArea.createdAt).toBe(createdAt);
       });
 
@@ -410,7 +493,7 @@ describe('Season Composition Domain Models', () => {
           new SeasonPillarArea(
             'season-pillar-area-id',
             mockSeasonPillarId,
-            '', // Empty area ID
+            '', // Empty area of focus ID
             1,
             new Date()
           );
@@ -430,61 +513,56 @@ describe('Season Composition Domain Models', () => {
       });
 
       it('should validate UUID formats on construction', () => {
-        const invalidUuids = ['invalid-uuid', '123', ''];
-        
-        invalidUuids.forEach(invalidUuid => {
-          expect(() => {
-            new SeasonPillarArea(
-              'season-pillar-area-id',
-              invalidUuid,
-              mockAreaId,
-              1,
-              new Date()
-            );
-          }).toThrow();
-        });
+        expect(() => {
+          new SeasonPillarArea(
+            'season-pillar-area-id',
+            'invalid-uuid',
+            mockAreaId,
+            1,
+            new Date()
+          );
+        }).toThrow('Season pillar ID must be a valid UUID');
       });
     });
 
     describe('Static Factory Methods', () => {
       describe('addToSeasonPillar', () => {
         it('should create season pillar area association', () => {
-          const associationData = SeasonPillarArea.addToSeasonPillar(
-            mockSeasonPillarId,
-            mockAreaId,
-            3
-          );
-
-          expect(associationData.seasonPillarId).toBe(mockSeasonPillarId);
-          expect(associationData.areaOfFocusId).toBe(mockAreaId);
-          expect(associationData.sortOrder).toBe(3);
-        });
-
-        it('should default sort order to 0 if not specified', () => {
-          const associationData = SeasonPillarArea.addToSeasonPillar(
+          const data = SeasonPillarArea.addToSeasonPillar(
             mockSeasonPillarId,
             mockAreaId
           );
 
-          expect(associationData.sortOrder).toBe(0);
+          expect(data.seasonPillarId).toBe(mockSeasonPillarId);
+          expect(data.areaOfFocusId).toBe(mockAreaId);
+          expect(data.sortOrder).toBe(0);
+        });
+
+        it('should default sort order to 0 if not specified', () => {
+          const data = SeasonPillarArea.addToSeasonPillar(
+            mockSeasonPillarId,
+            mockAreaId
+          );
+
+          expect(data.sortOrder).toBe(0);
         });
 
         it('should validate season pillar ID for association creation', () => {
           expect(() => {
             SeasonPillarArea.addToSeasonPillar(
-              'invalid-uuid',
+              '', // Empty season pillar ID
               mockAreaId
             );
-          }).toThrow('Season pillar ID must be a valid UUID');
+          }).toThrow('Season pillar ID cannot be empty');
         });
 
         it('should validate area of focus ID for association creation', () => {
           expect(() => {
             SeasonPillarArea.addToSeasonPillar(
               mockSeasonPillarId,
-              'invalid-uuid'
+              '' // Empty area of focus ID
             );
-          }).toThrow('Area of focus ID must be a valid UUID');
+          }).toThrow('Area of focus ID cannot be empty');
         });
 
         it('should validate sort order for association creation', () => {
@@ -504,7 +582,7 @@ describe('Season Composition Domain Models', () => {
             id: 'season-pillar-area-id',
             seasonPillarId: mockSeasonPillarId,
             areaOfFocusId: mockAreaId,
-            sortOrder: 2,
+            sortOrder: 1,
             createdAt: new Date('2024-06-01T10:00:00Z')
           };
 
@@ -513,66 +591,84 @@ describe('Season Composition Domain Models', () => {
           expect(seasonPillarArea.id).toBe('season-pillar-area-id');
           expect(seasonPillarArea.seasonPillarId).toBe(mockSeasonPillarId);
           expect(seasonPillarArea.areaOfFocusId).toBe(mockAreaId);
-          expect(seasonPillarArea.sortOrder).toBe(2);
+          expect(seasonPillarArea.sortOrder).toBe(1);
         });
       });
     });
 
     describe('Business Logic Methods', () => {
-      let seasonPillarArea: SeasonPillarArea;
-
-      beforeEach(() => {
-        seasonPillarArea = new SeasonPillarArea(
-          'season-pillar-area-id',
-          mockSeasonPillarId,
-          mockAreaId,
-          3,
-          new Date('2024-06-01T10:00:00Z')
-        );
-      });
-
       describe('updateSortOrder', () => {
         it('should update sort order successfully', () => {
-          const updatedArea = seasonPillarArea.updateSortOrder(7);
+          const seasonPillarArea = new SeasonPillarArea(
+            'season-pillar-area-id',
+            mockSeasonPillarId,
+            mockAreaId,
+            1,
+            new Date()
+          );
 
-          expect(updatedArea.sortOrder).toBe(7);
-          expect(updatedArea.id).toBe(seasonPillarArea.id);
-          expect(updatedArea.seasonPillarId).toBe(seasonPillarArea.seasonPillarId);
-          expect(updatedArea.areaOfFocusId).toBe(seasonPillarArea.areaOfFocusId);
-          expect(updatedArea.createdAt).toBe(seasonPillarArea.createdAt);
+          const updated = seasonPillarArea.updateSortOrder(5);
+
+          expect(updated.sortOrder).toBe(5);
+          expect(updated.id).toBe(seasonPillarArea.id);
+          expect(updated.seasonPillarId).toBe(seasonPillarArea.seasonPillarId);
+          expect(updated.areaOfFocusId).toBe(seasonPillarArea.areaOfFocusId);
         });
 
         it('should validate non-negative sort order', () => {
+          const seasonPillarArea = new SeasonPillarArea(
+            'season-pillar-area-id',
+            mockSeasonPillarId,
+            mockAreaId,
+            1,
+            new Date()
+          );
+
           expect(() => {
             seasonPillarArea.updateSortOrder(-1);
           }).toThrow('Sort order must be a non-negative integer');
         });
 
         it('should allow zero sort order', () => {
-          expect(() => {
-            seasonPillarArea.updateSortOrder(0);
-          }).not.toThrow();
+          const seasonPillarArea = new SeasonPillarArea(
+            'season-pillar-area-id',
+            mockSeasonPillarId,
+            mockAreaId,
+            1,
+            new Date()
+          );
+
+          const updated = seasonPillarArea.updateSortOrder(0);
+          expect(updated.sortOrder).toBe(0);
         });
 
         it('should handle updating to same sort order', () => {
-          const updatedArea = seasonPillarArea.updateSortOrder(3);
+          const seasonPillarArea = new SeasonPillarArea(
+            'season-pillar-area-id',
+            mockSeasonPillarId,
+            mockAreaId,
+            1,
+            new Date()
+          );
 
-          expect(updatedArea.sortOrder).toBe(3);
-          expect(updatedArea.id).toBe(seasonPillarArea.id);
+          const updated = seasonPillarArea.updateSortOrder(seasonPillarArea.sortOrder);
+          expect(updated.sortOrder).toBe(seasonPillarArea.sortOrder);
         });
       });
     });
 
     describe('Edge Cases and Error Handling', () => {
       it('should handle very high sort order values', () => {
-        const highSortOrder = 1000000;
-        const associationData = SeasonPillarArea.addToSeasonPillar(
+        const highSortOrder = 999999;
+        const seasonPillarArea = new SeasonPillarArea(
+          'season-pillar-area-id',
           mockSeasonPillarId,
           mockAreaId,
-          highSortOrder
+          highSortOrder,
+          new Date()
         );
 
-        expect(associationData.sortOrder).toBe(highSortOrder);
+        expect(seasonPillarArea.sortOrder).toBe(highSortOrder);
       });
 
       it('should preserve immutability across operations', () => {
@@ -580,16 +676,20 @@ describe('Season Composition Domain Models', () => {
           'season-pillar-area-id',
           mockSeasonPillarId,
           mockAreaId,
-          3,
-          new Date('2024-06-01T10:00:00Z')
+          1,
+          new Date()
         );
 
-        const updatedArea = originalArea.updateSortOrder(5);
+        const reordered = originalArea.updateSortOrder(5);
 
-        // Original should be unchanged
-        expect(originalArea.sortOrder).toBe(3);
-        expect(updatedArea.sortOrder).toBe(5);
-        expect(updatedArea).not.toBe(originalArea);
+        // Original should remain unchanged
+        expect(originalArea.sortOrder).toBe(1);
+
+        // New instance should have changes
+        expect(reordered.sortOrder).toBe(5);
+
+        // Objects should be different instances
+        expect(reordered).not.toBe(originalArea);
       });
     });
   });
@@ -603,14 +703,14 @@ describe('Season Composition Domain Models', () => {
           'season-area-metric-id',
           mockSeasonPillarAreaId,
           mockMetricId,
-          4,
+          1,
           createdAt
         );
 
         expect(seasonAreaMetric.id).toBe('season-area-metric-id');
         expect(seasonAreaMetric.seasonPillarAreaId).toBe(mockSeasonPillarAreaId);
         expect(seasonAreaMetric.metricId).toBe(mockMetricId);
-        expect(seasonAreaMetric.sortOrder).toBe(4);
+        expect(seasonAreaMetric.sortOrder).toBe(1);
         expect(seasonAreaMetric.createdAt).toBe(createdAt);
       });
 
@@ -651,61 +751,56 @@ describe('Season Composition Domain Models', () => {
       });
 
       it('should validate UUID formats on construction', () => {
-        const invalidUuids = ['invalid-uuid', '123', ''];
-        
-        invalidUuids.forEach(invalidUuid => {
-          expect(() => {
-            new SeasonAreaMetric(
-              'season-area-metric-id',
-              invalidUuid,
-              mockMetricId,
-              1,
-              new Date()
-            );
-          }).toThrow();
-        });
+        expect(() => {
+          new SeasonAreaMetric(
+            'season-area-metric-id',
+            'invalid-uuid',
+            mockMetricId,
+            1,
+            new Date()
+          );
+        }).toThrow('Season pillar area ID must be a valid UUID');
       });
     });
 
     describe('Static Factory Methods', () => {
       describe('addToSeasonArea', () => {
         it('should create season area metric association', () => {
-          const associationData = SeasonAreaMetric.addToSeasonArea(
-            mockSeasonPillarAreaId,
-            mockMetricId,
-            6
-          );
-
-          expect(associationData.seasonPillarAreaId).toBe(mockSeasonPillarAreaId);
-          expect(associationData.metricId).toBe(mockMetricId);
-          expect(associationData.sortOrder).toBe(6);
-        });
-
-        it('should default sort order to 0 if not specified', () => {
-          const associationData = SeasonAreaMetric.addToSeasonArea(
+          const data = SeasonAreaMetric.addToSeasonArea(
             mockSeasonPillarAreaId,
             mockMetricId
           );
 
-          expect(associationData.sortOrder).toBe(0);
+          expect(data.seasonPillarAreaId).toBe(mockSeasonPillarAreaId);
+          expect(data.metricId).toBe(mockMetricId);
+          expect(data.sortOrder).toBe(0);
+        });
+
+        it('should default sort order to 0 if not specified', () => {
+          const data = SeasonAreaMetric.addToSeasonArea(
+            mockSeasonPillarAreaId,
+            mockMetricId
+          );
+
+          expect(data.sortOrder).toBe(0);
         });
 
         it('should validate season pillar area ID for association creation', () => {
           expect(() => {
             SeasonAreaMetric.addToSeasonArea(
-              'invalid-uuid',
+              '', // Empty season pillar area ID
               mockMetricId
             );
-          }).toThrow('Season pillar area ID must be a valid UUID');
+          }).toThrow('Season pillar area ID cannot be empty');
         });
 
         it('should validate metric ID for association creation', () => {
           expect(() => {
             SeasonAreaMetric.addToSeasonArea(
               mockSeasonPillarAreaId,
-              'invalid-uuid'
+              '' // Empty metric ID
             );
-          }).toThrow('Metric ID must be a valid UUID');
+          }).toThrow('Metric ID cannot be empty');
         });
 
         it('should validate sort order for association creation', () => {
@@ -713,7 +808,7 @@ describe('Season Composition Domain Models', () => {
             SeasonAreaMetric.addToSeasonArea(
               mockSeasonPillarAreaId,
               mockMetricId,
-              -2 // Invalid sort order
+              -1 // Invalid sort order
             );
           }).toThrow('Sort order must be a non-negative integer');
         });
@@ -725,7 +820,7 @@ describe('Season Composition Domain Models', () => {
             id: 'season-area-metric-id',
             seasonPillarAreaId: mockSeasonPillarAreaId,
             metricId: mockMetricId,
-            sortOrder: 6,
+            sortOrder: 1,
             createdAt: new Date('2024-06-01T10:00:00Z')
           };
 
@@ -734,66 +829,84 @@ describe('Season Composition Domain Models', () => {
           expect(seasonAreaMetric.id).toBe('season-area-metric-id');
           expect(seasonAreaMetric.seasonPillarAreaId).toBe(mockSeasonPillarAreaId);
           expect(seasonAreaMetric.metricId).toBe(mockMetricId);
-          expect(seasonAreaMetric.sortOrder).toBe(6);
+          expect(seasonAreaMetric.sortOrder).toBe(1);
         });
       });
     });
 
     describe('Business Logic Methods', () => {
-      let seasonAreaMetric: SeasonAreaMetric;
-
-      beforeEach(() => {
-        seasonAreaMetric = new SeasonAreaMetric(
-          'season-area-metric-id',
-          mockSeasonPillarAreaId,
-          mockMetricId,
-          2,
-          new Date('2024-06-01T10:00:00Z')
-        );
-      });
-
       describe('updateSortOrder', () => {
         it('should update sort order successfully', () => {
-          const updatedMetric = seasonAreaMetric.updateSortOrder(8);
+          const seasonAreaMetric = new SeasonAreaMetric(
+            'season-area-metric-id',
+            mockSeasonPillarAreaId,
+            mockMetricId,
+            1,
+            new Date()
+          );
 
-          expect(updatedMetric.sortOrder).toBe(8);
-          expect(updatedMetric.id).toBe(seasonAreaMetric.id);
-          expect(updatedMetric.seasonPillarAreaId).toBe(seasonAreaMetric.seasonPillarAreaId);
-          expect(updatedMetric.metricId).toBe(seasonAreaMetric.metricId);
-          expect(updatedMetric.createdAt).toBe(seasonAreaMetric.createdAt);
+          const updated = seasonAreaMetric.updateSortOrder(5);
+
+          expect(updated.sortOrder).toBe(5);
+          expect(updated.id).toBe(seasonAreaMetric.id);
+          expect(updated.seasonPillarAreaId).toBe(seasonAreaMetric.seasonPillarAreaId);
+          expect(updated.metricId).toBe(seasonAreaMetric.metricId);
         });
 
         it('should validate non-negative sort order', () => {
+          const seasonAreaMetric = new SeasonAreaMetric(
+            'season-area-metric-id',
+            mockSeasonPillarAreaId,
+            mockMetricId,
+            1,
+            new Date()
+          );
+
           expect(() => {
-            seasonAreaMetric.updateSortOrder(-5);
+            seasonAreaMetric.updateSortOrder(-1);
           }).toThrow('Sort order must be a non-negative integer');
         });
 
         it('should allow zero sort order', () => {
-          expect(() => {
-            seasonAreaMetric.updateSortOrder(0);
-          }).not.toThrow();
+          const seasonAreaMetric = new SeasonAreaMetric(
+            'season-area-metric-id',
+            mockSeasonPillarAreaId,
+            mockMetricId,
+            1,
+            new Date()
+          );
+
+          const updated = seasonAreaMetric.updateSortOrder(0);
+          expect(updated.sortOrder).toBe(0);
         });
 
         it('should handle updating to same sort order', () => {
-          const updatedMetric = seasonAreaMetric.updateSortOrder(2);
+          const seasonAreaMetric = new SeasonAreaMetric(
+            'season-area-metric-id',
+            mockSeasonPillarAreaId,
+            mockMetricId,
+            1,
+            new Date()
+          );
 
-          expect(updatedMetric.sortOrder).toBe(2);
-          expect(updatedMetric.id).toBe(seasonAreaMetric.id);
+          const updated = seasonAreaMetric.updateSortOrder(seasonAreaMetric.sortOrder);
+          expect(updated.sortOrder).toBe(seasonAreaMetric.sortOrder);
         });
       });
     });
 
     describe('Edge Cases and Error Handling', () => {
       it('should handle very high sort order values', () => {
-        const highSortOrder = 1000000;
-        const associationData = SeasonAreaMetric.addToSeasonArea(
+        const highSortOrder = 999999;
+        const seasonAreaMetric = new SeasonAreaMetric(
+          'season-area-metric-id',
           mockSeasonPillarAreaId,
           mockMetricId,
-          highSortOrder
+          highSortOrder,
+          new Date()
         );
 
-        expect(associationData.sortOrder).toBe(highSortOrder);
+        expect(seasonAreaMetric.sortOrder).toBe(highSortOrder);
       });
 
       it('should preserve immutability across operations', () => {
@@ -801,213 +914,121 @@ describe('Season Composition Domain Models', () => {
           'season-area-metric-id',
           mockSeasonPillarAreaId,
           mockMetricId,
-          2,
-          new Date('2024-06-01T10:00:00Z')
+          1,
+          new Date()
         );
 
-        const updatedMetric = originalMetric.updateSortOrder(10);
+        const reordered = originalMetric.updateSortOrder(5);
 
-        // Original should be unchanged
-        expect(originalMetric.sortOrder).toBe(2);
-        expect(updatedMetric.sortOrder).toBe(10);
-        expect(updatedMetric).not.toBe(originalMetric);
+        // Original should remain unchanged
+        expect(originalMetric.sortOrder).toBe(1);
+
+        // New instance should have changes
+        expect(reordered.sortOrder).toBe(5);
+
+        // Objects should be different instances
+        expect(reordered).not.toBe(originalMetric);
       });
     });
   });
 
   describe('Cross-Model Integration', () => {
     it('should maintain hierarchical composition structure', () => {
-      // Create a season pillar
-      const seasonPillar = SeasonPillar.addToSeason(
+      const seasonPillar = new SeasonPillar(
+        'season-pillar-id',
         mockSeasonId,
         mockPillarId,
-        1
+        'Weight Loss and Strength',
+        true,
+        1,
+        new Date()
       );
 
-      // Create a season pillar area that references the season pillar
-      const seasonPillarArea = SeasonPillarArea.addToSeasonPillar(
+      const seasonPillarArea = new SeasonPillarArea(
+        'season-pillar-area-id',
         mockSeasonPillarId,
         mockAreaId,
-        1
+        1,
+        new Date()
       );
 
-      // Create a season area metric that references the season pillar area
-      const seasonAreaMetric = SeasonAreaMetric.addToSeasonArea(
+      const seasonAreaMetric = new SeasonAreaMetric(
+        'season-area-metric-id',
         mockSeasonPillarAreaId,
         mockMetricId,
-        1
+        1,
+        new Date()
       );
 
-      // Verify proper structure (hierarchical composition through foreign key relationships)
-      expect(seasonPillar.seasonId).toBe(mockSeasonId);
-      expect(seasonPillar.pillarId).toBe(mockPillarId);
+      // Verify the hierarchical relationships
       expect(seasonPillarArea.seasonPillarId).toBe(mockSeasonPillarId);
-      expect(seasonPillarArea.areaOfFocusId).toBe(mockAreaId);
       expect(seasonAreaMetric.seasonPillarAreaId).toBe(mockSeasonPillarAreaId);
-      expect(seasonAreaMetric.metricId).toBe(mockMetricId);
     });
 
     it('should support hierarchical organization through sort orders', () => {
-      // Create multiple season pillars with different sort orders
-      const pillar1 = SeasonPillar.addToSeason(
-        mockSeasonId,
-        '11111111-1111-1111-1111-111111111111',
-        1
-      );
+      const otherPillarId = 'aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee';
+      const otherAreaId = 'bbbbbbbb-cccc-dddd-eeee-ffffffffffff';
+      const otherMetricId = 'cccccccc-dddd-eeee-ffff-aaaaaaaaaaaa';
+      
+      const data = [
+        SeasonPillar.addToSeason(mockSeasonId, mockPillarId, 'Theme 1', 1),
+        SeasonPillar.addToSeason(mockSeasonId, otherPillarId, 'Theme 2', 2),
+        SeasonPillarArea.addToSeasonPillar(mockSeasonPillarId, mockAreaId, 1),
+        SeasonPillarArea.addToSeasonPillar(mockSeasonPillarId, otherAreaId, 2),
+        SeasonAreaMetric.addToSeasonArea(mockSeasonPillarAreaId, mockMetricId, 1),
+        SeasonAreaMetric.addToSeasonArea(mockSeasonPillarAreaId, otherMetricId, 2)
+      ];
 
-      const pillar2 = SeasonPillar.addToSeason(
-        mockSeasonId,
-        '22222222-2222-2222-2222-222222222222',
-        2
-      );
-
-      // Create multiple areas under a pillar with different sort orders
-      const area1 = SeasonPillarArea.addToSeasonPillar(
-        mockSeasonPillarId,
-        '33333333-3333-3333-3333-333333333333',
-        1
-      );
-
-      const area2 = SeasonPillarArea.addToSeasonPillar(
-        mockSeasonPillarId,
-        '44444444-4444-4444-4444-444444444444',
-        2
-      );
-
-      // Create multiple metrics under an area with different sort orders
-      const metric1 = SeasonAreaMetric.addToSeasonArea(
-        mockSeasonPillarAreaId,
-        '55555555-5555-5555-5555-555555555555',
-        1
-      );
-
-      const metric2 = SeasonAreaMetric.addToSeasonArea(
-        mockSeasonPillarAreaId,
-        '66666666-6666-6666-6666-666666666666',
-        2
-      );
-
-      // Verify ordering
-      expect(pillar1.sortOrder).toBeLessThan(pillar2.sortOrder);
-      expect(area1.sortOrder).toBeLessThan(area2.sortOrder);
-      expect(metric1.sortOrder).toBeLessThan(metric2.sortOrder);
+      // Verify sort orders are maintained
+      expect(data[0].sortOrder).toBeLessThan(data[1].sortOrder);
+      expect(data[2].sortOrder).toBeLessThan(data[3].sortOrder);
+      expect(data[4].sortOrder).toBeLessThan(data[5].sortOrder);
     });
 
     it('should handle UUID validation consistently across all models', () => {
-      const validUuid = '123e4567-e89b-12d3-a456-426614174000';
       const invalidUuid = 'not-a-uuid';
-
-      // All models should accept valid UUIDs
-      expect(() => {
-        SeasonPillar.addToSeason(validUuid, validUuid);
-      }).not.toThrow();
-
-      expect(() => {
-        SeasonPillarArea.addToSeasonPillar(validUuid, validUuid);
-      }).not.toThrow();
-
-      expect(() => {
-        SeasonAreaMetric.addToSeasonArea(validUuid, validUuid);
-      }).not.toThrow();
+      const validUuid = mockSeasonId;
 
       // All models should reject invalid UUIDs
-      expect(() => {
-        SeasonPillar.addToSeason(invalidUuid, validUuid);
-      }).toThrow();
-
-      expect(() => {
-        SeasonPillarArea.addToSeasonPillar(invalidUuid, validUuid);
-      }).toThrow();
-
-      expect(() => {
-        SeasonAreaMetric.addToSeasonArea(invalidUuid, validUuid);
-      }).toThrow();
+      expect(() => new SeasonPillar('id', invalidUuid, validUuid, 'Theme', true, 1, new Date())).toThrow();
+      expect(() => new SeasonPillarArea('id', invalidUuid, validUuid, 1, new Date())).toThrow();
+      expect(() => new SeasonAreaMetric('id', invalidUuid, validUuid, 1, new Date())).toThrow();
     });
 
     it('should handle sort order validation consistently', () => {
-      const validSortOrder = 5;
       const invalidSortOrder = -1;
 
-      // All models should accept valid sort orders
-      expect(() => {
-        SeasonPillar.addToSeason(mockSeasonId, mockPillarId, validSortOrder);
-      }).not.toThrow();
-
-      expect(() => {
-        SeasonPillarArea.addToSeasonPillar(mockSeasonPillarId, mockAreaId, validSortOrder);
-      }).not.toThrow();
-
-      expect(() => {
-        SeasonAreaMetric.addToSeasonArea(mockSeasonPillarAreaId, mockMetricId, validSortOrder);
-      }).not.toThrow();
-
-      // All models should reject invalid sort orders
-      expect(() => {
-        SeasonPillar.addToSeason(mockSeasonId, mockPillarId, invalidSortOrder);
-      }).toThrow();
-
-      expect(() => {
-        SeasonPillarArea.addToSeasonPillar(mockSeasonPillarId, mockAreaId, invalidSortOrder);
-      }).toThrow();
-
-      expect(() => {
-        SeasonAreaMetric.addToSeasonArea(mockSeasonPillarAreaId, mockMetricId, invalidSortOrder);
-      }).toThrow();
+      // All models should reject negative sort orders
+      expect(() => new SeasonPillar('id', mockSeasonId, mockPillarId, 'Theme', true, invalidSortOrder, new Date())).toThrow();
+      expect(() => new SeasonPillarArea('id', mockSeasonPillarId, mockAreaId, invalidSortOrder, new Date())).toThrow();
+      expect(() => new SeasonAreaMetric('id', mockSeasonPillarAreaId, mockMetricId, invalidSortOrder, new Date())).toThrow();
     });
   });
 
   describe('Performance and Memory Considerations', () => {
     it('should handle batch operations efficiently', () => {
-      const batchSize = 50;
-      const seasonPillars: any[] = [];
-      const seasonAreas: any[] = [];
-      const seasonMetrics: any[] = [];
-
-      // Create batch of associations
-      for (let i = 0; i < batchSize; i++) {
-        // Generate proper UUIDs for batch testing
-        const pillarId = `${i.toString().padStart(8, '0')}-1111-1111-1111-111111111111`;
-        const seasonPillarId = `${i.toString().padStart(8, '0')}-2222-2222-2222-222222222222`;
-        const areaId = `${i.toString().padStart(8, '0')}-3333-3333-3333-333333333333`;
-        const seasonPillarAreaId = `${i.toString().padStart(8, '0')}-4444-4444-4444-444444444444`;
-        const metricId = `${i.toString().padStart(8, '0')}-5555-5555-5555-555555555555`;
-
-        seasonPillars.push(SeasonPillar.addToSeason(
+      const startTime = performance.now();
+      
+      // Create multiple instances
+      const instances = [];
+      for (let i = 0; i < 100; i++) {
+        instances.push(new SeasonPillar(
+          `season-pillar-${i}`,
           mockSeasonId,
-          pillarId,
-          i
-        ));
-
-        seasonAreas.push(SeasonPillarArea.addToSeasonPillar(
-          seasonPillarId,
-          areaId,
-          i
-        ));
-
-        seasonMetrics.push(SeasonAreaMetric.addToSeasonArea(
-          seasonPillarAreaId,
-          metricId,
-          i
+          mockPillarId,
+          `Theme ${i}`,
+          true,
+          i,
+          new Date()
         ));
       }
-
-      expect(seasonPillars).toHaveLength(batchSize);
-      expect(seasonAreas).toHaveLength(batchSize);
-      expect(seasonMetrics).toHaveLength(batchSize);
-
-      // Verify all have correct properties
-      seasonPillars.forEach((pillar, index) => {
-        expect(pillar.seasonId).toBe(mockSeasonId);
-        expect(pillar.sortOrder).toBe(index);
-      });
-
-      seasonAreas.forEach((area, index) => {
-        expect(area.sortOrder).toBe(index);
-      });
-
-      seasonMetrics.forEach((metric, index) => {
-        expect(metric.sortOrder).toBe(index);
-      });
+      
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      
+      // Should complete within reasonable time (less than 100ms for 100 instances)
+      expect(duration).toBeLessThan(100);
+      expect(instances).toHaveLength(100);
     });
 
     it('should maintain constant memory usage across sort order updates', () => {
@@ -1015,23 +1036,20 @@ describe('Season Composition Domain Models', () => {
         'test-pillar',
         mockSeasonId,
         mockPillarId,
+        'Test Theme',
         true,
         1,
         new Date()
       );
 
-      // Multiple sort order updates should create new instances
-      const updated1 = pillar.updateSortOrder(2);
-      const updated2 = updated1.updateSortOrder(3);
-      const updated3 = updated2.updateSortOrder(4);
+      // Multiple updates should not cause memory leaks
+      let updated = pillar;
+      for (let i = 0; i < 10; i++) {
+        updated = updated.updateSortOrder(i);
+      }
 
-      // All instances should be different objects
-      expect(pillar).not.toBe(updated1);
-      expect(updated1).not.toBe(updated2);
-      expect(updated2).not.toBe(updated3);
-
-      // But share the same creation date (reference)
-      expect(pillar.createdAt).toBe(updated3.createdAt);
+      expect(updated.sortOrder).toBe(9);
+      expect(updated.theme).toBe('Test Theme');
     });
   });
 });

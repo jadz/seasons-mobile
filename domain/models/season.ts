@@ -6,13 +6,7 @@
  * all season-related entities and enforces business rules.
  */
 
-export enum SeasonPriority {
-  FAT_LOSS = 'fat_loss',
-  MUSCLE_GAIN = 'muscle_gain',
-  STRENGTH = 'strength',
-  ENDURANCE = 'endurance',
-  MAINTENANCE = 'maintenance'
-}
+// SeasonPriority moved to seasonComposition.ts as PillarTheme
 
 export enum SeasonStatus {
   DRAFT = 'draft',
@@ -28,7 +22,6 @@ export class Season {
     public readonly id: string,
     public readonly userId: string,
     public readonly name: string,
-    public readonly priority: SeasonPriority,
     public readonly durationWeeks: number | null,
     public readonly status: SeasonStatus,
     public readonly startDate: Date | null,
@@ -45,12 +38,10 @@ export class Season {
   static createDraft(
     userId: string,
     name: string,
-    priority: SeasonPriority,
     durationWeeks?: number
   ): {
     userId: string;
     name: string;
-    priority: SeasonPriority;
     durationWeeks: number | null;
     status: SeasonStatus;
     startDate: null;
@@ -66,7 +57,6 @@ export class Season {
     return {
       userId,
       name,
-      priority,
       durationWeeks: durationWeeks ?? null,
       status: SeasonStatus.DRAFT,
       startDate: null,
@@ -81,7 +71,6 @@ export class Season {
     id: string;
     userId: string;
     name: string;
-    priority: string;
     durationWeeks: number | null;
     status: string;
     startDate: Date | null;
@@ -89,14 +78,12 @@ export class Season {
     createdAt: Date;
     updatedAt: Date;
   }): Season {
-    const priority = this.parsePriority(data.priority);
     const status = this.parseStatus(data.status);
 
     return new Season(
       data.id,
       data.userId,
       data.name,
-      priority,
       data.durationWeeks,
       status,
       data.startDate,
@@ -254,7 +241,6 @@ export class Season {
       this.id,
       this.userId,
       this.name,
-      this.priority,
       this.durationWeeks,
       SeasonStatus.ACTIVE,
       actualStartDate,
@@ -276,7 +262,6 @@ export class Season {
       this.id,
       this.userId,
       this.name,
-      this.priority,
       this.durationWeeks,
       SeasonStatus.PAUSED,
       this.startDate,
@@ -298,7 +283,6 @@ export class Season {
       this.id,
       this.userId,
       this.name,
-      this.priority,
       this.durationWeeks,
       SeasonStatus.ACTIVE,
       this.startDate,
@@ -322,7 +306,6 @@ export class Season {
       this.id,
       this.userId,
       this.name,
-      this.priority,
       this.durationWeeks,
       SeasonStatus.COMPLETED,
       this.startDate,
@@ -344,7 +327,6 @@ export class Season {
       this.id,
       this.userId,
       this.name,
-      this.priority,
       this.durationWeeks,
       SeasonStatus.CANCELLED,
       this.startDate,
@@ -359,14 +341,13 @@ export class Season {
    */
   archive(): Season {
     if (!this.isCompleted() && this.status !== SeasonStatus.CANCELLED) {
-      throw new Error('Can only archive completed or cancelled seasons');
+      throw new Error('Cannot archive season: must be completed or cancelled first');
     }
 
     return new Season(
       this.id,
       this.userId,
       this.name,
-      this.priority,
       this.durationWeeks,
       SeasonStatus.ARCHIVED,
       this.startDate,
@@ -381,7 +362,6 @@ export class Season {
    */
   updateMetadata(
     name: string,
-    priority: SeasonPriority,
     durationWeeks?: number,
     userId?: string
   ): Season {
@@ -403,7 +383,6 @@ export class Season {
       this.id,
       this.userId,
       name,
-      priority,
       durationWeeks ?? this.durationWeeks,
       this.status,
       this.startDate,
@@ -414,6 +393,7 @@ export class Season {
   }
 
   private validateInvariants(): void {
+    Season.validateSeasonId(this.id);
     Season.validateUserId(this.userId);
     Season.validateName(this.name);
     
@@ -472,12 +452,17 @@ export class Season {
     }
   }
 
-  private static parsePriority(value: string): SeasonPriority {
-    const priority = value as SeasonPriority;
-    if (!Object.values(SeasonPriority).includes(priority)) {
-      throw new Error(`Invalid season priority: ${value}`);
+  // parsePriority method removed - priority now managed at pillar level
+
+  private static validateSeasonId(seasonId: string): void {
+    if (!seasonId?.trim()) {
+      throw new Error('Season ID cannot be empty');
     }
-    return priority;
+
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(seasonId)) {
+      throw new Error('Season ID must be a valid UUID');
+    }
   }
 
   private static parseStatus(value: string): SeasonStatus {

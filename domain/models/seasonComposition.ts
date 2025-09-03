@@ -2,7 +2,7 @@
  * Domain models for season composition entities
  * 
  * These models represent the relationships between seasons and their components:
- * - SeasonPillar: Which pillars are active in a season
+ * - SeasonPillar: Which pillars are active in a season with specific themes
  * - SeasonPillarArea: Which areas of focus are active for each pillar
  * - SeasonAreaMetric: Which metrics track each area of focus
  * 
@@ -14,6 +14,7 @@ export class SeasonPillar {
     public readonly id: string,
     public readonly seasonId: string,
     public readonly pillarId: string,
+    public readonly theme: string,
     public readonly isActive: boolean,
     public readonly sortOrder: number,
     public readonly createdAt: Date
@@ -22,25 +23,29 @@ export class SeasonPillar {
   }
 
   /**
-   * Add a pillar to a season
+   * Add a pillar to a season with a specific theme
    */
   static addToSeason(
     seasonId: string,
     pillarId: string,
+    theme: string,
     sortOrder?: number
   ): {
     seasonId: string;
     pillarId: string;
+    theme: string;
     isActive: boolean;
     sortOrder: number;
   } {
     this.validateSeasonId(seasonId);
     this.validatePillarId(pillarId);
+    this.validateTheme(theme);
     this.validateSortOrder(sortOrder ?? 0);
 
     return {
       seasonId,
       pillarId,
+      theme,
       isActive: true,
       sortOrder: sortOrder ?? 0
     };
@@ -53,6 +58,7 @@ export class SeasonPillar {
     id: string;
     seasonId: string;
     pillarId: string;
+    theme: string;
     isActive: boolean;
     sortOrder: number;
     createdAt: Date;
@@ -61,6 +67,7 @@ export class SeasonPillar {
       data.id,
       data.seasonId,
       data.pillarId,
+      data.theme,
       data.isActive,
       data.sortOrder,
       data.createdAt
@@ -86,6 +93,7 @@ export class SeasonPillar {
       this.id,
       this.seasonId,
       this.pillarId,
+      this.theme,
       true,
       this.sortOrder,
       this.createdAt
@@ -104,6 +112,7 @@ export class SeasonPillar {
       this.id,
       this.seasonId,
       this.pillarId,
+      this.theme,
       false,
       this.sortOrder,
       this.createdAt
@@ -120,6 +129,7 @@ export class SeasonPillar {
       this.id,
       this.seasonId,
       this.pillarId,
+      this.theme,
       this.isActive,
       sortOrder,
       this.createdAt
@@ -129,6 +139,7 @@ export class SeasonPillar {
   private validateInvariants(): void {
     SeasonPillar.validateSeasonId(this.seasonId);
     SeasonPillar.validatePillarId(this.pillarId);
+    SeasonPillar.validateTheme(this.theme);
     SeasonPillar.validateSortOrder(this.sortOrder);
   }
 
@@ -151,6 +162,16 @@ export class SeasonPillar {
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
     if (!uuidRegex.test(pillarId)) {
       throw new Error('Pillar ID must be a valid UUID');
+    }
+  }
+
+  private static validateTheme(theme: string): void {
+    if (!theme?.trim()) {
+      throw new Error('Season pillar theme cannot be empty');
+    }
+    
+    if (theme.length > 100) {
+      throw new Error('Season pillar theme cannot exceed 100 characters');
     }
   }
 

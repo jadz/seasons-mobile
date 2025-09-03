@@ -58,7 +58,6 @@ CREATE TABLE seasons (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   user_id uuid REFERENCES auth.users(id) NOT NULL,
   name text NOT NULL,
-  priority text NOT NULL CHECK (priority IN ('fat_loss', 'muscle_gain', 'strength', 'endurance', 'maintenance')),
   duration_weeks integer,
   status text NOT NULL CHECK (status IN ('draft', 'active', 'completed', 'archived', 'paused', 'cancelled')) DEFAULT 'draft',
   start_date timestamptz,
@@ -74,11 +73,12 @@ CREATE TABLE seasons (
 -- RELATIONSHIP TABLES
 -- ================================================================================================
 
--- Table: season_pillars (which pillars are active in each season)
+-- Table: season_pillars (which pillars are active in each season with specific themes)
 CREATE TABLE season_pillars (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   season_id uuid REFERENCES seasons(id) ON DELETE CASCADE NOT NULL,
   pillar_id uuid REFERENCES pillars(id) ON DELETE CASCADE NOT NULL,
+  theme text NOT NULL,
   is_active boolean NOT NULL DEFAULT true,
   sort_order integer NOT NULL DEFAULT 0,
   created_at timestamptz DEFAULT now(),
