@@ -1,8 +1,6 @@
 import { IUserPreferencesRepository } from '../../db/repositories/UserPreferencesRepository';
 import {
   UserPreferences,
-  validateUserPreferences,
-  createDefaultUserPreferences,
   DEFAULT_USER_PREFERENCES
 } from '../models/userPreferences';
 import {
@@ -37,7 +35,7 @@ export class UserPreferencesService {
       }
 
       // Return default preferences if none exist
-      const defaultPrefs = createDefaultUserPreferences(userId);
+      const defaultPrefs = UserPreferences.createDefault(userId);
       return {
         id: '', // No ID for non-persisted defaults
         userId,
@@ -61,7 +59,7 @@ export class UserPreferencesService {
   async createUserPreferences(userId: string, onboardingData: UserPreferencesOnboardingData): Promise<UserPreferencesView> {
     try {
       // Validate the onboarding data
-      if (!validateUserPreferences(onboardingData)) {
+      if (!UserPreferences.validate(onboardingData)) {
         throw new Error('Invalid preferences data');
       }
 
@@ -97,7 +95,7 @@ export class UserPreferencesService {
   async updateUserPreferences(userId: string, updateData: UserPreferencesUpdate): Promise<UserPreferencesView> {
     try {
       // Validate the update data
-      if (!validateUserPreferences(updateData)) {
+      if (!UserPreferences.validate(updateData)) {
         throw new Error('Invalid preferences data');
       }
 
@@ -115,7 +113,7 @@ export class UserPreferencesService {
         return updated;
       } else {
         // Create new preferences with defaults + updates
-        const defaultPrefs = createDefaultUserPreferences(userId);
+        const defaultPrefs = UserPreferences.createDefault(userId);
         const newPreferencesData: UserPreferencesData = {
           ...defaultPrefs,
           ...updateData,

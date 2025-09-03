@@ -1,9 +1,9 @@
-import { UserPreferences, BodyWeightUnit, StrengthTrainingUnit, BodyMeasurementUnit, DistanceUnit } from '../models/userPreferences';
+import { IUserPreferences, BodyWeightUnit, StrengthTrainingUnit, BodyMeasurementUnit, DistanceUnit } from '../models/userPreferences';
 
 /**
  * View type for user preferences queries - includes all fields with optional relationships
  */
-export type UserPreferencesView = UserPreferences;
+export type UserPreferencesView = IUserPreferences;
 
 /**
  * Data type for creating new user preferences (excludes generated fields)

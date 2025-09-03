@@ -6,7 +6,7 @@ import {
   StrengthTrainingUnit, 
   BodyMeasurementUnit, 
   DistanceUnit,
-  createDefaultUserPreferences,
+
   DEFAULT_USER_PREFERENCES 
 } from '../../models/userPreferences';
 import {

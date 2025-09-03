@@ -5,10 +5,7 @@ import {
   BodyMeasurementUnit,
   DistanceUnit,
   DEFAULT_USER_PREFERENCES,
-  createDefaultUserPreferences,
-  validateUserPreferences,
-  isMetricSystem,
-  isImperialSystem,
+  IUserPreferences,
 } from '../userPreferences';
 
 describe('UserPreferences Domain Models', () => {
@@ -51,10 +48,10 @@ describe('UserPreferences Domain Models', () => {
     });
   });
 
-  describe('createDefaultUserPreferences', () => {
+  describe('UserPreferences.createDefault', () => {
     test('should create preferences with provided userId and defaults', () => {
       const userId = 'test-user-123';
-      const preferences = createDefaultUserPreferences(userId);
+      const preferences = UserPreferences.createDefault(userId);
 
       expect(preferences.userId).toBe(userId);
       expect(preferences.bodyWeightUnit).toBe(DEFAULT_USER_PREFERENCES.bodyWeightUnit);
@@ -65,7 +62,7 @@ describe('UserPreferences Domain Models', () => {
     });
 
     test('should not include id, createdAt, or updatedAt fields', () => {
-      const preferences = createDefaultUserPreferences('test-user');
+      const preferences = UserPreferences.createDefault('test-user');
       
       expect(preferences).not.toHaveProperty('id');
       expect(preferences).not.toHaveProperty('createdAt');
@@ -73,20 +70,20 @@ describe('UserPreferences Domain Models', () => {
     });
   });
 
-  describe('validateUserPreferences', () => {
+  describe('UserPreferences.validate', () => {
     test('should return true for valid preferences', () => {
-      const validPreferences: Partial<UserPreferences> = {
+      const validPreferences: Partial<IUserPreferences> = {
         bodyWeightUnit: BodyWeightUnit.KILOGRAMS,
         strengthTrainingUnit: StrengthTrainingUnit.POUNDS,
         bodyMeasurementUnit: BodyMeasurementUnit.CENTIMETERS,
         distanceUnit: DistanceUnit.MILES,
       };
 
-      expect(validateUserPreferences(validPreferences)).toBe(true);
+      expect(UserPreferences.validate(validPreferences)).toBe(true);
     });
 
     test('should return true for empty preferences object', () => {
-      expect(validateUserPreferences({})).toBe(true);
+      expect(UserPreferences.validate({})).toBe(true);
     });
 
     test('should return false for invalid bodyWeightUnit', () => {
@@ -94,7 +91,7 @@ describe('UserPreferences Domain Models', () => {
         bodyWeightUnit: 'invalid' as BodyWeightUnit,
       };
 
-      expect(validateUserPreferences(invalidPreferences)).toBe(false);
+      expect(UserPreferences.validate(invalidPreferences)).toBe(false);
     });
 
     test('should return false for invalid strengthTrainingUnit', () => {
@@ -102,7 +99,7 @@ describe('UserPreferences Domain Models', () => {
         strengthTrainingUnit: 'invalid' as StrengthTrainingUnit,
       };
 
-      expect(validateUserPreferences(invalidPreferences)).toBe(false);
+      expect(UserPreferences.validate(invalidPreferences)).toBe(false);
     });
 
     test('should return false for invalid bodyMeasurementUnit', () => {
@@ -110,7 +107,7 @@ describe('UserPreferences Domain Models', () => {
         bodyMeasurementUnit: 'invalid' as BodyMeasurementUnit,
       };
 
-      expect(validateUserPreferences(invalidPreferences)).toBe(false);
+      expect(UserPreferences.validate(invalidPreferences)).toBe(false);
     });
 
     test('should return false for invalid distanceUnit', () => {
@@ -118,107 +115,105 @@ describe('UserPreferences Domain Models', () => {
         distanceUnit: 'invalid' as DistanceUnit,
       };
 
-      expect(validateUserPreferences(invalidPreferences)).toBe(false);
+      expect(UserPreferences.validate(invalidPreferences)).toBe(false);
     });
   });
 
-  describe('isMetricSystem', () => {
-    test('should return true for full metric preferences', () => {
-      const metricPreferences: UserPreferences = {
+  describe('UserPreferences instance methods', () => {
+    test('isMetricSystem should return true for full metric preferences', () => {
+      const metricPreferences = UserPreferences.fromData({
         id: 'test-id',
         userId: 'test-user',
-        bodyWeightUnit: BodyWeightUnit.KILOGRAMS,
-        strengthTrainingUnit: StrengthTrainingUnit.KILOGRAMS,
-        bodyMeasurementUnit: BodyMeasurementUnit.CENTIMETERS,
-        distanceUnit: DistanceUnit.KILOMETERS,
+        bodyWeightUnit: 'kg',
+        strengthTrainingUnit: 'kg',
+        bodyMeasurementUnit: 'cm',
+        distanceUnit: 'km',
         advancedLoggingEnabled: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      };
+      });
 
-      expect(isMetricSystem(metricPreferences)).toBe(true);
+      expect(metricPreferences.isMetricSystem()).toBe(true);
     });
 
-    test('should return false for mixed unit preferences', () => {
-      const mixedPreferences: UserPreferences = {
+    test('isMetricSystem should return false for mixed unit preferences', () => {
+      const mixedPreferences = UserPreferences.fromData({
         id: 'test-id',
         userId: 'test-user',
-        bodyWeightUnit: BodyWeightUnit.KILOGRAMS,
-        strengthTrainingUnit: StrengthTrainingUnit.POUNDS, // Imperial
-        bodyMeasurementUnit: BodyMeasurementUnit.CENTIMETERS,
-        distanceUnit: DistanceUnit.KILOMETERS,
+        bodyWeightUnit: 'kg',
+        strengthTrainingUnit: 'lbs', // Imperial
+        bodyMeasurementUnit: 'cm',
+        distanceUnit: 'km',
         advancedLoggingEnabled: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      };
+      });
 
-      expect(isMetricSystem(mixedPreferences)).toBe(false);
+      expect(mixedPreferences.isMetricSystem()).toBe(false);
     });
 
-    test('should return false for imperial preferences', () => {
-      const imperialPreferences: UserPreferences = {
+    test('isMetricSystem should return false for imperial preferences', () => {
+      const imperialPreferences = UserPreferences.fromData({
         id: 'test-id',
         userId: 'test-user',
-        bodyWeightUnit: BodyWeightUnit.POUNDS,
-        strengthTrainingUnit: StrengthTrainingUnit.POUNDS,
-        bodyMeasurementUnit: BodyMeasurementUnit.INCHES,
-        distanceUnit: DistanceUnit.MILES,
+        bodyWeightUnit: 'lbs',
+        strengthTrainingUnit: 'lbs',
+        bodyMeasurementUnit: 'in',
+        distanceUnit: 'mi',
         advancedLoggingEnabled: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      };
+      });
 
-      expect(isMetricSystem(imperialPreferences)).toBe(false);
-    });
-  });
-
-  describe('isImperialSystem', () => {
-    test('should return true for full imperial preferences', () => {
-      const imperialPreferences: UserPreferences = {
-        id: 'test-id',
-        userId: 'test-user',
-        bodyWeightUnit: BodyWeightUnit.POUNDS,
-        strengthTrainingUnit: StrengthTrainingUnit.POUNDS,
-        bodyMeasurementUnit: BodyMeasurementUnit.INCHES,
-        distanceUnit: DistanceUnit.MILES,
-        advancedLoggingEnabled: false,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-
-      expect(isImperialSystem(imperialPreferences)).toBe(true);
+      expect(imperialPreferences.isMetricSystem()).toBe(false);
     });
 
-    test('should return false for mixed unit preferences', () => {
-      const mixedPreferences: UserPreferences = {
+    test('isImperialSystem should return true for full imperial preferences', () => {
+      const imperialPreferences = UserPreferences.fromData({
         id: 'test-id',
         userId: 'test-user',
-        bodyWeightUnit: BodyWeightUnit.POUNDS,
-        strengthTrainingUnit: StrengthTrainingUnit.KILOGRAMS, // Metric
-        bodyMeasurementUnit: BodyMeasurementUnit.INCHES,
-        distanceUnit: DistanceUnit.MILES,
+        bodyWeightUnit: 'lbs',
+        strengthTrainingUnit: 'lbs',
+        bodyMeasurementUnit: 'in',
+        distanceUnit: 'mi',
         advancedLoggingEnabled: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      };
+      });
 
-      expect(isImperialSystem(mixedPreferences)).toBe(false);
+      expect(imperialPreferences.isImperialSystem()).toBe(true);
     });
 
-    test('should return false for metric preferences', () => {
-      const metricPreferences: UserPreferences = {
+    test('isImperialSystem should return false for mixed unit preferences', () => {
+      const mixedPreferences = UserPreferences.fromData({
         id: 'test-id',
         userId: 'test-user',
-        bodyWeightUnit: BodyWeightUnit.KILOGRAMS,
-        strengthTrainingUnit: StrengthTrainingUnit.KILOGRAMS,
-        bodyMeasurementUnit: BodyMeasurementUnit.CENTIMETERS,
-        distanceUnit: DistanceUnit.KILOMETERS,
+        bodyWeightUnit: 'lbs',
+        strengthTrainingUnit: 'kg', // Metric
+        bodyMeasurementUnit: 'in',
+        distanceUnit: 'mi',
         advancedLoggingEnabled: false,
         createdAt: new Date(),
         updatedAt: new Date(),
-      };
+      });
 
-      expect(isImperialSystem(metricPreferences)).toBe(false);
+      expect(mixedPreferences.isImperialSystem()).toBe(false);
+    });
+
+    test('isImperialSystem should return false for metric preferences', () => {
+      const metricPreferences = UserPreferences.fromData({
+        id: 'test-id',
+        userId: 'test-user',
+        bodyWeightUnit: 'kg',
+        strengthTrainingUnit: 'kg',
+        bodyMeasurementUnit: 'cm',
+        distanceUnit: 'km',
+        advancedLoggingEnabled: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+
+      expect(metricPreferences.isImperialSystem()).toBe(false);
     });
   });
 });

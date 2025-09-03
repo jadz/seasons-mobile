@@ -5,8 +5,7 @@ import {
   BodyWeightUnit, 
   StrengthTrainingUnit, 
   BodyMeasurementUnit, 
-  DistanceUnit,
-  createDefaultUserPreferences 
+  DistanceUnit
 } from '../../../domain/models/userPreferences';
 import {
   UserPreferencesData,
@@ -60,7 +59,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
   describe('create', () => {
     it('should create new user preferences and return generated ID', async () => {
       // Arrange - use authenticated test user with default data
-      const preferencesData = createDefaultUserPreferences(testUser.id);
+      const preferencesData = UserPreferences.createDefault(testUser.id);
 
       // Act
       const preferencesId = await createAndTrackPreferences(preferencesData);
@@ -73,7 +72,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
 
     it('should create preferences with default values', async () => {
       // Arrange - use authenticated test user with default values
-      const defaultData = createDefaultUserPreferences(testUser.id);
+      const defaultData = UserPreferences.createDefault(testUser.id);
 
       // Act
       const preferencesId = await createAndTrackPreferences(defaultData);
@@ -93,7 +92,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
 
     it('should throw error when creating preferences for user that already has preferences', async () => {
       // Arrange - use authenticated test user
-      const preferencesData = createDefaultUserPreferences(testUser.id);
+      const preferencesData = UserPreferences.createDefault(testUser.id);
       
       // Create first preferences
       await createAndTrackPreferences(preferencesData);
@@ -106,7 +105,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
   describe('findById', () => {
     it('should return user preferences by ID', async () => {
       // Arrange - use authenticated test user
-      const preferencesData = createDefaultUserPreferences(testUser.id);
+      const preferencesData = UserPreferences.createDefault(testUser.id);
       const preferencesId = await createAndTrackPreferences(preferencesData);
 
       // Act
@@ -131,7 +130,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
   describe('findByUserId', () => {
     it('should return user preferences by user ID', async () => {
       // Arrange - use authenticated test user
-      const preferencesData = createDefaultUserPreferences(testUser.id);
+      const preferencesData = UserPreferences.createDefault(testUser.id);
       await createAndTrackPreferences(preferencesData);
 
       // Act
@@ -155,7 +154,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
   describe('update', () => {
     it('should update user preferences', async () => {
       // Arrange - use authenticated test user
-      const preferencesData = createDefaultUserPreferences(testUser.id);
+      const preferencesData = UserPreferences.createDefault(testUser.id);
       const preferencesId = await createAndTrackPreferences(preferencesData);
 
       const updateData: UserPreferencesUpdate = {
@@ -179,7 +178,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
 
     it('should update updatedAt timestamp', async () => {
       // Arrange - use authenticated test user
-      const preferencesData = createDefaultUserPreferences(testUser.id);
+      const preferencesData = UserPreferences.createDefault(testUser.id);
       const preferencesId = await createAndTrackPreferences(preferencesData);
 
       const original = await repository.findById(preferencesId);
@@ -207,7 +206,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
   describe('delete', () => {
     it('should delete user preferences', async () => {
       // Arrange - use authenticated test user
-      const preferencesData = createDefaultUserPreferences(testUser.id);
+      const preferencesData = UserPreferences.createDefault(testUser.id);
       const preferencesId = await createAndTrackPreferences(preferencesData);
 
       // Verify it exists
@@ -232,7 +231,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
   describe('createOrUpdate', () => {
     it('should create preferences if none exist for user', async () => {
       // Arrange - use authenticated test user
-      const preferencesData = createDefaultUserPreferences(testUser.id);
+      const preferencesData = UserPreferences.createDefault(testUser.id);
 
       // Act
       const result = await repository.createOrUpdate(testUser.id, preferencesData);
@@ -247,7 +246,7 @@ describe('UserPreferencesRepository Integration Tests', () => {
 
     it('should update preferences if they already exist for user', async () => {
       // Arrange - use authenticated test user
-      const initialData = createDefaultUserPreferences(testUser.id);
+      const initialData = UserPreferences.createDefault(testUser.id);
       await createAndTrackPreferences(initialData);
 
       const updateData: UserPreferencesData = {

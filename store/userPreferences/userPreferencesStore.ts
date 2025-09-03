@@ -3,8 +3,7 @@ import { UserPreferencesService } from '../../domain/services/UserPreferencesSer
 import { userPreferencesRepository } from '../../db/repositories/UserPreferencesRepository';
 import { 
   UserPreferences, 
-  DEFAULT_USER_PREFERENCES,
-  isMetricSystem 
+  DEFAULT_USER_PREFERENCES
 } from '../../domain/models/userPreferences';
 import { 
   UserPreferencesView, 
@@ -145,7 +144,10 @@ export const userPreferencesStore = observable<UserPreferencesState>({
 
   isMetricSystem: () => {
     const preferences = userPreferencesStore.getCurrentPreferences();
-    return isMetricSystem(preferences);
+    return preferences.bodyWeightUnit === 'kg' &&
+           preferences.strengthTrainingUnit === 'kg' &&
+           preferences.bodyMeasurementUnit === 'cm' &&
+           preferences.distanceUnit === 'km';
   },
 
   isAdvancedLoggingEnabled: () => {
