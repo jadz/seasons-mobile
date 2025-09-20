@@ -3,6 +3,8 @@ import { useAuth } from '../hooks/auth';
 import { Text, View } from 'react-native';
 
 export default function Index() {
+  return <Redirect href="/playground" />;
+
   const { user, isLoading } = useAuth();
 
   if (isLoading) {

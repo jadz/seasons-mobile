@@ -39,6 +39,12 @@ const spacing = {
 
 // Typography variants with better organization
 const textVariants = {
+  defaults: {
+    fontSize: 16,
+    fontWeight: '400' as const,
+    letterSpacing: -0.2,
+    lineHeight: 22,
+  },
   hero: {
     fontSize: 32,
     fontWeight: '300' as const,
@@ -273,4 +279,3 @@ export type ThemeBorderRadii = keyof Theme['borderRadii'];
 export type ThemeShadows = keyof Theme['shadows'];
 
 export const theme = lightTheme;
-

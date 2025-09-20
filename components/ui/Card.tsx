@@ -24,18 +24,30 @@ export const Card: React.FC<CardProps> = ({
     switch (variant) {
       case 'elevated':
         return {
-          shadow: 'md' as keyof Theme['shadows'],
+          shadowColor: 'black' as keyof Theme['colors'],
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          elevation: 2,
           borderWidth: 0,
         };
       case 'outlined':
         return {
           borderWidth: 1,
           borderColor: 'border' as keyof Theme['colors'],
-          shadow: 'none' as keyof Theme['shadows'],
+          shadowColor: 'transparent' as keyof Theme['colors'],
+          shadowOffset: { width: 0, height: 0 },
+          shadowOpacity: 0,
+          shadowRadius: 0,
+          elevation: 0,
         };
       default:
         return {
-          shadow: 'sm' as keyof Theme['shadows'],
+          shadowColor: 'black' as keyof Theme['colors'],
+          shadowOffset: { width: 0, height: 1 },
+          shadowOpacity: 0.05,
+          shadowRadius: 2,
+          elevation: 1,
           borderWidth: 0,
         };
     }
@@ -71,4 +83,3 @@ export const Card: React.FC<CardProps> = ({
 };
 
 export default Card;
-
