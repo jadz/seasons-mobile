@@ -1,135 +1,139 @@
 import { createTheme } from '@shopify/restyle';
 
-// Base color palette from your original theme
+// Minimalistic color palette inspired by clean design
 const palette = {
-  mist: '#C9D0C3',
-  sage: '#7A9C81',
-  pine: '#4E7166',
-  forest: '#334C4E',
-  midnight: '#263137',
+  // Pure minimalist colors
   white: '#FFFFFF',
   black: '#000000',
-  transparentPine: 'rgba(78, 113, 102, 0.95)',
-  transparentForest: 'rgba(51, 76, 78, 0.92)',
-  subtleDark: '#EBEEED',
   
-  // Semantic colors
-  success: '#4CAF50',
-  warning: '#FFA500',
-  error: '#F44336',
-  info: '#2196F3',
+  // Subtle grays for minimal hierarchy
+  gray50: '#FEFEFE',
+  gray100: '#FAFAFA',
+  gray150: '#F7F7F7',
+  gray200: '#F0F0F0',
+  gray300: '#E8E8E8',
+  gray400: '#D1D1D1',
+  gray500: '#9A9A9A',
+  gray600: '#6B6B6B',
+  gray700: '#4A4A4A',
+  gray800: '#2A2A2A',
+  gray900: '#1A1A1A',
   
-  // Background variants
-  successBackground: '#E8F5E9',
-  warningBackground: '#FFF3E0',
-  errorBackground: '#FFEBEE',
-  infoBackground: '#E3F2FD',
+  // Minimal accent - very subtle
+  accent: '#4A90E2',
+  accentLight: 'rgba(74, 144, 226, 0.1)',
+  accentSubtle: 'rgba(74, 144, 226, 0.05)',
+  
+  // Minimal semantic colors - very subtle
+  success: '#22C55E',
+  successBackground: 'rgba(34, 197, 94, 0.03)',
+  warning: '#F59E0B',
+  warningBackground: 'rgba(245, 158, 11, 0.03)',
+  error: '#EF4444',
+  errorBackground: 'rgba(239, 68, 68, 0.03)',
+  
+  // Minimal selection state
+  selected: 'rgba(74, 144, 226, 0.08)',
+  selectedBorder: '#4A90E2',
+  
+  // Transparent overlays
+  overlay: 'rgba(0, 0, 0, 0.05)',
+  divider: 'rgba(0, 0, 0, 0.06)',
 };
 
-// Enhanced spacing system
+// Minimal spacing system with generous white space
 const spacing = {
   xs: 4,
   s: 8,
-  m: 16,
-  l: 24,
+  m: 12,
+  l: 20,
   xl: 32,
-  xxl: 40,
-  xxxl: 48,
+  xxl: 48,
+  xxxl: 64,
+  xxxxl: 80,
 };
 
-// Typography variants with better organization
+// Minimal typography variants - clean and simple
 const textVariants = {
   hero: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: '300' as const,
-    letterSpacing: -0.5,
-    lineHeight: 38,
+    letterSpacing: -0.3,
+    lineHeight: 36,
   },
   title: {
-    fontSize: 28,
-    fontWeight: '400' as const,
-    letterSpacing: -0.5,
-    lineHeight: 34,
-  },
-  h1: {
     fontSize: 24,
     fontWeight: '400' as const,
-    letterSpacing: -0.3,
+    letterSpacing: -0.2,
     lineHeight: 32,
   },
-  h2: {
+  h1: {
     fontSize: 20,
-    fontWeight: '400' as const,
-    letterSpacing: -0.3,
+    fontWeight: '500' as const,
+    letterSpacing: -0.1,
     lineHeight: 28,
   },
-  h3: {
+  h2: {
     fontSize: 18,
-    fontWeight: '400' as const,
-    letterSpacing: -0.2,
+    fontWeight: '500' as const,
+    letterSpacing: 0,
+    lineHeight: 26,
+  },
+  h3: {
+    fontSize: 16,
+    fontWeight: '500' as const,
+    letterSpacing: 0,
     lineHeight: 24,
   },
   body: {
     fontSize: 16,
     fontWeight: '400' as const,
-    letterSpacing: -0.2,
-    lineHeight: 22,
+    letterSpacing: 0,
+    lineHeight: 24,
   },
   bodyMedium: {
     fontSize: 16,
-    fontWeight: '500' as const,
-    letterSpacing: -0.2,
-    lineHeight: 22,
-  },
-  bodySemiBold: {
-    fontSize: 16,
-    fontWeight: '600' as const,
-    letterSpacing: -0.2,
-    lineHeight: 22,
+    fontWeight: '400' as const,
+    letterSpacing: 0,
+    lineHeight: 24,
   },
   caption: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: '400' as const,
-    letterSpacing: -0.1,
+    letterSpacing: 0,
     lineHeight: 20,
-    opacity: 0.7,
   },
   small: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '400' as const,
-    letterSpacing: -0.1,
-    lineHeight: 18,
-    opacity: 0.6,
-  },
-  mono: {
-    fontSize: 16,
-    fontFamily: 'RobotoMono_400Regular',
-    lineHeight: 22,
+    letterSpacing: 0,
+    lineHeight: 16,
   },
   label: {
     fontSize: 14,
-    fontWeight: '500' as const,
-    letterSpacing: -0.1,
-    lineHeight: 18,
+    fontWeight: '400' as const,
+    letterSpacing: 0,
+    lineHeight: 20,
   },
   button: {
     fontSize: 16,
-    fontWeight: '600' as const,
-    letterSpacing: -0.2,
+    fontWeight: '400' as const,
+    letterSpacing: 0,
   },
 };
 
-// Border radius system
+// Minimal border radius system
 const borderRadii = {
   xs: 4,
-  s: 8,
-  m: 12,
-  l: 16,
-  xl: 20,
+  s: 6,
+  m: 8,
+  l: 12,
+  xl: 16,
+  xxl: 20,
   round: 50,
 };
 
-// Box shadow variants
+// Minimal shadow system - barely visible
 const shadows = {
   none: {
     shadowColor: 'transparent',
@@ -138,85 +142,77 @@ const shadows = {
     shadowRadius: 0,
     elevation: 0,
   },
-  sm: {
+  minimal: {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.02,
     shadowRadius: 2,
     elevation: 1,
   },
-  md: {
+  subtle: {
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.03,
     shadowRadius: 4,
-    elevation: 2,
-  },
-  lg: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  xl: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
-    elevation: 8,
+    elevation: 1,
   },
 };
 
-// Light theme
+// Minimal light theme with clean hierarchy
 export const lightTheme = createTheme({
   colors: {
-    // Primary colors
-    primary: palette.forest,
-    primaryLight: palette.pine,
-    primaryDark: palette.midnight,
+    // Primary - minimal accent
+    primary: palette.accent,
+    primaryLight: palette.accentLight,
+    primarySubtle: palette.accentSubtle,
+    primarySoft: palette.accentSubtle,
     
-    // Secondary colors
-    secondary: palette.sage,
-    secondaryLight: palette.mist,
-    
-    // Background colors
-    background: palette.subtleDark,
-    surface: palette.white,
+    // Backgrounds - clean and minimal
+    background: palette.white,
+    surface: palette.gray50,
+    surfaceElevated: palette.white,
     card: palette.white,
+    glass: palette.gray50,
     
-    // Text colors
-    text: palette.midnight,
-    textSecondary: palette.pine,
-    textMuted: palette.sage,
+    // Text hierarchy - clean and simple
+    text: palette.gray900,
+    textPrimary: palette.gray900,
+    textSecondary: palette.gray600,
+    textMuted: palette.gray500,
     textInverse: palette.white,
     
-    // Border colors
-    border: palette.mist,
-    borderLight: '#E8E8E8',
-    borderDark: palette.sage,
+    // Minimal borders
+    border: palette.gray200,
+    borderLight: palette.gray150,
+    borderSubtle: palette.gray300,
+    borderFocus: palette.accent,
+    glassBorder: palette.gray200,
+    divider: palette.divider,
     
-    // Semantic colors
+    // Semantic colors - subtle
     success: palette.success,
     warning: palette.warning,
     error: palette.error,
-    info: palette.info,
+    accent: palette.accent,
     
-    // Semantic backgrounds
+    // Semantic backgrounds - barely visible
     successBackground: palette.successBackground,
     warningBackground: palette.warningBackground,
     errorBackground: palette.errorBackground,
-    infoBackground: palette.infoBackground,
     
-    // Interactive states
-    buttonPrimary: palette.forest,
-    buttonPrimaryDisabled: '#CCCCCC',
+    // Minimal interactive states
+    buttonPrimary: palette.accent,
+    buttonPrimaryDisabled: palette.gray300,
     buttonSecondary: palette.white,
-    buttonSecondaryBorder: palette.forest,
+    buttonSecondaryBorder: palette.gray300,
     
-    // Overlays
-    overlay: 'rgba(0, 0, 0, 0.5)',
-    headerBackground: palette.transparentPine,
+    // Selection states - subtle
+    selected: palette.selected,
+    selectedBorder: palette.selectedBorder,
+    selectedBackground: palette.selected,
+    
+    // Minimal overlays
+    overlay: palette.overlay,
     
     // Utility
     transparent: 'transparent',
@@ -233,35 +229,34 @@ export const lightTheme = createTheme({
   },
 });
 
-// Dark theme
+// Minimal dark theme
 export const darkTheme = createTheme({
   ...lightTheme,
   colors: {
     ...lightTheme.colors,
     
-    // Background colors
-    background: '#1A1F22',
-    surface: palette.midnight,
-    card: palette.midnight,
+    // Dark backgrounds
+    background: palette.gray900,
+    surface: palette.gray800,
+    surfaceElevated: palette.gray700,
+    card: palette.gray800,
     
-    // Text colors
+    // Dark text colors
     text: palette.white,
-    textSecondary: palette.mist,
-    textMuted: palette.sage,
-    textInverse: palette.midnight,
+    textPrimary: palette.white,
+    textSecondary: palette.gray400,
+    textMuted: palette.gray500,
+    textInverse: palette.gray900,
     
-    // Border colors
-    border: palette.forest,
-    borderLight: palette.pine,
-    borderDark: palette.midnight,
+    // Dark borders
+    border: palette.gray700,
+    borderLight: palette.gray600,
+    borderSubtle: palette.gray600,
     
-    // Interactive states
-    buttonPrimary: palette.sage,
-    buttonSecondary: palette.midnight,
-    buttonSecondaryBorder: palette.sage,
-    
-    // Overlays
-    headerBackground: palette.transparentForest,
+    // Dark interactive states
+    buttonPrimary: palette.accent,
+    buttonSecondary: palette.gray800,
+    buttonSecondaryBorder: palette.gray600,
   },
 });
 
