@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
+import { router } from 'expo-router';
 import { Box, Text, Button, WizardBar, SelectionCard } from '../../components/ui';
 
 export default function SeasonGoalsScreen() {
   const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
+
+  const handleContinue = () => {
+    if (selectedGoal === 'stronger') {
+      router.push('/onboarding/season-step-2-strength');
+    }
+    // For other goals, we could add different navigation paths later
+  };
   return (
     <Box flex={1} backgroundColor="background">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -35,6 +43,7 @@ export default function SeasonGoalsScreen() {
               description="Cut time in specific events"
               isSelected={selectedGoal === 'faster'}
               onPress={() => setSelectedGoal('faster')}
+              isDisabled={true}
             />
             
             <SelectionCard 
@@ -42,18 +51,25 @@ export default function SeasonGoalsScreen() {
               description="Reduce body fat, improve body composition"
               isSelected={selectedGoal === 'leaner'}
               onPress={() => setSelectedGoal('leaner')}
+              isDisabled={true}
             />
             
             <SelectionCard 
               title="+ Custom Outcome"
               isSelected={selectedGoal === 'custom'}
               onPress={() => setSelectedGoal('custom')}
+              isDisabled={true}
             />
           </Box>
           
           {/* Continue Button */}
           <Box marginBottom="xl">
-            <Button variant="primary" fullWidth>
+            <Button 
+              variant="primary" 
+              fullWidth
+              onPress={handleContinue}
+              disabled={!selectedGoal}
+            >
               Continue
             </Button>
           </Box>

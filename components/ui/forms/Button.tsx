@@ -30,17 +30,17 @@ export const Button: React.FC<ButtonProps> = ({
 
   const getVariantStyles = () => {
     const styles = {
-      backgroundColor: 'buttonPrimary' as ThemeColors,
-      textColor: 'textInverse' as ThemeColors,
-      borderColor: 'transparent' as ThemeColors,
-      borderWidth: 0,
+      backgroundColor: 'primaryDark' as ThemeColors,
+      textColor: 'white' as ThemeColors,
+      borderColor: 'primary' as ThemeColors,
+      borderWidth: 1,
     };
 
     switch (variant) {
       case 'secondary':
-        styles.backgroundColor = 'buttonSecondary';
+        styles.backgroundColor = 'surface';
         styles.textColor = 'text';
-        styles.borderColor = 'buttonSecondaryBorder';
+        styles.borderColor = 'border';
         styles.borderWidth = 1;
         break;
       case 'outline':
@@ -52,10 +52,13 @@ export const Button: React.FC<ButtonProps> = ({
       case 'ghost':
         styles.backgroundColor = 'transparent';
         styles.textColor = 'primary';
+        styles.borderWidth = 0;
         break;
       case 'danger':
-        styles.backgroundColor = 'error';
-        styles.textColor = 'textInverse';
+        styles.backgroundColor = 'primaryDark';
+        styles.textColor = 'white';
+        styles.borderColor = 'error';
+        styles.borderWidth = 1;
         break;
     }
 
@@ -63,6 +66,7 @@ export const Button: React.FC<ButtonProps> = ({
       styles.backgroundColor = 'buttonPrimaryDisabled';
       styles.textColor = 'textMuted';
       styles.borderColor = 'buttonPrimaryDisabled';
+      styles.borderWidth = 1;
     }
 
     return styles;
@@ -74,21 +78,21 @@ export const Button: React.FC<ButtonProps> = ({
         return {
           paddingVertical: 's',
           paddingHorizontal: 'm',
-          borderRadius: 's',
+          borderRadius: 'l',
           fontSize: 14,
         };
       case 'large':
         return {
           paddingVertical: 'l',
           paddingHorizontal: 'xl',
-          borderRadius: 'm',
+          borderRadius: 'l',
           fontSize: 18,
         };
       default:
         return {
           paddingVertical: 'm',
           paddingHorizontal: 'l',
-          borderRadius: 's',
+          borderRadius: 'l',
           fontSize: 16,
         };
     }

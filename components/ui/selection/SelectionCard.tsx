@@ -11,6 +11,7 @@ export interface SelectionCardProps extends Omit<TouchableOpacityProps, 'onPress
   onPress?: () => void;
   icon?: React.ReactNode;
   selectionType?: 'radio' | 'checkbox';
+  size?: 'small' | 'medium' | 'large';
 }
 
 export const SelectionCard: React.FC<SelectionCardProps> = ({
@@ -21,6 +22,7 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
   onPress,
   icon,
   selectionType = 'radio',
+  size = 'medium',
   ...touchableProps
 }) => {
   const handlePress = () => {
@@ -29,39 +31,36 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
     }
   };
 
-  const renderSelectionIndicator = () => {
-    if (isSelected) {
-      return (
-        <Box
-          width={32}
-          height={32}
-          borderRadius="round"
-          backgroundColor="text"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Text variant="body" color="white" fontSize={16}>
-            ✓
-          </Text>
-        </Box>
-      );
-    } else {
-      return (
-        <Box
-          width={32}
-          height={32}
-          borderRadius="round"
-          backgroundColor="border"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Text variant="body" color="textMuted" fontSize={12}>
-            ⋯
-          </Text>
-        </Box>
-      );
+  const getSizeStyles = () => {
+    switch (size) {
+      case 'small':
+        return {
+          paddingHorizontal: 'm',
+          paddingVertical: 'm',
+          marginBottom: 's',
+          textVariant: 'body',
+          borderRadius: 'm',
+        };
+      case 'large':
+        return {
+          paddingHorizontal: 'xxl',
+          paddingVertical: 'xl',
+          marginBottom: 'xl',
+          textVariant: 'h3',
+          borderRadius: 'l',
+        };
+      default: // medium
+        return {
+          paddingHorizontal: 'xl',
+          paddingVertical: 'l',
+          marginBottom: 'l',
+          textVariant: 'body',
+          borderRadius: 'l',
+        };
     }
   };
+
+  const sizeStyles = getSizeStyles();
 
   return (
     <TouchableOpacity
@@ -71,47 +70,41 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
       {...touchableProps}
     >
       <Box
-        backgroundColor="surface"
-        borderRadius="m"
-        borderWidth={2}
+        backgroundColor={isSelected ? 'primaryDark' : 'surface'}
+        borderRadius={sizeStyles.borderRadius as any}
+        borderWidth={1}
         borderColor={isSelected ? 'primary' : 'border'}
-        paddingHorizontal="l"
-        paddingVertical="l"
-        marginBottom="s"
+        paddingHorizontal={sizeStyles.paddingHorizontal as any}
+        paddingVertical={sizeStyles.paddingVertical as any}
+        marginBottom={sizeStyles.marginBottom as any}
         opacity={isDisabled ? 0.4 : 1}
       >
-        <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-          {/* Left side content */}
-          <Box flex={1} flexDirection="row" alignItems="center">
-            {icon && (
-              <Box marginRight="m">
-                {icon}
-              </Box>
-            )}
-            
-            <Box flex={1}>
-              <Text
-                variant="h3"
-                color="text"
-                marginBottom={description ? 'xs' : undefined}
-              >
-                {title}
-              </Text>
-              {description && (
-                <Text
-                  variant="body"
-                  color="textMuted"
-                  numberOfLines={2}
-                >
-                  {description}
-                </Text>
-              )}
+        <Box flexDirection="row" alignItems="center" justifyContent="center">
+          {icon && (
+            <Box marginRight="m">
+              {icon}
             </Box>
-          </Box>
-
-          {/* Right side selection indicator */}
-          <Box marginLeft="m">
-            {renderSelectionIndicator()}
+          )}
+          
+          <Box flex={1} alignItems={size === 'small' ? 'center' : 'flex-start'}>
+            <Text
+              variant={isSelected ? 'bodySemiBold' : sizeStyles.textVariant as any}
+              color={isSelected ? 'white' : 'text'}
+              textAlign={size === 'small' ? 'center' : 'left'}
+              marginBottom={description ? 'xs' : undefined}
+            >
+              {title}
+            </Text>
+            {description && (
+              <Text
+                variant="body"
+                color={isSelected ? 'textInverse' : 'textMuted'}
+                numberOfLines={2}
+                textAlign={size === 'small' ? 'center' : 'left'}
+              >
+                {description}
+              </Text>
+            )}
           </Box>
         </Box>
       </Box>
