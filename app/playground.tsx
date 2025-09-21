@@ -31,58 +31,68 @@ export default function PlaygroundScreen() {
         />
         
         <ScrollView style={{ flex: 1 }}>
-          <Box padding="m" gap="l">
-            
+          <Box padding="m">
             {/* Typography Section */}
-            <Card padding="m">
-              <Text variant="h2" marginBottom="m">Typography</Text>
-              <Box gap="s">
-                <Text variant="hero">Hero Text</Text>
-                <Text variant="title">Title Text</Text>
-                <Text variant="h1">Heading 1</Text>
-                <Text variant="h2">Heading 2</Text>
-                <Text variant="h3">Heading 3</Text>
-                <Text variant="body">Body text for regular content</Text>
-                <Text variant="bodyMedium">Body Medium text</Text>
-                <Text variant="bodySemiBold">Body SemiBold text</Text>
-                <Text variant="caption">Caption text</Text>
-                <Text variant="small">Small text</Text>
-                <Text variant="label">Label text</Text>
+            <Card>
+              <Box padding="m">
+                <Text variant="h2" marginBottom="m">Typography</Text>
+                <Box gap="s">
+                  <Text variant="hero">Hero Text</Text>
+                  <Text variant="title">Title Text</Text>
+                  <Text variant="h1">Heading 1</Text>
+                  <Text variant="h2">Heading 2</Text>
+                  <Text variant="h3">Heading 3</Text>
+                  <Text variant="body">Body text for regular content</Text>
+                  <Text variant="bodyMedium">Body Medium text</Text>
+                  <Text variant="bodySemiBold">Body SemiBold text</Text>
+                  <Text variant="caption">Caption text</Text>
+                  <Text variant="small">Small text</Text>
+                  <Text variant="label">Label text</Text>
+                </Box>
               </Box>
-            </Card>        
+            </Card>
+            
             <Divider />
+            
             {/* Button Section */}
-            <Card padding="m">
-              <Text variant="h2" marginBottom="m">Buttons</Text>
-              <Box gap="m">
-                <Box gap="s">
-                  <Text variant="label">Primary Buttons</Text>
-                  <Box flexDirection="row" gap="s" flexWrap="wrap">
-                    <Button variant="primary" size="small">Small</Button>
-                    <Button variant="primary" size="medium">Medium</Button>
-                    <Button variant="primary" size="large">Large</Button>
-                  </Box>
-                </Box>
-              </Box>
-              <Box gap="s">
-                  <Text variant="label">Button Variants</Text>
-                  <Box gap="s">
-                    <Button variant="primary">Primary</Button>
-                    <Button variant="secondary">Secondary</Button>
-                    <Button variant="outline">Outline</Button>
-                    <Button variant="ghost">Ghost</Button>
-                    <Button variant="danger">Danger</Button>
-                  </Box>
-                </Box>
-                <Box gap="s">
-                  <Text variant="label">Button States</Text>
-                  <Box gap="s">
-                    <Button variant="primary" loading>Loading</Button>
-                    <Button variant="primary" disabled>Disabled</Button>
-                    <Button variant="primary" fullWidth>Full Width</Button>
+            <Card>
+              <Box padding="m">
+                <Text variant="h2" marginBottom="m">Buttons</Text>
+                  <Box gap="m">
+                    <Box gap="s">
+                      <Text variant="label">Primary Buttons</Text>
+                      <Box flexDirection="row" gap="s" flexWrap="wrap">
+                        <Button variant="primary" size="small">Small</Button>
+                        <Button variant="primary" size="medium">Medium</Button>
+                        <Button variant="primary" size="large">Large</Button>
+                      </Box>
+                    </Box>
+                    
+                    <Box gap="s">
+                      <Text variant="label">Button Variants</Text>
+                      <Box gap="s">
+                        <Button variant="primary">Primary</Button>
+                        <Button variant="secondary">Secondary</Button>
+                        <Button variant="outline">Outline</Button>
+                        <Button variant="ghost">Ghost</Button>
+                        <Button variant="danger">Danger</Button>
+                      </Box>
+                    </Box>
+                    
+                    <Box gap="s">
+                      <Text variant="label">Button States</Text>
+                      <Box gap="s">
+                        <Button variant="primary" loading>Loading</Button>
+                        <Button variant="primary" disabled>Disabled</Button>
+                        <Button variant="primary" fullWidth>Full Width</Button>
+                      </Box>
+                    </Box>
                   </Box>
                 </Box>
             </Card>
+            
+            <Divider />
+            
             {/* Badge Section */}
             <Card padding="m">
               <Text variant="h2" marginBottom="m">Badges</Text>
@@ -98,6 +108,7 @@ export default function PlaygroundScreen() {
                     <Badge variant="outline">Outline</Badge>
                   </Box>
                 </Box>
+                
                 <Box gap="s">
                   <Text variant="label">Badge Sizes</Text>
                   <Box flexDirection="row" gap="s" flexWrap="wrap" alignItems="center">
@@ -117,9 +128,8 @@ export default function PlaygroundScreen() {
                 </Box>
               </Box>
             </Card>
-          </Box>
-        <Divider />
-
+            
+            <Divider />
 
             {/* Form Components Section */}
             <Card padding="m">
@@ -175,7 +185,6 @@ export default function PlaygroundScreen() {
 
             <Divider />
 
-
             {/* Card Section */}
             <Card padding="m">
               <Text variant="h2" marginBottom="m">Cards</Text>
@@ -208,15 +217,34 @@ export default function PlaygroundScreen() {
             </Card>
 
             <Divider />
+            {/* Layout Section */}
+            <Card padding="m">
+              <Text variant="h2" marginBottom="m">Layout Components</Text>
+              <Box gap="m">
+                <Box gap="s">
+                  <Text variant="label">Dividers</Text>
+                  <Text>Content above</Text>
+                  <Divider />
+                  <Text>Content below</Text>
+                  <Divider color="primary" thickness={2} />
+                  <Text>Thick colored divider above</Text>
+                </Box>
 
-
+                <Box gap="s">
+                  <Text variant="label">Box Layout</Text>
+                  <Box 
+                    backgroundColor="primary" 
+                    padding="m" 
+                    borderRadius="l"
+                    alignItems="center"
+                  >
+                    <Text color="textInverse">Styled Box Component</Text>
+                  </Box>
+                </Box>
+              </Box>
+            </Card>
+          </Box>
         </ScrollView>
-
-          
-
-
-
-
       </Box>
     </ThemeProvider>
   );

@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/auth';
 import { Text, View } from 'react-native';
 
 export default function Index() {
-  return <Redirect href="/playground" />;
+  return <Redirect href="/onboarding/season-step-1-outcomes" />;
 
   const { user, isLoading } = useAuth();
 

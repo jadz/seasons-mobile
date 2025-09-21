@@ -1,12 +1,21 @@
-export { default as Badge } from './Badge';
-export { default as Box } from './Box';
-export { default as Button } from './Button';
-export { default as Card } from './Card';
-export { default as Divider } from './Divider';
-export { default as Header } from './Header';
-export { default as Slider } from './Slider';
-export { default as Text } from './Text';
-export { default as TextInput } from './TextInput';
-export { ThemeProvider, useAppTheme } from './ThemeProvider';
-export { lightTheme, darkTheme } from './theme';
-export type { Theme } from './theme';
+// Foundation
+export { lightTheme, darkTheme, ThemeProvider, useAppTheme } from './foundation';
+export type { Theme } from './foundation';
+
+// Primitives
+export { Box, Text, Divider } from './primitives';
+
+// Forms
+export { Button, TextInput, Slider } from './forms';
+
+// Display
+export { Badge, Card } from './display';
+
+// Navigation
+export { Header, WizardBar, WizardDots } from './navigation';
+
+// Selection
+export { SelectionCard, SelectionList, PillarSelectionCard } from './selection';
+
+// Domain
+export { MetricGoalCard } from './domain';

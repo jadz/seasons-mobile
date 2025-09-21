@@ -8,10 +8,10 @@ import {
   BodyMeasurementUnit, 
   DistanceUnit 
 } from '../../domain/models/userPreferences';
-import { Box } from '../ui/Box';
-import { Text } from '../ui/Text';
-import { Button } from '../ui/Button';
-import { TextInput } from '../ui/TextInput';
+import { Box } from '../ui';
+import { Text } from '../ui';
+import { Button } from '../ui';
+import { TextInput } from '../ui';
 
 interface OnboardingFormProps {
   onComplete: () => void;

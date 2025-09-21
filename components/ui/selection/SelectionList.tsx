@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box } from './Box';
-import { Text } from './Text';
-import { Card } from './Card';
+import { Box } from '../primitives/Box';
+import { Text } from '../primitives/Text';
+import { Card } from '../display/Card';
 
 export interface SelectionItem {
   id: string;

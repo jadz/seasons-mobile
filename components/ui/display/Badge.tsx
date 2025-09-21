@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box } from './Box';
-import { Text } from './Text';
-import { Theme } from './theme';
+import { Box } from '../primitives/Box';
+import { Text } from '../primitives/Text';
+import { Theme, ThemeTextVariants } from '../foundation/theme';
 
 export interface BadgeProps {
   children?: React.ReactNode;
@@ -63,19 +63,19 @@ export const Badge: React.FC<BadgeProps> = ({
         return {
           paddingVertical: 'xs' as keyof Theme['spacing'],
           paddingHorizontal: 's' as keyof Theme['spacing'],
-          textVariant: 'small' as keyof Theme['textVariants'],
+          textVariant: 'small' as ThemeTextVariants,
         };
       case 'large':
         return {
           paddingVertical: 's' as keyof Theme['spacing'],
           paddingHorizontal: 'm' as keyof Theme['spacing'],
-          textVariant: 'body' as keyof Theme['textVariants'],
+          textVariant: 'body' as ThemeTextVariants,
         };
       default:
         return {
           paddingVertical: 'xs' as keyof Theme['spacing'],
           paddingHorizontal: 's' as keyof Theme['spacing'],
-          textVariant: 'caption' as keyof Theme['textVariants'],
+          textVariant: 'caption' as ThemeTextVariants,
         };
     }
   };

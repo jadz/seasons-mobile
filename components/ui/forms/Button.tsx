@@ -1,8 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps, ActivityIndicator } from 'react-native';
-import { Box } from './Box';
-import { Text } from './Text';
-import { Theme, ThemeColors } from './theme';
+import { Box } from '../primitives/Box';
+import { Text } from '../primitives/Text';
+import { Theme, ThemeColors } from '../foundation/theme';
 
 export interface ButtonProps extends TouchableOpacityProps {
   children?: React.ReactNode;
@@ -150,4 +150,3 @@ export const Button: React.FC<ButtonProps> = ({
 };
 
 export default Button;
-

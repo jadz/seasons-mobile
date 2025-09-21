@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, PanResponder, Dimensions } from 'react-native';
-import { Box } from './Box';
-import { Text } from './Text';
-import { Theme } from './theme';
+import { Box } from '../primitives/Box';
+import { Text } from '../primitives/Text';
+import { Theme } from '../foundation/theme';
 
 export interface SliderProps {
   value?: number;

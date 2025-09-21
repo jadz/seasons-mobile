@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from './Box';
-import { Theme } from './theme';
+import { Theme } from '../foundation/theme';
 
 export interface DividerProps {
   orientation?: 'horizontal' | 'vertical';

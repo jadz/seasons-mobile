@@ -8,7 +8,7 @@ import {
   PositionProps,
   OpacityProps,
 } from '@shopify/restyle';
-import { Theme } from './theme';
+import { Theme } from '../foundation/theme';
 
 // Box component with comprehensive layout, spacing, and styling props
 export const Box = createBox<Theme>();

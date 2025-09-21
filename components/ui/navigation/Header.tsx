@@ -1,8 +1,8 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Box } from './Box';
-import { Text } from './Text';
-import { Theme } from './theme';
+import { Box } from '../primitives/Box';
+import { Text } from '../primitives/Text';
+import { Theme } from '../foundation/theme';
 
 export interface HeaderProps {
   title?: string;

@@ -1,10 +1,10 @@
 import React from 'react';
 import { router } from 'expo-router';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { ThemeProvider } from '../../components/ui/ThemeProvider';
-import { Box } from '../../components/ui/Box';
-import { Text } from '../../components/ui/Text';
-import { Button } from '../../components/ui/Button';
+import { ThemeProvider } from '../../components/ui';
+import { Box } from '../../components/ui';
+import { Text } from '../../components/ui';
+import { Button } from '../../components/ui';
 
 export default function HomeScreen() {
   const { user, signOut } = useAuth();

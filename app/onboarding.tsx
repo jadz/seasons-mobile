@@ -1,8 +1,7 @@
 import React from 'react';
 import { router } from 'expo-router';
 import { OnboardingForm } from '../components/auth';
-import { ThemeProvider } from '../components/ui/ThemeProvider';
-import { Box } from '../components/ui/Box';
+import { ThemeProvider, Box } from '../components/ui';
 
 export default function OnboardingScreen() {
   const handleComplete = () => {

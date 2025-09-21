@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { Box } from './Box';
-import { Text } from './Text';
+import { Box } from '../primitives/Box';
+import { Text } from '../primitives/Text';
 
 export interface PillarSelectionCardProps extends Omit<TouchableOpacityProps, 'onPress'> {
   title: string;

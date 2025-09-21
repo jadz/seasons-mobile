@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box } from './Box';
-import { Theme } from './theme';
+import { Box } from '../primitives/Box';
+import { Theme } from '../foundation/theme';
 
 export interface WizardDotsProps {
   totalSteps: number;

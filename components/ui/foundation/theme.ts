@@ -274,7 +274,7 @@ export const darkTheme = createTheme({
 export type Theme = typeof lightTheme;
 export type ThemeColors = keyof Theme['colors'];
 export type ThemeSpacing = keyof Theme['spacing'];
-export type ThemeTextVariants = keyof Theme['textVariants'];
+export type ThemeTextVariants = Exclude<keyof Theme['textVariants'], 'defaults'>;
 export type ThemeBorderRadii = keyof Theme['borderRadii'];
 export type ThemeShadows = keyof Theme['shadows'];
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Box } from './Box';
-import { Text } from './Text';
-import { TextInput } from './TextInput';
-import { Card } from './Card';
-import { Button } from './Button';
+import { Box } from '../primitives/Box';
+import { Text } from '../primitives/Text';
+import { TextInput } from '../forms/TextInput';
+import { Card } from '../display/Card';
+import { Button } from '../forms/Button';
 
 export interface MetricGoalData {
   metricId: string;

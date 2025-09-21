@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { router } from 'expo-router';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { Box } from '../ui/Box';
-import { Text } from '../ui/Text';
-import { Button } from '../ui/Button';
-import { TextInput } from '../ui/TextInput';
+import { Box } from '../ui';
+import { Text } from '../ui';
+import { Button } from '../ui';
+import { TextInput } from '../ui';
 
 const SignInForm: React.FC = () => {
   const [email, setEmail] = useState('');

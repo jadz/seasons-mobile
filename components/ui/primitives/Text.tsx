@@ -7,7 +7,7 @@ import {
   LayoutProps,
 } from '@shopify/restyle';
 import { TextProps as RNTextProps } from 'react-native';
-import { Theme } from './theme';
+import { Theme } from '../foundation/theme';
 
 // Base text component
 export const Text = createText<Theme>();

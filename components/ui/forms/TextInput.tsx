@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 import { TextInput as RNTextInput, TextInputProps as RNTextInputProps } from 'react-native';
 import { useTheme } from '@shopify/restyle';
-import { Box } from './Box';
-import { Text } from './Text';
-import { Theme, ThemeColors } from './theme';
+import { Box } from '../primitives/Box';
+import { Text } from '../primitives/Text';
+import { Theme, ThemeColors } from '../foundation/theme';
 
 export interface TextInputProps extends RNTextInputProps {
   label?: string;
@@ -143,4 +143,3 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>(({
 TextInput.displayName = 'TextInput';
 
 export default TextInput;
-

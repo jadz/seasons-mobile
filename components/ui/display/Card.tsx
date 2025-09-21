@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
-import { Box, StyledBoxProps } from './Box';
-import { Theme } from './theme';
+import { Box, StyledBoxProps } from '../primitives/Box';
+import { Theme } from '../foundation/theme';
 
 export interface CardProps extends StyledBoxProps {
   children?: React.ReactNode;
