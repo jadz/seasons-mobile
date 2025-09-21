@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
-import { Box, Text, Button, WizardBar, SelectionCard } from '../../components/ui';
+import { Box, Text, Button, WizardBar } from '../../components/ui';
+import { SimpleSelectionButton } from '../../components/ui/selection/SimpleSelectionButton';
 
 export default function SeasonStrengthScreen() {
   const [selectedLifts, setSelectedLifts] = useState<string[]>([]);
@@ -49,55 +50,40 @@ export default function SeasonStrengthScreen() {
             </Text>
           </Box>
           
-          {/* Lift Selection Cards - 2x2 Grid */}
-          <Box marginBottom="l">
-            <Box flexDirection="row" marginBottom="s">
-              <Box flex={1} marginRight="s">
-                <SelectionCard 
-                  title="Bench Press"
-                  size="small"
-                  isSelected={selectedLifts.includes('bench')}
-                  onPress={() => handleLiftSelection('bench')}
-                  isDisabled={focusOverallStrength}
-                />
-              </Box>
-              <Box flex={1} marginLeft="s">
-                <SelectionCard 
-                  title="Overhead Press"
-                  size="small"
-                  isSelected={selectedLifts.includes('overhead')}
-                  onPress={() => handleLiftSelection('overhead')}
-                  isDisabled={focusOverallStrength}
-                />
-              </Box>
-            </Box>
-            
-            <Box flexDirection="row" marginBottom="l">
-              <Box flex={1} marginRight="s">
-                <SelectionCard 
-                  title="Squat"
-                  size="small"
-                  isSelected={selectedLifts.includes('squat')}
-                  onPress={() => handleLiftSelection('squat')}
-                  isDisabled={focusOverallStrength}
-                />
-              </Box>
-              <Box flex={1} marginLeft="s">
-                <SelectionCard 
-                  title="Deadlift"
-                  size="small"
-                  isSelected={selectedLifts.includes('deadlift')}
-                  onPress={() => handleLiftSelection('deadlift')}
-                  isDisabled={focusOverallStrength}
-                />
-              </Box>
-            </Box>
-          </Box>
-
-          {/* Add Another Lift Button */}
-          <Box marginBottom="l">
-            <SelectionCard 
-              title="+ Add another lift"
+          {/* Lift Selection Cards - Flowing Layout */}
+          <Box marginBottom="l" flexDirection="row" flexWrap="wrap" alignItems="flex-start">
+            <SimpleSelectionButton 
+              title="Bench Press"
+              isSelected={selectedLifts.includes('bench')}
+              onPress={() => handleLiftSelection('bench')}
+              isDisabled={focusOverallStrength}
+            />
+            <SimpleSelectionButton 
+              title="Overhead Press"
+              isSelected={selectedLifts.includes('overhead')}
+              onPress={() => handleLiftSelection('overhead')}
+              isDisabled={focusOverallStrength}
+            />
+            <SimpleSelectionButton 
+              title="Squat"
+              isSelected={selectedLifts.includes('squat')}
+              onPress={() => handleLiftSelection('squat')}
+              isDisabled={focusOverallStrength}
+            />
+            <SimpleSelectionButton 
+              title="Deadlift"
+              isSelected={selectedLifts.includes('deadlift')}
+              onPress={() => handleLiftSelection('deadlift')}
+              isDisabled={focusOverallStrength}
+            />
+            <SimpleSelectionButton 
+              title="Barbell Row"
+              isSelected={selectedLifts.includes('row')}
+              onPress={() => handleLiftSelection('row')}
+              isDisabled={focusOverallStrength}
+            />
+            <SimpleSelectionButton 
+              title="See more +"
               isSelected={false}
               onPress={handleAddAnotherLift}
               isDisabled={focusOverallStrength}
@@ -106,7 +92,7 @@ export default function SeasonStrengthScreen() {
 
           {/* Overall Strength Option */}
           <Box marginBottom="xl">
-            <SelectionCard 
+            <SimpleSelectionButton 
               title="I just want to focus on overall strength"
               isSelected={focusOverallStrength}
               onPress={handleOverallStrengthToggle}

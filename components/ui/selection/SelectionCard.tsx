@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, TouchableOpacityProps } from 'react-native';
+import { TouchableOpacity, TouchableOpacityProps, Text as RNText } from 'react-native';
 import { Box } from '../primitives/Box';
 import { Text } from '../primitives/Text';
 
@@ -37,6 +37,7 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
         return {
           paddingHorizontal: 'm',
           paddingVertical: 'm',
+          marginRight: 's',
           marginBottom: 's',
           textVariant: 'body',
           borderRadius: 'm',
@@ -77,6 +78,7 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
         paddingHorizontal={sizeStyles.paddingHorizontal as any}
         paddingVertical={sizeStyles.paddingVertical as any}
         marginBottom={sizeStyles.marginBottom as any}
+        marginRight={sizeStyles.marginRight as any}
         opacity={isDisabled ? 0.4 : 1}
       >
         <Box flexDirection="row" alignItems="center" justifyContent="center">
@@ -87,14 +89,16 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
           )}
           
           <Box flex={1} alignItems={size === 'small' ? 'center' : 'flex-start'}>
-            <Text
-              variant={isSelected ? 'bodySemiBold' : sizeStyles.textVariant as any}
-              color={isSelected ? 'white' : 'text'}
-              textAlign={size === 'small' ? 'center' : 'left'}
-              marginBottom={description ? 'xs' : undefined}
+            <RNText
+              style={{
+                color: isSelected ? 'white' : '#263137',
+                textAlign: size === 'small' ? 'center' : 'left',
+                fontSize: 16,
+                fontWeight: isSelected ? '600' : '400',
+              }}
             >
               {title}
-            </Text>
+            </RNText>
             {description && (
               <Text
                 variant="body"
