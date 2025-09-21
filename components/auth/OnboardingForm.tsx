@@ -79,7 +79,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onComplete }) => {
     onSelect: (value: any) => void;
   }> = ({ title, options, selectedValue, onSelect }) => (
     <Box marginBottom="l">
-      <Text variant="label" color="text" marginBottom="m">{title}</Text>
+      <Text variant="label" color="text/primary" marginBottom="m">{title}</Text>
       <Box flexDirection="row" gap="m">
         {options.map((option) => (
           <Button
@@ -99,12 +99,13 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onComplete }) => {
   if (currentStep === 'name') {
     return (
       <Box flex={1} padding="l" justifyContent="center">
-        <Text variant="h1" color="text" textAlign="center" marginBottom="xl">
+        <Text variant="h1" color="text/primary" textAlign="center" marginBottom="xl">
           What's your name?
+
         </Text>
         
         <Box marginBottom="xxl">
-          <Text variant="label" color="text" marginBottom="m">First Name</Text>
+          <Text variant="label" color="text/primary" marginBottom="m">First Name</Text>
           <TextInput
             value={firstName}
             onChangeText={setFirstName}
@@ -128,7 +129,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onComplete }) => {
 
   return (
     <Box flex={1} padding="l" justifyContent="center">
-      <Text variant="h1" color="text" textAlign="center" marginBottom="xl">
+      <Text variant="h1" color="text/primary" textAlign="center" marginBottom="xl">
         Set your preferences
       </Text>
       

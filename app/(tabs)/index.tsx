@@ -20,11 +20,11 @@ export default function HomeScreen() {
 
   return (
     <ThemeProvider initialThemeMode="light">
-      <Box flex={1} backgroundColor="background" justifyContent="center" alignItems="center" padding="l">
-        <Text variant="title" color="text" textAlign="center" marginBottom="m">
+      <Box flex={1} backgroundColor="bg/page" justifyContent="center" alignItems="center" padding="l">
+        <Text variant="title" color="text/primary" textAlign="center" marginBottom="m">
           Welcome Home
         </Text>
-        <Text variant="h2" color="textSecondary" textAlign="center" marginBottom="xxl">
+        <Text variant="h2" color="text/secondary" textAlign="center" marginBottom="xxl">
           Hello, {user?.firstName || 'User'}!
         </Text>
 

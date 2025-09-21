@@ -29,7 +29,7 @@ export const SelectionList: React.FC<SelectionListProps> = ({
   if (items.length === 0) {
     return (
       <Box paddingVertical="xl" alignItems="center">
-        <Text variant="body" color="textMuted" textAlign="center">
+        <Text variant="body" color="text/secondary" textAlign="center">
           {emptyMessage}
         </Text>
       </Box>
@@ -41,7 +41,7 @@ export const SelectionList: React.FC<SelectionListProps> = ({
       {title && (
         <Text 
           variant="h2" 
-          color="text" 
+          color="text/primary" 
           marginBottom="l"
         >
           {title}
@@ -53,53 +53,37 @@ export const SelectionList: React.FC<SelectionListProps> = ({
           <Box key={item.id} marginBottom="s">
             <Card
               variant="default"
-              padding="l"
               onPress={() => !item.isDisabled && onItemPress(item.id)}
               disabled={item.isDisabled}
-              backgroundColor={item.isSelected ? 'surface' : 'background'}
-              borderWidth={1}
-              borderColor={item.isSelected ? 'primary' : 'transparent'}
-              borderRadius="s"
             >
-              <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-                <Box flex={1} marginRight="l">
-                  <Text
-                    variant="body"
-                    color={item.isSelected ? 'text' : 'text'}
-                    marginBottom={item.description ? 'xs' : undefined}
-                  >
-                    {item.title}
-                  </Text>
-                  {item.description && (
-                    <Text 
-                      variant="caption" 
-                      color="textMuted" 
-                      numberOfLines={2}
+              <Box
+                backgroundColor={item.isSelected ? 'primaryDark' : 'surface'}
+                borderRadius="l"
+                borderWidth={1}
+                borderColor={item.isSelected ? 'primary' : 'border'}
+                paddingHorizontal="xl"
+                paddingVertical="l"
+                opacity={item.isDisabled ? 0.4 : 1}
+              >
+                <Box flexDirection="row" alignItems="center">
+                  <Box flex={1}>
+                    <Text
+                      variant={item.isSelected ? 'bodySemiBold' : 'body'}
+                      color={item.isSelected ? 'white' : 'text'}
+                      marginBottom={item.description ? 'xs' : undefined}
                     >
-                      {item.description}
+                      {item.title}
                     </Text>
-                  )}
-                </Box>
-                
-                {/* Minimal selection indicator */}
-                <Box
-                  width={16}
-                  height={16}
-                  borderRadius={multiSelect ? 's' : 'round'}
-                  borderWidth={1}
-                  borderColor={item.isSelected ? 'primary' : 'border'}
-                  backgroundColor={item.isSelected ? 'primary' : 'transparent'}
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  {item.isSelected && (
-                    <Box
-                      width={multiSelect ? 6 : 8}
-                      height={multiSelect ? 6 : 8}
-                      borderRadius={multiSelect ? 'xs' : 'round'}
-                      backgroundColor="white"
-                    />
-                  )}
+                    {item.description && (
+                      <Text 
+                        variant="body" 
+                        color={item.isSelected ? 'textInverse' : 'textMuted'} 
+                        numberOfLines={2}
+                      >
+                        {item.description}
+                      </Text>
+                    )}
+                  </Box>
                 </Box>
               </Box>
             </Card>

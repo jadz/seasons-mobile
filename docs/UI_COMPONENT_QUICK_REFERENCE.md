@@ -17,7 +17,7 @@ import { Theme, ThemeColors, ThemeTextVariants, ThemeSpacing } from '../componen
 
 ### Layout with Box
 ```typescript
-<Box padding="m" backgroundColor="surface" borderRadius="s">
+<Box padding="m" backgroundColor="bg/surface" borderRadius="s">
   <Box flexDirection="row" justifyContent="space-between" alignItems="center">
     <Text variant="h3">Title</Text>
     <Badge variant="success">Active</Badge>
@@ -178,17 +178,17 @@ import { Theme, ThemeColors, ThemeTextVariants, ThemeSpacing } from '../componen
 ### ✅ Do This Instead
 ```typescript
 // Use theme values
-<Box backgroundColor="primary" padding="m">
+<Box backgroundcolor="brand/primary" padding="m">
 
 // Use proper text variant
 <Text variant="body">Text</Text>
 
 // Use valid theme color
-<Box backgroundColor="surface">
+<Box backgroundColor="bg/surface">
 
 // Use individual shadow props
 <Box
-  shadowColor="black"
+  shadowcolor="bg/raised"
   shadowOffset={{ width: 0, height: 2 }}
   shadowOpacity={0.1}
   shadowRadius={4}

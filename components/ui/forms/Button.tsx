@@ -1,13 +1,14 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps, ActivityIndicator } from 'react-native';
+import { useTheme } from '@shopify/restyle';
 import { Box } from '../primitives/Box';
 import { Text } from '../primitives/Text';
-import { Theme, ThemeColors } from '../foundation/theme';
+import { Theme, ThemeColors, ThemeSpacing, ThemeRadii } from '../foundation/theme';
 
 export interface ButtonProps extends TouchableOpacityProps {
   children?: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-  size?: 'small' | 'medium' | 'large';
+  variant?: keyof Theme['buttonVariants'];
+  size?: keyof Theme['buttonSizes'];
   loading?: boolean;
   disabled?: boolean;
   fullWidth?: boolean;
@@ -26,76 +27,11 @@ export const Button: React.FC<ButtonProps> = ({
   rightIcon,
   ...touchableProps
 }) => {
+  const theme = useTheme<Theme>();
   const isDisabled = disabled || loading;
-
-  const getVariantStyles = () => {
-    const styles = {
-      backgroundColor: 'buttonPrimary' as ThemeColors,
-      textColor: 'textInverse' as ThemeColors,
-      borderColor: 'transparent' as ThemeColors,
-      borderWidth: 0,
-    };
-
-    switch (variant) {
-      case 'secondary':
-        styles.backgroundColor = 'buttonSecondary';
-        styles.textColor = 'text';
-        styles.borderColor = 'buttonSecondaryBorder';
-        styles.borderWidth = 1;
-        break;
-      case 'outline':
-        styles.backgroundColor = 'transparent';
-        styles.textColor = 'primary';
-        styles.borderColor = 'primary';
-        styles.borderWidth = 1;
-        break;
-      case 'ghost':
-        styles.backgroundColor = 'transparent';
-        styles.textColor = 'primary';
-        break;
-      case 'danger':
-        styles.backgroundColor = 'error';
-        styles.textColor = 'textInverse';
-        break;
-    }
-
-    if (isDisabled) {
-      styles.backgroundColor = 'buttonPrimaryDisabled';
-      styles.textColor = 'textMuted';
-      styles.borderColor = 'buttonPrimaryDisabled';
-    }
-
-    return styles;
-  };
-
-  const getSizeStyles = () => {
-    switch (size) {
-      case 'small':
-        return {
-          paddingVertical: 's',
-          paddingHorizontal: 'm',
-          borderRadius: 's',
-          fontSize: 14,
-        };
-      case 'large':
-        return {
-          paddingVertical: 'l',
-          paddingHorizontal: 'xl',
-          borderRadius: 'm',
-          fontSize: 18,
-        };
-      default:
-        return {
-          paddingVertical: 'm',
-          paddingHorizontal: 'l',
-          borderRadius: 's',
-          fontSize: 16,
-        };
-    }
-  };
-
-  const variantStyles = getVariantStyles();
-  const sizeStyles = getSizeStyles();
+  
+  const variantStyles = theme.buttonVariants[variant];
+  const sizeStyles = theme.buttonSizes[size];
 
   return (
     <TouchableOpacity
@@ -104,12 +40,12 @@ export const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.7}
     >
       <Box
-        backgroundColor={variantStyles.backgroundColor}
-        borderColor={variantStyles.borderColor}
+        backgroundColor={variantStyles.backgroundColor as ThemeColors}
+        borderColor={variantStyles.borderColor as ThemeColors}
         borderWidth={variantStyles.borderWidth}
-        paddingVertical={sizeStyles.paddingVertical as keyof Theme['spacing']}
-        paddingHorizontal={sizeStyles.paddingHorizontal as keyof Theme['spacing']}
-        borderRadius={sizeStyles.borderRadius as keyof Theme['borderRadii']}
+        paddingVertical={sizeStyles.paddingVertical as ThemeSpacing}
+        paddingHorizontal={sizeStyles.paddingHorizontal as ThemeSpacing}
+        borderRadius={sizeStyles.borderRadius as ThemeRadii}
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
@@ -117,31 +53,12 @@ export const Button: React.FC<ButtonProps> = ({
         opacity={isDisabled ? 0.6 : 1}
       >
         {loading ? (
-          <ActivityIndicator
-            size="small"
-            color={variantStyles.textColor}
-          />
+          <ActivityIndicator size="small" color={variantStyles.textColor} />
         ) : (
           <>
-            {leftIcon && (
-              <Box marginRight="s">
-                {leftIcon}
-              </Box>
-            )}
-            
-            <Text
-              variant="button"
-              color={variantStyles.textColor}
-              fontSize={sizeStyles.fontSize}
-            >
-              {children}
-            </Text>
-            
-            {rightIcon && (
-              <Box marginLeft="s">
-                {rightIcon}
-              </Box>
-            )}
+            {leftIcon && <Box marginRight="s">{leftIcon}</Box>}
+            <Text variant="button" color={variantStyles.textColor as ThemeColors}>{children}</Text>
+            {rightIcon && <Box marginLeft="s">{rightIcon}</Box>}
           </>
         )}
       </Box>

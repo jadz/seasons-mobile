@@ -76,12 +76,12 @@ export const MetricGoalCard: React.FC<MetricGoalCardProps> = ({
         <Box flex={1}>
           <Text 
             variant="body" 
-            color="text"
+            color="text/primary"
             marginBottom="xs"
           >
             {metric.metricName}
           </Text>
-          <Text variant="caption" color="textMuted">
+          <Text variant="caption" color="text/secondary">
             {metric.metricUnit}
           </Text>
         </Box>
@@ -136,7 +136,7 @@ export const MetricGoalCard: React.FC<MetricGoalCardProps> = ({
           {/* Simple progress preview */}
           {metric.baseline !== undefined && metric.target !== undefined && (
             <Box
-              backgroundColor="surface"
+              backgroundColor="bg/surface"
               padding="l"
               borderRadius="s"
               marginTop="m"
@@ -148,7 +148,7 @@ export const MetricGoalCard: React.FC<MetricGoalCardProps> = ({
                 alignItems="center" 
                 justifyContent="space-between"
               >
-                <Text variant="caption" color="textMuted">
+                <Text variant="caption" color="text/secondary">
                   {metric.baseline} → {metric.target} {metric.metricUnit}
                 </Text>
               </Box>

@@ -99,7 +99,7 @@ export type ThemeSpacing = keyof Theme['spacing'];
 import { Box } from '../components/ui';
 
 // Basic usage
-<Box padding="m" backgroundColor="surface">
+<Box padding="m" backgroundColor="bg/surface">
   <Text>Content</Text>
 </Box>
 
@@ -136,7 +136,7 @@ import { Text } from '../components/ui';
 <Text variant="caption" color="textSecondary">Caption</Text>
 
 // Custom styling
-<Text variant="body" color="primary" textAlign="center">
+<Text variant="body" color="brand/primary" textAlign="center">
   Centered primary text
 </Text>
 ```
@@ -288,7 +288,7 @@ import { Divider } from '../components/ui';
 <Divider />
 
 // Customized
-<Divider color="primary" thickness={2} />
+<Divider color="brand/primary" thickness={2} />
 <Divider orientation="vertical" length={100} />
 ```
 
@@ -454,7 +454,7 @@ variant: 'body' as ThemeTextVariants
 <Box style={{ backgroundColor: '#334C4E', padding: 16 }}>
 
 // ✅ Do this
-<Box backgroundColor="primary" padding="m">
+<Box backgroundcolor="brand/primary" padding="m">
 ```
 
 ### Component Variants
@@ -511,7 +511,7 @@ textVariant: 'body' as ThemeTextVariants
 
 // ✅ Do this
 <Box
-  shadowColor="black"
+  shadowcolor="bg/raised"
   shadowOffset={{ width: 0, height: 2 }}
   shadowOpacity={0.1}
   shadowRadius={4}
@@ -529,7 +529,7 @@ textVariant: 'body' as ThemeTextVariants
 <Box backgroundColor="selected">
 
 // ✅ Do this
-<Box backgroundColor="surface">
+<Box backgroundColor="bg/surface">
 ```
 
 #### 4. TypeScript errors with theme types

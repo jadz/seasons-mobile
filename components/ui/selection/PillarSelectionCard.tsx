@@ -67,7 +67,7 @@ export const PillarSelectionCard: React.FC<PillarSelectionCardProps> = ({
           {description && (
             <Text
               variant="caption"
-              color="textMuted"
+              color="text/secondary"
               numberOfLines={2}
             >
               {description}
@@ -81,7 +81,7 @@ export const PillarSelectionCard: React.FC<PillarSelectionCardProps> = ({
             width={16}
             height={16}
             borderRadius="round"
-            backgroundColor="primary"
+            backgroundcolor="brand/primary"
             alignItems="center"
             justifyContent="center"
           >
@@ -89,7 +89,7 @@ export const PillarSelectionCard: React.FC<PillarSelectionCardProps> = ({
               width={6}
               height={6}
               borderRadius="round"
-              backgroundColor="white"
+              backgroundColor="bg/surface"
             />
           </Box>
         )}

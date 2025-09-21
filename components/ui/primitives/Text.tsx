@@ -28,37 +28,37 @@ interface TextComponentProps {
 }
 
 export const HeroText: React.FC<TextComponentProps> = ({ children, ...props }) => (
-  <Text variant="hero" color="text" {...props}>
+  <Text variant="hero" color="text/primary" {...props}>
     {children}
   </Text>
 );
 
 export const TitleText: React.FC<TextComponentProps> = ({ children, ...props }) => (
-  <Text variant="title" color="text" {...props}>
+  <Text variant="title" color="text/primary" {...props}>
     {children}
   </Text>
 );
 
 export const H1Text: React.FC<TextComponentProps> = ({ children, ...props }) => (
-  <Text variant="h1" color="text" {...props}>
+  <Text variant="h1" color="text/primary" {...props}>
     {children}
   </Text>
 );
 
 export const H2Text: React.FC<TextComponentProps> = ({ children, ...props }) => (
-  <Text variant="h2" color="text" {...props}>
+  <Text variant="h2" color="text/primary" {...props}>
     {children}
   </Text>
 );
 
 export const H3Text: React.FC<TextComponentProps> = ({ children, ...props }) => (
-  <Text variant="h3" color="text" {...props}>
+  <Text variant="h3" color="text/primary" {...props}>
     {children}
   </Text>
 );
 
 export const BodyText: React.FC<TextComponentProps> = ({ children, ...props }) => (
-  <Text variant="body" color="text" {...props}>
+  <Text variant="body" color="text/primary" {...props}>
     {children}
   </Text>
 );
@@ -70,7 +70,7 @@ export const CaptionText: React.FC<TextComponentProps> = ({ children, ...props }
 );
 
 export const LabelText: React.FC<TextComponentProps> = ({ children, ...props }) => (
-  <Text variant="label" color="text" {...props}>
+  <Text variant="label" color="text/primary" {...props}>
     {children}
   </Text>
 );

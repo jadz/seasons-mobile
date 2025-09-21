@@ -249,7 +249,7 @@ Build complex UIs by composing simple components:
       <Text variant="h3" marginLeft="s">Status Card</Text>
     </Box>
     <Divider marginVertical="s" />
-    <Text variant="body" color="textMuted">
+    <Text variant="body" color="text/secondary">
       This demonstrates component composition
     </Text>
     <Button variant="primary" marginTop="m" fullWidth>

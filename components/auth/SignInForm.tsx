@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { Alert } from 'react-native';
 import { router } from 'expo-router';
 import { useAuth } from '../../hooks/auth/useAuth';
-import { Box } from '../ui';
-import { Text } from '../ui';
-import { Button } from '../ui';
-import { TextInput } from '../ui';
+import { Box, Text, Button, TextInput } from '../ui';
 
 const SignInForm: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -58,75 +55,117 @@ const SignInForm: React.FC = () => {
 
   if (emailSent && showOtpInput) {
     return (
-      <Box flex={1} justifyContent="center" padding="l">
-        <Text variant="title" color="text" textAlign="center" marginBottom="m">
-          Enter Verification Code
-        </Text>
-        <Text variant="body" color="textSecondary" textAlign="center" marginBottom="xl">
-          We've sent a verification code to {email}. Enter the code below or click the magic link in your email.
-        </Text>
+      <Box flex={1} justifyContent="center">
+        {/* Title Section */}
+        <Box marginBottom="xl">
+          <Text variant="h1" color="text/primary" textAlign="center" marginBottom="md">
+            Check your email
+          </Text>
+          <Text variant="body" color="text/secondary" textAlign="center">
+            We've sent a verification code to
+          </Text>
+          <Text variant="bodyMedium" color="text/primary" textAlign="center" marginTop="xs">
+            {email}
+          </Text>
+        </Box>
 
-        <TextInput
-          placeholder="Enter 6-digit code"
-          value={otp}
-          onChangeText={setOtp}
-          keyboardType="number-pad"
-          maxLength={6}
-          autoComplete="one-time-code"
-          textContentType="oneTimeCode"
-          editable={!isLoading}
-          style={{ marginBottom: 20 }}
-        />
+        {/* Instructions */}
+        <Box marginBottom="xl">
+          <Text variant="bodySmall" color="text/secondary" textAlign="center">
+            Enter the 6-digit code below or click the magic link in your email to continue.
+          </Text>
+        </Box>
 
-        <Button
-          onPress={handleVerifyOtp}
-          disabled={isLoading}
-        >
-          {isLoading ? 'Verifying...' : 'Verify Code'}
-        </Button>
+        {/* Input Section */}
+        <Box marginBottom="xl">
+          <TextInput
+            label="Verification Code"
+            placeholder="123456"
+            value={otp}
+            onChangeText={setOtp}
+            keyboardType="number-pad"
+            maxLength={6}
+            autoComplete="one-time-code"
+            textContentType="oneTimeCode"
+            editable={!isLoading}
+            variant="outlined"
+          />
+        </Box>
 
-        <Button
-          variant="ghost"
-          onPress={() => {
-            setEmailSent(false);
-            setShowOtpInput(false);
-            setOtp('');
-            setEmail('');
-          }}
-          style={{ marginTop: 20 }}
-        >
-          Try Different Email
-        </Button>
+        {/* Action Buttons */}
+        <Box gap="md">
+          <Button
+            variant="primary"
+            onPress={handleVerifyOtp}
+            disabled={isLoading || !otp.trim()}
+            fullWidth
+            loading={isLoading}
+          >
+            {isLoading ? 'Verifying...' : 'Verify Code'}
+          </Button>
+
+          <Button
+            variant="ghost"
+            onPress={() => {
+              setEmailSent(false);
+              setShowOtpInput(false);
+              setOtp('');
+              setEmail('');
+            }}
+            fullWidth
+          >
+            Try Different Email
+          </Button>
+        </Box>
       </Box>
     );
   }
 
   return (
-    <Box flex={1} justifyContent="center" padding="l">
-      <Text variant="title" color="text" textAlign="center" marginBottom="m">
-        Welcome to Seasons
-      </Text>
-      <Text variant="body" color="textSecondary" textAlign="center" marginBottom="xl">
-        Enter your email to get started. We'll send you a magic link to sign in.
-      </Text>
+    <Box flex={1} justifyContent="center">
+      {/* Welcome Section */}
+      <Box marginBottom="xl">
+        <Text variant="h1" color="text/primary" textAlign="center" marginBottom="md">
+          Sign in to your account
+        </Text>
+        <Text variant="body" color="text/secondary" textAlign="center">
+          Enter your email address and we'll send you a secure magic link to sign in.
+        </Text>
+      </Box>
 
-      <TextInput
-        placeholder="Enter your email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoComplete="email"
-        editable={!isLoading}
-        style={{ marginBottom: 20 }}
-      />
+      {/* Input Section */}
+      <Box marginBottom="xl">
+        <TextInput
+          label="Email Address"
+          placeholder="your@email.com"
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoComplete="email"
+          editable={!isLoading}
+          variant="outlined"
+          autoCorrect={false}
+        />
+      </Box>
 
+      {/* Action Button */}
       <Button
+        variant="primary"
         onPress={handleSignIn}
-        disabled={isLoading}
+        disabled={isLoading || !email.trim()}
+        fullWidth
+        loading={isLoading}
       >
         {isLoading ? 'Sending...' : 'Send Magic Link'}
       </Button>
+
+      {/* Helper Text */}
+      <Box marginTop="xl">
+        <Text variant="bodySmall" color="text/secondary" textAlign="center">
+          New to Seasons? No worries! We'll create your account automatically when you sign in.
+        </Text>
+      </Box>
     </Box>
   );
 };

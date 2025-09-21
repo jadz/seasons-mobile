@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { useColorScheme, StatusBar } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeProvider as RestyleThemeProvider } from '@shopify/restyle';
 import { lightTheme, darkTheme, Theme } from './theme';
 
@@ -13,6 +14,7 @@ interface ThemeContextType {
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const THEME_STORAGE_KEY = '@seasons_theme_mode';
 
 export interface ThemeProviderProps {
   children: React.ReactNode;
@@ -25,6 +27,34 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 }) => {
   const systemColorScheme = useColorScheme();
   const [themeMode, setThemeMode] = useState<ThemeMode>(initialThemeMode);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Load saved theme preference on app start
+  useEffect(() => {
+    const loadThemePreference = async () => {
+      try {
+        const savedTheme = await AsyncStorage.getItem(THEME_STORAGE_KEY);
+        if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark' || savedTheme === 'system')) {
+          setThemeMode(savedTheme as ThemeMode);
+        }
+      } catch (error) {
+        console.warn('Failed to load theme preference:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadThemePreference();
+  }, []);
+
+  // Save theme preference when it changes
+  useEffect(() => {
+    if (!isLoading) {
+      AsyncStorage.setItem(THEME_STORAGE_KEY, themeMode).catch((error) => {
+        console.warn('Failed to save theme preference:', error);
+      });
+    }
+  }, [themeMode, isLoading]);
   
   const isDark = React.useMemo(() => {
     if (themeMode === 'system') {
@@ -42,9 +72,18 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     isDark,
   };
 
+  // Show nothing while loading theme preference
+  if (isLoading) {
+    return null;
+  }
+
   return (
     <ThemeContext.Provider value={contextValue}>
       <RestyleThemeProvider theme={theme}>
+        <StatusBar 
+          barStyle={isDark ? 'light-content' : 'dark-content'}
+          backgroundColor={theme.colors.background}
+        />
         {children}
       </RestyleThemeProvider>
     </ThemeContext.Provider>
@@ -60,4 +99,3 @@ export const useAppTheme = (): ThemeContextType => {
 };
 
 export default ThemeProvider;
-

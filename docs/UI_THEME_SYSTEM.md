@@ -33,7 +33,7 @@ export default function App() {
 import { Box, Text, Button, Card } from './components/ui';
 
 export const MyScreen = () => (
-  <Box flex={1} backgroundColor="background" padding="l">
+  <Box flex={1} backgroundcolor="bg/primary" padding="l">
     <Card>
       <Text variant="h1" marginBottom="m">Welcome!</Text>
       <Text variant="body" color="textSecondary">
@@ -52,7 +52,7 @@ The foundational layout component with comprehensive styling props:
 
 ```tsx
 <Box 
-  backgroundColor="surface"
+  backgroundColor="bg/surface"
   padding="m"
   borderRadius="l"
   shadow="md"
@@ -75,7 +75,7 @@ The foundational layout component with comprehensive styling props:
 Typography component with built-in variants:
 
 ```tsx
-<Text variant="h1" color="text">Heading</Text>
+<Text variant="h1" color="text/primary">Heading</Text>
 <Text variant="body" color="textSecondary">Body text</Text>
 
 {/* Convenience components */}
@@ -163,28 +163,28 @@ The theme includes semantic color names that automatically adapt to light/dark m
 
 ```tsx
 // Primary colors
-backgroundColor="primary"      // Main brand color
+backgroundcolor="brand/primary"      // Main brand color
 backgroundColor="secondary"    // Secondary brand color
 
 // Text colors
-color="text"                  // Primary text
+color="text/primary"                  // Primary text
 color="textSecondary"         // Secondary text
-color="textMuted"             // Muted/disabled text
-color="textInverse"           // Text on dark backgrounds
+color="text/secondary"             // Muted/disabled text
+color="text/secondary"           // Text on dark backgrounds
 
 // Surfaces
-backgroundColor="background"   // Main app background
-backgroundColor="surface"      // Card/modal backgrounds
+backgroundcolor="bg/primary"   // Main app background
+backgroundColor="bg/surface"      // Card/modal backgrounds
 backgroundColor="card"         // Card backgrounds
 
 // Semantic colors
-backgroundColor="success"      // Success states
-backgroundColor="warning"      // Warning states
+backgroundColor="state/success"      // Success states
+backgroundColor="state/warning"      // Warning states
 backgroundColor="error"        // Error states
 backgroundColor="info"         // Info states
 
 // Borders
-borderColor="border"          // Default borders
+bordercolor="border/subtle"          // Default borders
 borderColor="borderLight"     // Light borders
 borderColor="borderDark"      // Dark borders
 ```
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
 
 ## Best Practices
 
-1. **Use semantic color names**: Prefer `color="text"` over `color="midnight"`
+1. **Use semantic color names**: Prefer `color="text/primary"` over `color="midnight"`
 2. **Follow spacing scale**: Use theme spacing values instead of arbitrary numbers
 3. **Leverage variants**: Use text and component variants for consistency
 4. **Compose with Box**: Build complex layouts by composing Box components

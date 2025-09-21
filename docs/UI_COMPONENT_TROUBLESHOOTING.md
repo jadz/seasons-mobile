@@ -52,7 +52,7 @@ textVariant: 'body' as ThemeTextVariants
 
 // ✅ Do this instead
 <Box
-  shadowColor="black"
+  shadowcolor="bg/raised"
   shadowOffset={{ width: 0, height: 2 }}
   shadowOpacity={0.1}
   shadowRadius={4}
@@ -72,9 +72,9 @@ borderColor="selectedBorder"
 color="textPrimary"
 
 // ✅ Valid theme colors
-backgroundColor="surface"
-borderColor="primary"
-color="text"
+backgroundColor="bg/surface"
+bordercolor="brand/primary"
+color="text/primary"
 ```
 
 **Valid Theme Colors**:
@@ -212,13 +212,13 @@ export type ThemeTextVariants = Exclude<keyof Theme['textVariants'], 'defaults'>
 ```typescript
 // Replace invalid theme references
 // Find: backgroundColor="selected"
-// Replace: backgroundColor="surface"
+// Replace: backgroundColor="bg/surface"
 
 // Find: color="textPrimary" 
-// Replace: color="text"
+// Replace: color="text/primary"
 
 // Find: borderColor="selectedBorder"
-// Replace: borderColor="primary"
+// Replace: bordercolor="brand/primary"
 ```
 
 ### Quick Shadow Fix
@@ -226,7 +226,7 @@ export type ThemeTextVariants = Exclude<keyof Theme['textVariants'], 'defaults'>
 // Replace shadow prop with individual properties
 // Find: shadow="md"
 // Replace with:
-shadowColor="black"
+shadowcolor="bg/raised"
 shadowOffset={{ width: 0, height: 2 }}
 shadowOpacity={0.1}
 shadowRadius={4}

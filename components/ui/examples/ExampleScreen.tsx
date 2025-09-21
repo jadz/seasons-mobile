@@ -20,7 +20,7 @@ export const ExampleScreen: React.FC = () => {
 
   return (
     <ScrollView>
-      <Box flex={1} backgroundColor="background" padding="l">
+      <Box flex={1} backgroundcolor="bg/primary" padding="l">
         {/* Header */}
         <Box marginBottom="xl">
           <HeroText marginBottom="s">Design System Demo</HeroText>
@@ -163,15 +163,15 @@ export const ExampleScreen: React.FC = () => {
           <H2Text marginBottom="m">Layout & Spacing</H2Text>
           <Box gap="s">
             <Box flexDirection="row" gap="s">
-              <Box flex={1} backgroundColor="primary" padding="m" borderRadius="s">
-                <Text color="textInverse">Flex 1</Text>
+              <Box flex={1} backgroundcolor="brand/primary" padding="m" borderRadius="s">
+                <Text color="text/secondary">Flex 1</Text>
               </Box>
               <Box flex={2} backgroundColor="secondary" padding="m" borderRadius="s">
-                <Text color="textInverse">Flex 2</Text>
+                <Text color="text/secondary">Flex 2</Text>
               </Box>
             </Box>
             
-            <Box backgroundColor="surface" padding="m" borderRadius="m" borderWidth={1} borderColor="border">
+            <Box backgroundColor="bg/surface" padding="m" borderRadius="m" borderWidth={1} bordercolor="border/subtle">
               <BodyText>Box with border and custom styling</BodyText>
             </Box>
           </Box>
@@ -182,26 +182,26 @@ export const ExampleScreen: React.FC = () => {
           <H2Text marginBottom="m">Colors</H2Text>
           <Box gap="s">
             <Box flexDirection="row" gap="s">
-              <Box flex={1} backgroundColor="primary" padding="s" borderRadius="s">
-                <Text color="textInverse" variant="small">Primary</Text>
+              <Box flex={1} backgroundcolor="brand/primary" padding="s" borderRadius="s">
+                <Text color="text/secondary" variant="small">Primary</Text>
               </Box>
               <Box flex={1} backgroundColor="secondary" padding="s" borderRadius="s">
-                <Text color="textInverse" variant="small">Secondary</Text>
+                <Text color="text/secondary" variant="small">Secondary</Text>
               </Box>
-              <Box flex={1} backgroundColor="success" padding="s" borderRadius="s">
-                <Text color="textInverse" variant="small">Success</Text>
+              <Box flex={1} backgroundColor="state/success" padding="s" borderRadius="s">
+                <Text color="text/secondary" variant="small">Success</Text>
               </Box>
             </Box>
             
             <Box flexDirection="row" gap="s">
-              <Box flex={1} backgroundColor="warning" padding="s" borderRadius="s">
-                <Text color="textInverse" variant="small">Warning</Text>
+              <Box flex={1} backgroundColor="state/warning" padding="s" borderRadius="s">
+                <Text color="text/secondary" variant="small">Warning</Text>
               </Box>
               <Box flex={1} backgroundColor="error" padding="s" borderRadius="s">
-                <Text color="textInverse" variant="small">Error</Text>
+                <Text color="text/secondary" variant="small">Error</Text>
               </Box>
               <Box flex={1} backgroundColor="info" padding="s" borderRadius="s">
-                <Text color="textInverse" variant="small">Info</Text>
+                <Text color="text/secondary" variant="small">Info</Text>
               </Box>
             </Box>
           </Box>

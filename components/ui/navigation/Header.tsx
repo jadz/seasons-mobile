@@ -1,8 +1,16 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
+import { createRestyleComponent, createVariant, VariantProps } from '@shopify/restyle';
 import { Box } from '../primitives/Box';
 import { Text } from '../primitives/Text';
 import { Theme } from '../foundation/theme';
+
+const headerVariant = createVariant({ themeKey: 'headerVariants' });
+
+const HeaderBox = createRestyleComponent<
+  VariantProps<Theme, 'headerVariants'> & React.ComponentProps<typeof Box>,
+  Theme
+>([headerVariant], Box);
 
 export interface HeaderProps {
   title?: string;
@@ -10,8 +18,7 @@ export interface HeaderProps {
   showBackButton?: boolean;
   onBackPress?: () => void;
   rightElement?: React.ReactNode;
-  backgroundColor?: keyof Theme['colors'];
-  variant?: 'default' | 'transparent' | 'elevated';
+  variant?: keyof Theme['headerVariants'];
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -20,51 +27,11 @@ export const Header: React.FC<HeaderProps> = ({
   showBackButton = false,
   onBackPress,
   rightElement,
-  backgroundColor = 'surface',
   variant = 'default',
 }) => {
-  const getVariantStyles = () => {
-    switch (variant) {
-      case 'transparent':
-        return {
-          backgroundColor: 'transparent' as keyof Theme['colors'],
-          shadowColor: 'transparent' as keyof Theme['colors'],
-          shadowOffset: { width: 0, height: 0 },
-          shadowOpacity: 0,
-          shadowRadius: 0,
-          elevation: 0,
-        };
-      case 'elevated':
-        return {
-          backgroundColor: backgroundColor,
-          shadowColor: 'black' as keyof Theme['colors'],
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.1,
-          shadowRadius: 4,
-          elevation: 2,
-        };
-      default:
-        return {
-          backgroundColor: backgroundColor,
-          shadowColor: 'black' as keyof Theme['colors'],
-          shadowOffset: { width: 0, height: 1 },
-          shadowOpacity: 0.05,
-          shadowRadius: 2,
-          elevation: 1,
-        };
-    }
-  };
-
-  const variantStyles = getVariantStyles();
-
   return (
-    <Box
-      backgroundColor={variantStyles.backgroundColor}
-      shadowColor={variantStyles.shadowColor}
-      shadowOffset={variantStyles.shadowOffset}
-      shadowOpacity={variantStyles.shadowOpacity}
-      shadowRadius={variantStyles.shadowRadius}
-      elevation={variantStyles.elevation}
+    <HeaderBox
+      variant={variant}
       paddingHorizontal="m"
       paddingVertical="m"
       flexDirection="row"
@@ -83,7 +50,7 @@ export const Header: React.FC<HeaderProps> = ({
               alignItems="center"
               justifyContent="center"
             >
-              <Text variant="h2" color="text">
+              <Text variant="h2" color="text/primary">
                 ←
               </Text>
             </Box>
@@ -96,7 +63,7 @@ export const Header: React.FC<HeaderProps> = ({
         {title && (
           <Text
             variant="h3"
-            color="text"
+            color="text/primary"
             textAlign="center"
             numberOfLines={1}
           >
@@ -106,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({
         {subtitle && (
           <Text
             variant="small"
-            color="textSecondary"
+            color="text/secondary"
             textAlign="center"
             numberOfLines={1}
             marginTop="xs"
@@ -120,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({
       <Box width={40} alignItems="flex-end">
         {rightElement}
       </Box>
-    </Box>
+    </HeaderBox>
   );
 };
 
