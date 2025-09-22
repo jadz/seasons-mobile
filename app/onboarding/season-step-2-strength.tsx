@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
-import { Box, Text, Button, WizardBar } from '../../components/ui';
+import { router } from 'expo-router';
+import { Box, Text, Button, WizardBar, Header } from '../../components/ui';
 import { SimpleSelectionButton } from '../../components/ui/selection/SimpleSelectionButton';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function SeasonStrengthScreen() {
   const [selectedLifts, setSelectedLifts] = useState<string[]>([]);
   const [focusOverallStrength, setFocusOverallStrength] = useState(false);
+  const insets = useSafeAreaInsets();
 
   const handleLiftSelection = (liftId: string) => {
     if (focusOverallStrength) {
@@ -36,77 +39,135 @@ export default function SeasonStrengthScreen() {
     console.log('Add another lift pressed');
   };
 
+  const handleBackPress = () => {
+    router.back();
+  };
+  
+
   return (
     <Box flex={1} backgroundColor="background">
+      {/* Safe Area Top */}
+      <Box style={{ paddingTop: insets.top }} backgroundColor="background" />
+      
+      {/* Standardized Header with Strength Accent */}
+      <Header
+        title="Let's build your season"
+        showBackButton={true}
+        onBackPress={handleBackPress}
+        variant="transparent"
+        backgroundColor="background"
+      />
+      
+      {/* Progress Indicator with Strength Theme */}
+      <Box paddingHorizontal="l" marginBottom="l">
+        <WizardBar totalSteps={4} currentStep={1} />
+      </Box>
+      
+      {/* Strength Focus Indicator */}
+      <Box paddingHorizontal="l" marginBottom="l">
+        <Box 
+          style={{ backgroundColor: "#D67B7B" }}
+          borderRadius="m" 
+          paddingHorizontal="m" 
+          paddingVertical="xs"
+          alignSelf="flex-start"
+        >
+          <Text variant="small" color="white" style={{ fontWeight: '600', textTransform: 'uppercase', letterSpacing: 1 }}>
+            💪 Strength Focus
+          </Text>
+        </Box>
+      </Box>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Box paddingHorizontal="l" paddingTop="xl">
-          {/* Progress Indicator */}
-          <WizardBar totalSteps={4} currentStep={1} />
-          
-          {/* Header Section */}
-          <Box paddingVertical="xl" alignItems="center">
-            <Text variant="title" textAlign="center" marginBottom="s">
-              I want to get stronger in the following lifts...
+        <Box paddingHorizontal="l">
+          {/* Specific Lifts Section */}
+          <Box marginBottom="xs">
+            <Text variant="h2" color="text" marginBottom="m">
+              Specific lifts I want to improve:
             </Text>
+            <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="l">
+              <SimpleSelectionButton 
+                title="Bench Press"
+                isSelected={selectedLifts.includes('bench')}
+                onPress={() => handleLiftSelection('bench')}
+                isDisabled={focusOverallStrength}
+              />
+              <SimpleSelectionButton 
+                title="Overhead Press"
+                isSelected={selectedLifts.includes('overhead')}
+                onPress={() => handleLiftSelection('overhead')}
+                isDisabled={focusOverallStrength}
+              />
+              <SimpleSelectionButton 
+                title="Squat"
+                isSelected={selectedLifts.includes('squat')}
+                onPress={() => handleLiftSelection('squat')}
+                isDisabled={focusOverallStrength}
+              />
+              <SimpleSelectionButton 
+                title="Deadlift"
+                isSelected={selectedLifts.includes('deadlift')}
+                onPress={() => handleLiftSelection('deadlift')}
+                isDisabled={focusOverallStrength}
+              />
+              <SimpleSelectionButton 
+                title="Barbell Row"
+                isSelected={selectedLifts.includes('row')}
+                onPress={() => handleLiftSelection('row')}
+                isDisabled={focusOverallStrength}
+              />
+              <SimpleSelectionButton 
+                title="See more +"
+                isSelected={false}
+                onPress={handleAddAnotherLift}
+                isDisabled={focusOverallStrength}
+              />
+            </Box>
           </Box>
-          
-          {/* Lift Selection Cards - Flowing Layout */}
-          <Box marginBottom="l" flexDirection="row" flexWrap="wrap" alignItems="flex-start">
-            <SimpleSelectionButton 
-              title="Bench Press"
-              isSelected={selectedLifts.includes('bench')}
-              onPress={() => handleLiftSelection('bench')}
-              isDisabled={focusOverallStrength}
-            />
-            <SimpleSelectionButton 
-              title="Overhead Press"
-              isSelected={selectedLifts.includes('overhead')}
-              onPress={() => handleLiftSelection('overhead')}
-              isDisabled={focusOverallStrength}
-            />
-            <SimpleSelectionButton 
-              title="Squat"
-              isSelected={selectedLifts.includes('squat')}
-              onPress={() => handleLiftSelection('squat')}
-              isDisabled={focusOverallStrength}
-            />
-            <SimpleSelectionButton 
-              title="Deadlift"
-              isSelected={selectedLifts.includes('deadlift')}
-              onPress={() => handleLiftSelection('deadlift')}
-              isDisabled={focusOverallStrength}
-            />
-            <SimpleSelectionButton 
-              title="Barbell Row"
-              isSelected={selectedLifts.includes('row')}
-              onPress={() => handleLiftSelection('row')}
-              isDisabled={focusOverallStrength}
-            />
-            <SimpleSelectionButton 
-              title="See more +"
-              isSelected={false}
-              onPress={handleAddAnotherLift}
-              isDisabled={focusOverallStrength}
-            />
+
+          {/* Divider */}
+          <Box alignItems="center" marginBottom="m">
+            <Box flexDirection="row" alignItems="center" width="100%">
+              <Box flex={1} height={1} backgroundColor="border" />
+              <Text variant="body" color="textMuted" marginHorizontal="m">
+                or
+              </Text>
+              <Box flex={1} height={1} backgroundColor="border" />
+            </Box>
           </Box>
 
           {/* Overall Strength Option */}
-          <Box marginBottom="xl">
+          <Box marginBottom="l">
+            <Text variant="h3" color="text" marginBottom="m">
+              Keep it simple:
+            </Text>
             <SimpleSelectionButton 
-              title="I just want to focus on overall strength"
+              title="Focus on overall strength"
               isSelected={focusOverallStrength}
               onPress={handleOverallStrengthToggle}
             />
           </Box>
           
+          {/* Help Text */}
+          {selectedLifts.length === 0 && !focusOverallStrength && (
+            <Box marginBottom="m" alignItems="center">
+              <Text variant="caption" color="textMuted" textAlign="center">
+                Choose at least one option above to continue
+              </Text>
+            </Box>
+          )}
+
           {/* Next Button */}
-          <Box marginBottom="xl">
+          <Box marginBottom="m">
             <Button 
               variant="primary" 
               fullWidth
               disabled={selectedLifts.length === 0 && !focusOverallStrength}
+              onPress={() => router.push('/onboarding/season-step-3-strength-numbers')}
             >
-              Next
+              {selectedLifts.length > 0 || focusOverallStrength 
+                ? `Set my numbers` 
+                : "Choose your focus above"
+              }
             </Button>
           </Box>
         </Box>

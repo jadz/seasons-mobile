@@ -12,6 +12,9 @@ export interface SelectionCardProps extends Omit<TouchableOpacityProps, 'onPress
   icon?: React.ReactNode;
   selectionType?: 'radio' | 'checkbox';
   size?: 'small' | 'medium' | 'large';
+  colorVariant?: 'default' | 'coral' | 'purple' | 'navy';
+  label?: string; // Small label in top left
+  largeDescription?: string; // Larger descriptive text
 }
 
 export const SelectionCard: React.FC<SelectionCardProps> = ({
@@ -23,11 +26,43 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
   icon,
   selectionType = 'radio',
   size = 'medium',
+  colorVariant = 'default',
+  label,
+  largeDescription,
   ...touchableProps
 }) => {
   const handlePress = () => {
     if (!isDisabled && onPress) {
       onPress();
+    }
+  };
+
+  const getColorStyles = () => {
+    switch (colorVariant) {
+      case 'coral':
+        return {
+          backgroundColor: '#D67B7B',
+          textColor: '#FFFFFF',
+          descriptionColor: '#FFFFFF',
+        };
+      case 'purple':
+        return {
+          backgroundColor: '#9B7BA7',
+          textColor: '#FFFFFF',
+          descriptionColor: '#FFFFFF',
+        };
+      case 'navy':
+        return {
+          backgroundColor: '#3A4A5C',
+          textColor: '#FFFFFF',
+          descriptionColor: '#FFFFFF',
+        };
+      default:
+        return {
+          backgroundColor: isSelected ? '#263137' : '#FFFFFF',
+          textColor: isSelected ? '#FFFFFF' : '#263137',
+          descriptionColor: isSelected ? '#FFFFFF' : '#7A9C81',
+        };
     }
   };
 
@@ -61,6 +96,7 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
     }
   };
 
+  const colorStyles = getColorStyles();
   const sizeStyles = getSizeStyles();
 
   return (
@@ -71,46 +107,85 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
       {...touchableProps}
     >
       <Box
-        backgroundColor={isSelected ? 'primaryDark' : 'surface'}
-        borderRadius={sizeStyles.borderRadius as any}
-        borderWidth={1}
-        borderColor={isSelected ? 'primary' : 'border'}
+        style={{
+          backgroundColor: colorStyles.backgroundColor,
+          borderRadius: 16,
+          borderWidth: colorVariant !== 'default' ? 0 : 1,
+          borderColor: colorVariant !== 'default' ? 'transparent' : (isSelected ? '#4E7166' : '#C9D0C3'),
+        }}
         paddingHorizontal={sizeStyles.paddingHorizontal as any}
         paddingVertical={sizeStyles.paddingVertical as any}
         marginBottom={sizeStyles.marginBottom as any}
         marginRight={sizeStyles.marginRight as any}
         opacity={isDisabled ? 0.4 : 1}
       >
-        <Box flexDirection="row" alignItems="center" justifyContent="center">
-          {icon && (
-            <Box marginRight="m">
-              {icon}
-            </Box>
-          )}
-          
-          <Box flex={1} alignItems={size === 'small' ? 'center' : 'flex-start'}>
+        {/* New layout for label + large description style */}
+        {label && largeDescription ? (
+          <Box>
+            {/* Small label in top left */}
             <RNText
               style={{
-                color: isSelected ? 'white' : '#263137',
-                textAlign: size === 'small' ? 'center' : 'left',
-                fontSize: 16,
-                fontWeight: isSelected ? '600' : '400',
+                color: colorStyles.textColor,
+                fontSize: 12,
+                fontWeight: '500',
+                opacity: 0.8,
+                marginBottom: 16,
+                textTransform: 'uppercase',
+                letterSpacing: 1,
               }}
             >
-              {title}
+              {label}
             </RNText>
-            {description && (
-              <Text
-                variant="body"
-                color={isSelected ? 'textInverse' : 'textMuted'}
-                numberOfLines={2}
-                textAlign={size === 'small' ? 'center' : 'left'}
-              >
-                {description}
-              </Text>
-            )}
+            
+            {/* Large descriptive text */}
+            <RNText
+              style={{
+                color: colorStyles.textColor,
+                fontSize: 18,
+                fontWeight: '600',
+                lineHeight: 24,
+              }}
+            >
+              {largeDescription}
+            </RNText>
           </Box>
-        </Box>
+        ) : (
+          /* Original layout for backwards compatibility */
+          <Box flexDirection="row" alignItems="center" justifyContent="center">
+            {icon && (
+              <Box marginRight="m">
+                {icon}
+              </Box>
+            )}
+            
+            <Box flex={1} alignItems={size === 'small' ? 'center' : 'flex-start'}>
+              <RNText
+                style={{
+                  color: colorStyles.textColor,
+                  textAlign: size === 'small' ? 'center' : 'left',
+                  fontSize: size === 'large' ? 20 : 16,
+                  fontWeight: colorVariant !== 'default' ? '600' : (isSelected ? '600' : '400'),
+                }}
+              >
+                {title}
+              </RNText>
+              {description && (
+                <RNText
+                  style={{
+                    color: colorStyles.descriptionColor,
+                    textAlign: size === 'small' ? 'center' : 'left',
+                    fontSize: 14,
+                    marginTop: 4,
+                    opacity: 0.9,
+                  }}
+                  numberOfLines={2}
+                >
+                  {description}
+                </RNText>
+              )}
+            </Box>
+          </Box>
+        )}
       </Box>
     </TouchableOpacity>
   );

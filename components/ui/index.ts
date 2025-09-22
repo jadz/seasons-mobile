@@ -6,7 +6,7 @@ export type { Theme } from './foundation';
 export { Box, Text, Divider } from './primitives';
 
 // Forms
-export { Button, TextInput, Slider } from './forms';
+export { Button, TextInput, Slider, SegmentedControl } from './forms';
 
 // Display
 export { Badge, Card } from './display';
