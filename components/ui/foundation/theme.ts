@@ -1,5 +1,4 @@
 import { createTheme } from '@shopify/restyle';
-import { Geist_400Regular } from '@expo-google-fonts/geist';
 
 // Base color palette from your original theme
 const palette = {

@@ -5,6 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Box, Text, Button, WizardBar, Header } from '../../components/ui';
 import { SimpleSelectionButton } from '../../components/ui/selection/SimpleSelectionButton';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ThemeSwitcher } from '../../components/ui/forms';
 
 export default function SeasonStrengthScreen() {
   const [selectedLifts, setSelectedLifts] = useState<string[]>([]);
@@ -85,21 +86,6 @@ export default function SeasonStrengthScreen() {
         {/* Progress Indicator with Strength Theme */}
         <Box paddingHorizontal="l" marginBottom="l">
           <WizardBar totalSteps={4} currentStep={1} />
-        </Box>
-        
-        {/* Strength Focus Indicator */}
-        <Box paddingHorizontal="l" marginBottom="l">
-          <Box 
-            style={{ backgroundColor: "#D67B7B" }}
-            borderRadius="m" 
-            paddingHorizontal="m" 
-            paddingVertical="xs"
-            alignSelf="flex-start"
-          >
-            <Text variant="small" color="white" style={{ fontWeight: '600', textTransform: 'uppercase', letterSpacing: 1 }}>
-              💪 Strength Focus
-            </Text>
-          </Box>
         </Box>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Box paddingHorizontal="l">
