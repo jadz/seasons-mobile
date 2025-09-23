@@ -16,6 +16,9 @@
         "backgroundColor": "#ffffff"
       }
     },
-    "scheme": "seasons-mobile"
+    "scheme": "seasons-mobile",
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

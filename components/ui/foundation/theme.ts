@@ -1,4 +1,5 @@
 import { createTheme } from '@shopify/restyle';
+import { Geist_400Regular } from '@expo-google-fonts/geist';
 
 // Base color palette from your original theme
 const palette = {
@@ -37,72 +38,77 @@ const spacing = {
   xxxl: 48,
 };
 
-// Typography variants with better organization
+// Typography variants with Geist font family
 const textVariants = {
   defaults: {
     fontSize: 16,
-    fontWeight: '400' as const,
+    fontFamily: 'Geist_400Regular',
     letterSpacing: -0.2,
     lineHeight: 22,
   },
   hero: {
     fontSize: 32,
-    fontWeight: '300' as const,
+    fontFamily: 'Geist_300Light',
     letterSpacing: -0.5,
     lineHeight: 38,
   },
   title: {
     fontSize: 28,
-    fontWeight: '400' as const,
+    fontFamily: 'Geist_400Regular',
     letterSpacing: -0.5,
     lineHeight: 34,
   },
   h1: {
     fontSize: 24,
-    fontWeight: '400' as const,
+    fontFamily: 'Geist_400Regular',
     letterSpacing: -0.3,
     lineHeight: 32,
   },
   h2: {
     fontSize: 20,
-    fontWeight: '400' as const,
+    fontFamily: 'Geist_400Regular',
     letterSpacing: -0.3,
     lineHeight: 28,
   },
   h3: {
     fontSize: 18,
-    fontWeight: '400' as const,
+    fontFamily: 'Geist_400Regular',
     letterSpacing: -0.2,
     lineHeight: 24,
   },
   body: {
     fontSize: 16,
-    fontWeight: '400' as const,
+    fontFamily: 'Geist_400Regular',
+    // fontWeight: '400' as const,
     letterSpacing: -0.2,
     lineHeight: 22,
   },
   bodyMedium: {
     fontSize: 16,
-    fontWeight: '500' as const,
+    fontFamily: 'Geist_500Medium',
+    // fontWeight: '500' as const,
     letterSpacing: -0.2,
     lineHeight: 22,
   },
   bodySemiBold: {
     fontSize: 16,
-    fontWeight: '600' as const,
+    fontFamily: 'Geist_600SemiBold',
+    // fontWeight: '600' as const,
     letterSpacing: -0.2,
     lineHeight: 22,
   },
   caption: {
     fontSize: 15,
-    fontWeight: '400' as const,
+    fontFamily: 'Geist_400Regular',
+    // fontWeight: '400' as const,
     letterSpacing: -0.1,
     lineHeight: 20,
     opacity: 0.7,
   },
   small: {
     fontSize: 13,
-    fontWeight: '400' as const,
+    fontFamily: 'Geist_400Regular',
+    // fontWeight: '400' as const,
     letterSpacing: -0.1,
     lineHeight: 18,
     opacity: 0.6,
@@ -114,13 +120,15 @@ const textVariants = {
   },
   label: {
     fontSize: 14,
-    fontWeight: '500' as const,
+    fontFamily: 'Geist_500Medium',
+    // fontWeight: '500' as const,
     letterSpacing: -0.1,
     lineHeight: 18,
   },
   button: {
     fontSize: 16,
-    fontWeight: '600' as const,
+    fontFamily: 'Geist_600SemiBold',
+    // fontWeight: '600' as const,
     letterSpacing: -0.2,
   },
 };

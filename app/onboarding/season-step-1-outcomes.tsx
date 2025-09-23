@@ -50,7 +50,8 @@ export default function SeasonGoalsScreen() {
           {/* Section Introduction */}
           <Box marginBottom="l">
             <Text variant="h2" color="text" marginBottom="xs">
-              At the end of this season, I want to:
+              {/* At the end of this season, I want to: */}
+              Most Dugg
             </Text>
             {/* <Text variant="body" color="textMuted">
               Choose the outcome that excites you most for this season
