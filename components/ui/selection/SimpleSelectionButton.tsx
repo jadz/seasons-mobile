@@ -1,5 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { Box, Text } from '../primitives';
+import { useTheme } from '@shopify/restyle';
+import { Theme } from '../foundation/theme';
 
 interface SimpleSelectionButtonProps {
   title: string;
@@ -14,62 +17,62 @@ export const SimpleSelectionButton: React.FC<SimpleSelectionButtonProps> = ({
   onPress,
   isDisabled = false,
 }) => {
+  const theme = useTheme<Theme>();
+
+  // Resolve borderRadius to numeric value
+  const borderRadius = theme.radii.md;
+
+  const getBackgroundColor = () => {
+    if (isDisabled) return 'bg/surface';
+    if (isSelected) return 'accent/brand';
+    return 'bg/surface';
+  };
+
+  const getBorderColor = () => {
+    if (isDisabled) return 'border/subtle';
+    if (isSelected) return 'accent/brand';
+    return 'border/subtle';
+  };
+
+  const getTextColor = () => {
+    if (isDisabled) return 'text/secondary';
+    if (isSelected) return 'accent/onBrand';
+    return 'text/primary';
+  };
+
   return (
     <TouchableOpacity
-      style={[
-        styles.button,
-        isSelected && styles.selected,
-        isDisabled && styles.disabled,
-      ]}
       onPress={onPress}
       disabled={isDisabled}
       activeOpacity={0.7}
     >
-      <Text style={[
-        styles.text,
-        isSelected && styles.selectedText,
-        isDisabled && styles.disabledText,
-      ]}>
-        {title}
-      </Text>
+      <Box
+        backgroundColor={getBackgroundColor()}
+        borderWidth={1}
+        borderColor={getBorderColor()}
+        borderRadius={borderRadius}
+        paddingHorizontal="lg"
+        paddingVertical="lg"
+        marginRight="sm"
+        marginBottom="sm"
+        style={{ minHeight: 50 }}
+        justifyContent="center"
+        alignItems="center"
+        opacity={isDisabled ? 0.4 : 1}
+      >
+        <Text
+          variant="body"
+          color={getTextColor()}
+          textAlign="center"
+          style={{
+            fontWeight: isSelected ? '600' : '400',
+          }}
+        >
+          {title}
+        </Text>
+      </Box>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#C9D0C3',
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    marginRight: 8,
-    marginBottom: 8,
-    minHeight: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  selected: {
-    backgroundColor: '#263137',
-    borderColor: '#4E7166',
-  },
-  disabled: {
-    opacity: 0.4,
-  },
-  text: {
-    fontSize: 16,
-    fontWeight: '400',
-    color: '#263137',
-    textAlign: 'center',
-  },
-  selectedText: {
-    color: '#FFFFFF',
-    fontWeight: '600',
-  },
-  disabledText: {
-    color: '#7A9C81',
-  },
-});
 
 export default SimpleSelectionButton;

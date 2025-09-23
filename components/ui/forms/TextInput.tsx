@@ -57,22 +57,22 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>(({
   const getVariantStyles = () => {
     const baseStyles = {
       borderWidth: 1,
-      borderRadius: theme.borderRadii.s,
+      borderRadius: theme.radii.sm,
     };
 
     switch (variant) {
       case 'filled':
         return {
           ...baseStyles,
-          backgroundColor: theme.colors.surface,
-          borderColor: theme.colors.border,
+          backgroundColor: theme.colors['bg/surface'],
+          borderColor: theme.colors['border/subtle'],
         };
       case 'outlined':
       default:
         return {
           ...baseStyles,
           backgroundColor: 'transparent',
-          borderColor: hasError ? theme.colors.error : theme.colors.border,
+          borderColor: hasError ? theme.colors['state/error'] : theme.colors['border/subtle'],
         };
     }
   };
@@ -85,7 +85,7 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>(({
       {label && (
         <Text
           variant="label"
-          color={hasError ? 'error' : 'text'}
+          color={hasError ? 'state/error' : 'text/primary'}
           marginBottom="s"
         >
           {label}
@@ -110,13 +110,13 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>(({
             {
               flex: 1,
               fontSize: sizeStyles.fontSize,
-              color: theme.colors.text,
+              color: theme.colors['text/primary'],
               paddingHorizontal: leftIcon || rightIcon ? 0 : sizeStyles.paddingHorizontal,
               paddingVertical: 0,
             },
             style,
           ]}
-          placeholderTextColor={theme.colors.textMuted}
+          placeholderTextColor={theme.colors['text/secondary']}
           {...textInputProps}
         />
         
@@ -130,7 +130,7 @@ export const TextInput = forwardRef<RNTextInput, TextInputProps>(({
       {(error || helperText) && (
         <Text
           variant="small"
-          color={hasError ? 'error' : 'textSecondary'}
+          color={hasError ? 'state/error' : 'text/secondary'}
           marginTop="xs"
         >
           {error || helperText}

@@ -3,6 +3,7 @@ import { ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Box, Text, Button, WizardBar, SelectionCard, Header } from '../../components/ui';
+import { SharedElement } from '../../components/ui/navigation';
 
 export default function SeasonGoalsScreen() {
   const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
@@ -48,26 +49,26 @@ export default function SeasonGoalsScreen() {
         <Box paddingHorizontal="l">
           
           {/* Section Introduction */}
-          <Box marginBottom="l">
-            <Text variant="h2" color="text" marginBottom="xs">
-              {/* At the end of this season, I want to: */}
-              Most Dugg
-            </Text>
-            {/* <Text variant="body" color="textMuted">
-              Choose the outcome that excites you most for this season
-            </Text> */}
-          </Box>
+          <SharedElement sharedId="step-title" isActive={true} animationType="slide" delay={100}>
+            <Box marginBottom="l">
+              <Text variant="h2" color="text" marginBottom="xs">
+                At the end of this season, I want to:
+              </Text>
+            </Box>
+          </SharedElement>
           
           {/* Goal Selection Cards */}
           <Box marginBottom="xl">
-            <SelectionCard 
-              title="Get Stronger"
-              colorVariant="coral"
-              label="STRENGTH"
-              largeDescription="Lift heavier weights and build muscle"
-              isSelected={selectedGoal === 'stronger'}
-              onPress={() => handleGoalSelection('stronger')}
-            />
+            <SharedElement sharedId="strength-card" isActive={true} animationType="scale" delay={200}>
+              <SelectionCard 
+                title="Get Stronger"
+                colorVariant="coral"
+                label="STRENGTH"
+                largeDescription="Lift heavier weights and build muscle"
+                isSelected={selectedGoal === 'stronger'}
+                onPress={() => handleGoalSelection('stronger')}
+              />
+            </SharedElement>
             
             <Box style={{ opacity: 0.6 }}>
               <SelectionCard 

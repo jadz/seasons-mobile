@@ -39,7 +39,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
     large: {
       height: 48,
       paddingHorizontal: 20,
-      textVariant: 'bodyMedium' as const,
+      textVariant: 'body' as const,
     },
   };
 
@@ -48,8 +48,8 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
   return (
     <Box
       flexDirection="row"
-      backgroundColor="border"
-      borderRadius="m"
+      backgroundColor="border/subtle"
+      borderRadius="md"
       padding="xs"
       style={fullWidth ? { flex: 1 } : undefined}
     >
@@ -65,10 +65,10 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
             style={{ flex: fullWidth ? 1 : undefined }}
           >
             <Box
-              backgroundColor={isSelected ? 'surface' : 'transparent'}
-              borderRadius="s"
-              paddingHorizontal="s"
-              paddingVertical="s"
+              backgroundColor={isSelected ? 'bg/surface' : 'transparent'}
+              borderRadius="sm"
+              paddingHorizontal="sm"
+              paddingVertical="sm"
               alignItems="center"
               justifyContent="center"
               style={{
@@ -78,7 +78,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
             >
               <Text
                 variant={config.textVariant}
-                color={isSelected ? 'text' : 'textMuted'}
+                color={isSelected ? 'text/primary' : 'text/secondary'}
                 style={{
                   fontWeight: isSelected ? '600' : '400',
                   textAlign: 'center',

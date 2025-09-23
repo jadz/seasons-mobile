@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, TouchableOpacityProps, ActivityIndicator } from 'react-native';
+import { useTheme } from '@shopify/restyle';
 import { Box } from '../primitives/Box';
 import { Text } from '../primitives/Text';
 import { Theme, ThemeColors } from '../foundation/theme';
@@ -13,6 +14,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   fullWidth?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
+  borderRadius?: keyof Theme['radii'];
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -24,47 +26,49 @@ export const Button: React.FC<ButtonProps> = ({
   fullWidth = false,
   leftIcon,
   rightIcon,
+  borderRadius,
   ...touchableProps
 }) => {
+  const theme = useTheme<Theme>();
   const isDisabled = disabled || loading;
 
   const getVariantStyles = () => {
     const styles = {
-      backgroundColor: 'primaryDark' as ThemeColors,
-      textColor: 'white' as ThemeColors,
-      borderColor: 'primary' as ThemeColors,
+      backgroundColor: 'accent/brand' as ThemeColors,
+      textColor: 'accent/onBrand' as ThemeColors,
+      borderColor: 'accent/brand' as ThemeColors,
       borderWidth: 1,
     };
 
     switch (variant) {
       case 'secondary':
-        styles.backgroundColor = 'surface';
-        styles.textColor = 'text';
-        styles.borderColor = 'border';
+        styles.backgroundColor = 'bg/surface';
+        styles.textColor = 'text/primary';
+        styles.borderColor = 'border/subtle';
         styles.borderWidth = 1;
         break;
       case 'outline':
         styles.backgroundColor = 'transparent';
-        styles.textColor = 'primary';
-        styles.borderColor = 'primary';
+        styles.textColor = 'accent/brand';
+        styles.borderColor = 'accent/brand';
         styles.borderWidth = 1;
         break;
       case 'ghost':
         styles.backgroundColor = 'transparent';
-        styles.textColor = 'primary';
+        styles.textColor = 'accent/brand';
         styles.borderWidth = 0;
         break;
       case 'danger':
-        styles.backgroundColor = 'primaryDark';
-        styles.textColor = 'white';
-        styles.borderColor = 'error';
+        styles.backgroundColor = 'state/error';
+        styles.textColor = 'text/inverse';
+        styles.borderColor = 'state/error';
         styles.borderWidth = 1;
         break;
     }
 
     if (isDisabled) {
       styles.backgroundColor = 'buttonPrimaryDisabled';
-      styles.textColor = 'textMuted';
+      styles.textColor = 'text/secondary';
       styles.borderColor = 'buttonPrimaryDisabled';
       styles.borderWidth = 1;
     }
@@ -76,23 +80,23 @@ export const Button: React.FC<ButtonProps> = ({
     switch (size) {
       case 'small':
         return {
-          paddingVertical: 's',
-          paddingHorizontal: 'm',
-          borderRadius: 'l',
+          paddingVertical: 's' as keyof Theme['spacing'],
+          paddingHorizontal: 'm' as keyof Theme['spacing'],
+          borderRadius: 'md' as keyof Theme['radii'],
           fontSize: 14,
         };
       case 'large':
         return {
-          paddingVertical: 'l',
-          paddingHorizontal: 'xl',
-          borderRadius: 'l',
+          paddingVertical: 'l' as keyof Theme['spacing'],
+          paddingHorizontal: 'xl' as keyof Theme['spacing'],
+          borderRadius: 'lg' as keyof Theme['radii'],
           fontSize: 18,
         };
       default:
         return {
-          paddingVertical: 'm',
-          paddingHorizontal: 'l',
-          borderRadius: 'l',
+          paddingVertical: 'm' as keyof Theme['spacing'],
+          paddingHorizontal: 'l' as keyof Theme['spacing'],
+          borderRadius: 'md' as keyof Theme['radii'],
           fontSize: 16,
         };
     }
@@ -100,6 +104,13 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = getVariantStyles();
   const sizeStyles = getSizeStyles();
+  
+  // Use the custom borderRadius or fall back to size-based radius
+  const radiusKey = borderRadius || sizeStyles.borderRadius;
+  const finalBorderRadius = theme.radii[radiusKey];
+  
+  // Debug logging
+  console.log('Button borderRadius:', { borderRadius, sizeStyles: sizeStyles.borderRadius, radiusKey, final: finalBorderRadius });
 
   return (
     <TouchableOpacity
@@ -113,7 +124,7 @@ export const Button: React.FC<ButtonProps> = ({
         borderWidth={variantStyles.borderWidth}
         paddingVertical={sizeStyles.paddingVertical as keyof Theme['spacing']}
         paddingHorizontal={sizeStyles.paddingHorizontal as keyof Theme['spacing']}
-        borderRadius={sizeStyles.borderRadius as keyof Theme['borderRadii']}
+        borderRadius={finalBorderRadius}
         flexDirection="row"
         alignItems="center"
         justifyContent="center"

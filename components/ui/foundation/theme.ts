@@ -1,280 +1,187 @@
 import { createTheme } from '@shopify/restyle';
 
-// Base color palette from your original theme
-const palette = {
-  mist: '#C9D0C3',
-  sage: '#7A9C81',
-  pine: '#4E7166',
-  forest: '#334C4E',
-  midnight: '#263137',
-  white: '#FFFFFF',
-  black: '#000000',
-  transparentPine: 'rgba(78, 113, 102, 0.95)',
-  transparentForest: 'rgba(51, 76, 78, 0.92)',
-  subtleDark: '#EBEEED',
-  
-  // Semantic colors
-  success: '#4CAF50',
-  warning: '#FFA500',
-  error: '#F44336',
-  info: '#2196F3',
-  
-  // Background variants
-  successBackground: '#E8F5E9',
-  warningBackground: '#FFF3E0',
-  errorBackground: '#FFEBEE',
-  infoBackground: '#E3F2FD',
-};
-
-// Enhanced spacing system
-const spacing = {
-  xs: 4,
-  s: 8,
-  m: 16,
-  l: 24,
-  xl: 32,
-  xxl: 40,
-  xxxl: 48,
-};
-
-// Typography variants with Geist font family
-const textVariants = {
-  defaults: {
-    fontSize: 16,
-    fontFamily: 'Geist_400Regular',
-    letterSpacing: -0.2,
-    lineHeight: 22,
+// Base tokens - lean, scalable, semantic
+const base = {
+  spacing: { 
+    // New semantic spacing
+    xs: 4, 
+    sm: 8, 
+    md: 12, 
+    lg: 16, 
+    xl: 24,
+    // Legacy spacing for backward compatibility
+    s: 8,
+    m: 16,
+    l: 24,
+    xxl: 40,
+    xxxl: 48,
   },
-  hero: {
-    fontSize: 32,
-    fontFamily: 'Geist_300Light',
-    letterSpacing: -0.5,
-    lineHeight: 38,
+  radii: { 
+    sm: 8, 
+    md: 12, 
+    lg: 16, 
+    xl: 24,
+    // Legacy radii for backward compatibility
+    s: 8,
+    m: 12,
+    l: 16,
+    round: 50,
   },
-  title: {
-    fontSize: 28,
-    fontFamily: 'Geist_400Regular',
-    letterSpacing: -0.5,
-    lineHeight: 34,
+  textVariants: {
+    defaults: {
+      fontFamily: 'Geist_400Regular',
+    },
+    h1: { 
+      fontSize: 32, 
+      lineHeight: 38, 
+      fontFamily: 'Geist-Bold',
+    },
+    h2: { 
+      fontSize: 24, 
+      lineHeight: 30, 
+      fontFamily: 'Geist_600SemiBold'
+    },
+    h3: { 
+      fontSize: 18, 
+      lineHeight: 24, 
+      fontFamily: 'Geist_400Regular',
+    },
+    body: { 
+      fontSize: 16, 
+      lineHeight: 22, 
+      fontFamily: 'Geist_400Regular',
+    },
+    caption: { 
+      fontSize: 14, 
+      lineHeight: 18, 
+      fontFamily: 'Geist_400Regular',
+    },
+    // Legacy text variants for backward compatibility
+    title: { 
+      fontSize: 28, 
+      lineHeight: 34, 
+      fontFamily: 'Geist_600SemiBold',
+    },
+    label: { 
+      fontSize: 14, 
+      lineHeight: 18, 
+      fontFamily: 'Geist_500Medium',
+    },
+    small: { 
+      fontSize: 13, 
+      lineHeight: 18, 
+      fontFamily: 'Geist_400Regular',
+    },
+    button: { 
+      fontSize: 18, 
+      lineHeight: 22, 
+      fontFamily: 'Geist_500Medium',
+    },
   },
-  h1: {
-    fontSize: 24,
-    fontFamily: 'Geist_400Regular',
-    letterSpacing: -0.3,
-    lineHeight: 32,
+  // Shadow tokens for consistency in RN/web parity
+  shadows: {
+    'elev/1': {
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.08,
+      shadowRadius: 2,
+      elevation: 1,
+    },
+    'elev/2': {
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.12,
+      shadowRadius: 12,
+      elevation: 4,
+    },
   },
-  h2: {
-    fontSize: 20,
-    fontFamily: 'Geist_400Regular',
-    letterSpacing: -0.3,
-    lineHeight: 28,
-  },
-  h3: {
-    fontSize: 18,
-    fontFamily: 'Geist_400Regular',
-    letterSpacing: -0.2,
-    lineHeight: 24,
-  },
-  body: {
-    fontSize: 16,
-    fontFamily: 'Geist_400Regular',
-    // fontWeight: '400' as const,
-    letterSpacing: -0.2,
-    lineHeight: 22,
-  },
-  bodyMedium: {
-    fontSize: 16,
-    fontFamily: 'Geist_500Medium',
-    // fontWeight: '500' as const,
-    letterSpacing: -0.2,
-    lineHeight: 22,
-  },
-  bodySemiBold: {
-    fontSize: 16,
-    fontFamily: 'Geist_600SemiBold',
-    // fontWeight: '600' as const,
-    letterSpacing: -0.2,
-    lineHeight: 22,
-  },
-  caption: {
-    fontSize: 15,
-    fontFamily: 'Geist_400Regular',
-    // fontWeight: '400' as const,
-    letterSpacing: -0.1,
-    lineHeight: 20,
-    opacity: 0.7,
-  },
-  small: {
-    fontSize: 13,
-    fontFamily: 'Geist_400Regular',
-    // fontWeight: '400' as const,
-    letterSpacing: -0.1,
-    lineHeight: 18,
-    opacity: 0.6,
-  },
-  mono: {
-    fontSize: 16,
-    fontFamily: 'RobotoMono_400Regular',
-    lineHeight: 22,
-  },
-  label: {
-    fontSize: 14,
-    fontFamily: 'Geist_500Medium',
-    // fontWeight: '500' as const,
-    letterSpacing: -0.1,
-    lineHeight: 18,
-  },
-  button: {
-    fontSize: 16,
-    fontFamily: 'Geist_600SemiBold',
-    // fontWeight: '600' as const,
-    letterSpacing: -0.2,
-  },
-};
-
-// Border radius system
-const borderRadii = {
-  xs: 4,
-  s: 8,
-  m: 12,
-  l: 16,
-  xl: 20,
-  round: 50,
-};
-
-// Box shadow variants
-const shadows = {
-  none: {
-    shadowColor: 'transparent',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0,
-    shadowRadius: 0,
-    elevation: 0,
-  },
-  sm: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 2,
-    elevation: 1,
-  },
-  md: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  lg: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  xl: {
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.2,
-    shadowRadius: 16,
-    elevation: 8,
-  },
-};
-
-// Light theme
-export const lightTheme = createTheme({
-  colors: {
-    // Primary colors
-    primary: palette.forest,
-    primaryLight: palette.pine,
-    primaryDark: palette.midnight,
-    
-    // Secondary colors
-    secondary: palette.sage,
-    secondaryLight: palette.mist,
-    
-    // Background colors
-    background: palette.subtleDark,
-    surface: palette.white,
-    card: palette.white,
-    
-    // Text colors
-    text: palette.midnight,
-    textSecondary: palette.pine,
-    textMuted: palette.sage,
-    textInverse: palette.white,
-    
-    // Border colors
-    border: palette.mist,
-    borderLight: '#E8E8E8',
-    borderDark: palette.sage,
-    
-    // Semantic colors
-    success: palette.success,
-    warning: palette.warning,
-    error: palette.error,
-    info: palette.info,
-    
-    // Semantic backgrounds
-    successBackground: palette.successBackground,
-    warningBackground: palette.warningBackground,
-    errorBackground: palette.errorBackground,
-    infoBackground: palette.infoBackground,
-    
-    // Interactive states
-    buttonPrimary: palette.forest,
-    buttonPrimaryDisabled: '#CCCCCC',
-    buttonSecondary: palette.white,
-    buttonSecondaryBorder: palette.forest,
-    
-    // Overlays
-    overlay: 'rgba(0, 0, 0, 0.5)',
-    headerBackground: palette.transparentPine,
-    
-    // Utility
-    transparent: 'transparent',
-    white: palette.white,
-    black: palette.black,
-  },
-  spacing,
-  borderRadii,
-  textVariants,
-  shadows,
   breakpoints: {
     phone: 0,
     tablet: 768,
   },
+};
+
+export const lightTheme = createTheme({
+  ...base,
+  colors: {
+    'bg/page': '#FFFFFF',
+    'bg/surface': '#FFFFFF',
+    'bg/raised': '#F5F6F8',
+    'text/primary': '#0E1116',
+    'text/secondary': '#4B5563',
+    'text/inverse': '#FFFFFF',
+    'accent/brand': '#2563EB',
+    'accent/onBrand': '#FFFFFF',
+    'border/subtle': '#E5E7EB',
+    'border/strong': '#D1D5DB',
+    'state/success': '#10B981',
+    'state/warn': '#F59E0B',
+    'state/error': '#EF4444',
+    'state/on': '#0B0F14',
+    'focus/ring': '#3B82F6',
+    'overlay/scrim': 'rgba(0,0,0,0.45)',
+    
+    // Legacy aliases for backward compatibility
+    background: '#FFFFFF',
+    surface: '#FFFFFF',
+    text: '#0E1116',
+    textSecondary: '#4B5563',
+    textMuted: '#4B5563',
+    textInverse: '#FFFFFF',
+    primary: '#2563EB',
+    border: '#E5E7EB',
+    success: '#10B981',
+    warning: '#F59E0B',
+    error: '#EF4444',
+    transparent: 'transparent',
+    white: '#FFFFFF',
+    black: '#0E1116',
+    // Button states
+    buttonPrimaryDisabled: '#D1D5DB',
+  },
 });
 
-// Dark theme
 export const darkTheme = createTheme({
-  ...lightTheme,
+  ...base,
   colors: {
-    ...lightTheme.colors,
+    // 'bg/page': '#0B0F14',
+    'bg/page': '#2C2A2D',
+    // 'bg/surface': '#0F141A',
+    'bg/surface': '#2C2A2D',
+    // Raised gets a subtle light overlay to imply elevation
+    'bg/raised': '#141A21',
+    'text/primary': '#E5E7EB',
+    'text/secondary': '#9CA3AF',
+    'text/inverse': '#0B0F14',
+    // 'accent/brand': '#3B82F6',
+    'accent/brand': '#F5CA47',
+    'accent/onBrand': '#0B0F14',
+    'border/subtle': '#1F2937',
+    'border/strong': '#374151',
+    'state/success': '#34D399',
+    'state/warn': '#FBBF24',
+    'state/error': '#F87171',
+    'state/on': '#0B0F14',
+    'focus/ring': '#60A5FA',
+    'overlay/scrim': 'rgba(0,0,0,0.6)',
     
-    // Background colors
-    background: '#1A1F22',
-    surface: palette.midnight,
-    card: palette.midnight,
-    
-    // Text colors
-    text: palette.white,
-    textSecondary: palette.mist,
-    textMuted: palette.sage,
-    textInverse: palette.midnight,
-    
-    // Border colors
-    border: palette.forest,
-    borderLight: palette.pine,
-    borderDark: palette.midnight,
-    
-    // Interactive states
-    buttonPrimary: palette.sage,
-    buttonSecondary: palette.midnight,
-    buttonSecondaryBorder: palette.sage,
-    
-    // Overlays
-    headerBackground: palette.transparentForest,
+    // Legacy aliases for backward compatibility
+    background: '#0B0F14',
+    surface: '#0F141A',
+    text: '#E5E7EB',
+    textSecondary: '#9CA3AF',
+    textMuted: '#9CA3AF',
+    textInverse: '#0B0F14',
+    primary: '#3B82F6',
+    border: '#1F2937',
+    success: '#34D399',
+    warning: '#FBBF24',
+    error: '#F87171',
+    transparent: 'transparent',
+    white: '#E5E7EB',
+    black: '#0B0F14',
+    // Button states
+    buttonPrimaryDisabled: '#374151',
   },
 });
 
@@ -282,7 +189,7 @@ export type Theme = typeof lightTheme;
 export type ThemeColors = keyof Theme['colors'];
 export type ThemeSpacing = keyof Theme['spacing'];
 export type ThemeTextVariants = Exclude<keyof Theme['textVariants'], 'defaults'>;
-export type ThemeBorderRadii = keyof Theme['borderRadii'];
+export type ThemeRadii = keyof Theme['radii'];
 export type ThemeShadows = keyof Theme['shadows'];
 
 export const theme = lightTheme;

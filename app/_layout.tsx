@@ -11,8 +11,6 @@ import {
   Geist_700Bold,
 } from '@expo-google-fonts/geist';
 
-import { AlanSans_400Regular } from '@expo-google-fonts/alan-sans';
-
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -22,7 +20,6 @@ export default function RootLayout() {
     Geist_500Medium,
     Geist_600SemiBold,
     Geist_700Bold,
-    AlanSans_400Regular
   });
 
   useEffect(() => {
