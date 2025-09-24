@@ -38,15 +38,6 @@ export default function RootLayout() {
   if (!loaded && !error) {
     return null;
   }
-  // useEffect(() => {
-  //   if (loaded || error) {
-  //     SplashScreen.hideAsync();
-  //   }
-  // }, [loaded, error]);
-
-  // if (!loaded && !error) {
-  //   return null;
-  // }
 
   return (
     <AuthProvider>

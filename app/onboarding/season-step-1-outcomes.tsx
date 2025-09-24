@@ -3,7 +3,6 @@ import { ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Box, Text, Button, WizardBar, SelectionCard, Header } from '../../components/ui';
-import { SharedElement } from '../../components/ui/navigation';
 
 export default function SeasonGoalsScreen() {
   const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
@@ -17,7 +16,7 @@ export default function SeasonGoalsScreen() {
       // Small delay for visual feedback, then navigate
       setTimeout(() => {
         router.push('/onboarding/season-step-2-strength');
-      }, 150);
+      }, 15);
     }
     // For other goals, we could add different navigation paths later
   };
@@ -49,26 +48,25 @@ export default function SeasonGoalsScreen() {
         <Box paddingHorizontal="l">
           
           {/* Section Introduction */}
-          <SharedElement sharedId="step-title" isActive={true} animationType="slide" delay={100}>
-            <Box marginBottom="l">
-              <Text variant="h2" color="text" marginBottom="xs">
-                At the end of this season, I want to:
-              </Text>
-            </Box>
-          </SharedElement>
+          <Box marginBottom="l">
+            <Text variant="h2" color="text" marginBottom="xs">
+              At the end of this season, I want to:
+            </Text>
+            {/* <Text variant="body" color="textMuted">
+              Choose the outcome that excites you most for this season
+            </Text> */}
+          </Box>
           
           {/* Goal Selection Cards */}
           <Box marginBottom="xl">
-            <SharedElement sharedId="strength-card" isActive={true} animationType="scale" delay={200}>
-              <SelectionCard 
-                title="Get Stronger"
-                colorVariant="coral"
-                label="STRENGTH"
-                largeDescription="Lift heavier weights and build muscle"
-                isSelected={selectedGoal === 'stronger'}
-                onPress={() => handleGoalSelection('stronger')}
-              />
-            </SharedElement>
+            <SelectionCard 
+              title="Get Stronger"
+              colorVariant="coral"
+              label="STRENGTH"
+              largeDescription="Lift heavier weights and build muscle"
+              isSelected={selectedGoal === 'stronger'}
+              onPress={() => handleGoalSelection('stronger')}
+            />
             
             <Box style={{ opacity: 0.6 }}>
               <SelectionCard 

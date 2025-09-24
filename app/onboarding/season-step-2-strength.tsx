@@ -6,7 +6,6 @@ import { Box, Text, Button, WizardBar, Header } from '../../components/ui';
 import { SimpleSelectionButton } from '../../components/ui/selection/SimpleSelectionButton';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ThemeSwitcher } from '../../components/ui/forms';
-import { SharedElement } from '../../components/ui/navigation';
 
 export default function SeasonStrengthScreen() {
   const [selectedLifts, setSelectedLifts] = useState<string[]>([]);
@@ -91,15 +90,10 @@ export default function SeasonStrengthScreen() {
         <ScrollView showsVerticalScrollIndicator={false}>
           <Box paddingHorizontal="l">
             {/* Specific Lifts Section */}
-            <SharedElement sharedId="step2-title" isActive={true} animationType="slide" delay={100}>
-              <Box marginBottom="xs">
-                <Text variant="h2" color="text" marginBottom="m">
-                  Specific lifts I want to improve:
-                </Text>
-              </Box>
-            </SharedElement>
-            
-            <SharedElement sharedId="lift-buttons" isActive={true} animationType="scale" delay={200}>
+            <Box marginBottom="xs">
+              <Text variant="h2" color="text" marginBottom="m">
+                Specific lifts I want to improve:
+              </Text>
               <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="l">
                 <SimpleSelectionButton 
                   title="Bench Press"
@@ -138,7 +132,7 @@ export default function SeasonStrengthScreen() {
                   isDisabled={focusOverallStrength}
                 />
               </Box>
-            </SharedElement>
+            </Box>
 
             {/* Divider */}
             <Box alignItems="center" marginBottom="m">
