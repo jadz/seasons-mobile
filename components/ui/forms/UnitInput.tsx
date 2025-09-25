@@ -30,8 +30,7 @@ export const UnitInput: React.FC<UnitInputProps> = ({
     <View style={[
       styles.wrapper,
       {
-        borderColor: theme.colors.border,
-        backgroundColor: disabled ? theme.colors.surface : 'white',
+        backgroundColor: disabled ? '#F2F2F7' : 'white',
       },
       disabled && styles.disabledWrapper,
       width && { width },
@@ -71,8 +70,8 @@ const styles = StyleSheet.create({
   wrapper: {
     position: 'relative',
     minHeight: 56,
-    borderRadius: 8,
-    borderWidth: 1,
+    borderRadius: 12,
+    borderWidth: 0,
     paddingHorizontal: 20,
     paddingVertical: 16,
     justifyContent: 'center',
@@ -81,16 +80,18 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    paddingRight: 40,
+    paddingRight: 50,
     fontSize: 18,
     fontWeight: '600',
     textAlign: 'left',
+    color: '#1D1D1F',
   },
   unit: {
     position: 'absolute',
     right: 20,
     fontSize: 16,
     fontWeight: '500',
+    color: '#8E8E93',
   },
   disabledWrapper: {
     opacity: 0.6,
