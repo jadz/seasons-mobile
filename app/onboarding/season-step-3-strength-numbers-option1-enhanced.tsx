@@ -50,75 +50,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
   const targetRepsRef = useRef<any>(null);
   const targetWeightRef = useRef<any>(null);
   
-  // Keyboard toolbar component
-  const KeyboardToolbar = () => (
-    <>
-      <InputAccessoryView nativeID="keyboardToolbar">
-        <Box 
-          flexDirection="row" 
-          justifyContent="space-between" 
-          alignItems="center" 
-          paddingHorizontal="l" 
-          paddingVertical="m"
-          backgroundColor="bg/surface"
-          style={{ borderTopWidth: 1, borderTopColor: '#E5E7EB' }}
-        >
-          <Button
-            variant="ghost"
-            onPress={() => {
-              if (activeInputField) {
-                updateCurrentLift(activeInputField as keyof LiftData, '');
-              }
-            }}
-          >
-            Clear
-          </Button>
-          <Button
-            variant="ghost"
-            onPress={() => {
-              Keyboard.dismiss();
-              setActiveInputField(null);
-            }}
-          >
-            Done
-          </Button>
-        </Box>
-      </InputAccessoryView>
-      
-      <InputAccessoryView nativeID="keyboardToolbarTarget">
-        <Box 
-          flexDirection="row" 
-          justifyContent="space-between" 
-          alignItems="center" 
-          paddingHorizontal="l" 
-          paddingVertical="m"
-          backgroundColor="bg/surface"
-          style={{ borderTopWidth: 1, borderTopColor: '#E5E7EB' }}
-        >
-          <Button
-            variant="ghost"
-            onPress={() => {
-              if (activeInputField) {
-                updateCurrentLift(activeInputField as keyof LiftData, '');
-              }
-            }}
-          >
-            Clear
-          </Button>
-          <Button
-            variant="ghost"
-            onPress={() => {
-              Keyboard.dismiss();
-              setActiveInputField(null);
-            }}
-          >
-            Done
-          </Button>
-        </Box>
-      </InputAccessoryView>
-    </>
-  );
-  
   // Handle tap outside to dismiss keyboard
   const handleTapOutside = () => {
     Keyboard.dismiss();
@@ -130,6 +61,75 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
       index === currentLiftIndex ? { ...lift, [field]: value } : lift
     ));
   };
+
+  // Stable keyboard toolbar components to prevent re-rendering flashes
+  const keyboardToolbarCurrent = React.useMemo(() => (
+    <InputAccessoryView nativeID="keyboardToolbar">
+      <Box 
+        flexDirection="row" 
+        justifyContent="space-between" 
+        alignItems="center" 
+        paddingHorizontal="l" 
+        paddingVertical="m"
+        backgroundColor="bg/surface"
+        style={{ borderTopWidth: 1, borderTopColor: '#E5E7EB' }}
+      >
+        <Button
+          variant="ghost"
+          onPress={() => {
+            if (activeInputField) {
+              updateCurrentLift(activeInputField as keyof LiftData, '');
+            }
+          }}
+        >
+          Clear
+        </Button>
+        <Button
+          variant="ghost"
+          onPress={() => {
+            Keyboard.dismiss();
+            setActiveInputField(null);
+          }}
+        >
+          Done
+        </Button>
+      </Box>
+    </InputAccessoryView>
+  ), [activeInputField]);
+
+  const keyboardToolbarTarget = React.useMemo(() => (
+    <InputAccessoryView nativeID="keyboardToolbarTarget">
+      <Box 
+        flexDirection="row" 
+        justifyContent="space-between" 
+        alignItems="center" 
+        paddingHorizontal="l" 
+        paddingVertical="m"
+        backgroundColor="bg/surface"
+        style={{ borderTopWidth: 1, borderTopColor: '#E5E7EB' }}
+      >
+        <Button
+          variant="ghost"
+          onPress={() => {
+            if (activeInputField) {
+              updateCurrentLift(activeInputField as keyof LiftData, '');
+            }
+          }}
+        >
+          Clear
+        </Button>
+        <Button
+          variant="ghost"
+          onPress={() => {
+            Keyboard.dismiss();
+            setActiveInputField(null);
+          }}
+        >
+          Done
+        </Button>
+      </Box>
+    </InputAccessoryView>
+  ), [activeInputField]);
 
   const toggleMode = () => {
     const newMode = currentLift.mode === '1rm' ? 'reps' : '1rm';
@@ -553,8 +553,13 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
         </Box>
       </TouchableWithoutFeedback>
       
-      {/* Keyboard Toolbar */}
-      {Platform.OS === 'ios' && <KeyboardToolbar />}
+      {/* Keyboard Toolbars */}
+      {Platform.OS === 'ios' && (
+        <>
+          {keyboardToolbarCurrent}
+          {keyboardToolbarTarget}
+        </>
+      )}
     </View>
   );
 }
