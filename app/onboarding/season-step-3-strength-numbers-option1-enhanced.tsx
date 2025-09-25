@@ -331,31 +331,37 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           />
         </Box>
 
-        {/* Clean input interface with improved alignment */}
+        {/* Clean input interface with left alignment */}
         <Box paddingVertical="l">
-          <Box width="100%" maxWidth={320}>
+          <Box width="100%">
             {/* Current section */}
             <Box marginBottom="l">
-              <Text variant="h2" color="textMuted" marginBottom="s">
+              <Text variant="caption" color="textMuted" marginBottom="s" style={{ fontSize: 13, fontWeight: '500' }}>
                 Current
               </Text>
-              <Box flexDirection="row" alignItems="center" justifyContent="flex-start">
-                <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 60 }}>
-                  {currentLift.mode === '1rm' ? '1RM' : ''}
-                </Text>
+              <Box flexDirection="row" alignItems="center">
                 {currentLift.mode === 'reps' && (
-                  <UnitInput
-                    value={currentLift.currentReps}
-                    onChangeText={(value) => updateCurrentLift('currentReps', value)}
-                    placeholder="5"
-                    unit="reps"
-                    width={100}
-                    style={{ marginRight: 12 }}
-                  />
+                  <>
+                    <UnitInput
+                      value={currentLift.currentReps}
+                      onChangeText={(value) => updateCurrentLift('currentReps', value)}
+                      placeholder="5"
+                      unit="reps"
+                      width={100}
+                      style={{ marginRight: 12 }}
+                    />
+                    <Text variant="body" color="textMuted" style={{ fontSize: 20, marginRight: 12 }}>
+                      ×
+                    </Text>
+                  </>
                 )}
-                <Text variant="body" color="textMuted" style={{ fontSize: 20, marginHorizontal: 12 }}>
-                  ×
-                </Text>
+                {currentLift.mode === '1rm' && (
+                  <>
+                    <Text variant="body" color="textMuted" style={{ fontSize: 16, marginRight: 12 }}>
+                      1RM ×
+                    </Text>
+                  </>
+                )}
                 <UnitInput
                   value={currentLift.currentWeight}
                   onChangeText={(value) => updateCurrentLift('currentWeight', value)}
@@ -368,32 +374,38 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
 
             {/* Target section */}
             <Box marginBottom="l">
-              <Text variant="h2" color="textMuted" marginBottom="s">
+              <Text variant="caption" color="textMuted" marginBottom="s" style={{ fontSize: 13, fontWeight: '500' }}>
                 Target
               </Text>
-              <Box flexDirection="row" alignItems="center" justifyContent="flex-start">
-                <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 60 }}>
-                  {currentLift.mode === '1rm' ? '1RM' : ''}
-                </Text>
+              <Box flexDirection="row" alignItems="center">
                 {currentLift.mode === 'reps' && (
-                  <UnitInput
-                    value={currentLift.targetReps}
-                    onChangeText={(value) => updateCurrentLift('targetReps', value)}
-                    placeholder="8"
-                    unit="reps"
-                    width={100}
-                    style={{ marginRight: 12 }}
-                  />
+                  <>
+                    <UnitInput
+                      value={currentLift.targetReps}
+                      onChangeText={(value) => updateCurrentLift('targetReps', value)}
+                      placeholder="8"
+                      unit="reps"
+                      width={100}
+                      style={{ marginRight: 12 }}
+                    />
+                    <Text variant="body" color="textMuted" style={{ fontSize: 20, marginRight: 12 }}>
+                      ×
+                    </Text>
+                  </>
                 )}
-                <Text variant="body" color="textMuted" style={{ fontSize: 20, marginHorizontal: 12 }}>
-                  ×
-                </Text>
+                {currentLift.mode === '1rm' && (
+                  <>
+                    <Text variant="body" color="textMuted" style={{ fontSize: 16, marginRight: 12 }}>
+                      1RM ×
+                    </Text>
+                  </>
+                )}
                 <UnitInput
                   value={currentLift.targetWeight}
                   onChangeText={(value) => updateCurrentLift('targetWeight', value)}
                   placeholder={currentLift.mode === '1rm' ? '100' : '75'}
                   unit="kg"
-                  width={130}
+                  width={120}
                 />
               </Box>
             </Box>
