@@ -316,7 +316,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
         </Box>
 
         {/* Simple mode toggle */}
-        <Box>
+        <Box marginBottom="m" alignSelf="flex-start">
           <SegmentedControl
             options={[
               { value: '1rm', label: 'Max' },
@@ -328,6 +328,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                 toggleMode();
               }
             }}
+            fullWidth={false}
           />
         </Box>
 
