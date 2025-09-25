@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, ScrollView } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, ScrollView, TouchableWithoutFeedback, Keyboard, InputAccessoryView, Platform } from 'react-native';
 import { router } from 'expo-router';
 import { Box, Text, Button, WizardBar, TextInput, UnitInput, Header, SegmentedControl } from '../../components/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -41,7 +41,89 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
 
   const [currentLiftIndex, setCurrentLiftIndex] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
+  const [activeInputField, setActiveInputField] = useState<string | null>(null);
   const currentLift = liftsData[currentLiftIndex];
+  
+  // Refs for input fields
+  const currentRepsRef = useRef<any>(null);
+  const currentWeightRef = useRef<any>(null);
+  const targetRepsRef = useRef<any>(null);
+  const targetWeightRef = useRef<any>(null);
+  
+  // Keyboard toolbar component
+  const KeyboardToolbar = () => (
+    <>
+      <InputAccessoryView nativeID="keyboardToolbar">
+        <Box 
+          flexDirection="row" 
+          justifyContent="space-between" 
+          alignItems="center" 
+          paddingHorizontal="l" 
+          paddingVertical="m"
+          backgroundColor="bg/surface"
+          style={{ borderTopWidth: 1, borderTopColor: '#E5E7EB' }}
+        >
+          <Button
+            variant="ghost"
+            onPress={() => {
+              if (activeInputField) {
+                updateCurrentLift(activeInputField as keyof LiftData, '');
+              }
+            }}
+          >
+            Clear
+          </Button>
+          <Button
+            variant="ghost"
+            onPress={() => {
+              Keyboard.dismiss();
+              setActiveInputField(null);
+            }}
+          >
+            Done
+          </Button>
+        </Box>
+      </InputAccessoryView>
+      
+      <InputAccessoryView nativeID="keyboardToolbarTarget">
+        <Box 
+          flexDirection="row" 
+          justifyContent="space-between" 
+          alignItems="center" 
+          paddingHorizontal="l" 
+          paddingVertical="m"
+          backgroundColor="bg/surface"
+          style={{ borderTopWidth: 1, borderTopColor: '#E5E7EB' }}
+        >
+          <Button
+            variant="ghost"
+            onPress={() => {
+              if (activeInputField) {
+                updateCurrentLift(activeInputField as keyof LiftData, '');
+              }
+            }}
+          >
+            Clear
+          </Button>
+          <Button
+            variant="ghost"
+            onPress={() => {
+              Keyboard.dismiss();
+              setActiveInputField(null);
+            }}
+          >
+            Done
+          </Button>
+        </Box>
+      </InputAccessoryView>
+    </>
+  );
+  
+  // Handle tap outside to dismiss keyboard
+  const handleTapOutside = () => {
+    Keyboard.dismiss();
+    setActiveInputField(null);
+  };
 
   const updateCurrentLift = (field: keyof LiftData, value: string) => {
     setLiftsData(prev => prev.map((lift, index) => 
@@ -264,8 +346,9 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
 
   return (
     <View style={{ flex: 1 }}>
-      <Box flex={1} backgroundColor="background">
-      <Box style={{ paddingTop: insets.top }} backgroundColor="background" />
+      <TouchableWithoutFeedback onPress={handleTapOutside}>
+        <Box flex={1} backgroundColor="background">
+        <Box style={{ paddingTop: insets.top }} backgroundColor="background" />
       
         {/* Header Gradient Overlay - Balanced Visibility */}
         <LinearGradient
@@ -319,8 +402,8 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
         <Box marginBottom="m" alignSelf="flex-start">
           <SegmentedControl
             options={[
-              { value: '1rm', label: 'Max' },
-              { value: 'reps', label: 'Reps' }
+              { value: '1rm', label: '1RM' },
+              { value: 'reps', label: 'REPS' }
             ]}
             selectedValue={currentLift.mode}
             onValueChange={(value) => {
@@ -337,7 +420,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           <Box width="100%">
             {/* Current section */}
             <Box marginBottom="l">
-              <Text variant="caption" color="textMuted" marginBottom="s" style={{ fontSize: 13, fontWeight: '500' }}>
+              <Text variant="label" color="textMuted" marginBottom="s" style={{ fontSize: 13, fontWeight: '500' }}>
                 Current
               </Text>
               <Box flexDirection="row" alignItems="center">
@@ -350,6 +433,9 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                       unit="reps"
                       width={100}
                       style={{ marginRight: 12 }}
+                      inputAccessoryViewID="keyboardToolbar"
+                      onFocus={() => setActiveInputField('currentReps')}
+                      onBlur={() => setActiveInputField(null)}
                     />
                     <Text variant="body" color="textMuted" style={{ fontSize: 20, marginRight: 12 }}>
                       ×
@@ -369,13 +455,16 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                   placeholder={currentLift.mode === '1rm' ? '80' : '60'}
                   unit="kg"
                   width={120}
+                  inputAccessoryViewID="keyboardToolbar"
+                  onFocus={() => setActiveInputField('currentWeight')}
+                  onBlur={() => setActiveInputField(null)}
                 />
               </Box>
             </Box>
 
             {/* Target section */}
             <Box marginBottom="l">
-              <Text variant="caption" color="textMuted" marginBottom="s" style={{ fontSize: 13, fontWeight: '500' }}>
+              <Text variant="label" color="textMuted" marginBottom="s" style={{ fontSize: 13, fontWeight: '500' }}>
                 Target
               </Text>
               <Box flexDirection="row" alignItems="center">
@@ -388,6 +477,9 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                       unit="reps"
                       width={100}
                       style={{ marginRight: 12 }}
+                      inputAccessoryViewID="keyboardToolbarTarget"
+                      onFocus={() => setActiveInputField('targetReps')}
+                      onBlur={() => setActiveInputField(null)}
                     />
                     <Text variant="body" color="textMuted" style={{ fontSize: 20, marginRight: 12 }}>
                       ×
@@ -407,6 +499,9 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                   placeholder={currentLift.mode === '1rm' ? '100' : '75'}
                   unit="kg"
                   width={120}
+                  inputAccessoryViewID="keyboardToolbarTarget"
+                  onFocus={() => setActiveInputField('targetWeight')}
+                  onBlur={() => setActiveInputField(null)}
                 />
               </Box>
             </Box>
@@ -454,8 +549,12 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
             </Button>
           )}
         </Box>
-      </Box>
-      </Box>
+        </Box>
+        </Box>
+      </TouchableWithoutFeedback>
+      
+      {/* Keyboard Toolbar */}
+      {Platform.OS === 'ios' && <KeyboardToolbar />}
     </View>
   );
 }

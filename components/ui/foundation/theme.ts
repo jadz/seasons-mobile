@@ -144,9 +144,7 @@ export const lightTheme = createTheme({
 export const darkTheme = createTheme({
   ...base,
   colors: {
-    // 'bg/page': '#0B0F14',
     'bg/page': '#2C2A2D',
-    // 'bg/surface': '#0F141A',
     'bg/surface': '#2C2A2D',
     // Raised gets a subtle light overlay to imply elevation
     'bg/raised': '#141A21',

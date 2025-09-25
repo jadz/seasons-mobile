@@ -12,6 +12,9 @@ interface UnitInputProps {
   keyboardType?: 'numeric' | 'default';
   style?: any;
   width?: number;
+  inputAccessoryViewID?: string;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
 export const UnitInput: React.FC<UnitInputProps> = ({
@@ -23,6 +26,9 @@ export const UnitInput: React.FC<UnitInputProps> = ({
   keyboardType = 'numeric',
   style,
   width,
+  inputAccessoryViewID,
+  onFocus,
+  onBlur,
 }) => {
   const { theme } = useAppTheme();
 
@@ -43,6 +49,9 @@ export const UnitInput: React.FC<UnitInputProps> = ({
         placeholder={placeholder}
         keyboardType={keyboardType}
         editable={!disabled}
+        inputAccessoryViewID={inputAccessoryViewID}
+        onFocus={onFocus}
+        onBlur={onBlur}
         style={[
           styles.input,
           {

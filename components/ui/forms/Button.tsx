@@ -108,9 +108,6 @@ export const Button: React.FC<ButtonProps> = ({
   // Use the custom borderRadius or fall back to size-based radius
   const radiusKey = borderRadius || sizeStyles.borderRadius;
   const finalBorderRadius = theme.radii[radiusKey];
-  
-  // Debug logging
-  console.log('Button borderRadius:', { borderRadius, sizeStyles: sizeStyles.borderRadius, radiusKey, final: finalBorderRadius });
 
   return (
     <TouchableOpacity
