@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import { Box, Text, Button, WizardBar, TextInput, UnitInput, Header, SegmentedControl } from '../../components/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -102,7 +102,8 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
 
   if (showSummary) {
     return (
-      <Box flex={1} backgroundColor="background">
+      <View style={{ flex: 1 }}>
+        <Box flex={1} backgroundColor="background">
         <Box style={{ paddingTop: insets.top }} backgroundColor="background" />
         {/* Header Gradient Overlay - Balanced Visibility */}
         <LinearGradient
@@ -256,12 +257,14 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
             </Box>
           </Box>
         </ScrollView>
-      </Box>
+        </Box>
+      </View>
     );
   }
 
   return (
-    <Box flex={1} backgroundColor="background">
+    <View style={{ flex: 1 }}>
+      <Box flex={1} backgroundColor="background">
       <Box style={{ paddingTop: insets.top }} backgroundColor="background" />
       
         {/* Header Gradient Overlay - Balanced Visibility */}
@@ -300,7 +303,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
       
       <Box flex={1} paddingHorizontal="l">
         {/* Clear header with context */}
-        <Box paddingVertical="l">
+        <Box paddingVertical="m">
           <Text variant="caption" color="textMuted" marginBottom="xs">
             {currentLiftIndex + 1} of {liftsData.length}
           </Text>
@@ -313,9 +316,8 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
         </Box>
 
         {/* Simple mode toggle */}
-        <Box marginBottom="l">
+        <Box>
           <SegmentedControl
-            borderRadius="xl"
             options={[
               { value: '1rm', label: 'Max' },
               { value: 'reps', label: 'Reps' }
@@ -329,13 +331,16 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           />
         </Box>
 
-        {/* Clean input interface matching screenshot style */}
-        <Box>
-          <Box marginBottom="xl">
-            {/* Current row */}
-            <Box marginBottom="xl">
-              <Box flexDirection="row" alignItems="center" marginBottom="s">
-                <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 6 }}>
+        {/* Clean input interface with improved alignment */}
+        <Box paddingVertical="l">
+          <Box width="100%" maxWidth={320}>
+            {/* Current section */}
+            <Box marginBottom="l">
+              <Text variant="h2" color="textMuted" marginBottom="s">
+                Current
+              </Text>
+              <Box flexDirection="row" alignItems="center" justifyContent="flex-start">
+                <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 60 }}>
                   {currentLift.mode === '1rm' ? '1RM' : ''}
                 </Text>
                 {currentLift.mode === 'reps' && (
@@ -344,11 +349,11 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                     onChangeText={(value) => updateCurrentLift('currentReps', value)}
                     placeholder="5"
                     unit="reps"
-                    width={120}
+                    width={100}
                     style={{ marginRight: 12 }}
                   />
                 )}
-                <Text variant="body" color="textMuted" style={{ fontSize: 20, marginHorizontal: 8 }}>
+                <Text variant="body" color="textMuted" style={{ fontSize: 20, marginHorizontal: 12 }}>
                   ×
                 </Text>
                 <UnitInput
@@ -356,19 +361,18 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                   onChangeText={(value) => updateCurrentLift('currentWeight', value)}
                   placeholder={currentLift.mode === '1rm' ? '80' : '60'}
                   unit="kg"
-                  width={100}
-                  style={{ marginRight: 16 }}
+                  width={120}
                 />
-                <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 60 }}>
-                  Current
-                </Text>
               </Box>
             </Box>
 
-            {/* Target row */}
-            <Box>
-              <Box flexDirection="row" alignItems="center" marginBottom="s">
-                <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 5 }}>
+            {/* Target section */}
+            <Box marginBottom="l">
+              <Text variant="h2" color="textMuted" marginBottom="s">
+                Target
+              </Text>
+              <Box flexDirection="row" alignItems="center" justifyContent="flex-start">
+                <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 60 }}>
                   {currentLift.mode === '1rm' ? '1RM' : ''}
                 </Text>
                 {currentLift.mode === 'reps' && (
@@ -377,11 +381,11 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                     onChangeText={(value) => updateCurrentLift('targetReps', value)}
                     placeholder="8"
                     unit="reps"
-                    width={120}
+                    width={100}
                     style={{ marginRight: 12 }}
                   />
                 )}
-                <Text variant="body" color="textMuted" style={{ fontSize: 20, marginHorizontal: 8 }}>
+                <Text variant="body" color="textMuted" style={{ fontSize: 20, marginHorizontal: 12 }}>
                   ×
                 </Text>
                 <UnitInput
@@ -389,12 +393,8 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                   onChangeText={(value) => updateCurrentLift('targetWeight', value)}
                   placeholder={currentLift.mode === '1rm' ? '100' : '75'}
                   unit="kg"
-                  width={100}
-                  style={{ marginRight: 16 }}
+                  width={130}
                 />
-                <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 5 }}>
-                  Target
-                </Text>
               </Box>
             </Box>
           </Box>
@@ -442,6 +442,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           )}
         </Box>
       </Box>
-    </Box>
+      </Box>
+    </View>
   );
 }
