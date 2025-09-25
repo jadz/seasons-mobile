@@ -173,7 +173,9 @@ export default function SeasonStrengthScreen() {
                 borderRadius='md'
                 fullWidth
                 disabled={selectedLifts.length === 0 && !focusOverallStrength}
-                onPress={() => router.push('/onboarding/season-step-3-strength-numbers')}
+                // onPress={() => router.push('/onboarding/season-step-3-strength-numbers')}
+                onPress={() => router.push('/onboarding/season-step-3-strength-numbers-option1-enhanced')} // Not a bad way of doing it - could actually work
+                // onPress={() => router.push('/onboarding/season-step-3-strength-numbers-option3')} // Not a bad way of doing it - could actually work
               >
                 {selectedLifts.length > 0 || focusOverallStrength 
                   ? `Set my numbers` 

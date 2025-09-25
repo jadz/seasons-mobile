@@ -88,24 +88,10 @@ export default function SeasonStrengthNumbersScreen() {
       />
       
       {/* Progress Indicator */}
-      <Box paddingHorizontal="l" marginBottom="l">
+      <Box paddingHorizontal="l">
         <WizardBar totalSteps={4} currentStep={2} />
       </Box>
       
-      {/* Strength Focus Indicator */}
-      <Box paddingHorizontal="l" marginBottom="l">
-        <Box 
-          style={{ backgroundColor: "#D67B7B" }}
-          borderRadius="m" 
-          paddingHorizontal="m" 
-          paddingVertical="xs"
-          alignSelf="flex-start"
-        >
-          <Text variant="small" color="white" style={{ fontWeight: '600', textTransform: 'uppercase', letterSpacing: 1 }}>
-            💪 Strength Focus
-          </Text>
-        </Box>
-      </Box>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Box paddingHorizontal="l">
           {/* Header Section */}
@@ -123,7 +109,7 @@ export default function SeasonStrengthNumbersScreen() {
             {liftsData.map((lift, index) => (
               <Box key={lift.id} marginBottom="l">
                 <Box
-                  backgroundColor="white"
+                  backgroundColor="background"
                   borderRadius="l"
                   padding="l"
                   marginBottom="s"

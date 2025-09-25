@@ -49,9 +49,13 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
     <Box
       flexDirection="row"
       backgroundColor="border/subtle"
-      borderRadius="md"
       padding="xs"
-      style={fullWidth ? { flex: 1 } : undefined}
+      style={[
+        {
+          borderRadius: theme.theme.radii.md
+        },
+        fullWidth ? { flex: 1 } : undefined
+      ]}
     >
       {options.map((option, index) => {
         const isSelected = option.value === selectedValue;
@@ -66,7 +70,6 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
           >
             <Box
               backgroundColor={isSelected ? 'bg/surface' : 'transparent'}
-              borderRadius="sm"
               paddingHorizontal="sm"
               paddingVertical="sm"
               alignItems="center"
@@ -74,6 +77,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
               style={{
                 height: config.height,
                 minWidth: fullWidth ? undefined : 80,
+                borderRadius: theme.theme.radii.sm,
               }}
             >
               <Text
