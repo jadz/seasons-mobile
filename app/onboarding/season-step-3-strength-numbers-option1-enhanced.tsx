@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
 import { router } from 'expo-router';
-import { Box, Text, Button, WizardBar, TextInput, Header, SegmentedControl } from '../../components/ui';
+import { Box, Text, Button, WizardBar, TextInput, UnitInput, Header, SegmentedControl } from '../../components/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -368,38 +368,13 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                 <Text variant="body" color="textMuted" style={{ fontSize: 18, marginHorizontal: 12 }}>
                   ×
                 </Text>
-                <Box 
-                  backgroundColor="white" 
-                  borderRadius="s" 
-                  flex={1}
-                  marginRight="m"
-                  style={{
-                    borderWidth: 1,
-                    borderColor: '#D1D1D6',
-                    paddingHorizontal: 20,
-                    paddingVertical: 16,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    minHeight: 56,
-                  }}
-                >
-                  <TextInput
-                    placeholder={currentLift.mode === '1rm' ? '80' : '60'}
-                    value={currentLift.currentWeight}
-                    onChangeText={(value) => updateCurrentLift('currentWeight', value)}
-                    keyboardType="numeric"
-                    style={{ 
-                      fontSize: 18, 
-                      fontWeight: '600',
-                      color: '#000000',
-                      flex: 1
-                    }}
-                  />
-                  <Text variant="body" color="textMuted" style={{ fontSize: 16, marginLeft: 12 }}>
-                    kg
-                  </Text>
-                </Box>
+                <UnitInput
+                  value={currentLift.currentWeight}
+                  onChangeText={(value) => updateCurrentLift('currentWeight', value)}
+                  placeholder={currentLift.mode === '1rm' ? '80' : '60'}
+                  unit="kg"
+                  style={{ flex: 1, marginRight: 16 }}
+                />
                 <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 60 }}>
                   Current
                 </Text>
@@ -442,38 +417,13 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                 <Text variant="body" color="textMuted" style={{ fontSize: 18, marginHorizontal: 12 }}>
                   ×
                 </Text>
-                <Box 
-                  backgroundColor="background" 
-                  borderRadius="s" 
-                  flex={1}
-                  marginRight="m"
-                  style={{
-                    borderWidth: 1,
-                    // borderColor:D1D1D61D6',
-                    paddingHorizontal: 20,
-                    paddingVertical: 16,
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    minHeight: 56,
-                  }}
-                >
-                <TextInput
-                    placeholder={currentLift.mode === '1rm' ? '100' : '75'}
-                    value={currentLift.targetWeight}
-                    onChangeText={(value) => updateCurrentLift('targetWeight', value)}
-                    keyboardType="numeric"
-                    style={{ 
-                      fontSize: 18, 
-                      fontWeight: '600',
-                      color: '#000000',
-                      flex: 1
-                    }}
-                  />
-                  <Text variant="body" color="textMuted" style={{ fontSize: 16, marginLeft: 12 }}>
-                    kg
-                  </Text>
-                </Box>
+                <UnitInput
+                  value={currentLift.targetWeight}
+                  onChangeText={(value) => updateCurrentLift('targetWeight', value)}
+                  placeholder={currentLift.mode === '1rm' ? '100' : '75'}
+                  unit="kg"
+                  style={{ flex: 1, marginRight: 16 }}
+                />
                 <Text variant="body" color="textMuted" style={{ fontSize: 16, minWidth: 60 }}>
                   Target
                 </Text>
