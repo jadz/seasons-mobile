@@ -83,7 +83,7 @@ export const Header: React.FC<HeaderProps> = ({
               alignItems="center"
               justifyContent="center"
             >
-              <Text variant="h2" color="text">
+              <Text variant="h2" color="text/primary">
                 ←
               </Text>
             </Box>
@@ -96,7 +96,7 @@ export const Header: React.FC<HeaderProps> = ({
         {title && (
           <Text
             variant="h3"
-            color="text"
+            color="text/primary"
             textAlign="center"
             numberOfLines={1}
           >

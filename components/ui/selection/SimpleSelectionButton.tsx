@@ -24,19 +24,19 @@ export const SimpleSelectionButton: React.FC<SimpleSelectionButtonProps> = ({
 
   const getBackgroundColor = () => {
     if (isDisabled) return 'bg/surface';
-    if (isSelected) return 'accent/brand';
+    if (isSelected) return 'brand/primary';
     return 'bg/surface';
   };
 
   const getBorderColor = () => {
     if (isDisabled) return 'border/subtle';
-    if (isSelected) return 'accent/brand';
+    if (isSelected) return 'brand/primary';
     return 'border/subtle';
   };
 
   const getTextColor = () => {
     if (isDisabled) return 'text/secondary';
-    if (isSelected) return 'accent/onBrand';
+    if (isSelected) return 'brand/onPrimary';
     return 'text/primary';
   };
 

@@ -95,7 +95,7 @@ export default function SeasonBodyMetricsScreen() {
         showBackButton={true}
         onBackPress={handleBackPress}
         variant="transparent"
-        backgroundColor="background"
+        backgroundcolor="bg/primary"
       />
       {/* Progress Indicator */}
       <Box paddingHorizontal="l">
@@ -161,11 +161,11 @@ export default function SeasonBodyMetricsScreen() {
           {/* Divider */}
           <Box alignItems="center" marginBottom="xl">
             <Box flexDirection="row" alignItems="center" width="100%">
-              <Box flex={1} height={1} backgroundColor="white" style={{ opacity: 0.3 }} />
+              <Box flex={1} height={1} backgroundColor="bg/surface" style={{ opacity: 0.3 }} />
               <Text variant="body" color="white" marginHorizontal="m" style={{ opacity: 0.8 }}>
                 or
               </Text>
-              <Box flex={1} height={1} backgroundColor="white" style={{ opacity: 0.3 }} />
+              <Box flex={1} height={1} backgroundColor="bg/surface" style={{ opacity: 0.3 }} />
             </Box>
           </Box>
 

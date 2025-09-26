@@ -34,9 +34,9 @@ export const Button: React.FC<ButtonProps> = ({
 
   const getVariantStyles = () => {
     const styles = {
-      backgroundColor: 'accent/brand' as ThemeColors,
-      textColor: 'accent/onBrand' as ThemeColors,
-      borderColor: 'accent/brand' as ThemeColors,
+      backgroundColor: 'brand/primary' as ThemeColors,
+      textColor: 'brand/onPrimary' as ThemeColors,
+      borderColor: 'brand/primary' as ThemeColors,
       borderWidth: 1,
     };
 
@@ -49,13 +49,13 @@ export const Button: React.FC<ButtonProps> = ({
         break;
       case 'outline':
         styles.backgroundColor = 'transparent';
-        styles.textColor = 'accent/brand';
-        styles.borderColor = 'accent/brand';
+        styles.textColor = 'brand/primary';
+        styles.borderColor = 'brand/primary';
         styles.borderWidth = 1;
         break;
       case 'ghost':
         styles.backgroundColor = 'transparent';
-        styles.textColor = 'accent/brand';
+        styles.textColor = 'brand/primary';
         styles.borderWidth = 0;
         break;
       case 'danger':
@@ -67,9 +67,9 @@ export const Button: React.FC<ButtonProps> = ({
     }
 
     if (isDisabled) {
-      styles.backgroundColor = 'buttonPrimaryDisabled';
+      styles.backgroundColor = 'bg/page';
       styles.textColor = 'text/secondary';
-      styles.borderColor = 'buttonPrimaryDisabled';
+      styles.borderColor = 'border/subtle';
       styles.borderWidth = 1;
     }
 

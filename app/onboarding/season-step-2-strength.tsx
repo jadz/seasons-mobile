@@ -47,7 +47,7 @@ export default function SeasonStrengthScreen() {
   
 
   return (
-    <Box flex={1} backgroundColor="background">
+    <Box flex={1} backgroundColor="bg/page">
       {/* Header Gradient Overlay - Balanced Visibility */}
       <LinearGradient
         colors={[
@@ -70,9 +70,9 @@ export default function SeasonStrengthScreen() {
         end={{ x: 0, y: 1 }}
       />
       
-      <Box flex={1} backgroundColor="transparent">
+      <Box flex={1}>
         {/* Safe Area Top */}
-        <Box style={{ paddingTop: insets.top }} backgroundColor="transparent" />
+        <Box style={{ paddingTop: insets.top }} />
         
         {/* Standardized Header with Strength Accent */}
         <Header
@@ -80,7 +80,6 @@ export default function SeasonStrengthScreen() {
           showBackButton={true}
           onBackPress={handleBackPress}
           variant="transparent"
-          backgroundColor="transparent"
         />
         
         {/* Progress Indicator with Strength Theme */}
@@ -91,7 +90,7 @@ export default function SeasonStrengthScreen() {
           <Box paddingHorizontal="l">
             {/* Specific Lifts Section */}
             <Box marginBottom="xs">
-              <Text variant="h2" color="text" marginBottom="m">
+              <Text variant="h2" color="text/primary" marginBottom="m">
                 Specific lifts I want to improve:
               </Text>
               <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="l">
@@ -137,17 +136,17 @@ export default function SeasonStrengthScreen() {
             {/* Divider */}
             <Box alignItems="center" marginBottom="m">
               <Box flexDirection="row" alignItems="center" width="100%">
-                <Box flex={1} height={1} backgroundColor="border" />
-                <Text variant="body" color="textMuted" marginHorizontal="m">
+                <Box flex={1} height={1} backgroundcolor="border/subtle" />
+                <Text variant="body" color="text/secondary" marginHorizontal="m">
                   or
                 </Text>
-                <Box flex={1} height={1} backgroundColor="border" />
+                <Box flex={1} height={1} backgroundcolor="border/subtle" />
               </Box>
             </Box>
 
             {/* Overall Strength Option */}
             <Box marginBottom="l">
-              <Text variant="h3" color="text" marginBottom="m">
+              <Text variant="h3" color="text/primary" marginBottom="m">
                 Keep it simple:
               </Text>
               <SimpleSelectionButton 
@@ -160,7 +159,7 @@ export default function SeasonStrengthScreen() {
             {/* Help Text */}
             {selectedLifts.length === 0 && !focusOverallStrength && (
               <Box marginBottom="m" alignItems="center">
-                <Text variant="caption" color="textMuted" textAlign="center">
+                <Text variant="caption" color="text/secondary" textAlign="center">
                   Choose at least one option above to continue
                 </Text>
               </Box>
@@ -169,13 +168,11 @@ export default function SeasonStrengthScreen() {
             {/* Next Button */}
             <Box marginBottom="m">
               <Button 
-                variant="primary" 
+                variant="brand/primary" 
                 borderRadius='md'
                 fullWidth
                 disabled={selectedLifts.length === 0 && !focusOverallStrength}
-                // onPress={() => router.push('/onboarding/season-step-3-strength-numbers')}
-                onPress={() => router.push('/onboarding/season-step-3-strength-numbers-option1-enhanced')} // Not a bad way of doing it - could actually work
-                // onPress={() => router.push('/onboarding/season-step-3-strength-numbers-option3')} // Not a bad way of doing it - could actually work
+                onPress={() => router.push('/onboarding/season-step-3-strength-numbers')}
               >
                 {selectedLifts.length > 0 || focusOverallStrength 
                   ? `Set my numbers` 

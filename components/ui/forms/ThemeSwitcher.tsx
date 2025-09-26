@@ -7,11 +7,11 @@ export const ThemeSwitcher: React.FC = () => {
   const { themeMode, setThemeMode, isDark } = useAppTheme();
 
   return (
-    <Box padding="m" backgroundColor="surface" borderRadius="m" marginVertical="s">
-      <Text variant="label" marginBottom="s" color="text">
+    <Box padding="m" backgroundColor="bg/surface" borderRadius="m" marginVertical="s">
+      <Text variant="label" marginBottom="s" color="text/primary">
         Theme Settings
       </Text>
-      <Text variant="caption" marginBottom="m" color="textMuted">
+      <Text variant="caption" marginBottom="m" color="text/secondary">
         Current: {themeMode} {isDark ? '(Dark)' : '(Light)'}
       </Text>
       

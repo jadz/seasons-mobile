@@ -38,7 +38,7 @@ const PreferenceSelector: React.FC<PreferenceSelectorProps> = ({
   disabled = false
 }) => (
   <Box marginBottom="l">
-    <Text variant="label" color="text" marginBottom="s">
+    <Text variant="label" color="text/primary" marginBottom="s">
       {title}
     </Text>
     <Box flexDirection="row" gap="s">
@@ -115,7 +115,7 @@ const OnboardingFormRefactored: React.FC<OnboardingFormRefactoredProps> = ({ onC
 
   if (currentStep === 'name') {
     return (
-      <Box flex={1} backgroundColor="background" padding="l" justifyContent="center">
+      <Box flex={1} backgroundcolor="bg/primary" padding="l" justifyContent="center">
         <Card variant="elevated" padding="xl">
           <H1Text textAlign="center" marginBottom="xl">
             What's your name?
@@ -148,7 +148,7 @@ const OnboardingFormRefactored: React.FC<OnboardingFormRefactoredProps> = ({ onC
   }
 
   return (
-    <Box flex={1} backgroundColor="background" padding="l" justifyContent="center">
+    <Box flex={1} backgroundcolor="bg/primary" padding="l" justifyContent="center">
       <Card variant="elevated" padding="xl">
         <H1Text textAlign="center" marginBottom="m">
           Set your preferences

@@ -55,18 +55,18 @@ export const UnitInput: React.FC<UnitInputProps> = ({
         style={[
           styles.input,
           {
-            color: disabled ? theme.colors.textMuted : theme.colors.text,
+            color: disabled ? theme.colors['text/secondary'] : theme.colors['text/primary']
           },
           disabled && styles.disabledInput
         ]}
-        placeholderTextColor={theme.colors.textMuted}
+        placeholderTextColor={theme.colors['text/secondary']}
       />
       <Text
         variant="caption"
-        color="textMuted"
+        color="text/secondary"
         style={[
           styles.unit,
-          disabled && { color: theme.colors.textMuted }
+          disabled && { color: theme.colors['text/inverse'] }
         ]}
         pointerEvents="none"
       >

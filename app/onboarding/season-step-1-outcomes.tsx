@@ -26,9 +26,9 @@ export default function SeasonGoalsScreen() {
   };
   
   return (
-    <Box flex={1} backgroundColor="background">
+    <Box flex={1} backgroundColor="bg/page">
       {/* Safe Area Top */}
-      <Box style={{ paddingTop: insets.top }} backgroundColor="background" />
+      <Box style={{ paddingTop: insets.top }} backgroundColor="bg/page" />
       
       {/* Standardized Header */}
       <Header
@@ -36,7 +36,7 @@ export default function SeasonGoalsScreen() {
         showBackButton={true}
         onBackPress={handleBackPress}
         variant="transparent"
-        backgroundColor="background"
+        backgroundColor="bg/page"
       />
       
       {/* Progress Indicator */}
@@ -49,12 +49,9 @@ export default function SeasonGoalsScreen() {
           
           {/* Section Introduction */}
           <Box marginBottom="l">
-            <Text variant="h2" color="text" marginBottom="xs">
+            <Text variant="h2" color="text/primary" marginBottom="xs">
               At the end of this season, I want to:
             </Text>
-            {/* <Text variant="body" color="textMuted">
-              Choose the outcome that excites you most for this season
-            </Text> */}
           </Box>
           
           {/* Goal Selection Cards */}

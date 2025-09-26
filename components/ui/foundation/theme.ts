@@ -110,8 +110,8 @@ export const lightTheme = createTheme({
     'text/primary': '#0E1116',
     'text/secondary': '#4B5563',
     'text/inverse': '#FFFFFF',
-    'accent/brand': '#2563EB',
-    'accent/onBrand': '#FFFFFF',
+    'brand/primary': '#2563EB',
+    'brand/onPrimary': '#FFFFFF',
     'border/subtle': '#E5E7EB',
     'border/strong': '#D1D5DB',
     'state/success': '#10B981',
@@ -120,40 +120,65 @@ export const lightTheme = createTheme({
     'state/on': '#0B0F14',
     'focus/ring': '#3B82F6',
     'overlay/scrim': 'rgba(0,0,0,0.45)',
-    
-    // Legacy aliases for backward compatibility
-    background: '#FFFFFF',
-    surface: '#FFFFFF',
-    text: '#0E1116',
-    textSecondary: '#4B5563',
-    textMuted: '#4B5563',
-    textInverse: '#FFFFFF',
-    primary: '#2563EB',
-    border: '#E5E7EB',
-    success: '#10B981',
-    warning: '#F59E0B',
-    error: '#EF4444',
-    transparent: 'transparent',
-    white: '#FFFFFF',
-    black: '#0E1116',
-    // Button states
-    buttonPrimaryDisabled: '#D1D5DB',
+    transparent: 'transparent'
   },
 });
+
+// export const darkTheme = createTheme({
+//   ...base,
+//   colors: {
+//     'bg/page': '#2C2A2D',
+//     'bg/surface': '#2C2A2D',
+//     // Raised gets a subtle light overlay to imply elevation
+//     'bg/raised': '#141A21',
+//     'text/primary': '#E5E7EB',
+//     'text/secondary': '#9CA3AF',
+//     'text/inverse': '#0B0F14',
+//     // 'brand/primary': '#3B82F6',
+//     'brand/primary': '#F5CA47',
+//     'brand/onPrimary': '#0B0F14',
+//     'border/subtle': '#1F2937',
+//     'border/strong': '#374151',
+//     'state/success': '#34D399',
+//     'state/warn': '#FBBF24',
+//     'state/error': '#F87171',
+//     'state/on': '#0B0F14',
+//     'focus/ring': '#60A5FA',
+//     'overlay/scrim': 'rgba(0,0,0,0.6)',
+    
+//     // Legacy aliases for backward compatibility
+//     background: '#0B0F14',
+//     surface: '#0F141A',
+//     text: '#E5E7EB',
+//     textSecondary: '#9CA3AF',
+//     textMuted: '#9CA3AF',
+//     textInverse: '#0B0F14',
+//     primary: '#3B82F6',
+//     border: '#1F2937',
+//     success: '#34D399',
+//     warning: '#FBBF24',
+//     error: '#F87171',
+//     transparent: 'transparent',
+//     white: '#E5E7EB',
+//     black: '#0B0F14',
+//     // Button states
+//     buttonPrimaryDisabled: '#374151',
+//   },
+// });
 
 export const darkTheme = createTheme({
   ...base,
   colors: {
-    'bg/page': '#2C2A2D',
+    'bg/page': '#0B0F14',
     'bg/surface': '#2C2A2D',
     // Raised gets a subtle light overlay to imply elevation
     'bg/raised': '#141A21',
     'text/primary': '#E5E7EB',
     'text/secondary': '#9CA3AF',
     'text/inverse': '#0B0F14',
-    // 'accent/brand': '#3B82F6',
-    'accent/brand': '#F5CA47',
-    'accent/onBrand': '#0B0F14',
+    // 'brand/primary': '#3B82F6',
+    'brand/primary': '#F5CA47',
+    'brand/onPrimary': '#0B0F14',
     'border/subtle': '#1F2937',
     'border/strong': '#374151',
     'state/success': '#34D399',
@@ -162,24 +187,7 @@ export const darkTheme = createTheme({
     'state/on': '#0B0F14',
     'focus/ring': '#60A5FA',
     'overlay/scrim': 'rgba(0,0,0,0.6)',
-    
-    // Legacy aliases for backward compatibility
-    background: '#0B0F14',
-    surface: '#0F141A',
-    text: '#E5E7EB',
-    textSecondary: '#9CA3AF',
-    textMuted: '#9CA3AF',
-    textInverse: '#0B0F14',
-    primary: '#3B82F6',
-    border: '#1F2937',
-    success: '#34D399',
-    warning: '#FBBF24',
-    error: '#F87171',
-    transparent: 'transparent',
-    white: '#E5E7EB',
-    black: '#0B0F14',
-    // Button states
-    buttonPrimaryDisabled: '#374151',
+    transparent: 'transparent'
   },
 });
 

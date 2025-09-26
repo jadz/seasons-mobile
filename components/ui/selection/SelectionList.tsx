@@ -29,7 +29,7 @@ export const SelectionList: React.FC<SelectionListProps> = ({
   if (items.length === 0) {
     return (
       <Box paddingVertical="xl" alignItems="center">
-        <Text variant="body" color="textMuted" textAlign="center">
+        <Text variant="body" color="text/secondary" textAlign="center">
           {emptyMessage}
         </Text>
       </Box>
@@ -41,7 +41,7 @@ export const SelectionList: React.FC<SelectionListProps> = ({
       {title && (
         <Text 
           variant="h2" 
-          color="text" 
+          color="text/primary" 
           marginBottom="l"
         >
           {title}

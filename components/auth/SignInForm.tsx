@@ -59,7 +59,7 @@ const SignInForm: React.FC = () => {
   if (emailSent && showOtpInput) {
     return (
       <Box flex={1} justifyContent="center" padding="l">
-        <Text variant="title" color="text" textAlign="center" marginBottom="m">
+        <Text variant="title" color="text/primary" textAlign="center" marginBottom="m">
           Enter Verification Code
         </Text>
         <Text variant="body" color="textSecondary" textAlign="center" marginBottom="xl">
@@ -103,7 +103,7 @@ const SignInForm: React.FC = () => {
 
   return (
     <Box flex={1} justifyContent="center" padding="l">
-      <Text variant="title" color="text" textAlign="center" marginBottom="m">
+      <Text variant="title" color="text/primary" textAlign="center" marginBottom="m">
         Welcome to Seasons
       </Text>
       <Text variant="body" color="textSecondary" textAlign="center" marginBottom="xl">

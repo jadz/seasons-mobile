@@ -17,9 +17,9 @@ export const WizardBar: React.FC<WizardBarProps> = ({
   currentStep,
   barHeight = 4,
   spacing = 'xs',
-  activeColor = 'primary',
-  inactiveColor = 'border',
-  completedColor = 'primary',
+  activeColor = 'brand/primary',
+  inactiveColor = 'border/strong',
+  completedColor = 'brand/primary',
 }) => {
   return (
     <Box 

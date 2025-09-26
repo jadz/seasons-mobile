@@ -19,7 +19,7 @@ export default function PlaygroundScreen() {
 
   return (
     <ThemeProvider>
-      <Box flex={1} backgroundColor="background">
+      <Box flex={1} backgroundcolor="bg/primary">
         <Header
           title="Component Playground"
           subtitle="All UI Components"
@@ -226,19 +226,19 @@ export default function PlaygroundScreen() {
                   <Text>Content above</Text>
                   <Divider />
                   <Text>Content below</Text>
-                  <Divider color="primary" thickness={2} />
+                  <Divider color="brand/primary" thickness={2} />
                   <Text>Thick colored divider above</Text>
                 </Box>
 
                 <Box gap="s">
                   <Text variant="label">Box Layout</Text>
                   <Box 
-                    backgroundColor="primary" 
+                    backgroundcolor="brand/primary" 
                     padding="m" 
                     borderRadius="l"
                     alignItems="center"
                   >
-                    <Text color="textInverse">Styled Box Component</Text>
+                    <Text color="text/secondary">Styled Box Component</Text>
                   </Box>
                 </Box>
               </Box>

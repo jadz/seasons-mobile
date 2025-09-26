@@ -10,7 +10,7 @@ export default function OnboardingScreen() {
 
   return (
     <ThemeProvider initialThemeMode="light">
-      <Box flex={1} backgroundColor="background">
+      <Box flex={1} backgroundcolor="bg/primary">
         <OnboardingForm onComplete={handleComplete} />
       </Box>
     </ThemeProvider>

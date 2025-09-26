@@ -123,16 +123,16 @@ export default function SeasonSetOtherMetricsScreen() {
   const renderPhotosMetric = (metric: MetricData) => (
     <Box key={metric.id} marginBottom="l">
       <Box
-        backgroundColor="white"
+        backgroundColor="bg/surface"
         borderRadius="l"
         padding="l"
       >
-        <Text variant="h3" color="text" marginBottom="m">
+        <Text variant="h3" color="text/primary" marginBottom="m">
           {metric.title}
         </Text>
         
         <Box marginBottom="m">
-          <Text variant="label" color="textMuted" marginBottom="xs">
+          <Text variant="label" color="text/secondary" marginBottom="xs">
             How often would you like photo reminders?
           </Text>
           <Box flexDirection="row" flexWrap="wrap">
@@ -167,20 +167,20 @@ export default function SeasonSetOtherMetricsScreen() {
     return (
       <Box key={metric.id} marginBottom="l">
         <Box
-          backgroundColor="white"
+          backgroundColor="bg/surface"
           borderRadius="l"
           padding="l"
         >
-          <Text variant="h3" color="text" marginBottom="xs">
+          <Text variant="h3" color="text/primary" marginBottom="xs">
             {metric.title}
           </Text>
-          <Text variant="caption" color="textMuted" marginBottom="m">
+          <Text variant="caption" color="text/secondary" marginBottom="m">
             We'll start with waist measurement - you can add more later
           </Text>
           
           {/* Current Measurement */}
           <Box marginBottom="m">
-            <Text variant="label" color="textMuted" marginBottom="xs">
+            <Text variant="label" color="text/secondary" marginBottom="xs">
               {config.currentLabel}
             </Text>
             <Box flexDirection="row" alignItems="center">
@@ -192,13 +192,13 @@ export default function SeasonSetOtherMetricsScreen() {
                   keyboardType="numeric"
                 />
               </Box>
-              <Text variant="body" color="text">{metric.unit}</Text>
+              <Text variant="body" color="text/primary">{metric.unit}</Text>
             </Box>
           </Box>
 
           {/* Target Measurement */}
           <Box>
-            <Text variant="label" color="textMuted" marginBottom="xs">
+            <Text variant="label" color="text/secondary" marginBottom="xs">
               {config.targetLabel}
             </Text>
             <Box flexDirection="row" alignItems="center">
@@ -210,7 +210,7 @@ export default function SeasonSetOtherMetricsScreen() {
                   keyboardType="numeric"
                 />
               </Box>
-              <Text variant="body" color="text">{metric.unit}</Text>
+              <Text variant="body" color="text/primary">{metric.unit}</Text>
             </Box>
           </Box>
         </Box>
@@ -239,7 +239,7 @@ export default function SeasonSetOtherMetricsScreen() {
     return (
       <Box key={metric.id} marginBottom="l">
         <Box
-          backgroundColor="white"
+          backgroundColor="bg/surface"
           borderRadius="l"
           padding="l"
           style={{
@@ -252,14 +252,14 @@ export default function SeasonSetOtherMetricsScreen() {
         >
           {/* Clean Header */}
           <Box marginBottom="m">
-            <Text variant="h3" color="text" marginBottom="xs">
+            <Text variant="h3" color="text/primary" marginBottom="xs">
               {metric.title}
             </Text>
           </Box>
           
           {/* Current Value - Clean Input */}
           <Box marginBottom="l">
-            <Text variant="label" color="textMuted" marginBottom="xs">
+            <Text variant="label" color="text/secondary" marginBottom="xs">
               {config.currentLabel}
             </Text>
             <Box flexDirection="row" alignItems="center">
@@ -271,13 +271,13 @@ export default function SeasonSetOtherMetricsScreen() {
                   keyboardType="numeric"
                 />
               </Box>
-              <Text variant="body" color="text">{metric.unit}</Text>
+              <Text variant="body" color="text/primary">{metric.unit}</Text>
             </Box>
           </Box>
 
           {/* Goal Selection - Clean Buttons */}
           <Box>
-            <Text variant="label" color="textMuted" marginBottom="m">
+            <Text variant="label" color="text/secondary" marginBottom="m">
               {config.targetLabel}
             </Text>
             <Box>
@@ -336,7 +336,7 @@ export default function SeasonSetOtherMetricsScreen() {
     return (
       <Box key={metric.id} marginBottom="l">
         <Box
-          backgroundColor="white"
+          backgroundColor="bg/surface"
           borderRadius="l"
           padding="l"
           style={{
@@ -364,7 +364,7 @@ export default function SeasonSetOtherMetricsScreen() {
               <Text style={{ fontSize: 20 }}>{visuals.icon}</Text>
             </Box>
             <Box flex={1}>
-              <Text variant="h3" color="text">
+              <Text variant="h3" color="text/primary">
                 {metric.title}
               </Text>
             </Box>
@@ -372,7 +372,7 @@ export default function SeasonSetOtherMetricsScreen() {
           
           {/* Current Value */}
           <Box marginBottom="m">
-            <Text variant="label" color="textMuted" marginBottom="xs">
+            <Text variant="label" color="text/secondary" marginBottom="xs">
               {config.currentLabel}
             </Text>
             <Box 
@@ -404,7 +404,7 @@ export default function SeasonSetOtherMetricsScreen() {
               </Box>
               <Text 
                 variant="body" 
-                color="textMuted"
+                color="text/secondary"
                 style={{ fontWeight: '600' }}
               >
                 {metric.unit}
@@ -428,7 +428,7 @@ export default function SeasonSetOtherMetricsScreen() {
 
           {/* Target Value */}
           <Box>
-            <Text variant="label" color="textMuted" marginBottom="xs">
+            <Text variant="label" color="text/secondary" marginBottom="xs">
               {config.targetLabel}
             </Text>
             <Box 
@@ -460,7 +460,7 @@ export default function SeasonSetOtherMetricsScreen() {
               </Box>
               <Text 
                 variant="body" 
-                color="textMuted"
+                color="text/secondary"
                 style={{ fontWeight: '600' }}
               >
                 {metric.unit}
@@ -496,7 +496,7 @@ export default function SeasonSetOtherMetricsScreen() {
         showBackButton={true}
         onBackPress={handleBackPress}
         variant="transparent"
-        backgroundColor="background"
+        backgroundcolor="bg/primary"
       />
       {/* Progress Indicator */}
       <Box paddingHorizontal="l">
@@ -507,7 +507,7 @@ export default function SeasonSetOtherMetricsScreen() {
           {/* Header Section - Clean and Simple */}
           {/* Header Section */}
           <Box paddingVertical="xl">
-            <Text variant="h2" color="white" marginBottom="m">
+            <Text variant="h2" color="text/inverse" marginBottom="m">
               Tell us where you are, and where you want to be
             </Text>
           </Box>
@@ -528,7 +528,7 @@ export default function SeasonSetOtherMetricsScreen() {
           
           {/* Help Text */}
           <Box marginBottom="m" alignItems="center">
-            <Text variant="caption" color="white" textAlign="center" style={{ opacity: 0.8 }}>
+            <Text variant="caption" color="text/inverse" textAlign="center" style={{ opacity: 0.8 }}>
               Don't have all the numbers? No worries - you can add them later
             </Text>
           </Box>
@@ -549,7 +549,7 @@ export default function SeasonSetOtherMetricsScreen() {
               fullWidth
               onPress={handleSkipAll}
             >
-              <Text color="white" style={{ opacity: 0.9 }}>
+              <Text color="text/inverse" style={{ opacity: 0.9 }}>
                 Skip all - I'll set these up later
               </Text>
             </Button>
