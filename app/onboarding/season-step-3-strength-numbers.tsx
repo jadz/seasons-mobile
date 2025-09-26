@@ -16,8 +16,7 @@ interface LiftData {
 }
 
 export default function SeasonStrengthNumbersOption1Enhanced() {
-  // const selectedLifts = ['bench', 'squat', 'deadlift'];
-  const selectedLifts = ['bench']
+  const selectedLifts = ['bench', 'squat', 'deadlift'];
   const insets = useSafeAreaInsets();
   
   const liftNames = {
@@ -224,48 +223,37 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
         
         <ScrollView showsVerticalScrollIndicator={false}>
           <Box paddingHorizontal="l">
-            {/* Enhanced Summary Header */}
-            <Box paddingVertical="xl">
-              <Text variant="h2" color="text/primary" marginBottom="s" style={{ fontSize: 24, fontWeight: '700' }}>
-                Your strength goals
-              </Text>
-              <Text variant="body" color="text/secondary" style={{ fontSize: 16, lineHeight: 22 }}>
-                Review your targets and make any final adjustments before we create your personalized training season
+            {/* Simple Header */}
+            <Box paddingVertical="l">
+              <Text variant="h2" color="text/primary" marginBottom="s">
+                Review Your Goals
               </Text>
             </Box>
             
-            {/* Enhanced Summary Cards */}
+            {/* Simple Card Layout */}
             <Box marginBottom="xl">
               {liftsData.map((lift, index) => {
                 const currentWeight = parseFloat(lift.currentWeight) || 0;
                 const targetWeight = parseFloat(lift.targetWeight) || 0;
-                const improvement = Math.max(0, targetWeight - currentWeight);
-                const hasValidGoal = currentWeight > 0 && targetWeight > 0 && targetWeight !== currentWeight;
+                const hasValidGoal = currentWeight > 0 && targetWeight > 0;
+                const isComplete = hasValidGoal && currentWeight >= targetWeight;
                 
                 return (
                   <Box key={lift.id} marginBottom="l">
-                    <Box
+                    <Box 
                       backgroundColor="bg/surface"
-                      borderRadius="16"
+                      borderRadius={12}
                       padding="l"
-                      style={{
-                        shadowColor: '#000',
-                        shadowOffset: { width: 0, height: 1 },
-                        shadowOpacity: 0.05,
-                        shadowRadius: 4,
-                        elevation: 2,
-                        borderWidth: 1,
-                        borderColor: 'rgba(255, 255, 255, 0.1)',
-                      }}
                     >
-                      {/* Lift Header with Edit */}
-                      <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="l">
+                      {/* Header Row */}
+                      <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="m">
                         <Text variant="h3" color="text/primary" style={{ fontSize: 18, fontWeight: '600' }}>
                           {lift.name}
                         </Text>
                         <Button
                           variant="ghost"
                           onPress={() => editLift(index)}
+                          style={{ paddingHorizontal: 12, paddingVertical: 6 }}
                         >
                           <Text color="brand/primary" style={{ fontSize: 14, fontWeight: '500' }}>
                             Edit
@@ -275,85 +263,67 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
 
                       {hasValidGoal ? (
                         <>
-                          {/* Progress Overview */}
-                          <Box marginBottom="m">
-                            <Box flexDirection="row" alignItems="baseline" marginBottom="xs">
-                              <Text variant="body" color="text/secondary" style={{ fontSize: 14 }}>
-                                Current: 
+                          {/* Data Row */}
+                          <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="m">
+                            <Box alignItems="center">
+                              <Text variant="caption" color="text/secondary" style={{ fontSize: 11, marginBottom: 4 }}>
+                                CURRENT
                               </Text>
-                              <Text variant="h3" color="text/primary" style={{ fontSize: 16, fontWeight: '600', marginLeft: 4 }}>
+                              <Text variant="h2" color="text/primary" style={{ fontSize: 22, fontWeight: '700' }}>
                                 {lift.mode === 'reps' && lift.currentReps !== '1' 
-                                  ? `${lift.currentReps} reps @ ` 
-                                  : ''
-                                }{lift.currentWeight}kg
+                                  ? `${lift.currentReps}×${lift.currentWeight}` 
+                                  : lift.currentWeight
+                                }
                               </Text>
                             </Box>
-                            <Box flexDirection="row" alignItems="baseline">
-                              <Text variant="body" color="text/secondary" style={{ fontSize: 14 }}>
-                                Goal: 
+                            
+                            <Text variant="h2" color="text/secondary" style={{ fontSize: 20 }}>
+                              →
+                            </Text>
+                            
+                            <Box alignItems="center">
+                              <Text variant="caption" color="text/secondary" style={{ fontSize: 11, marginBottom: 4 }}>
+                                TARGET
                               </Text>
-                              <Text variant="h3" color="brand/primary" style={{ fontSize: 16, fontWeight: '600', marginLeft: 4 }}>
+                              <Text variant="h2" color={isComplete ? "state/success" : "brand/primary"} style={{ fontSize: 22, fontWeight: '700' }}>
                                 {lift.mode === 'reps' && lift.targetReps !== '1' 
-                                  ? `${lift.targetReps} reps @ ` 
-                                  : ''
-                                }{lift.targetWeight}kg
+                                  ? `${lift.targetReps}×${lift.targetWeight}` 
+                                  : lift.targetWeight
+                                }
                               </Text>
                             </Box>
                           </Box>
 
-                          {/* Improvement Highlight */}
-                          {improvement > 0 && (
-                            <Box 
-                              backgroundColor="state/success" 
-                              borderRadius={8} 
-                              padding="m" 
-                              marginBottom="m"
-                            >
-                              <Box flexDirection="row" alignItems="center">
-                                <Text style={{ fontSize: 16, marginRight: 6 }}>🎯</Text>
-                                <Text variant="body" color="text/primary" style={{ fontSize: 14, fontWeight: '500' }}>
-                                  +{improvement}kg improvement goal
-                                </Text>
-                              </Box>
-                            </Box>
-                          )}
-
-                          {/* Visual Progress Bar */}
-                          <Box>
-                            <Box flexDirection="row" justifyContent="space-between" marginBottom="xs">
-                              <Text variant="caption" color="text/secondary" style={{ fontSize: 12 }}>
-                                Progress
-                              </Text>
-                              <Text variant="caption" color="brand/primary" style={{ fontSize: 12, fontWeight: '500' }}>
-                                {Math.round((currentWeight / targetWeight) * 100)}%
-                              </Text>
-                            </Box>
-                            <Box
-                              backgroundColor="bg/raised"
-                              borderRadius={4}
-                              style={{ height: 6 }}
-                            >
-                              <Box
-                                backgroundColor="brand/primary"
-                                borderRadius={4}
-                                style={{ 
-                                  height: 6, 
-                                  width: `${Math.min((currentWeight / targetWeight) * 100, 100)}%`,
-                                  minWidth: currentWeight > 0 ? 8 : 0,
-                                }}
-                              />
-                            </Box>
+                          {/* Improvement Stats */}
+                          <Box alignItems="center">
+                            {(() => {
+                              const weightIncrease = targetWeight - currentWeight;
+                              const percentIncrease = currentWeight > 0 ? Math.round((weightIncrease / currentWeight) * 100) : 0;
+                              
+                              if (weightIncrease > 0) {
+                                return (
+                                  <Text variant="caption" color="brand/primary" style={{ fontSize: 12, fontWeight: '600' }}>
+                                    +{weightIncrease}kg • +{percentIncrease}% improvement goal
+                                  </Text>
+                                );
+                              } else if (weightIncrease === 0) {
+                                return (
+                                  <Text variant="caption" color="state/success" style={{ fontSize: 12 }}>
+                                    🎯 Goal achieved
+                                  </Text>
+                                );
+                              }
+                              return null;
+                            })()}
                           </Box>
                         </>
                       ) : (
-                        /* No Goal Set State */
                         <Box alignItems="center" paddingVertical="l">
-                          <Text style={{ fontSize: 24, marginBottom: 8 }}>⚠️</Text>
-                          <Text variant="body" color="text/secondary" textAlign="center" marginBottom="xs">
-                            No goal set yet
+                          <Text variant="body" color="text/secondary" textAlign="center">
+                            No targets set
                           </Text>
-                          <Text variant="caption" color="text/secondary" textAlign="center">
-                            Tap Edit to set your strength targets
+                          <Text variant="caption" color="text/secondary" textAlign="center" style={{ fontSize: 12, marginTop: 4 }}>
+                            Tap Edit to add your goals
                           </Text>
                         </Box>
                       )}
