@@ -230,101 +230,109 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
               </Text>
             </Box>
             
-            {/* Simple Card Layout */}
+            {/* Progress Row Layout - Inspired by Recovery Impact Analysis */}
             <Box marginBottom="xl">
               {liftsData.map((lift, index) => {
                 const currentWeight = parseFloat(lift.currentWeight) || 0;
                 const targetWeight = parseFloat(lift.targetWeight) || 0;
                 const hasValidGoal = currentWeight > 0 && targetWeight > 0;
+                
+                // Calculate relative improvement percentage
+                const relativeImprovement = hasValidGoal && currentWeight > 0 
+                  ? Math.round(((targetWeight - currentWeight) / currentWeight) * 100)
+                  : 0;
+                
+                // Calculate current progress toward goal (for circle position)
+                const currentProgress = hasValidGoal && targetWeight > 0
+                  ? Math.min((currentWeight / targetWeight) * 100, 100)
+                  : 0;
+                
                 const isComplete = hasValidGoal && currentWeight >= targetWeight;
+                const improvementColor = relativeImprovement > 0 ? "state/success" : relativeImprovement < 0 ? "state/error" : "text/secondary";
                 
                 return (
                   <Box key={lift.id} marginBottom="l">
                     <Box 
                       backgroundColor="bg/surface"
-                      borderRadius={12}
-                      padding="l"
+                      borderRadius={8}
+                      paddingHorizontal="l"
+                      paddingVertical="s"
                     >
-                      {/* Header Row */}
-                      <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="m">
-                        <Text variant="h3" color="text/primary" style={{ fontSize: 18, fontWeight: '600' }}>
-                          {lift.name}
-                        </Text>
-                        <Button
-                          variant="ghost"
-                          onPress={() => editLift(index)}
-                          style={{ paddingHorizontal: 12, paddingVertical: 6 }}
-                        >
-                          <Text color="brand/primary" style={{ fontSize: 14, fontWeight: '500' }}>
-                            Edit
-                          </Text>
-                        </Button>
-                      </Box>
-
                       {hasValidGoal ? (
                         <>
-                          {/* Data Row */}
-                          <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="m">
-                            <Box alignItems="center">
-                              <Text variant="caption" color="text/secondary" style={{ fontSize: 11, marginBottom: 4 }}>
+                          {/* Clean Header Row */}
+                          <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="s">
+                            <Text variant="h2" color="text/primary" style={{ fontSize: 22, fontWeight: '700', letterSpacing: -0.5 }}>
+                              {lift.name}
+                            </Text>
+                            <Button
+                              variant="ghost"
+                              onPress={() => editLift(index)}
+                              style={{ paddingHorizontal: 12, paddingVertical: 8 }}
+                            >
+                              <Text color="brand/primary" style={{ fontSize: 14, fontWeight: '600' }}>
+                                Edit
+                              </Text>
+                            </Button>
+                          </Box>
+
+                          {/* Current → Target Display */}
+                          <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+                            <Box alignItems="center" flex={1}>
+                              <Text variant="caption" color="text/secondary" style={{ fontSize: 10, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
                                 CURRENT
                               </Text>
-                              <Text variant="h2" color="text/primary" style={{ fontSize: 22, fontWeight: '700' }}>
+                              <Text variant="h1" color="text/primary" style={{ fontSize: 26, fontWeight: '700', lineHeight: 30 }}>
                                 {lift.mode === 'reps' && lift.currentReps !== '1' 
                                   ? `${lift.currentReps}×${lift.currentWeight}` 
                                   : lift.currentWeight
                                 }
                               </Text>
+                              <Text variant="caption" color="text/secondary" style={{ fontSize: 11, fontWeight: '500', marginTop: 1 }}>
+                                kg
+                              </Text>
                             </Box>
                             
-                            <Text variant="h2" color="text/secondary" style={{ fontSize: 20 }}>
-                              →
-                            </Text>
+                            <Box alignItems="center" paddingHorizontal="l">
+                              <Text variant="h2" color="text/secondary" style={{ fontSize: 20, fontWeight: '300' }}>
+                                →
+                              </Text>
+                              <Text variant="caption" color={improvementColor} style={{ fontSize: 12, fontWeight: '700', marginTop: 4 }}>
+                                {relativeImprovement > 0 ? '+' : ''}{relativeImprovement}%
+                              </Text>
+                            </Box>
                             
-                            <Box alignItems="center">
-                              <Text variant="caption" color="text/secondary" style={{ fontSize: 11, marginBottom: 4 }}>
+                            <Box alignItems="center" flex={1}>
+                              <Text variant="caption" color="text/secondary" style={{ fontSize: 10, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
                                 TARGET
                               </Text>
-                              <Text variant="h2" color={isComplete ? "state/success" : "brand/primary"} style={{ fontSize: 22, fontWeight: '700' }}>
+                              <Text variant="h1" color={isComplete ? "state/success" : "brand/primary"} style={{ fontSize: 26, fontWeight: '700', lineHeight: 30 }}>
                                 {lift.mode === 'reps' && lift.targetReps !== '1' 
                                   ? `${lift.targetReps}×${lift.targetWeight}` 
                                   : lift.targetWeight
                                 }
                               </Text>
+                              <Text variant="caption" color="text/secondary" style={{ fontSize: 11, fontWeight: '500', marginTop: 1 }}>
+                                kg
+                              </Text>
                             </Box>
-                          </Box>
-
-                          {/* Improvement Stats */}
-                          <Box alignItems="center">
-                            {(() => {
-                              const weightIncrease = targetWeight - currentWeight;
-                              const percentIncrease = currentWeight > 0 ? Math.round((weightIncrease / currentWeight) * 100) : 0;
-                              
-                              if (weightIncrease > 0) {
-                                return (
-                                  <Text variant="caption" color="brand/primary" style={{ fontSize: 12, fontWeight: '600' }}>
-                                    +{weightIncrease}kg • +{percentIncrease}% improvement goal
-                                  </Text>
-                                );
-                              } else if (weightIncrease === 0) {
-                                return (
-                                  <Text variant="caption" color="state/success" style={{ fontSize: 12 }}>
-                                    🎯 Goal achieved
-                                  </Text>
-                                );
-                              }
-                              return null;
-                            })()}
                           </Box>
                         </>
                       ) : (
-                        <Box alignItems="center" paddingVertical="l">
-                          <Text variant="body" color="text/secondary" textAlign="center">
-                            No targets set
+                        /* Empty State */
+                        <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+                          <Text variant="body" color="text/primary" style={{ fontSize: 16, fontWeight: '600' }}>
+                            {lift.name}
                           </Text>
-                          <Text variant="caption" color="text/secondary" textAlign="center" style={{ fontSize: 12, marginTop: 4 }}>
-                            Tap Edit to add your goals
-                          </Text>
+                          <Button
+                            variant="ghost"
+                            onPress={() => editLift(index)}
+                            style={{ paddingHorizontal: 12, paddingVertical: 6 }}
+                          >
+                            <Text color="brand/primary" style={{ fontSize: 14 }}>
+                              Set Goal
+                            </Text>
+                          </Button>
                         </Box>
                       )}
                     </Box>

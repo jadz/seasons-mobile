@@ -105,8 +105,8 @@ export const lightTheme = createTheme({
   ...base,
   colors: {
     'bg/page': '#FFFFFF',
-    'bg/surface': '#FFFFFF',
-    'bg/raised': '#F5F6F8',
+    'bg/surface': '#F5F6F8',
+    'bg/raised': '#e5ecfcff',
     'text/primary': '#0E1116',
     'text/secondary': '#4B5563',
     'text/inverse': '#FFFFFF',
