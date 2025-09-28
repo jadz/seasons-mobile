@@ -264,7 +264,7 @@ export default function SeasonSetOtherMetricsScreen() {
                 <Box
                   key={option.id}
                   backgroundColor={metric.targetValue === option.id ? 'brand/primary' : 'transparent'}
-                  borderRadius={16}
+                  borderRadius="l"
                   borderWidth={1}
                   borderColor={metric.targetValue === option.id ? 'brand/primary' : 'border/subtle'}
                   paddingHorizontal="l"

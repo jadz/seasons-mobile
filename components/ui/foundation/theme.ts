@@ -16,6 +16,19 @@ const base = {
     xxl: 40,
     xxxl: 48,
   },
+  borderRadii: { 
+    12: 12,
+    xs: 4,
+    sm: 8, 
+    md: 12, 
+    lg: 16, 
+    xl: 24,
+    // Legacy radii for backward compatibility
+    s: 8,
+    m: 12,
+    l: 16,
+    round: 50,
+  },
   radii: { 
     sm: 8, 
     md: 12, 
