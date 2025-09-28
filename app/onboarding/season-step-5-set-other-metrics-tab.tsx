@@ -310,24 +310,35 @@ export default function SeasonSetOtherMetricsScreen() {
           <Text variant="h3" color="text/primary" marginBottom="xs">
             {metric.title}
           </Text>
+          <Text variant="caption" color="text/secondary">
+            {metric.id === 'weight' ? 'Track your overall progress and body composition' : 'Monitor changes in body composition and health'}
+          </Text>
         </Box>
         
-        {/* Current Value - Clean Input */}
-        <Box marginBottom="l">
-          <Text variant="label" color="text/secondary" marginBottom="xs">
-            {config.currentLabel}
+        {/* Current Status Section */}
+        <Box marginBottom="xl">
+          <Text variant="h4" color="text/primary" marginBottom="m">
+            Current Status
           </Text>
-          <UnitInput
-            placeholder={metric.placeholder}
-            value={metric.currentValue}
-            onChangeText={(value) => updateMetricData(metric.id, 'currentValue', value)}
-            unit={metric.unit}
-            width={110}
-          />
+          <Box marginBottom="s">
+            <Text variant="label" color="text/secondary" marginBottom="xs">
+              {config.currentLabel}
+            </Text>
+            <UnitInput
+              placeholder={metric.placeholder}
+              value={metric.currentValue}
+              onChangeText={(value) => updateMetricData(metric.id, 'currentValue', value)}
+              unit={metric.unit}
+              width={110}
+            />
+          </Box>
         </Box>
 
-        {/* Goal Selection - Form Elements */}
+        {/* Season Goal Section */}
         <Box marginBottom="xl">
+          <Text variant="h4" color="text/primary" marginBottom="m">
+            Season Goal
+          </Text>
           <Text variant="label" color="text/secondary" marginBottom="m">
             {config.targetLabel}
           </Text>
