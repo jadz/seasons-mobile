@@ -196,6 +196,32 @@ const base = {
       borderRadius: 'lg',
     },
   },
+  headerVariants: {
+    default: {
+      backgroundColor: 'bg/surface',
+      shadowColor: 'shadow/default',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.05,
+      shadowRadius: 2,
+      elevation: 1,
+    },
+    transparent: {
+      backgroundColor: 'transparent',
+      shadowColor: 'transparent',
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
+    },
+    elevated: {
+      backgroundColor: 'bg/surface',
+      shadowColor: 'shadow/default',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
+    },
+  },
 };
 
 export const lightTheme = createTheme({
@@ -218,6 +244,7 @@ export const lightTheme = createTheme({
     'state/on': '#0B0F14',
     'focus/ring': '#3B82F6',
     'overlay/scrim': 'rgba(0,0,0,0.45)',
+    'shadow/default': '#000',
     transparent: 'transparent'
   },
 });
@@ -242,6 +269,7 @@ export const darkTheme = createTheme({
     'state/on': '#0B0F14',
     'focus/ring': '#60A5FA',
     'overlay/scrim': 'rgba(0,0,0,0.6)',
+    'shadow/default': '#000',
     transparent: 'transparent'
   },
 });

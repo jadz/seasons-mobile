@@ -13,9 +13,9 @@ export default function OnboardingLayout() {
         }}
       >
         <Stack.Screen 
-          name="season-step-3-strength-numbers" 
+          name="overview" 
           options={{
-            title: 'Set Your Numbers',
+            title: 'Welcome to Seasons',
           }}
         />
         <Stack.Screen 
@@ -30,12 +30,12 @@ export default function OnboardingLayout() {
             title: 'Strength Focus',
           }}
         />
-        {/* <Stack.Screen 
+        <Stack.Screen 
           name="season-step-3-strength-numbers" 
           options={{
             title: 'Set Your Numbers',
           }}
-        /> */}
+        />
         <Stack.Screen 
           name="season-step-4-body-metrics" 
           options={{
