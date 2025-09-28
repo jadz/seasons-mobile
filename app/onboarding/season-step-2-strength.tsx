@@ -136,11 +136,11 @@ export default function SeasonStrengthScreen() {
             {/* Divider */}
             <Box alignItems="center" marginBottom="m">
               <Box flexDirection="row" alignItems="center" width="100%">
-                <Box flex={1} height={1} backgroundcolor="border/subtle" />
+                <Box flex={1} height={1} />
                 <Text variant="body" color="text/secondary" marginHorizontal="m">
                   or
                 </Text>
-                <Box flex={1} height={1} backgroundcolor="border/subtle" />
+                <Box flex={1} height={1} />
               </Box>
             </Box>
 
@@ -168,8 +168,7 @@ export default function SeasonStrengthScreen() {
             {/* Next Button */}
             <Box marginBottom="m">
               <Button 
-                variant="brand/primary" 
-                borderRadius='md'
+                variant="primary" 
                 fullWidth
                 disabled={selectedLifts.length === 0 && !focusOverallStrength}
                 onPress={() => router.push('/onboarding/season-step-3-strength-numbers')}

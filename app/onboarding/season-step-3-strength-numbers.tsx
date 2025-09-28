@@ -187,6 +187,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
     return (
       <View style={{ flex: 1 }}>
         <Box flex={1} backgroundColor="bg/page">
+        <Box style={{ paddingTop: insets.top }} backgroundColor="bg/page" />
         {/* Header Gradient Overlay - Balanced Visibility */}
         <LinearGradient
           colors={[
@@ -254,7 +255,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                   <Box key={lift.id} marginBottom="l">
                     <Box 
                       backgroundColor="bg/surface"
-                      borderRadius={8}
+                      borderRadius="md"
                       paddingHorizontal="l"
                       paddingVertical="s"
                     >
