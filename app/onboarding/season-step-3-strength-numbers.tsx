@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
-import { View, ScrollView, TouchableWithoutFeedback, Keyboard, InputAccessoryView, Platform } from 'react-native';
+import React, { useState, useRef, useCallback } from 'react';
+import { View, ScrollView, TouchableWithoutFeedback, Keyboard, InputAccessoryView, Platform, useWindowDimensions } from 'react-native';
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { router } from 'expo-router';
 import { Box, Text, Button, WizardBar, TextInput, UnitInput, Header, SegmentedControl } from '../../components/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAppTheme } from '../../components/ui/foundation';
 import { LinearGradient } from 'expo-linear-gradient';
 
 interface LiftData {
@@ -17,8 +19,10 @@ interface LiftData {
 
 export default function SeasonStrengthNumbersOption1Enhanced() {
   // const selectedLifts = ['bench', 'squat', 'deadlift'];
-  const selectedLifts = ['bench'];
+  const selectedLifts = ['bench', 'squat', 'deadlift'];
   const insets = useSafeAreaInsets();
+  const layout = useWindowDimensions();
+  const { theme } = useAppTheme();
   
   const liftNames = {
     bench: 'Bench Press',
@@ -45,6 +49,15 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
   const [activeInputField, setActiveInputField] = useState<string | null>(null);
   const currentLift = liftsData[currentLiftIndex];
   
+  // Tab state for TabView
+  const [index, setIndex] = useState(0);
+  const [routes] = useState(
+    selectedLifts.map(liftId => ({
+      key: liftId,
+      title: liftNames[liftId as keyof typeof liftNames].split(' ')[0] // Just first word for tabs
+    }))
+  );
+  
   // Refs for input fields
   const currentRepsRef = useRef<any>(null);
   const currentWeightRef = useRef<any>(null);
@@ -57,11 +70,11 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
     setActiveInputField(null);
   };
 
-  const updateCurrentLift = (field: keyof LiftData, value: string) => {
+  const updateCurrentLift = useCallback((field: keyof LiftData, value: string) => {
     setLiftsData(prev => prev.map((lift, index) => 
       index === currentLiftIndex ? { ...lift, [field]: value } : lift
     ));
-  };
+  }, [currentLiftIndex]);
 
   // Stable keyboard toolbar components to prevent re-rendering flashes
   const keyboardToolbarCurrent = React.useMemo(() => (
@@ -132,7 +145,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
     </InputAccessoryView>
   ), [activeInputField]);
 
-  const toggleMode = () => {
+  const toggleMode = useCallback(() => {
     const newMode = currentLift.mode === '1rm' ? 'reps' : '1rm';
     setLiftsData(prev => prev.map((lift, index) => 
       index === currentLiftIndex 
@@ -144,44 +157,230 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           }
         : lift
     ));
-  };
+  }, [currentLift.mode, currentLiftIndex]);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentLiftIndex < liftsData.length - 1) {
       setCurrentLiftIndex(currentLiftIndex + 1);
     } else {
       setShowSummary(true);
     }
-  };
+  }, [currentLiftIndex, liftsData.length]);
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     if (showSummary) {
       setShowSummary(false);
       setCurrentLiftIndex(liftsData.length - 1);
     } else if (currentLiftIndex > 0) {
       setCurrentLiftIndex(currentLiftIndex - 1);
     }
-  };
+  }, [showSummary, currentLiftIndex, liftsData.length]);
 
-  const handleBackPress = () => {
+  const handleBackPress = useCallback(() => {
     if (showSummary || currentLiftIndex > 0) {
       handlePrevious();
     } else {
       router.back();
     }
-  };
+  }, [showSummary, currentLiftIndex, handlePrevious]);
 
-  const handleComplete = () => {
+  const handleComplete = useCallback(() => {
     console.log('Lift data:', liftsData);
     router.push('/onboarding/season-step-4-body-metrics');
-  };
+  }, [liftsData]);
 
-  const editLift = (liftIndex: number) => {
+  const editLift = useCallback((liftIndex: number) => {
     setShowSummary(false);
     setCurrentLiftIndex(liftIndex);
-  };
+  }, []);
 
   const isCurrentLiftValid = currentLift.currentWeight && currentLift.targetWeight;
+
+  // Render individual lift form for TabView
+  const renderLiftForm = useCallback((liftData: LiftData, liftIndex: number) => {
+    return (
+      <ScrollView 
+        style={{ flex: 1 }} 
+        contentContainerStyle={{ padding: 24, paddingBottom: 150 }} 
+        showsVerticalScrollIndicator={false}
+        bounces={true}
+        scrollEventThrottle={16}
+        keyboardShouldPersistTaps="handled"
+        removeClippedSubviews={false}
+      >
+        {/* Clear header with context */}
+        <Box paddingVertical="m">
+          <Text variant="h3" color="text/primary" marginBottom="s">
+            {liftData.name}
+          </Text>
+          <Text variant="body" color="text/secondary">
+            Set where you are now and the outcome you want
+          </Text>
+        </Box>
+
+        {/* Simple mode toggle */}
+        <Box marginBottom="m" alignSelf="flex-start">
+          <SegmentedControl
+            options={[
+              { value: '1rm', label: '1RM' },
+              { value: 'reps', label: 'REPS' }
+            ]}
+            selectedValue={liftData.mode}
+            onValueChange={(value) => {
+              if (value !== liftData.mode && liftIndex === currentLiftIndex) {
+                toggleMode();
+              }
+            }}
+            fullWidth={false}
+          />
+        </Box>
+
+        {/* Clean input interface */}
+        <Box paddingVertical="l">
+          <Box width="100%">
+            {/* Current section */}
+            <Box marginBottom="l">
+              <Text variant="label" color="text/secondary" marginBottom="s">
+                Current
+              </Text>
+              <Box flexDirection="row" alignItems="center">
+                {liftData.mode === 'reps' && (
+                  <>
+                    <UnitInput
+                      value={liftData.currentReps}
+                      onChangeText={(value) => {
+                        if (liftIndex === currentLiftIndex) {
+                          updateCurrentLift('currentReps', value);
+                        }
+                      }}
+                      unit="reps"
+                      width={100}
+                      style={{ marginRight: 12 }}
+                      inputAccessoryViewID="keyboardToolbar"
+                      onFocus={() => setActiveInputField('currentReps')}
+                      onBlur={() => setActiveInputField(null)}
+                    />
+                    <Text variant="body" color="text/secondary" style={{ fontSize: 20, marginRight: 12 }}>
+                      ×
+                    </Text>
+                  </>
+                )}
+                {liftData.mode === '1rm' && (
+                  <>
+                    <Text variant="body" color="text/secondary" style={{ fontSize: 16, marginRight: 12 }}>
+                      1RM ×
+                    </Text>
+                  </>
+                )}
+                <UnitInput
+                  value={liftData.currentWeight}
+                  onChangeText={(value) => {
+                    if (liftIndex === currentLiftIndex) {
+                      updateCurrentLift('currentWeight', value);
+                    }
+                  }}
+                  unit="kg"
+                  width={120}
+                  inputAccessoryViewID="keyboardToolbar"
+                  onFocus={() => setActiveInputField('currentWeight')}
+                  onBlur={() => setActiveInputField(null)}
+                />
+              </Box>
+            </Box>
+
+            {/* Target section */}
+            <Box marginBottom="l">
+              <Text variant="label" color="text/secondary" marginBottom="s">
+                Target (the outcome I want)
+              </Text>
+              <Box flexDirection="row" alignItems="center">
+                {liftData.mode === 'reps' && (
+                  <>
+                    <UnitInput
+                      value={liftData.targetReps}
+                      onChangeText={(value) => {
+                        if (liftIndex === currentLiftIndex) {
+                          updateCurrentLift('targetReps', value);
+                        }
+                      }}
+                      unit="reps"
+                      width={100}
+                      style={{ marginRight: 12 }}
+                      inputAccessoryViewID="keyboardToolbarTarget"
+                      onFocus={() => setActiveInputField('targetReps')}
+                      onBlur={() => setActiveInputField(null)}
+                    />
+                    <Text variant="body" color="text/secondary" style={{ fontSize: 20, marginRight: 12 }}>
+                      ×
+                    </Text>
+                  </>
+                )}
+                {liftData.mode === '1rm' && (
+                  <>
+                    <Text variant="body" color="text/secondary" style={{ fontSize: 16, marginRight: 12 }}>
+                      1RM ×
+                    </Text>
+                  </>
+                )}
+                <UnitInput
+                  value={liftData.targetWeight}
+                  onChangeText={(value) => {
+                    if (liftIndex === currentLiftIndex) {
+                      updateCurrentLift('targetWeight', value);
+                    }
+                  }}
+                  unit="kg"
+                  width={120}
+                  inputAccessoryViewID="keyboardToolbarTarget"
+                  onFocus={() => setActiveInputField('targetWeight')}
+                  onBlur={() => setActiveInputField(null)}
+                />
+              </Box>
+            </Box>
+          </Box>
+
+          {/* Help text */}
+          <Box marginBottom="xl">
+            <Text variant="caption" color="text/secondary">
+              Don't know exact numbers? Use your best estimate
+            </Text>
+          </Box>
+        </Box>
+
+        {/* Action Buttons */}
+        <Box>
+          <Button 
+            variant="primary" 
+            fullWidth
+            onPress={handleNext}
+            disabled={!isCurrentLiftValid}
+            style={{ marginBottom: 12 }}
+          >
+            {currentLiftIndex < liftsData.length - 1 ? 'Next Lift' : 'Review My Focus'}
+          </Button>
+          
+          {currentLiftIndex > 0 && (
+            <Button 
+              variant="ghost" 
+              fullWidth
+              onPress={handlePrevious}
+            >
+              Previous Lift
+            </Button>
+          )}
+        </Box>
+      </ScrollView>
+    );
+  }, [currentLiftIndex, updateCurrentLift, toggleMode, activeInputField, isCurrentLiftValid, handleNext, handlePrevious, liftsData.length]);
+
+  const renderScene = useCallback(({ route }: { route: { key: string } }) => {
+    const liftIndex = selectedLifts.indexOf(route.key);
+    const liftData = liftsData[liftIndex];
+    
+    if (!liftData) return null;
+
+    return renderLiftForm(liftData, liftIndex);
+  }, [selectedLifts, liftsData, renderLiftForm]);
 
   if (showSummary) {
     return (
@@ -368,12 +567,17 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
     );
   }
 
+  // Update currentLiftIndex when tab changes
+  const handleTabChange = useCallback((newIndex: number) => {
+    setIndex(newIndex);
+    setCurrentLiftIndex(newIndex);
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
-      <TouchableWithoutFeedback onPress={handleTapOutside}>
-        <Box flex={1} backgroundColor="bg/page">
+      <Box flex={1} backgroundColor="bg/page">
         <Box style={{ paddingTop: insets.top }} backgroundColor="bg/page" />
-      
+        
         {/* Header Gradient Overlay - Balanced Visibility */}
         <LinearGradient
           colors={[
@@ -395,183 +599,55 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}
         />
-
-      <Header
-        title="Let's build your season"
-        showBackButton={true}
-        onBackPress={handleBackPress}
-        variant="transparent"
-        backgroundColor="bg/page"
-      />
-      
-      <Box paddingHorizontal="l">
-        <WizardBar totalSteps={4} currentStep={2} />
-      </Box>
-      
-      <Box flex={1} paddingHorizontal="l">
-        {/* Clear header with context */}
-        <Box paddingVertical="m">
-          <Text variant="caption" color="text/secondary" marginBottom="xs">
-            {currentLiftIndex + 1} of {liftsData.length}
-          </Text>
-          <Text variant="h1" color="text/primary" marginBottom="s">
-            {currentLift.name}
+        
+        <Header
+          title="Let's build your season"
+          showBackButton={true}
+          onBackPress={handleBackPress}
+          variant="transparent"
+          backgroundColor="bg/page"
+        />
+        
+        <Box paddingHorizontal="l">
+          <WizardBar totalSteps={4} currentStep={2} />
+        </Box>
+        
+        {/* Header Section */}
+        <Box paddingHorizontal="l" paddingVertical="xl">
+          <Text variant="h1" color="text/primary" marginBottom="m">
+            Set your strength focus
           </Text>
           <Text variant="body" color="text/secondary">
-            Set where you are now and the outcome you want
+            Set where you are now and the outcome you want for each lift
           </Text>
         </Box>
-
-        {/* Simple mode toggle */}
-        <Box marginBottom="m" alignSelf="flex-start">
-          <SegmentedControl
-            options={[
-              { value: '1rm', label: '1RM' },
-              { value: 'reps', label: 'REPS' }
-            ]}
-            selectedValue={currentLift.mode}
-            onValueChange={(value) => {
-              if (value !== currentLift.mode) {
-                toggleMode();
-              }
-            }}
-            fullWidth={false}
-          />
-        </Box>
-
-        {/* Clean input interface with left alignment */}
-        <Box paddingVertical="l">
-          <Box width="100%">
-            {/* Current section */}
-            <Box marginBottom="l">
-              <Text variant="label" color="text/secondary" marginBottom="s">
-                Current
-              </Text>
-              <Box flexDirection="row" alignItems="center">
-                {currentLift.mode === 'reps' && (
-                  <>
-                    <UnitInput
-                      value={currentLift.currentReps}
-                      onChangeText={(value) => updateCurrentLift('currentReps', value)}
-                      unit="reps"
-                      width={100}
-                      style={{ marginRight: 12 }}
-                      inputAccessoryViewID="keyboardToolbar"
-                      onFocus={() => setActiveInputField('currentReps')}
-                      onBlur={() => setActiveInputField(null)}
-                    />
-                    <Text variant="body" color="text/secondary" style={{ fontSize: 20, marginRight: 12 }}>
-                      ×
-                    </Text>
-                  </>
-                )}
-                {currentLift.mode === '1rm' && (
-                  <>
-                    <Text variant="body" color="text/secondary" style={{ fontSize: 16, marginRight: 12 }}>
-                      1RM ×
-                    </Text>
-                  </>
-                )}
-                <UnitInput
-                  value={currentLift.currentWeight}
-                  onChangeText={(value) => updateCurrentLift('currentWeight', value)}
-                  unit="kg"
-                  width={120}
-                  inputAccessoryViewID="keyboardToolbar"
-                  onFocus={() => setActiveInputField('currentWeight')}
-                  onBlur={() => setActiveInputField(null)}
-                />
-              </Box>
-            </Box>
-
-            {/* Target section */}
-            <Box marginBottom="l">
-              <Text variant="label" color="text/secondary" marginBottom="s">
-                Target (the outcome I want)
-              </Text>
-              <Box flexDirection="row" alignItems="center">
-                {currentLift.mode === 'reps' && (
-                  <>
-                    <UnitInput
-                      value={currentLift.targetReps}
-                      onChangeText={(value) => updateCurrentLift('targetReps', value)}
-                      unit="reps"
-                      width={100}
-                      style={{ marginRight: 12 }}
-                      inputAccessoryViewID="keyboardToolbarTarget"
-                      onFocus={() => setActiveInputField('targetReps')}
-                      onBlur={() => setActiveInputField(null)}
-                    />
-                    <Text variant="body" color="text/secondary" style={{ fontSize: 20, marginRight: 12 }}>
-                      ×
-                    </Text>
-                  </>
-                )}
-                {currentLift.mode === '1rm' && (
-                  <>
-                    <Text variant="body" color="text/secondary" style={{ fontSize: 16, marginRight: 12 }}>
-                      1RM ×
-                    </Text>
-                  </>
-                )}
-                <UnitInput
-                  value={currentLift.targetWeight}
-                  onChangeText={(value) => updateCurrentLift('targetWeight', value)}
-                  unit="kg"
-                  width={120}
-                  inputAccessoryViewID="keyboardToolbarTarget"
-                  onFocus={() => setActiveInputField('targetWeight')}
-                  onBlur={() => setActiveInputField(null)}
-                />
-              </Box>
-            </Box>
-          </Box>
-
-          {/* Help text */}
-          <Box marginBottom="xl">
-            <Text variant="caption" color="text/secondary">
-              Don't know exact numbers? Use your best estimate
-            </Text>
-          </Box>
-
-          {/* Navigation dots */}
-          <Box flexDirection="row" justifyContent="center" marginBottom="l">
-            {liftsData.map((_, index) => (
-              <Box
-                key={index}
-                backgroundColor={index === currentLiftIndex ? "brand/primary" : "bg/raised"}
-                marginHorizontal="s"
-                style={{ width: 10, height: 10, borderRadius: 5 }}
-              />
-            ))}
-          </Box>
-        </Box>
-
-        {/* Action buttons */}
-        <Box marginBottom="xl">
-          <Button 
-            variant="primary" 
-            fullWidth
-            onPress={handleNext}
-            disabled={!isCurrentLiftValid}
-            style={{ marginBottom: 12 }}
-          >
-            {currentLiftIndex < liftsData.length - 1 ? 'Next Lift' : 'Review My Focus'}
-          </Button>
-          
-          {currentLiftIndex > 0 && (
-            <Button 
-              variant="ghost" 
-              fullWidth
-              onPress={handlePrevious}
-            >
-              Previous Lift
-            </Button>
+        
+        {/* TabView */}
+        <TabView
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          onIndexChange={handleTabChange}
+          initialLayout={{ width: layout.width }}
+          renderTabBar={(props) => (
+            <TabBar
+              {...props}
+              indicatorStyle={{ 
+                backgroundColor: theme.colors['brand/primary'],
+                height: 3,
+              }}
+              style={{ 
+                backgroundColor: theme.colors['bg/page'],
+                elevation: 0,
+                shadowOpacity: 0,
+                borderBottomWidth: 1,
+                borderBottomColor: theme.colors['border/subtle'],
+              }}
+              activeColor={theme.colors['brand/primary']}
+              inactiveColor={theme.colors['text/secondary']}
+            />
           )}
-        </Box>
-        </Box>
-        </Box>
-      </TouchableWithoutFeedback>
+        />
+      </Box>
       
       {/* Keyboard Toolbars */}
       {Platform.OS === 'ios' && (

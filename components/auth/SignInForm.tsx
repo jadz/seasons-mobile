@@ -62,7 +62,7 @@ const SignInForm: React.FC = () => {
         <Text variant="title" color="text/primary" textAlign="center" marginBottom="m">
           Enter Verification Code
         </Text>
-        <Text variant="body" color="textSecondary" textAlign="center" marginBottom="xl">
+        <Text variant="body" color="text/secondary" textAlign="center" marginBottom="xl">
           We've sent a verification code to {email}. Enter the code below or click the magic link in your email.
         </Text>
 
@@ -106,7 +106,7 @@ const SignInForm: React.FC = () => {
       <Text variant="title" color="text/primary" textAlign="center" marginBottom="m">
         Welcome to Seasons
       </Text>
-      <Text variant="body" color="textSecondary" textAlign="center" marginBottom="xl">
+      <Text variant="body" color="text/secondary" textAlign="center" marginBottom="xl">
         Enter your email to get started. We'll send you a magic link to sign in.
       </Text>
 

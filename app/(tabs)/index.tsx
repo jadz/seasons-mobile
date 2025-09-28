@@ -24,7 +24,7 @@ export default function HomeScreen() {
         <Text variant="title" color="text/primary" textAlign="center" marginBottom="m">
           Welcome Home
         </Text>
-        <Text variant="h2" color="textSecondary" textAlign="center" marginBottom="xxl">
+        <Text variant="h2" color="text/secondary" textAlign="center" marginBottom="xxl">
           Hello, {user?.firstName || 'User'}!
         </Text>
 
