@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
+import { View, ScrollView, TouchableWithoutFeedback, Keyboard, InputAccessoryView, Platform } from 'react-native';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Box, Text, Button, WizardBar, TextInput, Header } from '../../components/ui';
+import { Box, Text, Button, WizardBar, TextInput, UnitInput, Header } from '../../components/ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useAppTheme } from '../../components/ui/foundation';
 
 interface MetricData {
   id: string;
@@ -19,6 +20,7 @@ export default function SeasonSetOtherMetricsScreen() {
   // Mock selected metrics - in real app this would come from previous screen
   const selectedMetrics = ['weight', 'body-fat', 'measurements'];
   const insets = useSafeAreaInsets();
+  const { theme } = useAppTheme();
   
   const metricConfigs = {
     weight: {
@@ -149,7 +151,7 @@ export default function SeasonSetOtherMetricsScreen() {
               >
                 <Text 
                   variant="body" 
-                  color={metric.currentValue === frequency ? 'white' : 'text'}
+                  color={metric.currentValue === frequency ? 'text/primary' : 'text/secondary'}
                 >
                   {frequency}
                 </Text>
@@ -183,35 +185,27 @@ export default function SeasonSetOtherMetricsScreen() {
             <Text variant="label" color="text/secondary" marginBottom="xs">
               {config.currentLabel}
             </Text>
-            <Box flexDirection="row" alignItems="center">
-              <Box flex={1} marginRight="s">
-                <TextInput
-                  placeholder={metric.placeholder}
-                  value={metric.currentValue}
-                  onChangeText={(value) => updateMetricData(metric.id, 'currentValue', value)}
-                  keyboardType="numeric"
-                />
-              </Box>
-              <Text variant="body" color="text/primary">{metric.unit}</Text>
-            </Box>
+            <UnitInput
+              placeholder={metric.placeholder}
+              value={metric.currentValue}
+              onChangeText={(value) => updateMetricData(metric.id, 'currentValue', value)}
+              unit={metric.unit}
+              width={110}
+            />
           </Box>
 
           {/* Target Measurement */}
           <Box>
-            <Text variant="label" color="text/secondary" marginBottom="xs">
+            <Text variant="label" color="text/primary" marginBottom="xs">
               {config.targetLabel}
             </Text>
-            <Box flexDirection="row" alignItems="center">
-              <Box flex={1} marginRight="s">
-                <TextInput
-                  placeholder={metric.targetPlaceholder}
-                  value={metric.targetValue}
-                  onChangeText={(value) => updateMetricData(metric.id, 'targetValue', value)}
-                  keyboardType="numeric"
-                />
-              </Box>
-              <Text variant="body" color="text/primary">{metric.unit}</Text>
-            </Box>
+            <UnitInput
+              placeholder={metric.targetPlaceholder}
+              value={metric.targetValue}
+              onChangeText={(value) => updateMetricData(metric.id, 'targetValue', value)}
+              unit={metric.unit}
+              width={110}
+            />
           </Box>
         </Box>
       </Box>
@@ -222,19 +216,8 @@ export default function SeasonSetOtherMetricsScreen() {
   const renderGoalBasedMetric = (metric: MetricData) => {
     const config = getMetricConfig(metric.id);
     
-    // Get color for each metric type
-    const getMetricColor = (metricId: string) => {
-      switch (metricId) {
-        case 'weight':
-          return '#4ECDC4';
-        case 'body-fat':
-          return '#45B7D1';
-        default:
-          return '#96CEB4';
-      }
-    };
-    
-    const color = getMetricColor(metric.id);
+    // Use primary theme color for all metrics
+    const color = theme.colors['brand/primary'];
     
     return (
       <Box key={metric.id} marginBottom="l">
@@ -262,22 +245,18 @@ export default function SeasonSetOtherMetricsScreen() {
             <Text variant="label" color="text/secondary" marginBottom="xs">
               {config.currentLabel}
             </Text>
-            <Box flexDirection="row" alignItems="center">
-              <Box flex={1} marginRight="s">
-                <TextInput
-                  placeholder={metric.placeholder}
-                  value={metric.currentValue}
-                  onChangeText={(value) => updateMetricData(metric.id, 'currentValue', value)}
-                  keyboardType="numeric"
-                />
-              </Box>
-              <Text variant="body" color="text/primary">{metric.unit}</Text>
-            </Box>
+            <UnitInput
+              placeholder={metric.placeholder}
+              value={metric.currentValue}
+              onChangeText={(value) => updateMetricData(metric.id, 'currentValue', value)}
+              unit={metric.unit}
+              width={110}
+            />
           </Box>
 
           {/* Goal Selection - Clean Buttons */}
           <Box>
-            <Text variant="label" color="text/secondary" marginBottom="m">
+            <Text variant="label" color="text/primary" marginBottom="m" style={{ fontWeight: '600' }}>
               {config.targetLabel}
             </Text>
             <Box>
@@ -298,14 +277,14 @@ export default function SeasonSetOtherMetricsScreen() {
                   <Box flexDirection="row" justifyContent="space-between" alignItems="center">
                     <Text 
                       variant="body" 
-                      color={metric.targetValue === option.id ? 'white' : 'text'}
+                      color={metric.targetValue === option.id ? 'brand/onPrimary' : 'brand/primary'}
                       style={{ fontWeight: '500' }}
                     >
                       {option.label}
                     </Text>
                     <Text 
                       variant="caption" 
-                      color={metric.targetValue === option.id ? 'white' : 'textMuted'}
+                      color={metric.targetValue === option.id ? 'text/primary' : 'text/inverse'}
                       style={{ 
                         backgroundColor: metric.targetValue === option.id ? 'rgba(255,255,255,0.2)' : color,
                         color: 'white',
@@ -375,41 +354,13 @@ export default function SeasonSetOtherMetricsScreen() {
             <Text variant="label" color="text/secondary" marginBottom="xs">
               {config.currentLabel}
             </Text>
-            <Box 
-              flexDirection="row" 
-              alignItems="center"
-              style={{
-                backgroundColor: '#F8F9FA',
-                borderRadius: 12,
-                paddingHorizontal: 16,
-                paddingVertical: 4,
-                borderWidth: 2,
-                borderColor: metric.currentValue ? visuals.color : '#E9ECEF',
-              }}
-            >
-              <Box flex={1} marginRight="s">
-                <TextInput
-                  placeholder={metric.placeholder}
-                  value={metric.currentValue}
-                  onChangeText={(value) => updateMetricData(metric.id, 'currentValue', value)}
-                  keyboardType="numeric"
-                  style={{ 
-                    backgroundColor: 'transparent',
-                    borderWidth: 0,
-                    fontSize: 18,
-                    fontWeight: '600',
-                    color: metric.currentValue ? visuals.color : '#6C757D'
-                  }}
-                />
-              </Box>
-              <Text 
-                variant="body" 
-                color="text/secondary"
-                style={{ fontWeight: '600' }}
-              >
-                {metric.unit}
-              </Text>
-            </Box>
+            <UnitInput
+              placeholder={metric.placeholder}
+              value={metric.currentValue}
+              onChangeText={(value) => updateMetricData(metric.id, 'currentValue', value)}
+              unit={metric.unit}
+              width={110}
+            />
           </Box>
 
           {/* Arrow indicator */}
@@ -428,44 +379,16 @@ export default function SeasonSetOtherMetricsScreen() {
 
           {/* Target Value */}
           <Box>
-            <Text variant="label" color="text/secondary" marginBottom="xs">
+            <Text variant="label" color="text/primary" marginBottom="xs">
               {config.targetLabel}
             </Text>
-            <Box 
-              flexDirection="row" 
-              alignItems="center"
-              style={{
-                backgroundColor: '#F8F9FA',
-                borderRadius: 12,
-                paddingHorizontal: 16,
-                paddingVertical: 4,
-                borderWidth: 2,
-                borderColor: metric.targetValue ? visuals.color : '#E9ECEF',
-              }}
-            >
-              <Box flex={1} marginRight="s">
-                <TextInput
-                  placeholder={metric.targetPlaceholder}
-                  value={metric.targetValue}
-                  onChangeText={(value) => updateMetricData(metric.id, 'targetValue', value)}
-                  keyboardType="numeric"
-                  style={{ 
-                    backgroundColor: 'transparent',
-                    borderWidth: 0,
-                    fontSize: 18,
-                    fontWeight: '600',
-                    color: metric.targetValue ? visuals.color : '#6C757D'
-                  }}
-                />
-              </Box>
-              <Text 
-                variant="body" 
-                color="text/secondary"
-                style={{ fontWeight: '600' }}
-              >
-                {metric.unit}
-              </Text>
-            </Box>
+            <UnitInput
+              placeholder={metric.targetPlaceholder}
+              value={metric.targetValue}
+              onChangeText={(value) => updateMetricData(metric.id, 'targetValue', value)}
+              unit={metric.unit}
+              width={110}
+            />
           </Box>
         </Box>
       </Box>
@@ -473,44 +396,54 @@ export default function SeasonSetOtherMetricsScreen() {
   };
 
   return (
-    <LinearGradient
-      colors={[
-        '#FF6B6B', // Vibrant coral top
-        '#E55A5A', // Rich coral-red
-        '#D67B7B', // Original coral
-        '#C44A4A', // Deeper coral
-        '#B85A5A', // Rich burgundy
-        '#8B3A3A', // Deep burgundy
-        '#5D2A2A', // Almost black burgundy
-      ]}
-      locations={[0, 0.15, 0.3, 0.5, 0.7, 0.85, 1]}
-      style={{ flex: 1 }}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-    >
-      {/* Safe Area Top */}
-      <Box style={{ paddingTop: insets.top}} />
-      {/* Standardized Header */}
-      <Header
-        title="Let's build your season"
-        showBackButton={true}
-        onBackPress={handleBackPress}
-        variant="transparent"
-        backgroundcolor="bg/primary"
-      />
-      {/* Progress Indicator */}
-      <Box paddingHorizontal="l">
-        <WizardBar totalSteps={4} currentStep={4} />
-      </Box>
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <View style={{ flex: 1 }}>
+      <Box flex={1} backgroundColor="bg/page">
+        <Box style={{ paddingTop: insets.top }} backgroundColor="bg/page" />
+        {/* Header Gradient Overlay - Balanced Visibility */}
+        <LinearGradient
+          colors={[
+            'rgba(214, 123, 123, 0.35)', // More noticeable coral at top
+            'rgba(214, 123, 123, 0.22)', // Medium-strong coral
+            'rgba(214, 123, 123, 0.12)', // Medium coral
+            'rgba(214, 123, 123, 0.05)', // Light coral
+            'rgba(235, 238, 237, 0)', // Fully transparent background
+          ]}
+          locations={[0, 0.3, 0.6, 0.8, 1]}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 190 + insets.top, // Cover header area properly
+            zIndex: 0,
+          }}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+        />
+        
+        <Header
+          title="Let's build your season"
+          showBackButton={true}
+          onBackPress={handleBackPress}
+          variant="transparent"
+          backgroundColor="bg/page"
+        />
+        
         <Box paddingHorizontal="l">
-          {/* Header Section - Clean and Simple */}
-          {/* Header Section */}
-          <Box paddingVertical="xl">
-            <Text variant="h2" color="text/inverse" marginBottom="m">
-              Tell us where you are, and where you want to be
-            </Text>
-          </Box>
+          <WizardBar totalSteps={4} currentStep={4} />
+        </Box>
+        
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Box paddingHorizontal="l">
+            {/* Header Section */}
+            <Box paddingVertical="xl">
+              <Text variant="h2" color="text/primary" marginBottom="m">
+                Tell us where you are, and where you want to be
+              </Text>
+              <Text variant="body" color="text/primary" style={{ opacity: 0.9 }}>
+                Set your baseline numbers to track progress
+              </Text>
+            </Box>
           {/* Dynamic Metric Forms */}
           <Box marginBottom="xl">
             {metricsData.map((metric) => {
@@ -528,13 +461,13 @@ export default function SeasonSetOtherMetricsScreen() {
           
           {/* Help Text */}
           <Box marginBottom="m" alignItems="center">
-            <Text variant="caption" color="text/inverse" textAlign="center" style={{ opacity: 0.8 }}>
+            <Text variant="caption" color="text/secondary" textAlign="center">
               Don't have all the numbers? No worries - you can add them later
             </Text>
           </Box>
 
           {/* Action Buttons */}
-          <Box marginBottom="xl">
+          <Box marginBottom="m">
             <Button 
               variant="primary" 
               fullWidth
@@ -549,13 +482,14 @@ export default function SeasonSetOtherMetricsScreen() {
               fullWidth
               onPress={handleSkipAll}
             >
-              <Text color="text/inverse" style={{ opacity: 0.9 }}>
+              <Text color="text/secondary">
                 Skip all - I'll set these up later
               </Text>
             </Button>
           </Box>
         </Box>
       </ScrollView>
-    </LinearGradient>
+      </Box>
+    </View>
   );
 }

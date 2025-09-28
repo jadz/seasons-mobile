@@ -15,7 +15,8 @@ export default function SeasonGoalsScreen() {
     if (goalId === 'stronger') {
       // Small delay for visual feedback, then navigate
       setTimeout(() => {
-        router.push('/onboarding/season-step-2-strength');
+        router.push('/onboarding/season-step-5-set-other-metrics');
+        // router.push('/onboarding/season-step-2-strength');
       }, 15);
     }
     // For other goals, we could add different navigation paths later

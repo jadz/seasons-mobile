@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
 import { router } from 'expo-router';
+import { View, ScrollView, TouchableWithoutFeedback, Keyboard, InputAccessoryView, Platform } from 'react-native';
 import { Box, Text, Button, WizardBar, Header } from '../../components/ui';
 import { SimpleSelectionButton } from '../../components/ui/selection/SimpleSelectionButton';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface MetricOption {
   id: string;
@@ -35,7 +36,7 @@ export default function SeasonBodyMetricsScreen() {
     },
     {
       id: 'energy',
-      title: 'Energy Levels',
+      title: 'Energy & Mood',
       description: 'How you feel day-to-day',
     },
   ];
@@ -86,92 +87,86 @@ export default function SeasonBodyMetricsScreen() {
   const hasSelection = selectedMetrics.length > 0 || skipTracking;
 
   return (
-    <Box flex={1} style={{ backgroundColor: '#D67B7B' }}>
-      {/* Safe Area Top */}
-      <Box style={{ paddingTop: insets.top, backgroundColor:"#D67B7B" }} />
-      {/* Standardized Header */}
-      <Header
-        title="Let's build your season"
-        showBackButton={true}
-        onBackPress={handleBackPress}
-        variant="transparent"
-        backgroundcolor="bg/primary"
-      />
-      {/* Progress Indicator */}
-      <Box paddingHorizontal="l">
-        <WizardBar totalSteps={4} currentStep={2} />
-      </Box>
+      <View style={{ flex: 1 }}>
+        <Box flex={1} backgroundColor="bg/page">
+        <Box style={{ paddingTop: insets.top }} backgroundColor="bg/page" />
+        {/* Header Gradient Overlay - Balanced Visibility */}
+        <LinearGradient
+          colors={[
+            'rgba(214, 123, 123, 0.35)', // More noticeable coral at top
+            'rgba(214, 123, 123, 0.22)', // Medium-strong coral
+            'rgba(214, 123, 123, 0.12)', // Medium coral
+            'rgba(214, 123, 123, 0.05)', // Light coral
+            'rgba(235, 238, 237, 0)', // Fully transparent background
+          ]}
+          locations={[0, 0.3, 0.6, 0.8, 1]}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 190 + insets.top, // Cover header area properly
+            zIndex: 0,
+          }}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+        />
+        
+        <Header
+          title="Let's build your season"
+          showBackButton={true}
+          onBackPress={handleBackPress}
+          variant="transparent"
+          backgroundColor="bg/page"
+        />
+        
+        <Box paddingHorizontal="l">
+          <WizardBar totalSteps={4} currentStep={3} />
+        </Box>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Box paddingHorizontal="l">
           {/* Header Section */}
           <Box paddingVertical="xl">
-            <Text variant="h2" color="white" marginBottom="m">
+            <Text variant="h2" color="text/primary" marginBottom="m">
               Want to keep an eye on anything else?
             </Text>
-            <Text variant="body" color="white" style={{ opacity: 0.9 }}>
+            <Text variant="body" color="text/primary" style={{ opacity: 0.9 }}>
               Optional ways to track your progress beyond strength
             </Text>
           </Box>
           
           {/* Metrics Selection */}
-          <Box marginBottom="xl">
-            <Text variant="h2" color="white" marginBottom="m">
+          <Box marginBottom="xs">
+            <Text variant="h2" color="text/primary" marginBottom="m">
               I'd like to track:
             </Text>
             <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="l">
-              {metricOptions.map((metric, index) => (
-                <Box 
-                  key={metric.id} 
-                  marginBottom="s" 
-                  style={{ 
-                    width: '48%', 
-                    marginRight: index % 2 === 0 ? '4%' : 0 
-                  }}
-                >
-                  <Box
-                    backgroundColor={selectedMetrics.includes(metric.id) ? 'white' : 'transparent'}
-                    borderRadius="m"
-                    borderWidth={1}
-                    borderColor="white"
-                    padding="m"
-                    style={{ opacity: skipTracking ? 0.4 : 1 }}
-                    onTouchEnd={() => handleMetricSelection(metric.id)}
-                  >
-                    <Text 
-                      variant="body" 
-                      color={selectedMetrics.includes(metric.id) ? 'text' : 'white'}
-                      marginBottom="xs"
-                      style={{ fontWeight: '600' }}
-                    >
-                      {metric.title}
-                    </Text>
-                    <Text 
-                      variant="caption" 
-                      color={selectedMetrics.includes(metric.id) ? 'textMuted' : 'white'}
-                      style={{ opacity: selectedMetrics.includes(metric.id) ? 1 : 0.8 }}
-                    >
-                      {metric.description}
-                    </Text>
-                  </Box>
-                </Box>
+              {metricOptions.map((metric) => (
+                <SimpleSelectionButton 
+                  key={metric.id}
+                  title={metric.title}
+                  isSelected={selectedMetrics.includes(metric.id)}
+                  onPress={() => handleMetricSelection(metric.id)}
+                  isDisabled={skipTracking}
+                />
               ))}
             </Box>
           </Box>
 
           {/* Divider */}
-          <Box alignItems="center" marginBottom="xl">
+          <Box alignItems="center" marginBottom="m">
             <Box flexDirection="row" alignItems="center" width="100%">
-              <Box flex={1} height={1} backgroundColor="bg/surface" style={{ opacity: 0.3 }} />
-              <Text variant="body" color="white" marginHorizontal="m" style={{ opacity: 0.8 }}>
+              <Box flex={1} height={1} backgroundColor="border/subtle" />
+              <Text variant="body" color="text/secondary" marginHorizontal="m">
                 or
               </Text>
-              <Box flex={1} height={1} backgroundColor="bg/surface" style={{ opacity: 0.3 }} />
+              <Box flex={1} height={1} backgroundColor="border/subtle" />
             </Box>
           </Box>
 
           {/* Skip Option */}
-          <Box marginBottom="xl">
-            <Text variant="h3" color="white" marginBottom="m">
+          <Box marginBottom="l">
+            <Text variant="h3" color="text/primary" marginBottom="m">
               Keep it focused:
             </Text>
             <SimpleSelectionButton 
@@ -179,22 +174,13 @@ export default function SeasonBodyMetricsScreen() {
               isSelected={skipTracking}
               onPress={handleSkipToggle}
             />
-            <Text variant="caption" color="white" marginTop="s" style={{ opacity: 0.8 }}>
+            <Text variant="caption" color="text/secondary" marginTop="s">
               You can always add body tracking later
             </Text>
           </Box>
-          
-          {/* Help Text */}
-          {!hasSelection && (
-            <Box marginBottom="m" alignItems="center">
-              <Text variant="caption" color="white" textAlign="center" style={{ opacity: 0.8 }}>
-                Choose what you'd like to track, or skip to keep things simple
-              </Text>
-            </Box>
-          )}
 
           {/* Next Button */}
-          <Box marginBottom="xl">
+          <Box marginBottom="m">
             <Button 
               variant="primary" 
               fullWidth
@@ -203,12 +189,13 @@ export default function SeasonBodyMetricsScreen() {
             >
               {hasSelection 
                 ? (skipTracking ? "Create my strength season" : "Create my season")
-                : "Make a choice above"
+                : "Choose your focus above"
               }
             </Button>
           </Box>
         </Box>
       </ScrollView>
-    </Box>
+      </Box>
+    </View>
   );
 }

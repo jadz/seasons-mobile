@@ -110,6 +110,7 @@ export const lightTheme = createTheme({
     'text/primary': '#0E1116',
     'text/secondary': '#4B5563',
     'text/inverse': '#FFFFFF',
+    'input/placeholder': '#D1D5DB',
     'brand/primary': '#2563EB',
     'brand/onPrimary': '#FFFFFF',
     'border/subtle': '#E5E7EB',
@@ -124,59 +125,16 @@ export const lightTheme = createTheme({
   },
 });
 
-// export const darkTheme = createTheme({
-//   ...base,
-//   colors: {
-//     'bg/page': '#2C2A2D',
-//     'bg/surface': '#2C2A2D',
-//     // Raised gets a subtle light overlay to imply elevation
-//     'bg/raised': '#141A21',
-//     'text/primary': '#E5E7EB',
-//     'text/secondary': '#9CA3AF',
-//     'text/inverse': '#0B0F14',
-//     // 'brand/primary': '#3B82F6',
-//     'brand/primary': '#F5CA47',
-//     'brand/onPrimary': '#0B0F14',
-//     'border/subtle': '#1F2937',
-//     'border/strong': '#374151',
-//     'state/success': '#34D399',
-//     'state/warn': '#FBBF24',
-//     'state/error': '#F87171',
-//     'state/on': '#0B0F14',
-//     'focus/ring': '#60A5FA',
-//     'overlay/scrim': 'rgba(0,0,0,0.6)',
-    
-//     // Legacy aliases for backward compatibility
-//     background: '#0B0F14',
-//     surface: '#0F141A',
-//     text: '#E5E7EB',
-//     textSecondary: '#9CA3AF',
-//     textMuted: '#9CA3AF',
-//     textInverse: '#0B0F14',
-//     primary: '#3B82F6',
-//     border: '#1F2937',
-//     success: '#34D399',
-//     warning: '#FBBF24',
-//     error: '#F87171',
-//     transparent: 'transparent',
-//     white: '#E5E7EB',
-//     black: '#0B0F14',
-//     // Button states
-//     buttonPrimaryDisabled: '#374151',
-//   },
-// });
-
 export const darkTheme = createTheme({
   ...base,
   colors: {
     'bg/page': '#0B0F14',
     'bg/surface': '#2C2A2D',
-    // Raised gets a subtle light overlay to imply elevation
     'bg/raised': '#141A21',
     'text/primary': '#E5E7EB',
     'text/secondary': '#9CA3AF',
     'text/inverse': '#0B0F14',
-    // 'brand/primary': '#3B82F6',
+    'input/placeholder': '#3F3F46',
     'brand/primary': '#F5CA47',
     'brand/onPrimary': '#0B0F14',
     'border/subtle': '#1F2937',

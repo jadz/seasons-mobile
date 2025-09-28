@@ -16,7 +16,8 @@ interface LiftData {
 }
 
 export default function SeasonStrengthNumbersOption1Enhanced() {
-  const selectedLifts = ['bench', 'squat', 'deadlift'];
+  // const selectedLifts = ['bench', 'squat', 'deadlift'];
+  const selectedLifts = ['bench'];
   const insets = useSafeAreaInsets();
   
   const liftNames = {
@@ -186,7 +187,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
     return (
       <View style={{ flex: 1 }}>
         <Box flex={1} backgroundColor="bg/page">
-        <Box style={{ paddingTop: insets.top }} backgroundColor="bg/page" />
         {/* Header Gradient Overlay - Balanced Visibility */}
         <LinearGradient
           colors={[
@@ -226,7 +226,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
             {/* Simple Header */}
             <Box paddingVertical="l">
               <Text variant="h2" color="text/primary" marginBottom="s">
-                Review Your Goals
+                Review your strength targets
               </Text>
             </Box>
             
@@ -349,7 +349,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                 onPress={handleComplete}
                 style={{ marginBottom: 12 }}
               >
-                Create My Season
+                Continue Season Setup
               </Button>
               
               <Button 
@@ -555,7 +555,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
             disabled={!isCurrentLiftValid}
             style={{ marginBottom: 12 }}
           >
-            {currentLiftIndex < liftsData.length - 1 ? 'Next Lift' : 'Review Goals'}
+            {currentLiftIndex < liftsData.length - 1 ? 'Next Lift' : 'Review Your Lifts'}
           </Button>
           
           {currentLiftIndex > 0 && (

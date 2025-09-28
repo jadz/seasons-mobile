@@ -36,8 +36,8 @@ export const UnitInput: React.FC<UnitInputProps> = ({
     <View style={[
       styles.wrapper,
       {
-        backgroundColor: disabled ? theme.colors['bg/raised'] : theme.colors['bg/surface'],
-        borderColor: theme.colors['border/subtle'],
+        backgroundColor: disabled ? theme.colors['bg/raised'] : 'transparent',
+        borderColor: theme.colors['border/strong'],
       },
       disabled && styles.disabledWrapper,
       width && { width },
@@ -55,11 +55,11 @@ export const UnitInput: React.FC<UnitInputProps> = ({
         style={[
           styles.input,
           {
-            color: disabled ? theme.colors['text/secondary'] : theme.colors['text/primary']
+            color: disabled ? theme.colors['input/placeholder'] : theme.colors['text/primary']
           },
           disabled && styles.disabledInput
         ]}
-        placeholderTextColor={theme.colors['text/secondary']}
+        placeholderTextColor={theme.colors['input/placeholder']}
       />
       <Text
         variant="caption"
