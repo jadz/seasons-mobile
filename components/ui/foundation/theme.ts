@@ -112,6 +112,55 @@ const base = {
     phone: 0,
     tablet: 768,
   },
+  buttonVariants: {
+    primary: {
+      backgroundColor: 'brand/primary',
+      borderColor: 'brand/primary',
+      borderWidth: 1,
+      textColor: 'brand/onPrimary',
+    },
+    secondary: {
+      backgroundColor: 'bg/surface',
+      borderColor: 'border/subtle',
+      borderWidth: 1,
+      textColor: 'text/primary',
+    },
+    outline: {
+      backgroundColor: 'transparent',
+      borderColor: 'brand/primary',
+      borderWidth: 1,
+      textColor: 'brand/primary',
+    },
+    ghost: {
+      backgroundColor: 'transparent',
+      borderColor: 'transparent',
+      borderWidth: 0,
+      textColor: 'brand/primary',
+    },
+    danger: {
+      backgroundColor: 'state/error',
+      borderColor: 'state/error',
+      borderWidth: 1,
+      textColor: 'text/inverse',
+    },
+  },
+  buttonSizes: {
+    small: {
+      paddingVertical: 's',
+      paddingHorizontal: 'm',
+      borderRadius: 'md',
+    },
+    medium: {
+      paddingVertical: 'm',
+      paddingHorizontal: 'l',
+      borderRadius: 'md',
+    },
+    large: {
+      paddingVertical: 'l',
+      paddingHorizontal: 'xl',
+      borderRadius: 'lg',
+    },
+  },
 };
 
 export const lightTheme = createTheme({

@@ -3,18 +3,17 @@ import { TouchableOpacity, TouchableOpacityProps, ActivityIndicator } from 'reac
 import { useTheme } from '@shopify/restyle';
 import { Box } from '../primitives/Box';
 import { Text } from '../primitives/Text';
-import { Theme, ThemeColors } from '../foundation/theme';
+import { Theme, ThemeColors, ThemeSpacing, ThemeRadii } from '../foundation/theme';
 
 export interface ButtonProps extends TouchableOpacityProps {
   children?: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-  size?: 'small' | 'medium' | 'large';
+  variant?: keyof Theme['buttonVariants'];
+  size?: keyof Theme['buttonSizes'];
   loading?: boolean;
   disabled?: boolean;
   fullWidth?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
-  borderRadius?: keyof Theme['radii'];
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -26,88 +25,13 @@ export const Button: React.FC<ButtonProps> = ({
   fullWidth = false,
   leftIcon,
   rightIcon,
-  borderRadius,
   ...touchableProps
 }) => {
   const theme = useTheme<Theme>();
   const isDisabled = disabled || loading;
-
-  const getVariantStyles = () => {
-    const styles = {
-      backgroundColor: 'brand/primary' as ThemeColors,
-      textColor: 'brand/onPrimary' as ThemeColors,
-      borderColor: 'brand/primary' as ThemeColors,
-      borderWidth: 1,
-    };
-
-    switch (variant) {
-      case 'secondary':
-        styles.backgroundColor = 'bg/surface';
-        styles.textColor = 'text/primary';
-        styles.borderColor = 'border/subtle';
-        styles.borderWidth = 1;
-        break;
-      case 'outline':
-        styles.backgroundColor = 'transparent';
-        styles.textColor = 'brand/primary';
-        styles.borderColor = 'brand/primary';
-        styles.borderWidth = 1;
-        break;
-      case 'ghost':
-        styles.backgroundColor = 'transparent';
-        styles.textColor = 'brand/primary';
-        styles.borderWidth = 0;
-        break;
-      case 'danger':
-        styles.backgroundColor = 'state/error';
-        styles.textColor = 'text/inverse';
-        styles.borderColor = 'state/error';
-        styles.borderWidth = 1;
-        break;
-    }
-
-    if (isDisabled) {
-      styles.backgroundColor = 'bg/page';
-      styles.textColor = 'text/secondary';
-      styles.borderColor = 'border/subtle';
-      styles.borderWidth = 1;
-    }
-
-    return styles;
-  };
-
-  const getSizeStyles = () => {
-    switch (size) {
-      case 'small':
-        return {
-          paddingVertical: 's' as keyof Theme['spacing'],
-          paddingHorizontal: 'm' as keyof Theme['spacing'],
-          borderRadius: 'md' as keyof Theme['radii'],
-          fontSize: 14,
-        };
-      case 'large':
-        return {
-          paddingVertical: 'l' as keyof Theme['spacing'],
-          paddingHorizontal: 'xl' as keyof Theme['spacing'],
-          borderRadius: 'lg' as keyof Theme['radii'],
-          fontSize: 18,
-        };
-      default:
-        return {
-          paddingVertical: 'm' as keyof Theme['spacing'],
-          paddingHorizontal: 'l' as keyof Theme['spacing'],
-          borderRadius: 'md' as keyof Theme['radii'],
-          fontSize: 16,
-        };
-    }
-  };
-
-  const variantStyles = getVariantStyles();
-  const sizeStyles = getSizeStyles();
   
-  // Use the custom borderRadius or fall back to size-based radius
-  const radiusKey = borderRadius || sizeStyles.borderRadius;
-  const finalBorderRadius = theme.radii[radiusKey];
+  const variantStyles = theme.buttonVariants[variant];
+  const sizeStyles = theme.buttonSizes[size];
 
   return (
     <TouchableOpacity
@@ -116,12 +40,12 @@ export const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.7}
     >
       <Box
-        backgroundColor={variantStyles.backgroundColor}
-        borderColor={variantStyles.borderColor}
+        backgroundColor={variantStyles.backgroundColor as ThemeColors}
+        borderColor={variantStyles.borderColor as ThemeColors}
         borderWidth={variantStyles.borderWidth}
-        paddingVertical={sizeStyles.paddingVertical as keyof Theme['spacing']}
-        paddingHorizontal={sizeStyles.paddingHorizontal as keyof Theme['spacing']}
-        borderRadius={finalBorderRadius}
+        paddingVertical={sizeStyles.paddingVertical as ThemeSpacing}
+        paddingHorizontal={sizeStyles.paddingHorizontal as ThemeSpacing}
+        borderRadius={sizeStyles.borderRadius as ThemeRadii}
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
@@ -129,31 +53,12 @@ export const Button: React.FC<ButtonProps> = ({
         opacity={isDisabled ? 0.6 : 1}
       >
         {loading ? (
-          <ActivityIndicator
-            size="small"
-            color={variantStyles.textColor}
-          />
+          <ActivityIndicator size="small" color={variantStyles.textColor} />
         ) : (
           <>
-            {leftIcon && (
-              <Box marginRight="s">
-                {leftIcon}
-              </Box>
-            )}
-            
-            <Text
-              variant="button"
-              color={variantStyles.textColor}
-              fontSize={sizeStyles.fontSize}
-            >
-              {children}
-            </Text>
-            
-            {rightIcon && (
-              <Box marginLeft="s">
-                {rightIcon}
-              </Box>
-            )}
+            {leftIcon && <Box marginRight="s">{leftIcon}</Box>}
+            <Text variant="button" color={variantStyles.textColor as ThemeColors}>{children}</Text>
+            {rightIcon && <Box marginLeft="s">{rightIcon}</Box>}
           </>
         )}
       </Box>
