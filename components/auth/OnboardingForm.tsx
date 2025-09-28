@@ -101,6 +101,7 @@ const OnboardingForm: React.FC<OnboardingFormProps> = ({ onComplete }) => {
       <Box flex={1} padding="l" justifyContent="center">
         <Text variant="h1" color="text/primary" textAlign="center" marginBottom="xl">
           What's your name?
+
         </Text>
         
         <Box marginBottom="xxl">
