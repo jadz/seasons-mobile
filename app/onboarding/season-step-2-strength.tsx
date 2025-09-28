@@ -90,7 +90,7 @@ export default function SeasonStrengthScreen() {
           <Box paddingHorizontal="l">
             {/* Specific Lifts Section */}
             <Box marginBottom="xs">
-              <Text variant="h2" color="text/primary" marginBottom="m">
+              <Text variant="h1" color="text/primary" marginBottom="m">
                 Specific lifts I want to improve:
               </Text>
               <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="l">
@@ -146,7 +146,7 @@ export default function SeasonStrengthScreen() {
 
             {/* Overall Strength Option */}
             <Box marginBottom="l">
-              <Text variant="h3" color="text/primary" marginBottom="m">
+              <Text variant="h2" color="text/primary" marginBottom="m">
                 Keep it simple:
               </Text>
               <SimpleSelectionButton 

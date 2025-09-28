@@ -44,51 +44,86 @@ const base = {
     defaults: {
       fontFamily: 'Geist_400Regular',
     },
+    // Primary hierarchy - optimized for mobile with refined Geist weights
     h1: { 
-      fontSize: 32, 
-      lineHeight: 38, 
-      fontFamily: 'Geist-Bold',
+      fontSize: 28, 
+      lineHeight: 34, 
+      fontFamily: 'Geist_600SemiBold',
+      letterSpacing: -0.5,
     },
     h2: { 
-      fontSize: 24, 
-      lineHeight: 30, 
-      fontFamily: 'Geist_600SemiBold'
+      fontSize: 22, 
+      lineHeight: 28, 
+      fontFamily: 'Geist_500Medium',
+      letterSpacing: -0.25,
     },
     h3: { 
       fontSize: 18, 
       lineHeight: 24, 
-      fontFamily: 'Geist_400Regular',
+      fontFamily: 'Geist_500Medium',
+      letterSpacing: -0.15,
     },
+    h4: {
+      fontSize: 16,
+      lineHeight: 22,
+      fontFamily: 'Geist_500Medium',
+    },
+    // Body text hierarchy
     body: { 
       fontSize: 16, 
-      lineHeight: 22, 
+      lineHeight: 24, 
       fontFamily: 'Geist_400Regular',
     },
-    caption: { 
-      fontSize: 14, 
-      lineHeight: 18, 
+    bodyMedium: {
+      fontSize: 16,
+      lineHeight: 24,
+      fontFamily: 'Geist_500Medium',
+    },
+    bodySmall: {
+      fontSize: 14,
+      lineHeight: 20,
       fontFamily: 'Geist_400Regular',
+    },
+    // Supporting text
+    caption: { 
+      fontSize: 12, 
+      lineHeight: 16, 
+      fontFamily: 'Geist_400Regular',
+    },
+    captionMedium: {
+      fontSize: 12,
+      lineHeight: 16,
+      fontFamily: 'Geist_500Medium',
+    },
+    overline: {
+      fontSize: 11,
+      lineHeight: 16,
+      fontFamily: 'Geist_500Medium',
+      textTransform: 'uppercase',
+      letterSpacing: 0.5,
     },
     // Legacy text variants for backward compatibility
     title: { 
-      fontSize: 28, 
-      lineHeight: 34, 
-      fontFamily: 'Geist_600SemiBold',
+      fontSize: 24, 
+      lineHeight: 30, 
+      fontFamily: 'Geist_500Medium',
+      letterSpacing: -0.25,
     },
     label: { 
       fontSize: 14, 
-      lineHeight: 18, 
+      lineHeight: 20, 
       fontFamily: 'Geist_500Medium',
     },
     small: { 
-      fontSize: 13, 
-      lineHeight: 18, 
+      fontSize: 12, 
+      lineHeight: 16, 
       fontFamily: 'Geist_400Regular',
     },
     button: { 
-      fontSize: 18, 
-      lineHeight: 22, 
+      fontSize: 16, 
+      lineHeight: 24, 
       fontFamily: 'Geist_500Medium',
+      letterSpacing: 0.1,
     },
   },
   // Shadow tokens for consistency in RN/web parity

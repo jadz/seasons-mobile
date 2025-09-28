@@ -226,7 +226,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           <Box paddingHorizontal="l">
             {/* Simple Header */}
             <Box paddingVertical="l">
-              <Text variant="h2" color="text/primary" marginBottom="s">
+              <Text variant="h1" color="text/primary" marginBottom="s">
                 Review your strength targets
               </Text>
             </Box>
@@ -263,7 +263,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                         <>
                           {/* Clean Header Row */}
                           <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="s">
-                            <Text variant="h2" color="text/primary" style={{ fontSize: 22, fontWeight: '700', letterSpacing: -0.5 }}>
+                            <Text variant="h3" color="text/primary">
                               {lift.name}
                             </Text>
                             <Button
@@ -280,40 +280,40 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                           {/* Current → Target Display */}
                           <Box flexDirection="row" alignItems="center" justifyContent="space-between">
                             <Box alignItems="center" flex={1}>
-                              <Text variant="caption" color="text/secondary" style={{ fontSize: 10, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
+                              <Text variant="caption" color="text/secondary" style={{ textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
                                 CURRENT
                               </Text>
-                              <Text variant="h1" color="text/primary" style={{ fontSize: 26, fontWeight: '700', lineHeight: 30 }}>
+                              <Text variant="h2" color="text/primary">
                                 {lift.mode === 'reps' && lift.currentReps !== '1' 
                                   ? `${lift.currentReps}×${lift.currentWeight}` 
                                   : lift.currentWeight
                                 }
                               </Text>
-                              <Text variant="caption" color="text/secondary" style={{ fontSize: 11, fontWeight: '500', marginTop: 1 }}>
+                              <Text variant="caption" color="text/secondary">
                                 kg
                               </Text>
                             </Box>
                             
                             <Box alignItems="center" paddingHorizontal="l">
-                              <Text variant="h2" color="text/secondary" style={{ fontSize: 20, fontWeight: '300' }}>
+                              <Text variant="h3" color="text/secondary">
                                 →
                               </Text>
-                              <Text variant="caption" color={improvementColor} style={{ fontSize: 12, fontWeight: '700', marginTop: 4 }}>
+                              <Text variant="caption" color={improvementColor} style={{ fontWeight: '600', marginTop: 4 }}>
                                 {relativeImprovement > 0 ? '+' : ''}{relativeImprovement}%
                               </Text>
                             </Box>
                             
                             <Box alignItems="center" flex={1}>
-                              <Text variant="caption" color="text/secondary" style={{ fontSize: 10, fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
+                              <Text variant="caption" color="text/secondary" style={{ textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
                                 TARGET
                               </Text>
-                              <Text variant="h1" color={isComplete ? "state/success" : "brand/primary"} style={{ fontSize: 26, fontWeight: '700', lineHeight: 30 }}>
+                              <Text variant="h2" color={isComplete ? "state/success" : "brand/primary"}>
                                 {lift.mode === 'reps' && lift.targetReps !== '1' 
                                   ? `${lift.targetReps}×${lift.targetWeight}` 
                                   : lift.targetWeight
                                 }
                               </Text>
-                              <Text variant="caption" color="text/secondary" style={{ fontSize: 11, fontWeight: '500', marginTop: 1 }}>
+                              <Text variant="caption" color="text/secondary">
                                 kg
                               </Text>
                             </Box>
@@ -322,7 +322,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                       ) : (
                         /* Empty State */
                         <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-                          <Text variant="body" color="text/primary" style={{ fontSize: 16, fontWeight: '600' }}>
+                          <Text variant="h3" color="text/primary">
                             {lift.name}
                           </Text>
                           <Button
@@ -330,7 +330,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                             onPress={() => editLift(index)}
                             style={{ paddingHorizontal: 12, paddingVertical: 6 }}
                           >
-                            <Text color="brand/primary" style={{ fontSize: 14 }}>
+                            <Text variant="caption" color="brand/primary">
                               Set Goal
                             </Text>
                           </Button>
@@ -444,7 +444,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           <Box width="100%">
             {/* Current section */}
             <Box marginBottom="l">
-              <Text variant="label" color="text/secondary" marginBottom="s" style={{ fontSize: 13, fontWeight: '500' }}>
+              <Text variant="label" color="text/secondary" marginBottom="s">
                 Current
               </Text>
               <Box flexDirection="row" alignItems="center">
@@ -486,7 +486,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
 
             {/* Target section */}
             <Box marginBottom="l">
-              <Text variant="label" color="text/secondary" marginBottom="s" style={{ fontSize: 13, fontWeight: '500' }}>
+              <Text variant="label" color="text/secondary" marginBottom="s">
                 Target
               </Text>
               <Box flexDirection="row" alignItems="center">
@@ -529,7 +529,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
 
           {/* Help text */}
           <Box marginBottom="xl">
-            <Text variant="caption" color="text/secondary" style={{ fontSize: 14 }}>
+            <Text variant="caption" color="text/secondary">
               Don't know exact numbers? Use your best estimate
             </Text>
           </Box>

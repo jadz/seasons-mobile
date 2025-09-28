@@ -274,9 +274,8 @@ export default function SeasonSetOtherMetricsScreen() {
                 >
                   <Box flexDirection="row" justifyContent="space-between" alignItems="center">
                     <Text 
-                      variant="body" 
-                      color={metric.targetValue === option.id ? 'brand/onPrimary' : 'text/primary'}
-                      style={{ fontWeight: '500' }}
+                        variant="body" 
+                        color={metric.targetValue === option.id ? 'brand/onPrimary' : 'text/primary'}
                     >
                       {option.label}
                     </Text>
@@ -289,10 +288,6 @@ export default function SeasonSetOtherMetricsScreen() {
                       <Text 
                         variant="caption" 
                         color={metric.targetValue === option.id ? 'brand/primary' : 'brand/onPrimary'}
-                        style={{ 
-                          fontSize: 11,
-                          fontWeight: '600',
-                        }}
                       >
                         {option.range}
                       </Text>

@@ -50,7 +50,7 @@ export default function SeasonGoalsScreen() {
           
           {/* Section Introduction */}
           <Box marginBottom="l">
-            <Text variant="h2" color="text/primary" marginBottom="xs">
+            <Text variant="h1" color="text/primary" marginBottom="xs">
               At the end of this season, I want to:
             </Text>
           </Box>

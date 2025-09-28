@@ -127,10 +127,10 @@ export default function SeasonBodyMetricsScreen() {
         <Box paddingHorizontal="l">
           {/* Header Section */}
           <Box paddingVertical="xl">
-            <Text variant="h2" color="text/primary" marginBottom="m">
+            <Text variant="h1" color="text/primary" marginBottom="m">
               Want to keep an eye on anything else?
             </Text>
-            <Text variant="body" color="text/primary" style={{ opacity: 0.9 }}>
+            <Text variant="body" color="text/secondary">
               Optional ways to track your progress beyond strength
             </Text>
           </Box>
@@ -166,7 +166,7 @@ export default function SeasonBodyMetricsScreen() {
 
           {/* Skip Option */}
           <Box marginBottom="l">
-            <Text variant="h3" color="text/primary" marginBottom="m">
+            <Text variant="h2" color="text/primary" marginBottom="m">
               Keep it focused:
             </Text>
             <SimpleSelectionButton 
