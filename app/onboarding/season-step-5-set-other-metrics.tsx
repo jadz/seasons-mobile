@@ -170,7 +170,7 @@ export default function SeasonSetOtherMetricsScreen() {
       <Box key={metric.id} marginBottom="l">
         <Box
           backgroundColor="bg/surface"
-          borderRadius="l"
+          borderRadius="xl"
           padding="l"
         >
           <Text variant="h3" color="text/primary" marginBottom="xs">
@@ -254,49 +254,49 @@ export default function SeasonSetOtherMetricsScreen() {
             />
           </Box>
 
-          {/* Goal Selection - Clean Buttons */}
+          {/* Goal Selection - Form Elements */}
           <Box>
-            <Text variant="label" color="text/primary" marginBottom="m" style={{ fontWeight: '600' }}>
+            <Text variant="label" color="text/secondary" marginBottom="xs">
               {config.targetLabel}
             </Text>
             <Box>
               {(config as any).options?.map((option: any) => (
                 <Box
                   key={option.id}
-                  style={{
-                    backgroundColor: metric.targetValue === option.id ? color : '#F8F9FA',
-                    borderRadius: 12,
-                    paddingHorizontal: 16,
-                    paddingVertical: 14,
-                    marginBottom: 8,
-                    borderWidth: 1,
-                    borderColor: metric.targetValue === option.id ? color : '#E9ECEF',
-                  }}
+                  backgroundColor={metric.targetValue === option.id ? 'brand/primary' : 'transparent'}
+                  borderRadius={16}
+                  borderWidth={1}
+                  borderColor={metric.targetValue === option.id ? 'brand/primary' : 'border/subtle'}
+                  paddingHorizontal="l"
+                  paddingVertical="m"
+                  marginBottom="s"
                   onTouchEnd={() => updateMetricData(metric.id, 'targetValue', option.id)}
                 >
                   <Box flexDirection="row" justifyContent="space-between" alignItems="center">
                     <Text 
                       variant="body" 
-                      color={metric.targetValue === option.id ? 'brand/onPrimary' : 'brand/primary'}
+                      color={metric.targetValue === option.id ? 'brand/onPrimary' : 'text/primary'}
                       style={{ fontWeight: '500' }}
                     >
                       {option.label}
                     </Text>
-                    <Text 
-                      variant="caption" 
-                      color={metric.targetValue === option.id ? 'text/primary' : 'text/inverse'}
-                      style={{ 
-                        backgroundColor: metric.targetValue === option.id ? 'rgba(255,255,255,0.2)' : color,
-                        color: 'white',
-                        paddingHorizontal: 8,
-                        paddingVertical: 2,
-                        borderRadius: 8,
-                        fontSize: 11,
-                        fontWeight: '600',
-                      }}
+                    <Box
+                      backgroundColor={metric.targetValue === option.id ? 'brand/onPrimary' : 'brand/primary'}
+                      borderRadius="sm"
+                      paddingHorizontal="s"
+                      paddingVertical="xs"
                     >
-                      {option.range}
-                    </Text>
+                      <Text 
+                        variant="caption" 
+                        color={metric.targetValue === option.id ? 'brand/primary' : 'brand/onPrimary'}
+                        style={{ 
+                          fontSize: 11,
+                          fontWeight: '600',
+                        }}
+                      >
+                        {option.range}
+                      </Text>
+                    </Box>
                   </Box>
                 </Box>
               ))}
