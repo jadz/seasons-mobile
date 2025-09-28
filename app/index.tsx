@@ -3,7 +3,8 @@ import { useAuth } from '../hooks/auth';
 import { Text, View } from 'react-native';
 
 export default function Index() {
-  return <Redirect href="/onboarding/overview" />;
+  // return <Redirect href="/onboarding/overview" />;
+  return <Redirect href="/onboarding/season-overview" />;
   // return <Redirect href="/onboarding/season-step-1-outcomes" />;
   // return <Redirect href="/onboarding/season-step-5-set-other-metrics-tab" />;
 

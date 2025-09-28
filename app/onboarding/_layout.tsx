@@ -19,6 +19,30 @@ export default function OnboardingLayout() {
           }}
         />
         <Stack.Screen 
+          name="user-step-1-username" 
+          options={{
+            title: 'Choose Username',
+          }}
+        />
+        <Stack.Screen 
+          name="user-step-2-personal-info" 
+          options={{
+            title: 'Personal Information',
+          }}
+        />
+        <Stack.Screen 
+          name="user-step-3-unit-preferences" 
+          options={{
+            title: 'Unit Preferences',
+          }}
+        />
+        <Stack.Screen 
+          name="season-overview" 
+          options={{
+            title: 'Create Your Season',
+          }}
+        />
+        <Stack.Screen 
           name="season-step-1-outcomes" 
           options={{
             title: 'Choose Your Goal',

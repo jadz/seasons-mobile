@@ -11,8 +11,8 @@ export default function OnboardingOverviewScreen() {
   const theme = useTheme<Theme>();
 
   const handleGetStarted = () => {
-    // Navigate to first onboarding step
-    router.push('/onboarding/season-step-1-outcomes');
+    // Navigate to user information collection first
+    router.push('/onboarding/user-step-1-username');
   };
 
   const handleSkipOnboarding = () => {
