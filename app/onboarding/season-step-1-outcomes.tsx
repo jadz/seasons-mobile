@@ -4,22 +4,22 @@ import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Box, Text, Button, WizardBar, SelectionCard, Header } from '../../components/ui';
 
-export default function SeasonGoalsScreen() {
-  const [selectedGoal, setSelectedGoal] = useState<string | null>(null);
+export default function SeasonFocusScreen() {
+  const [selectedFocus, setSelectedFocus] = useState<string | null>(null);
   const insets = useSafeAreaInsets();
 
-  const handleGoalSelection = (goalId: string) => {
-    setSelectedGoal(goalId);
+  const handleFocusSelection = (focusId: string) => {
+    setSelectedFocus(focusId);
     
     // Immediate navigation based on selection
-    if (goalId === 'stronger') {
+    if (focusId === 'stronger') {
       // Small delay for visual feedback, then navigate
       setTimeout(() => {
         // router.push('/onboarding/season-step-5-set-other-metrics');
         router.push('/onboarding/season-step-2-strength');
       }, 15);
     }
-    // For other goals, we could add different navigation paths later
+    // For other focuses, we could add different navigation paths later
   };
 
   const handleBackPress = () => {
@@ -51,28 +51,28 @@ export default function SeasonGoalsScreen() {
           {/* Section Introduction */}
           <Box marginBottom="l">
             <Text variant="h1" color="text/primary" marginBottom="xs">
-              At the end of this season, I want to:
+              This season, my focus is:
             </Text>
           </Box>
           
-          {/* Goal Selection Cards */}
+          {/* Focus Selection Cards */}
           <Box marginBottom="xl">
             <SelectionCard 
-              title="Get Stronger"
+              title="Strength"
               colorVariant="coral"
-              label="STRENGTH"
-              largeDescription="Lift heavier weights and build muscle"
-              isSelected={selectedGoal === 'stronger'}
-              onPress={() => handleGoalSelection('stronger')}
+              label="STRENGTH FOCUS"
+              largeDescription="The outcome I want: Lift heavier and build muscle"
+              isSelected={selectedFocus === 'stronger'}
+              onPress={() => handleFocusSelection('stronger')}
             />
             
             <Box style={{ opacity: 0.6 }}>
               <SelectionCard 
-                title="Get Faster" 
+                title="Speed" 
                 colorVariant="purple"
-                label="SPEED"
-                largeDescription="Run faster and improve endurance"
-                isSelected={selectedGoal === 'faster'}
+                label="SPEED FOCUS"
+                largeDescription="The outcome I want: Run faster with better endurance"
+                isSelected={selectedFocus === 'faster'}
                 onPress={() => {}}
                 isDisabled={true}
               />
@@ -80,11 +80,11 @@ export default function SeasonGoalsScreen() {
             
             <Box style={{ opacity: 0.6 }}>
               <SelectionCard 
-                title="Get Leaner"
+                title="Body Composition"
                 colorVariant="navy"
-                label="BODY COMPOSITION"
-                largeDescription="Lose fat and tone your body"
-                isSelected={selectedGoal === 'leaner'}
+                label="COMPOSITION FOCUS"
+                largeDescription="The outcome I want: Lose fat and get leaner"
+                isSelected={selectedFocus === 'leaner'}
                 onPress={() => {}}
                 isDisabled={true}
               />
@@ -94,8 +94,8 @@ export default function SeasonGoalsScreen() {
               <SelectionCard 
                 title="Something Else"
                 colorVariant="default"
-                description="More goals coming soon"
-                isSelected={selectedGoal === 'custom'}
+                description="More focuses coming soon"
+                isSelected={selectedFocus === 'custom'}
                 onPress={() => {}}
                 isDisabled={true}
               />

@@ -227,7 +227,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
             {/* Simple Header */}
             <Box paddingVertical="l">
               <Text variant="h1" color="text/primary" marginBottom="s">
-                Review your strength targets
+                Review your strength focus
               </Text>
             </Box>
             
@@ -236,19 +236,19 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
               {liftsData.map((lift, index) => {
                 const currentWeight = parseFloat(lift.currentWeight) || 0;
                 const targetWeight = parseFloat(lift.targetWeight) || 0;
-                const hasValidGoal = currentWeight > 0 && targetWeight > 0;
+                const hasValidTarget = currentWeight > 0 && targetWeight > 0;
                 
                 // Calculate relative improvement percentage
-                const relativeImprovement = hasValidGoal && currentWeight > 0 
+                const relativeImprovement = hasValidTarget && currentWeight > 0 
                   ? Math.round(((targetWeight - currentWeight) / currentWeight) * 100)
                   : 0;
                 
-                // Calculate current progress toward goal (for circle position)
-                const currentProgress = hasValidGoal && targetWeight > 0
+                // Calculate current progress toward target (for circle position)
+                const currentProgress = hasValidTarget && targetWeight > 0
                   ? Math.min((currentWeight / targetWeight) * 100, 100)
                   : 0;
                 
-                const isComplete = hasValidGoal && currentWeight >= targetWeight;
+                const isComplete = hasValidTarget && currentWeight >= targetWeight;
                 const improvementColor = relativeImprovement > 0 ? "state/success" : relativeImprovement < 0 ? "state/error" : "text/secondary";
                 
                 return (
@@ -259,7 +259,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                       paddingHorizontal="l"
                       paddingVertical="s"
                     >
-                      {hasValidGoal ? (
+                      {hasValidTarget ? (
                         <>
                           {/* Clean Header Row */}
                           <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="s">
@@ -331,7 +331,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                             style={{ paddingHorizontal: 12, paddingVertical: 6 }}
                           >
                             <Text variant="caption" color="brand/primary">
-                              Set Goal
+                              Set Focus
                             </Text>
                           </Button>
                         </Box>
@@ -350,7 +350,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                 onPress={handleComplete}
                 style={{ marginBottom: 12 }}
               >
-                Continue Season Setup
+                Continue with my focus
               </Button>
               
               <Button 
@@ -418,7 +418,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
             {currentLift.name}
           </Text>
           <Text variant="body" color="text/secondary">
-            Set your current ability and season goal
+            Set where you are now and the outcome you want
           </Text>
         </Box>
 
@@ -487,7 +487,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
             {/* Target section */}
             <Box marginBottom="l">
               <Text variant="label" color="text/secondary" marginBottom="s">
-                Target
+                Target (the outcome I want)
               </Text>
               <Box flexDirection="row" alignItems="center">
                 {currentLift.mode === 'reps' && (
@@ -556,7 +556,7 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
             disabled={!isCurrentLiftValid}
             style={{ marginBottom: 12 }}
           >
-            {currentLiftIndex < liftsData.length - 1 ? 'Next Lift' : 'Review Your Lifts'}
+            {currentLiftIndex < liftsData.length - 1 ? 'Next Lift' : 'Review My Focus'}
           </Button>
           
           {currentLiftIndex > 0 && (

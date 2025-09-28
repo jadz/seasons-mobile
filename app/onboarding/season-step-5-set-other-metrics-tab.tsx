@@ -56,7 +56,7 @@ export default function SeasonSetOtherMetricsScreen() {
       options: [
         { id: 'maintain', label: 'Keep it stable', range: '±1%' },
         { id: 'reduce', label: 'Reduce body fat', range: '-2-8%' },
-        { id: 'monitor', label: 'Track without goals', range: 'Track only' },
+        { id: 'monitor', label: 'Just track it', range: 'Track only' },
       ]
     },
     measurements: {
@@ -237,7 +237,7 @@ export default function SeasonSetOtherMetricsScreen() {
             {metric.title}
           </Text>
           <Text variant="caption" color="text/secondary">
-            Track any measurements you want - all optional
+            Monitor measurements while focusing on strength - all optional
           </Text>
         </Box>
         
@@ -299,8 +299,8 @@ export default function SeasonSetOtherMetricsScreen() {
     );
   }, [measurementData, updateMeasurement]);
 
-  // Goal-based metric rendering for weight and body fat - CLEAN VERSION
-  const renderGoalBasedMetric = useCallback((metric: MetricData) => {
+  // Focus-based metric rendering for weight and body fat - CLEAN VERSION
+  const renderFocusBasedMetric = useCallback((metric: MetricData) => {
     const config = getMetricConfig(metric.id);
     
     return (
@@ -311,7 +311,7 @@ export default function SeasonSetOtherMetricsScreen() {
             {metric.title}
           </Text>
           <Text variant="caption" color="text/secondary">
-            {metric.id === 'weight' ? 'Track your overall progress and body composition' : 'Monitor changes in body composition and health'}
+            {metric.id === 'weight' ? 'Monitor your weight while focusing on strength' : 'Keep an eye on changes while focusing on strength'}
           </Text>
         </Box>
         
@@ -334,10 +334,10 @@ export default function SeasonSetOtherMetricsScreen() {
           </Box>
         </Box>
 
-        {/* Season Goal Section */}
+        {/* What to Monitor Section */}
         <Box marginBottom="xl">
           <Text variant="h4" color="text/primary" marginBottom="m">
-            Season Goal
+            What I want to see
           </Text>
           <Text variant="label" color="text/secondary" marginBottom="m">
             {config.targetLabel}
@@ -468,7 +468,7 @@ export default function SeasonSetOtherMetricsScreen() {
     if (route.key === 'measurements') {
       content = renderMeasurementsMetric(metric);
     } else {
-      content = renderGoalBasedMetric(metric);
+      content = renderFocusBasedMetric(metric);
     }
 
     return (
@@ -498,7 +498,7 @@ export default function SeasonSetOtherMetricsScreen() {
             onPress={handleNext}
             style={{ marginBottom: 12 }}
           >
-            {hasAnyValues ? "Create my season!" : "Create season without baselines"}
+            {hasAnyValues ? "Create my focus season!" : "Create my focus season without monitoring"}
           </Button>
           
           <Button 
@@ -507,13 +507,13 @@ export default function SeasonSetOtherMetricsScreen() {
             onPress={handleSkipAll}
           >
             <Text color="text/secondary">
-              Skip all - I'll set these up later
+              Skip monitoring - focus on strength only
             </Text>
           </Button>
         </Box>
       </ScrollView>
     );
-  }, [metricsData, hasAnyValues, handleNext, handleSkipAll, renderGoalBasedMetric, renderMeasurementsMetric]);
+  }, [metricsData, hasAnyValues, handleNext, handleSkipAll, renderFocusBasedMetric, renderMeasurementsMetric]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -556,10 +556,10 @@ export default function SeasonSetOtherMetricsScreen() {
         {/* Header Section */}
         <Box paddingHorizontal="l" paddingVertical="xl">
           <Text variant="h1" color="text/primary" marginBottom="m">
-            Tell us where you are, and where you want to be
+            Tell us where you are, and what you want to keep an eye on
           </Text>
           <Text variant="body" color="text/secondary">
-            Set your baseline numbers to track progress
+            Set your baseline numbers to monitor while focusing on strength
           </Text>
         </Box>
         

@@ -22,22 +22,22 @@ export default function SeasonBodyMetricsScreen() {
     {
       id: 'weight',
       title: 'Body Weight',
-      description: 'Track overall weight changes',
+      description: 'Monitor weight changes',
     },
     {
       id: 'body-fat',
       title: 'Body Fat %',
-      description: 'Monitor body composition',
+      description: 'Keep an eye on body fat',
     },
     {
       id: 'measurements',
       title: 'Body Measurements',
-      description: 'Chest, waist, arms, etc.',
+      description: 'Monitor measurements',
     },
     {
       id: 'energy',
       title: 'Energy & Mood',
-      description: 'How you feel day-to-day',
+      description: 'Track energy and mood',
     },
   ];
 
@@ -72,7 +72,7 @@ export default function SeasonBodyMetricsScreen() {
     
     if (selectedMetrics.length > 0) {
       // User selected metrics, go to set baselines screen
-      router.push('/onboarding/season-step-5-set-other-metrics');
+      router.push('/onboarding/season-step-5-set-other-metrics-tab');
     } else {
       // User skipped tracking, complete onboarding
       // router.push('/onboarding/complete');
@@ -131,14 +131,14 @@ export default function SeasonBodyMetricsScreen() {
               Want to keep an eye on anything else?
             </Text>
             <Text variant="body" color="text/secondary">
-              Optional ways to track your progress beyond strength
+              Things to monitor while focusing on strength
             </Text>
           </Box>
           
           {/* Metrics Selection */}
           <Box marginBottom="xs">
             <Text variant="h2" color="text/primary" marginBottom="m">
-              I'd like to track:
+              I'd like to keep an eye on:
             </Text>
             <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="l">
               {metricOptions.map((metric) => (
@@ -175,7 +175,7 @@ export default function SeasonBodyMetricsScreen() {
               onPress={handleSkipToggle}
             />
             <Text variant="caption" color="text/secondary" marginTop="s">
-              You can always add body tracking later
+              You can always add other things to monitor later
             </Text>
           </Box>
 
@@ -188,8 +188,8 @@ export default function SeasonBodyMetricsScreen() {
               disabled={!hasSelection}
             >
               {hasSelection 
-                ? (skipTracking ? "Create my strength season" : "Create my season")
-                : "Choose your focus above"
+                ? (skipTracking ? "Create my strength focus season" : "Set my monitoring baselines")
+                : "Choose what to monitor above"
               }
             </Button>
           </Box>

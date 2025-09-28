@@ -91,7 +91,7 @@ export default function SeasonStrengthScreen() {
             {/* Specific Lifts Section */}
             <Box marginBottom="xs">
               <Text variant="h1" color="text/primary" marginBottom="m">
-                Specific lifts I want to improve:
+                For my strength focus, I want to improve:
               </Text>
               <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="l">
                 <SimpleSelectionButton 
@@ -150,7 +150,7 @@ export default function SeasonStrengthScreen() {
                 Keep it simple:
               </Text>
               <SimpleSelectionButton 
-                title="Focus on overall strength"
+                title="Overall strength (all lifts)"
                 isSelected={focusOverallStrength}
                 onPress={handleOverallStrengthToggle}
               />
@@ -160,7 +160,7 @@ export default function SeasonStrengthScreen() {
             {selectedLifts.length === 0 && !focusOverallStrength && (
               <Box marginBottom="m" alignItems="center">
                 <Text variant="caption" color="text/secondary" textAlign="center">
-                  Choose at least one option above to continue
+                  Choose what you want to focus on this season
                 </Text>
               </Box>
             )}
@@ -174,7 +174,7 @@ export default function SeasonStrengthScreen() {
                 onPress={() => router.push('/onboarding/season-step-3-strength-numbers')}
               >
                 {selectedLifts.length > 0 || focusOverallStrength 
-                  ? `Set my numbers` 
+                  ? `Set my strength focus` 
                   : "Choose your focus above"
                 }
               </Button>
