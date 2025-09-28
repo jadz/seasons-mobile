@@ -102,10 +102,13 @@ export default function SeasonSetOtherMetricsScreen() {
 
   // Measurements state for the measurements metric
   const [measurementData, setMeasurementData] = useState({
-    waist: { current: '', target: '' },
+    neck: { current: '', target: '' },
     chest: { current: '', target: '' },
-    arms: { current: '', target: '' },
-    thighs: { current: '', target: '' },
+    waist: { current: '', target: '' },
+    leftBicep: { current: '', target: '' },
+    rightBicep: { current: '', target: '' },
+    leftThigh: { current: '', target: '' },
+    rightThigh: { current: '', target: '' },
   });
 
   const updateMetricData = useCallback((metricId: string, field: 'currentValue' | 'targetValue', value: string) => {
@@ -114,21 +117,21 @@ export default function SeasonSetOtherMetricsScreen() {
     ));
   }, []);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     // Complete onboarding or navigate to final review
     console.log('Metrics data:', metricsData);
     // router.push('/onboarding/complete');
-  };
+  }, [metricsData]);
 
-  const handleSkipAll = () => {
+  const handleSkipAll = useCallback(() => {
     // Skip setting baseline numbers and complete onboarding
     console.log('Skipping all metric baselines');
     handleNext();
-  };
+  }, [handleNext]);
 
-  const handleBackPress = () => {
+  const handleBackPress = useCallback(() => {
     router.back();
-  };
+  }, []);
 
   // Check if user has filled at least some values
   const hasAnyValues = metricsData.some(metric => 
@@ -138,154 +141,6 @@ export default function SeasonSetOtherMetricsScreen() {
   const getMetricConfig = (metricId: string) => {
     return metricConfigs[metricId as keyof typeof metricConfigs];
   };
-  
-  // Create individual tab scene components
-  const WeightRoute = () => {
-    const metric = metricsData.find(m => m.id === 'weight');
-    return metric ? (
-      <ScrollView 
-        style={{ flex: 1 }} 
-        contentContainerStyle={{ padding: 24, paddingBottom: 150 }} 
-        showsVerticalScrollIndicator={false}
-        bounces={true}
-        scrollEventThrottle={16}
-        keyboardShouldPersistTaps="handled"
-        maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
-        removeClippedSubviews={false}
-      >
-        {renderGoalBasedMetric(metric)}
-        
-        {/* Help Text */}
-        <Box marginTop="xl" marginBottom="l" alignItems="center">
-          <Text variant="caption" color="text/secondary" textAlign="center">
-            Don't have all the numbers? No worries - you can add them later
-          </Text>
-        </Box>
-
-        {/* Action Buttons */}
-        <Box>
-          <Button 
-            variant="primary" 
-            fullWidth
-            onPress={handleNext}
-            style={{ marginBottom: 12 }}
-          >
-            {hasAnyValues ? "Create my season!" : "Create season without baselines"}
-          </Button>
-          
-          <Button 
-            variant="ghost" 
-            fullWidth
-            onPress={handleSkipAll}
-          >
-            <Text color="text/secondary">
-              Skip all - I'll set these up later
-            </Text>
-          </Button>
-        </Box>
-      </ScrollView>
-    ) : null;
-  };
-
-  const BodyFatRoute = () => {
-    const metric = metricsData.find(m => m.id === 'body-fat');
-    return metric ? (
-      <ScrollView 
-        style={{ flex: 1 }} 
-        contentContainerStyle={{ padding: 24, paddingBottom: 150 }} 
-        showsVerticalScrollIndicator={false}
-        bounces={true}
-        scrollEventThrottle={16}
-        keyboardShouldPersistTaps="handled"
-        maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
-        removeClippedSubviews={false}
-      >
-        {renderGoalBasedMetric(metric)}
-        
-        {/* Help Text */}
-        <Box marginTop="xl" marginBottom="l" alignItems="center">
-          <Text variant="caption" color="text/secondary" textAlign="center">
-            Don't have all the numbers? No worries - you can add them later
-          </Text>
-        </Box>
-
-        {/* Action Buttons */}
-        <Box>
-          <Button 
-            variant="primary" 
-            fullWidth
-            onPress={handleNext}
-            style={{ marginBottom: 12 }}
-          >
-            {hasAnyValues ? "Create my season!" : "Create season without baselines"}
-          </Button>
-          
-          <Button 
-            variant="ghost" 
-            fullWidth
-            onPress={handleSkipAll}
-          >
-            <Text color="text/secondary">
-              Skip all - I'll set these up later
-            </Text>
-          </Button>
-        </Box>
-      </ScrollView>
-    ) : null;
-  };
-
-  const MeasurementsRoute = () => {
-    const metric = metricsData.find(m => m.id === 'measurements');
-    return metric ? (
-      <ScrollView 
-        style={{ flex: 1 }} 
-        contentContainerStyle={{ padding: 24, paddingBottom: 150 }} 
-        showsVerticalScrollIndicator={false}
-        bounces={true}
-        scrollEventThrottle={16}
-        keyboardShouldPersistTaps="handled"
-        maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
-        removeClippedSubviews={false}
-      >
-        {renderMeasurementsMetric(metric)}
-        
-        {/* Help Text */}
-        <Box marginTop="xl" marginBottom="l" alignItems="center">
-          <Text variant="caption" color="text/secondary" textAlign="center">
-            Don't have all the numbers? No worries - you can add them later
-          </Text>
-        </Box>
-
-        {/* Action Buttons */}
-        <Box>
-          <Button 
-            variant="primary" 
-            fullWidth
-            onPress={handleNext}
-            style={{ marginBottom: 12 }}
-          >
-            {hasAnyValues ? "Create my season!" : "Create season without baselines"}
-          </Button>
-          
-          <Button 
-            variant="ghost" 
-            fullWidth
-            onPress={handleSkipAll}
-          >
-            <Text color="text/secondary">
-              Skip all - I'll set these up later
-            </Text>
-          </Button>
-        </Box>
-      </ScrollView>
-    ) : null;
-  };
-
-  const renderScene = SceneMap({
-    weight: WeightRoute,
-    'body-fat': BodyFatRoute,
-    measurements: MeasurementsRoute,
-  });
 
   // Special handling for photos metric
   const renderPhotosMetric = (metric: MetricData, isLast: boolean = false) => (
@@ -348,12 +203,30 @@ export default function SeasonSetOtherMetricsScreen() {
   }, []);
 
   // Special handling for measurements metric
-  const renderMeasurementsMetric = (metric: MetricData) => {
-    const measurements = [
-      { id: 'waist', label: 'Waist', placeholder: '85' },
-      { id: 'chest', label: 'Chest', placeholder: '100' },
-      { id: 'arms', label: 'Arms', placeholder: '35' },
-      { id: 'thighs', label: 'Thighs', placeholder: '60' },
+  const renderMeasurementsMetric = useCallback((metric: MetricData) => {
+    const measurementGroups = [
+      {
+        title: 'Upper Body',
+        measurements: [
+          { id: 'neck', label: 'Neck', placeholder: '38' },
+          { id: 'chest', label: 'Chest', placeholder: '100' },
+          { id: 'waist', label: 'Waist', placeholder: '85' },
+        ]
+      },
+      {
+        title: 'Arms',
+        measurements: [
+          { id: 'leftBicep', label: 'Left Bicep', placeholder: '35' },
+          { id: 'rightBicep', label: 'Right Bicep', placeholder: '35' },
+        ]
+      },
+      {
+        title: 'Legs',
+        measurements: [
+          { id: 'leftThigh', label: 'Left Thigh', placeholder: '60' },
+          { id: 'rightThigh', label: 'Right Thigh', placeholder: '60' },
+        ]
+      }
     ];
 
     return (
@@ -368,58 +241,66 @@ export default function SeasonSetOtherMetricsScreen() {
           </Text>
         </Box>
         
-        {/* Measurements Grid - Flowing Layout */}
-        <Box marginBottom="xl">
-          <Box flexDirection="row" flexWrap="wrap" gap="m">
-            {measurements.map((measurement) => {
-              const data = measurementData[measurement.id as keyof typeof measurementData];
-              const hasCurrentValue = data.current.trim() !== '';
-              
-              return (
-                <Box key={measurement.id} style={{ minWidth: '45%', maxWidth: '48%' }}>
-                  <Text variant="bodyMedium" color="text/primary" marginBottom="s">
-                    {measurement.label}
-                  </Text>
-                  
-                  {/* Current Input */}
-                  <Box marginBottom="s">
-                    <Text variant="caption" color="text/secondary" marginBottom="xs">
-                      Current
+        {/* Measurement Groups */}
+        {measurementGroups.map((group, groupIndex) => (
+          <Box key={group.title} marginBottom="xl">
+            {/* Group Title */}
+            <Text variant="h4" color="text/primary" marginBottom="m">
+              {group.title}
+            </Text>
+            
+            {/* Measurements Grid - Flowing Layout */}
+            <Box flexDirection="row" flexWrap="wrap" gap="m">
+              {group.measurements.map((measurement) => {
+                const data = measurementData[measurement.id as keyof typeof measurementData];
+                const hasCurrentValue = data.current.trim() !== '';
+                
+                return (
+                  <Box key={measurement.id} style={{ minWidth: '45%', maxWidth: '48%' }}>
+                    <Text variant="bodyMedium" color="text/primary" marginBottom="s">
+                      {measurement.label}
                     </Text>
-                    <UnitInput
-                      placeholder={measurement.placeholder}
-                      value={data.current}
-                      onChangeText={(value) => updateMeasurement(measurement.id, 'current', value)}
-                      unit="cm"
-                    />
-                  </Box>
-
-                  {/* Target Input - show if current has value */}
-                  {hasCurrentValue && (
-                    <Box>
+                    
+                    {/* Current Input */}
+                    <Box marginBottom="s">
                       <Text variant="caption" color="text/secondary" marginBottom="xs">
-                        Target
+                        Current
                       </Text>
                       <UnitInput
                         placeholder={measurement.placeholder}
-                        value={data.target}
-                        onChangeText={(value) => updateMeasurement(measurement.id, 'target', value)}
+                        value={data.current}
+                        onChangeText={(value) => updateMeasurement(measurement.id, 'current', value)}
                         unit="cm"
                       />
                     </Box>
-                  )}
-                </Box>
-              );
-            })}
+
+                    {/* Target Input - show if current has value */}
+                    {hasCurrentValue && (
+                      <Box>
+                        <Text variant="caption" color="text/secondary" marginBottom="xs">
+                          Target
+                        </Text>
+                        <UnitInput
+                          placeholder={measurement.placeholder}
+                          value={data.target}
+                          onChangeText={(value) => updateMeasurement(measurement.id, 'target', value)}
+                          unit="cm"
+                        />
+                      </Box>
+                    )}
+                  </Box>
+                );
+              })}
+            </Box>
           </Box>
-        </Box>
+        ))}
 
       </Box>
     );
-  };
+  }, [measurementData, updateMeasurement]);
 
   // Goal-based metric rendering for weight and body fat - CLEAN VERSION
-  const renderGoalBasedMetric = (metric: MetricData) => {
+  const renderGoalBasedMetric = useCallback((metric: MetricData) => {
     const config = getMetricConfig(metric.id);
     
     return (
@@ -495,7 +376,7 @@ export default function SeasonSetOtherMetricsScreen() {
 
       </Box>
     );
-  };
+  }, [updateMetricData]);
 
   // Standard metric rendering for energy levels
   const renderStandardMetric = (metric: MetricData) => {
@@ -567,6 +448,61 @@ export default function SeasonSetOtherMetricsScreen() {
       </Box>
     );
   };
+
+  const renderScene = useCallback(({ route }: { route: { key: string } }) => {
+    const metric = metricsData.find(m => m.id === route.key);
+    if (!metric) return null;
+
+    let content;
+    if (route.key === 'measurements') {
+      content = renderMeasurementsMetric(metric);
+    } else {
+      content = renderGoalBasedMetric(metric);
+    }
+
+    return (
+      <ScrollView 
+        style={{ flex: 1 }} 
+        contentContainerStyle={{ padding: 24, paddingBottom: 150 }} 
+        showsVerticalScrollIndicator={false}
+        bounces={true}
+        scrollEventThrottle={16}
+        keyboardShouldPersistTaps="handled"
+        removeClippedSubviews={false}
+      >
+        {content}
+        
+        {/* Help Text */}
+        <Box marginTop="xl" marginBottom="l" alignItems="center">
+          <Text variant="caption" color="text/secondary" textAlign="center">
+            Don't have all the numbers? No worries - you can add them later
+          </Text>
+        </Box>
+
+        {/* Action Buttons */}
+        <Box>
+          <Button 
+            variant="primary" 
+            fullWidth
+            onPress={handleNext}
+            style={{ marginBottom: 12 }}
+          >
+            {hasAnyValues ? "Create my season!" : "Create season without baselines"}
+          </Button>
+          
+          <Button 
+            variant="ghost" 
+            fullWidth
+            onPress={handleSkipAll}
+          >
+            <Text color="text/secondary">
+              Skip all - I'll set these up later
+            </Text>
+          </Button>
+        </Box>
+      </ScrollView>
+    );
+  }, [metricsData, hasAnyValues, handleNext, handleSkipAll, renderGoalBasedMetric, renderMeasurementsMetric]);
 
   return (
     <View style={{ flex: 1 }}>
