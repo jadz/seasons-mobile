@@ -21,6 +21,10 @@ export default function SeasonStrengthScreen() {
       if (prev.includes(liftId)) {
         return prev.filter(id => id !== liftId);
       } else {
+        // Cap at 3 lifts maximum
+        if (prev.length >= 3) {
+          return prev; // Don't add more if already at limit
+        }
         return [...prev, liftId];
       }
     });
@@ -93,43 +97,54 @@ export default function SeasonStrengthScreen() {
               <Text variant="h1" color="text/primary" marginBottom="m">
                 For my strength focus, I want to improve:
               </Text>
-              <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="l">
+              <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="m">
                 <SimpleSelectionButton 
                   title="Bench Press"
                   isSelected={selectedLifts.includes('bench')}
                   onPress={() => handleLiftSelection('bench')}
-                  isDisabled={focusOverallStrength}
+                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('bench'))}
                 />
                 <SimpleSelectionButton 
                   title="Overhead Press"
                   isSelected={selectedLifts.includes('overhead')}
                   onPress={() => handleLiftSelection('overhead')}
-                  isDisabled={focusOverallStrength}
+                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('overhead'))}
                 />
                 <SimpleSelectionButton 
                   title="Squat"
                   isSelected={selectedLifts.includes('squat')}
                   onPress={() => handleLiftSelection('squat')}
-                  isDisabled={focusOverallStrength}
+                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('squat'))}
                 />
                 <SimpleSelectionButton 
                   title="Deadlift"
                   isSelected={selectedLifts.includes('deadlift')}
                   onPress={() => handleLiftSelection('deadlift')}
-                  isDisabled={focusOverallStrength}
+                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('deadlift'))}
                 />
                 <SimpleSelectionButton 
                   title="Barbell Row"
                   isSelected={selectedLifts.includes('row')}
                   onPress={() => handleLiftSelection('row')}
-                  isDisabled={focusOverallStrength}
+                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('row'))}
                 />
-                <SimpleSelectionButton 
-                  title="See more +"
-                  isSelected={false}
-                  onPress={handleAddAnotherLift}
-                  isDisabled={focusOverallStrength}
-                />
+              </Box>
+              
+              {/* Selection limit message */}
+              <Box marginBottom="l">
+                {selectedLifts.length >= 3 ? (
+                  <Text variant="caption" color="text/secondary" textAlign="center">
+                    Perfect! Focus on these 3 lifts to get started. You can add more lifts later in your season.
+                  </Text>
+                ) : selectedLifts.length > 0 ? (
+                  <Text variant="caption" color="text/secondary" textAlign="center">
+                    {selectedLifts.length} of 3 lifts selected • Pick up to 3 to get started
+                  </Text>
+                ) : (
+                  <Text variant="caption" color="text/secondary" textAlign="center">
+                    Pick up to 3 lifts to focus on this season
+                  </Text>
+                )}
               </Box>
             </Box>
 

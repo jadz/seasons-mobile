@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { View, ScrollView, TouchableWithoutFeedback, Keyboard, InputAccessoryView, Platform, useWindowDimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import { router } from 'expo-router';
@@ -47,7 +47,9 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
   const [currentLiftIndex, setCurrentLiftIndex] = useState(0);
   const [showSummary, setShowSummary] = useState(false);
   const [activeInputField, setActiveInputField] = useState<string | null>(null);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
   const currentLift = liftsData[currentLiftIndex];
+  const scrollViewRef = useRef<ScrollView>(null);
   
   // Tab state for TabView
   const [index, setIndex] = useState(0);
@@ -64,6 +66,28 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
   const targetRepsRef = useRef<any>(null);
   const targetWeightRef = useRef<any>(null);
   
+  // Handle keyboard events
+  useEffect(() => {
+    const keyboardWillShow = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow',
+      (event) => {
+        setKeyboardHeight(event.endCoordinates.height);
+      }
+    );
+    
+    const keyboardWillHide = Keyboard.addListener(
+      Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide',
+      () => {
+        setKeyboardHeight(0);
+      }
+    );
+
+    return () => {
+      keyboardWillShow.remove();
+      keyboardWillHide.remove();
+    };
+  }, []);
+
   // Handle tap outside to dismiss keyboard
   const handleTapOutside = () => {
     Keyboard.dismiss();
@@ -76,74 +100,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
     ));
   }, [currentLiftIndex]);
 
-  // Stable keyboard toolbar components to prevent re-rendering flashes
-  const keyboardToolbarCurrent = React.useMemo(() => (
-    <InputAccessoryView nativeID="keyboardToolbar">
-      <Box 
-        flexDirection="row" 
-        justifyContent="space-between" 
-        alignItems="center" 
-        paddingHorizontal="l" 
-        paddingVertical="m"
-        backgroundColor="bg/surface"
-        style={{ borderTopWidth: 1, borderTopColor: '#E5E7EB' }}
-      >
-        <Button
-          variant="ghost"
-          onPress={() => {
-            if (activeInputField) {
-              updateCurrentLift(activeInputField as keyof LiftData, '');
-            }
-          }}
-        >
-          Clear
-        </Button>
-        <Button
-          variant="ghost"
-          onPress={() => {
-            Keyboard.dismiss();
-            setActiveInputField(null);
-          }}
-        >
-          Done
-        </Button>
-      </Box>
-    </InputAccessoryView>
-  ), [activeInputField]);
-
-  const keyboardToolbarTarget = React.useMemo(() => (
-    <InputAccessoryView nativeID="keyboardToolbarTarget">
-      <Box 
-        flexDirection="row" 
-        justifyContent="space-between" 
-        alignItems="center" 
-        paddingHorizontal="l" 
-        paddingVertical="m"
-        backgroundColor="bg/surface"
-        style={{ borderTopWidth: 1, borderTopColor: '#E5E7EB' }}
-      >
-        <Button
-          variant="ghost"
-          onPress={() => {
-            if (activeInputField) {
-              updateCurrentLift(activeInputField as keyof LiftData, '');
-            }
-          }}
-        >
-          Clear
-        </Button>
-        <Button
-          variant="ghost"
-          onPress={() => {
-            Keyboard.dismiss();
-            setActiveInputField(null);
-          }}
-        >
-          Done
-        </Button>
-      </Box>
-    </InputAccessoryView>
-  ), [activeInputField]);
 
   const toggleMode = useCallback(() => {
     const newMode = currentLift.mode === '1rm' ? 'reps' : '1rm';
@@ -160,12 +116,8 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
   }, [currentLift.mode, currentLiftIndex]);
 
   const handleNext = useCallback(() => {
-    if (currentLiftIndex < liftsData.length - 1) {
-      setCurrentLiftIndex(currentLiftIndex + 1);
-    } else {
-      setShowSummary(true);
-    }
-  }, [currentLiftIndex, liftsData.length]);
+    setShowSummary(true);
+  }, []);
 
   const handlePrevious = useCallback(() => {
     if (showSummary) {
@@ -195,13 +147,22 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
   }, []);
 
   const isCurrentLiftValid = currentLift.currentWeight && currentLift.targetWeight;
+  const areAllLiftsValid = liftsData.every(lift => lift.currentWeight && lift.targetWeight);
 
   // Render individual lift form for TabView
   const renderLiftForm = useCallback((liftData: LiftData, liftIndex: number) => {
+    const paddingBottom = keyboardHeight > 0 
+      ? keyboardHeight + 20 // Just a little extra breathing room
+      : 150;
+
     return (
       <ScrollView 
+        ref={scrollViewRef}
         style={{ flex: 1 }} 
-        contentContainerStyle={{ padding: 24, paddingBottom: 150 }} 
+        contentContainerStyle={{ 
+          padding: 24, 
+          paddingBottom: paddingBottom
+        }} 
         showsVerticalScrollIndicator={false}
         bounces={true}
         scrollEventThrottle={16}
@@ -256,7 +217,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                       unit="reps"
                       width={100}
                       style={{ marginRight: 12 }}
-                      inputAccessoryViewID="keyboardToolbar"
                       onFocus={() => setActiveInputField('currentReps')}
                       onBlur={() => setActiveInputField(null)}
                     />
@@ -306,7 +266,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                       unit="reps"
                       width={100}
                       style={{ marginRight: 12 }}
-                      inputAccessoryViewID="keyboardToolbarTarget"
                       onFocus={() => setActiveInputField('targetReps')}
                       onBlur={() => setActiveInputField(null)}
                     />
@@ -347,31 +306,20 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           </Box>
         </Box>
 
-        {/* Action Buttons */}
+        {/* Action Button */}
         <Box>
           <Button 
             variant="primary" 
             fullWidth
             onPress={handleNext}
-            disabled={!isCurrentLiftValid}
-            style={{ marginBottom: 12 }}
+            disabled={!areAllLiftsValid}
           >
-            {currentLiftIndex < liftsData.length - 1 ? 'Next Lift' : 'Review My Focus'}
+            Review My Focus
           </Button>
-          
-          {currentLiftIndex > 0 && (
-            <Button 
-              variant="ghost" 
-              fullWidth
-              onPress={handlePrevious}
-            >
-              Previous Lift
-            </Button>
-          )}
         </Box>
       </ScrollView>
     );
-  }, [currentLiftIndex, updateCurrentLift, toggleMode, activeInputField, isCurrentLiftValid, handleNext, handlePrevious, liftsData.length]);
+  }, [currentLiftIndex, updateCurrentLift, toggleMode, activeInputField, areAllLiftsValid, handleNext, keyboardHeight]);
 
   const renderScene = useCallback(({ route }: { route: { key: string } }) => {
     const liftIndex = selectedLifts.indexOf(route.key);
@@ -414,7 +362,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           showBackButton={true}
           onBackPress={handleBackPress}
           variant="transparent"
-          backgroundColor="bg/page"
         />
         
         <Box paddingHorizontal="l">
@@ -605,7 +552,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
           showBackButton={true}
           onBackPress={handleBackPress}
           variant="transparent"
-          backgroundColor="bg/page"
         />
         
         <Box paddingHorizontal="l">
@@ -649,13 +595,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
         />
       </Box>
       
-      {/* Keyboard Toolbars */}
-      {Platform.OS === 'ios' && (
-        <>
-          {keyboardToolbarCurrent}
-          {keyboardToolbarTarget}
-        </>
-      )}
     </View>
   );
 }
