@@ -222,6 +222,7 @@ export const TrainingPhaseDefinitionCard: React.FC<TrainingPhaseDefinitionCardPr
         initialEndDate={phase.endDate}
         existingRanges={existingRanges}
         title={`${phase.name || 'Phase'} Training Dates`}
+        numberOfMonths={4}
       />
     </>
   );
