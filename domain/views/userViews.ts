@@ -6,5 +6,5 @@ export type UserWithProfile = User & {
 
 export interface UserProfileData {
   firstName: string;
-  hasCompletedOnboarding?: boolean;
+  username?: string;
 }

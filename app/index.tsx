@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/auth';
 import { Text, View } from 'react-native';
 
 export default function Index() {
-  return <Redirect href="/onboarding/overview" />;
+  // return <Redirect href="/onboarding/overview" />;
   // return <Redirect href="/onboarding/season-overview" />;
   // return <Redirect href="/onboarding/user-step-1-username" />;
   // return <Redirect href="/onboarding/season-step-6-training-phases" />;
@@ -12,7 +12,6 @@ export default function Index() {
   // return <Redirect href="/onboarding/season-step-5-set-other-metrics-tab" />;
 
   const { user, isLoading } = useAuth();
-
   if (isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -26,8 +25,8 @@ export default function Index() {
   }
 
   if (user.isNewUser) {
-    // return <Redirect href="/onboarding" />;
-    return <Redirect href="/user-onboarding" />;
+    return <Redirect href="/onboarding" />;
+    // return <Redirect href="/user-onboarding" />;
   }
 
   return <Redirect href="/(tabs)" />;

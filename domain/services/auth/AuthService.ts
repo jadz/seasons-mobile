@@ -109,13 +109,13 @@ export class AuthService {
         // Update existing profile
         await userRepository.updateProfile(authUser.id, {
           firstName: onboardingData.firstName,
-          hasCompletedOnboarding: true,
+          username: onboardingData.username,
         });
       } else {
         // Create new profile
         await userRepository.createProfile(authUser.id, {
           firstName: onboardingData.firstName,
-          hasCompletedOnboarding: true,
+          username: onboardingData.username,
         });
       }
 
@@ -132,25 +132,6 @@ export class AuthService {
     }
   }
 
-  /**
-   * Mark onboarding as complete for current user
-   */
-  static async markOnboardingComplete(): Promise<void> {
-    try {
-      const { data: { user: authUser }, error } = await supabase.auth.getUser();
-
-      if (error || !authUser) {
-        throw new Error('User not authenticated');
-      }
-
-      await userRepository.updateProfile(authUser.id, {
-        hasCompletedOnboarding: true,
-      });
-    } catch (error) {
-      console.error('Error in markOnboardingComplete:', error);
-      throw error;
-    }
-  }
 
   /**
    * Listen to authentication state changes

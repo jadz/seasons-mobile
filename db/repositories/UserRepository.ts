@@ -39,7 +39,7 @@ class UserRepository implements IUserRepository {
         .insert({
           user_id: userId,
           first_name: profileData.firstName,
-          has_completed_onboarding: profileData.hasCompletedOnboarding || false,
+          username: profileData.username,
         })
         .select('id')
         .single();
@@ -61,9 +61,7 @@ class UserRepository implements IUserRepository {
         .from('user_profiles')
         .update({
           ...(updateData.firstName && { first_name: updateData.firstName }),
-          ...(updateData.hasCompletedOnboarding !== undefined && { 
-            has_completed_onboarding: updateData.hasCompletedOnboarding 
-          }),
+          ...(updateData.username && { username: updateData.username }),
         })
         .eq('user_id', userId);
 
@@ -92,8 +90,8 @@ class UserRepository implements IUserRepository {
         id: authUser.id,
         email: authUser.email!,
         firstName: profile?.firstName,
-        isNewUser: !profile || !profile.hasCompletedOnboarding,
-        hasCompletedOnboarding: profile?.hasCompletedOnboarding || false,
+        username: profile?.username,
+        isNewUser: !profile,
         createdAt: new Date(authUser.created_at),
         updatedAt: new Date(authUser.updated_at || authUser.created_at),
         profile,
@@ -109,7 +107,7 @@ class UserRepository implements IUserRepository {
       id: data.id,
       userId: data.user_id,
       firstName: data.first_name || '',
-      hasCompletedOnboarding: data.has_completed_onboarding || false,
+      username: data.username || '',
       createdAt: new Date(data.created_at),
       updatedAt: new Date(data.updated_at),
     };

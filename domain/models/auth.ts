@@ -15,6 +15,7 @@ export interface VerifyOtpRequest {
 
 export interface OnboardingData {
   firstName: string;
+  username?: string;
 }
 
 import { User } from './user';
