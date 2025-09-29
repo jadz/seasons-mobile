@@ -46,7 +46,7 @@ const DayButton = memo<DayButtonProps>(({
   themeColors 
 }) => {
   if (!date) {
-    return <Box style={{ width: 40, height: 40 }} />;
+    return <View style={{ flex: 1, height: 40 }} />;
   }
 
   const handlePress = useCallback(() => {
@@ -55,7 +55,7 @@ const DayButton = memo<DayButtonProps>(({
 
   // Determine background styling
   let containerStyle: any = {
-    width: 40,
+    flex: 1,
     height: 40,
     justifyContent: 'center' as const,
     alignItems: 'center' as const,
@@ -153,25 +153,33 @@ const MonthComponent = memo<MonthComponentProps>(({ monthData, monthIndex, numbe
         </Box>
       )}
 
-      {/* Weekday Headers */}
-      <Box flexDirection="row" paddingHorizontal="l" marginBottom="m">
-        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
-          <Box key={index} style={{ width: 40 }} alignItems="center">
-            <Text variant="caption" color="text/secondary">{day}</Text>
-          </Box>
-        ))}
-      </Box>
-
-      {/* Calendar Grid */}
-      <Box paddingHorizontal="l">
-        <View style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          justifyContent: 'flex-start'
-        }}>
-          {monthData.days.map((date, index) => renderDay(date, `${monthIndex}-${index}`))}
-        </View>
-      </Box>
+        {/* Calendar Grid with Headers */}
+        <Box paddingHorizontal="l">
+          {/* Weekday Headers - using same grid structure */}
+          <View style={{ flexDirection: 'row', marginBottom: 12 }}>
+            {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, index) => (
+              <View key={index} style={{ flex: 1, height: 20, alignItems: 'center', justifyContent: 'center' }}>
+                <Text variant="caption" color="text/secondary">{day}</Text>
+              </View>
+            ))}
+          </View>
+          
+          {/* Calendar Days - using same grid structure */}
+          {Array.from({ length: Math.ceil(monthData.days.length / 7) }, (_, weekIndex) => {
+            const weekDays = monthData.days.slice(weekIndex * 7, (weekIndex + 1) * 7);
+            // Ensure each week has exactly 7 elements for proper alignment
+            while (weekDays.length < 7) {
+              weekDays.push(null);
+            }
+            return (
+              <View key={weekIndex} style={{ flexDirection: 'row' }}>
+                {weekDays.map((date, dayIndex) => 
+                  renderDay(date, `${monthIndex}-${weekIndex}-${dayIndex}`)
+                )}
+              </View>
+            );
+          })}
+        </Box>
     </Box>
   );
 });
@@ -209,7 +217,10 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
       const firstDay = new Date(year, month, 1);
       const lastDay = new Date(year, month + 1, 0);
       const daysInMonth = lastDay.getDate();
-      const startingDayOfWeek = firstDay.getDay();
+      
+      // Convert Sunday-based getDay() to Monday-based (0=Monday, 6=Sunday)
+      let startingDayOfWeek = firstDay.getDay();
+      startingDayOfWeek = startingDayOfWeek === 0 ? 6 : startingDayOfWeek - 1;
       
       // Generate calendar grid
       const days = [];
@@ -328,7 +339,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
 
   const renderDay = useCallback((date: Date | null, index: string | number) => {
     if (!date) {
-      return <Box key={index} style={{ width: 40, height: 40 }} />;
+      return <View key={index} style={{ flex: 1, height: 40 }} />;
     }
 
     const isSelected = dateCalculations.isDateInRange(date);
