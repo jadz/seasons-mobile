@@ -72,11 +72,11 @@ export default function SeasonBodyMetricsScreen() {
     
     if (selectedMetrics.length > 0) {
       // User selected metrics, go to set baselines screen
-      router.push('/onboarding/season-step-5-set-other-metrics-tab');
+      router.push('/onboarding/season-step-5-set-other-metrics');
     } else {
       // User skipped tracking, complete onboarding
       // router.push('/onboarding/complete');
-      console.log('Completing onboarding - no additional metrics');
+      router.push('/onboarding/season-step-5-set-other-metrics');
     }
   };
 
@@ -117,7 +117,6 @@ export default function SeasonBodyMetricsScreen() {
           showBackButton={true}
           onBackPress={handleBackPress}
           variant="transparent"
-          backgroundColor="bg/page"
         />
         
         <Box paddingHorizontal="l">

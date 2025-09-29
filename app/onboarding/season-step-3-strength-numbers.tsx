@@ -149,6 +149,12 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
   const isCurrentLiftValid = currentLift.currentWeight && currentLift.targetWeight;
   const areAllLiftsValid = liftsData.every(lift => lift.currentWeight && lift.targetWeight);
 
+  // Update currentLiftIndex when tab changes
+  const handleTabChange = useCallback((newIndex: number) => {
+    setIndex(newIndex);
+    setCurrentLiftIndex(newIndex);
+  }, []);
+
   // Render individual lift form for TabView
   const renderLiftForm = useCallback((liftData: LiftData, liftIndex: number) => {
     const paddingBottom = keyboardHeight > 0 
@@ -241,7 +247,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                   }}
                   unit="kg"
                   width={120}
-                  inputAccessoryViewID="keyboardToolbar"
                   onFocus={() => setActiveInputField('currentWeight')}
                   onBlur={() => setActiveInputField(null)}
                 />
@@ -290,7 +295,6 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
                   }}
                   unit="kg"
                   width={120}
-                  inputAccessoryViewID="keyboardToolbarTarget"
                   onFocus={() => setActiveInputField('targetWeight')}
                   onBlur={() => setActiveInputField(null)}
                 />
@@ -330,195 +334,192 @@ export default function SeasonStrengthNumbersOption1Enhanced() {
     return renderLiftForm(liftData, liftIndex);
   }, [selectedLifts, liftsData, renderLiftForm]);
 
-  if (showSummary) {
-    return (
-      <View style={{ flex: 1 }}>
-        <Box flex={1} backgroundColor="bg/page">
-        <Box style={{ paddingTop: insets.top }} backgroundColor="bg/page" />
-        {/* Header Gradient Overlay - Balanced Visibility */}
-        <LinearGradient
-          colors={[
-            'rgba(214, 123, 123, 0.35)', // More noticeable coral at top
-            'rgba(214, 123, 123, 0.22)', // Medium-strong coral
-            'rgba(214, 123, 123, 0.12)', // Medium coral
-            'rgba(214, 123, 123, 0.05)', // Light coral
-            'rgba(235, 238, 237, 0)', // Fully transparent background
-          ]}
-          locations={[0, 0.3, 0.6, 0.8, 1]}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: 190 + insets.top, // Cover header area properly
-            zIndex: 0,
-          }}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0, y: 1 }}
-        />
-        
-        <Header
-          title="Let's build your season"
-          showBackButton={true}
-          onBackPress={handleBackPress}
-          variant="transparent"
-        />
-        
+  // Render summary view
+  const renderSummaryView = () => (
+    <View style={{ flex: 1 }}>
+      <Box flex={1} backgroundColor="bg/page">
+      <Box style={{ paddingTop: insets.top }} backgroundColor="bg/page" />
+      {/* Header Gradient Overlay - Balanced Visibility */}
+      <LinearGradient
+        colors={[
+          'rgba(214, 123, 123, 0.35)', // More noticeable coral at top
+          'rgba(214, 123, 123, 0.22)', // Medium-strong coral
+          'rgba(214, 123, 123, 0.12)', // Medium coral
+          'rgba(214, 123, 123, 0.05)', // Light coral
+          'rgba(235, 238, 237, 0)', // Fully transparent background
+        ]}
+        locations={[0, 0.3, 0.6, 0.8, 1]}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: 190 + insets.top, // Cover header area properly
+          zIndex: 0,
+        }}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      />
+      
+      <Header
+        title="Let's build your season"
+        showBackButton={true}
+        onBackPress={handleBackPress}
+        variant="transparent"
+      />
+      
+      <Box paddingHorizontal="l">
+        <WizardBar totalSteps={4} currentStep={2} />
+      </Box>
+      
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Box paddingHorizontal="l">
-          <WizardBar totalSteps={4} currentStep={2} />
-        </Box>
-        
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <Box paddingHorizontal="l">
-            {/* Simple Header */}
-            <Box paddingVertical="l">
-              <Text variant="h1" color="text/primary" marginBottom="s">
-                Review your strength focus
-              </Text>
-            </Box>
-            
-            {/* Progress Row Layout - Inspired by Recovery Impact Analysis */}
-            <Box marginBottom="xl">
-              {liftsData.map((lift, index) => {
-                const currentWeight = parseFloat(lift.currentWeight) || 0;
-                const targetWeight = parseFloat(lift.targetWeight) || 0;
-                const hasValidTarget = currentWeight > 0 && targetWeight > 0;
-                
-                // Calculate relative improvement percentage
-                const relativeImprovement = hasValidTarget && currentWeight > 0 
-                  ? Math.round(((targetWeight - currentWeight) / currentWeight) * 100)
-                  : 0;
-                
-                // Calculate current progress toward target (for circle position)
-                const currentProgress = hasValidTarget && targetWeight > 0
-                  ? Math.min((currentWeight / targetWeight) * 100, 100)
-                  : 0;
-                
-                const isComplete = hasValidTarget && currentWeight >= targetWeight;
-                const improvementColor = relativeImprovement > 0 ? "state/success" : relativeImprovement < 0 ? "state/error" : "text/secondary";
-                
-                return (
-                  <Box key={lift.id} marginBottom="l">
-                    <Box 
-                      backgroundColor="bg/surface"
-                      borderRadius="md"
-                      paddingHorizontal="l"
-                      paddingVertical="s"
-                    >
-                      {hasValidTarget ? (
-                        <>
-                          {/* Clean Header Row */}
-                          <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="s">
-                            <Text variant="h3" color="text/primary">
-                              {lift.name}
-                            </Text>
-                            <Button
-                              variant="ghost"
-                              onPress={() => editLift(index)}
-                              style={{ paddingHorizontal: 12, paddingVertical: 8 }}
-                            >
-                              <Text color="brand/primary" style={{ fontSize: 14, fontWeight: '600' }}>
-                                Edit
-                              </Text>
-                            </Button>
-                          </Box>
-
-                          {/* Current → Target Display */}
-                          <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-                            <Box alignItems="center" flex={1}>
-                              <Text variant="caption" color="text/secondary" style={{ textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
-                                CURRENT
-                              </Text>
-                              <Text variant="h2" color="text/primary">
-                                {lift.mode === 'reps' && lift.currentReps !== '1' 
-                                  ? `${lift.currentReps}×${lift.currentWeight}` 
-                                  : lift.currentWeight
-                                }
-                              </Text>
-                              <Text variant="caption" color="text/secondary">
-                                kg
-                              </Text>
-                            </Box>
-                            
-                            <Box alignItems="center" paddingHorizontal="l">
-                              <Text variant="h3" color="text/secondary">
-                                →
-                              </Text>
-                              <Text variant="caption" color={improvementColor} style={{ fontWeight: '600', marginTop: 4 }}>
-                                {relativeImprovement > 0 ? '+' : ''}{relativeImprovement}%
-                              </Text>
-                            </Box>
-                            
-                            <Box alignItems="center" flex={1}>
-                              <Text variant="caption" color="text/secondary" style={{ textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
-                                TARGET
-                              </Text>
-                              <Text variant="h2" color={isComplete ? "state/success" : "brand/primary"}>
-                                {lift.mode === 'reps' && lift.targetReps !== '1' 
-                                  ? `${lift.targetReps}×${lift.targetWeight}` 
-                                  : lift.targetWeight
-                                }
-                              </Text>
-                              <Text variant="caption" color="text/secondary">
-                                kg
-                              </Text>
-                            </Box>
-                          </Box>
-                        </>
-                      ) : (
-                        /* Empty State */
-                        <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+          {/* Simple Header */}
+          <Box paddingVertical="l">
+            <Text variant="h1" color="text/primary" marginBottom="s">
+              Review your strength focus
+            </Text>
+          </Box>
+          
+          {/* Progress Row Layout - Inspired by Recovery Impact Analysis */}
+          <Box marginBottom="xl">
+            {liftsData.map((lift, index) => {
+              const currentWeight = parseFloat(lift.currentWeight) || 0;
+              const targetWeight = parseFloat(lift.targetWeight) || 0;
+              const hasValidTarget = currentWeight > 0 && targetWeight > 0;
+              
+              // Calculate relative improvement percentage
+              const relativeImprovement = hasValidTarget && currentWeight > 0 
+                ? Math.round(((targetWeight - currentWeight) / currentWeight) * 100)
+                : 0;
+              
+              // Calculate current progress toward target (for circle position)
+              const currentProgress = hasValidTarget && targetWeight > 0
+                ? Math.min((currentWeight / targetWeight) * 100, 100)
+                : 0;
+              
+              const isComplete = hasValidTarget && currentWeight >= targetWeight;
+              const improvementColor = relativeImprovement > 0 ? "state/success" : relativeImprovement < 0 ? "state/error" : "text/secondary";
+              
+              return (
+                <Box key={lift.id} marginBottom="l">
+                  <Box 
+                    backgroundColor="bg/surface"
+                    borderRadius="md"
+                    paddingHorizontal="l"
+                    paddingVertical="s"
+                  >
+                    {hasValidTarget ? (
+                      <>
+                        {/* Clean Header Row */}
+                        <Box flexDirection="row" alignItems="center" justifyContent="space-between" marginBottom="s">
                           <Text variant="h3" color="text/primary">
                             {lift.name}
                           </Text>
                           <Button
                             variant="ghost"
                             onPress={() => editLift(index)}
-                            style={{ paddingHorizontal: 12, paddingVertical: 6 }}
+                            style={{ paddingHorizontal: 12, paddingVertical: 8 }}
                           >
-                            <Text variant="caption" color="brand/primary">
-                              Set Focus
+                            <Text color="brand/primary" style={{ fontSize: 14, fontWeight: '600' }}>
+                              Edit
                             </Text>
                           </Button>
                         </Box>
-                      )}
-                    </Box>
+
+                        {/* Current → Target Display */}
+                        <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+                          <Box alignItems="center" flex={1}>
+                            <Text variant="caption" color="text/secondary" style={{ textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
+                              CURRENT
+                            </Text>
+                            <Text variant="h2" color="text/primary">
+                              {lift.mode === 'reps' && lift.currentReps !== '1' 
+                                ? `${lift.currentReps}×${lift.currentWeight}` 
+                                : lift.currentWeight
+                              }
+                            </Text>
+                            <Text variant="caption" color="text/secondary">
+                              kg
+                            </Text>
+                          </Box>
+                          
+                          <Box alignItems="center" paddingHorizontal="l">
+                            <Text variant="h3" color="text/secondary">
+                              →
+                            </Text>
+                            <Text variant="caption" color={improvementColor} style={{ fontWeight: '600', marginTop: 4 }}>
+                              {relativeImprovement > 0 ? '+' : ''}{relativeImprovement}%
+                            </Text>
+                          </Box>
+                          
+                          <Box alignItems="center" flex={1}>
+                            <Text variant="caption" color="text/secondary" style={{ textTransform: 'uppercase', letterSpacing: 0.5, marginBottom: 4 }}>
+                              TARGET
+                            </Text>
+                            <Text variant="h2" color={isComplete ? "state/success" : "brand/primary"}>
+                              {lift.mode === 'reps' && lift.targetReps !== '1' 
+                                ? `${lift.targetReps}×${lift.targetWeight}` 
+                                : lift.targetWeight
+                              }
+                            </Text>
+                            <Text variant="caption" color="text/secondary">
+                              kg
+                            </Text>
+                          </Box>
+                        </Box>
+                      </>
+                    ) : (
+                      /* Empty State */
+                      <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+                        <Text variant="h3" color="text/primary">
+                          {lift.name}
+                        </Text>
+                        <Button
+                          variant="ghost"
+                          onPress={() => editLift(index)}
+                          style={{ paddingHorizontal: 12, paddingVertical: 6 }}
+                        >
+                          <Text variant="caption" color="brand/primary">
+                            Set Focus
+                          </Text>
+                        </Button>
+                      </Box>
+                    )}
                   </Box>
-                );
-              })}
-            </Box>
-
-            {/* Action Buttons */}
-            <Box marginBottom="xl">
-              <Button 
-                variant="primary" 
-                fullWidth
-                onPress={handleComplete}
-                style={{ marginBottom: 12 }}
-              >
-                Continue with my focus
-              </Button>
-              
-              <Button 
-                variant="ghost" 
-                fullWidth
-                onPress={handlePrevious}
-              >
-                Back to Edit
-              </Button>
-            </Box>
+                </Box>
+              );
+            })}
           </Box>
-        </ScrollView>
-        </Box>
-      </View>
-    );
-  }
 
-  // Update currentLiftIndex when tab changes
-  const handleTabChange = useCallback((newIndex: number) => {
-    setIndex(newIndex);
-    setCurrentLiftIndex(newIndex);
-  }, []);
+          {/* Action Buttons */}
+          <Box marginBottom="xl">
+            <Button 
+              variant="primary" 
+              fullWidth
+              onPress={handleComplete}
+              style={{ marginBottom: 12 }}
+            >
+              Continue with my focus
+            </Button>
+            
+            <Button 
+              variant="ghost" 
+              fullWidth
+              onPress={handlePrevious}
+            >
+              Back to Edit
+            </Button>
+          </Box>
+        </Box>
+      </ScrollView>
+      </Box>
+    </View>
+  );
+
+  if (showSummary) {
+    return renderSummaryView();
+  }
 
   return (
     <View style={{ flex: 1 }}>

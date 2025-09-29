@@ -67,6 +67,30 @@ export default function OnboardingLayout() {
           }}
         />
         <Stack.Screen 
+          name="season-step-5-duration" 
+          options={{
+            title: 'Season Duration',
+          }}
+        />
+        <Stack.Screen 
+          name="season-step-6-start-date" 
+          options={{
+            title: 'Start Date',
+          }}
+        />
+        <Stack.Screen 
+          name="season-step-7-deload" 
+          options={{
+            title: 'Deload Preference',
+          }}
+        />
+        <Stack.Screen 
+          name="season-step-8-phases" 
+          options={{
+            title: 'Training Phases',
+          }}
+        />
+        <Stack.Screen 
           name="season-step-5-set-other-metrics" 
           options={{
             title: 'Other Metrics',
