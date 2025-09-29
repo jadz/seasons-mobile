@@ -15,7 +15,8 @@ export { Badge, Card } from './display';
 export { Header, WizardBar, WizardDots } from './navigation';
 
 // Selection
-export { SelectionCard, SelectionList, PillarSelectionCard } from './selection';
+export { SelectionCard, SelectionList, PillarSelectionCard, DateRangePicker } from './selection';
+export type { DateRange, DateRangePickerProps } from './selection';
 
 // Domain
 export { MetricGoalCard } from './domain';

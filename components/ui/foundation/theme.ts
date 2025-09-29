@@ -222,6 +222,33 @@ const base = {
       elevation: 2,
     },
   },
+  cardVariants: {
+    default: {
+      shadowColor: 'shadow/default',
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.05,
+      shadowRadius: 2,
+      elevation: 1,
+      borderWidth: 0,
+    },
+    elevated: {
+      shadowColor: 'shadow/default',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 2,
+      borderWidth: 0,
+    },
+    outlined: {
+      borderWidth: 1,
+      borderColor: 'border/subtle',
+      shadowColor: 'transparent',
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
+    },
+  },
 };
 
 export const lightTheme = createTheme({

@@ -96,6 +96,12 @@ export default function OnboardingLayout() {
             title: 'Other Metrics',
           }}
         />
+        <Stack.Screen 
+          name="season-step-6-training-phases" 
+          options={{
+            title: 'Training Phases',
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );
