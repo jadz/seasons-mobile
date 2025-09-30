@@ -1,6 +1,10 @@
 import { IUserOnboardingRepository, userOnboardingRepository } from '../../../db/repositories/UserOnboardingRepository';
 import { IUserRepository, userRepository } from '../../../db/repositories/UserRepository';
 import { UserOnboardingProgress } from '../../models/userOnboarding';
+import { UserPreferencesService } from '../UserPreferencesService';
+import { userPreferencesRepository } from '../../../db/repositories/UserPreferencesRepository';
+import { UserPreferencesOnboardingData } from '../../views/userPreferencesViews';
+import { onboardingLogger } from '../../../utils/logger';
 
 /**
  * Service for managing user onboarding flow
@@ -11,7 +15,8 @@ import { UserOnboardingProgress } from '../../models/userOnboarding';
 export class OnboardingService {
   constructor(
     private readonly onboardingRepository: IUserOnboardingRepository,
-    private readonly userRepository: IUserRepository
+    private readonly userRepository: IUserRepository,
+    private readonly userPreferencesService: UserPreferencesService
   ) {}
 
   /**
@@ -123,18 +128,46 @@ export class OnboardingService {
   /**
    * Complete the unit preferences step
    * @param userId The user ID
-   * @throws Error if update fails
+   * @param preferencesData The user's unit preferences
+   * @throws Error if preferences creation fails or update fails
    */
-  async completeUnitPreferencesStep(userId: string): Promise<void> {
+  async completeUnitPreferencesStep(
+    userId: string, 
+    preferencesData: UserPreferencesOnboardingData
+  ): Promise<void> {
+    onboardingLogger.debug('OnboardingService.completeUnitPreferencesStep called', {
+      userId,
+      preferencesData,
+    });
+
     try {
+      // Create user preferences
+      onboardingLogger.debug('OnboardingService: Creating user preferences via UserPreferencesService');
+      const createdPreferences = await this.userPreferencesService.createUserPreferences(userId, preferencesData);
+      
+      onboardingLogger.info('OnboardingService: User preferences created successfully', {
+        createdPreferences,
+      });
+
       // Update onboarding progress
+      onboardingLogger.debug('OnboardingService: Updating onboarding progress');
       await this.onboardingRepository.upsert({
         userId,
         currentStepName: 'unit_preferences',
         currentStepNumber: '3',
       });
+
+      onboardingLogger.info('OnboardingService: Unit preferences step completed successfully', {
+        userId,
+        stepName: 'unit_preferences',
+        stepNumber: '3',
+      });
     } catch (error) {
-      console.error('Error completing unit preferences step:', error);
+      onboardingLogger.error('OnboardingService: Error completing unit preferences step', {
+        userId,
+        preferencesData,
+        error,
+      });
       throw error;
     }
   }
@@ -190,5 +223,6 @@ export class OnboardingService {
 // Export singleton instance for easy consumption
 export const onboardingService = new OnboardingService(
   userOnboardingRepository,
-  userRepository
+  userRepository,
+  new UserPreferencesService(userPreferencesRepository)
 );

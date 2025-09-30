@@ -11,6 +11,7 @@ import {
   UserPreferencesView,
   UserPreferencesOnboardingData
 } from '../views/userPreferencesViews';
+import { preferencesLogger } from '../../utils/logger';
 
 /**
  * Service for managing user preferences including advanced logging toggle and unit preferences
@@ -52,16 +53,23 @@ export class UserPreferencesService {
   }
 
   /**
-   * Create new user preferences during onboarding
+   * Create or update user preferences during onboarding
    * @param userId The user ID
    * @param onboardingData The preferences data from onboarding
-   * @returns The created preferences
-   * @throws Error if user already has preferences or data is invalid
+   * @returns The created or updated preferences
+   * @throws Error if data is invalid
    */
   async createUserPreferences(userId: string, onboardingData: UserPreferencesOnboardingData): Promise<UserPreferencesView> {
+    preferencesLogger.debug('UserPreferencesService.createUserPreferences called', {
+      userId,
+      onboardingData,
+    });
+
     try {
       // Validate the onboarding data
+      preferencesLogger.debug('UserPreferencesService: Validating onboarding data');
       if (!validateUserPreferences(onboardingData)) {
+        preferencesLogger.error('UserPreferencesService: Invalid preferences data', { onboardingData });
         throw new Error('Invalid preferences data');
       }
 
@@ -71,19 +79,26 @@ export class UserPreferencesService {
         advancedLoggingEnabled: false, // Default for new users
       };
 
-      const preferencesId = await this.userPreferencesRepository.create(preferencesData);
-      const created = await this.userPreferencesRepository.findById(preferencesId);
-      
-      if (!created) {
-        throw new Error('Failed to retrieve created preferences');
-      }
+      preferencesLogger.debug('UserPreferencesService: Upserting preferences in repository', {
+        preferencesData,
+      });
 
-      return created;
+      // Use createOrUpdate to handle both new users and users updating their preferences during onboarding
+      const result = await this.userPreferencesRepository.createOrUpdate(userId, preferencesData);
+      
+      preferencesLogger.info('UserPreferencesService: User preferences upserted successfully', {
+        userId,
+        result,
+      });
+
+      return result;
     } catch (error) {
-      console.error('Error creating user preferences:', error);
-      if (error instanceof Error && error.message.includes('already exist')) {
-        throw new Error('User already has preferences');
-      }
+      preferencesLogger.error('UserPreferencesService: Error upserting user preferences', {
+        userId,
+        onboardingData,
+        error,
+      });
+      
       throw error;
     }
   }

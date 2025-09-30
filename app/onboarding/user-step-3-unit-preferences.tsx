@@ -11,6 +11,9 @@ import {
   BodyMeasurementUnit, 
   DistanceUnit 
 } from '../../domain/models/userPreferences';
+import { useAuth } from '../../hooks/auth/useAuth';
+import { useOnboarding } from '../../hooks/onboarding/useOnboarding';
+import { onboardingLogger } from '../../utils/logger';
 
 export default function UserUnitPreferencesScreen() {
   const [bodyWeightUnit, setBodyWeightUnit] = useState<BodyWeightUnit>(BodyWeightUnit.KILOGRAMS);
@@ -19,15 +22,44 @@ export default function UserUnitPreferencesScreen() {
   const [distanceUnit, setDistanceUnit] = useState<DistanceUnit>(DistanceUnit.KILOMETERS);
   const insets = useSafeAreaInsets();
   const theme = useTheme<Theme>();
+  
+  const { user } = useAuth();
+  const { completeUnitPreferencesStep, isLoading, error } = useOnboarding();
 
   const handleBackPress = () => {
     router.back();
   };
 
-  const handleContinue = () => {
-    // TODO: Save unit preferences
-    // Navigate to season creation overview
-    router.push('/onboarding/season-overview');
+  const handleContinue = async () => {
+    onboardingLogger.debug('handleContinue called - starting unit preferences step');
+    
+    if (!user) {
+      onboardingLogger.error('handleContinue: No user found');
+      return;
+    }
+
+    const preferencesData = {
+      bodyWeightUnit,
+      strengthTrainingUnit,
+      bodyMeasurementUnit,
+      distanceUnit,
+    };
+
+    onboardingLogger.debug('handleContinue: Submitting preferences data', {
+      userId: user.id,
+      preferencesData,
+    });
+
+    const success = await completeUnitPreferencesStep(user.id, preferencesData);
+
+    onboardingLogger.debug('handleContinue: Preferences step result', { success });
+
+    if (success) {
+      onboardingLogger.info('handleContinue: Success! Navigating to season overview');
+      router.push('/onboarding/season-overview');
+    } else {
+      onboardingLogger.error('handleContinue: Failed to complete unit preferences step');
+    }
   };
 
   const PreferenceSelector: React.FC<{
@@ -135,13 +167,23 @@ export default function UserUnitPreferencesScreen() {
             />
           </Box>
 
+          {/* Error Message */}
+          {error && (
+            <Box marginBottom="l" backgroundColor="state/error" padding="m" borderRadius="sm">
+              <Text variant="caption" color="text/inverse">
+                {error}
+              </Text>
+            </Box>
+          )}
+
           {/* Continue Button */}
           <Button
             variant="primary"
             onPress={handleContinue}
+            disabled={isLoading || !user}
             fullWidth
           >
-            Continue
+            {isLoading ? 'Saving...' : 'Continue'}
           </Button>
           
           {/* Bottom Spacing */}

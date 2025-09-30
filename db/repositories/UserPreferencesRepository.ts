@@ -197,28 +197,28 @@ class UserPreferencesRepository implements IUserPreferencesRepository {
 
   async createOrUpdate(userId: string, preferencesData: UserPreferencesData): Promise<UserPreferencesView> {
     try {
-      // Try to find existing preferences first
-      const existing = await this.findByUserId(userId);
-      
-      if (existing) {
-        // Update existing preferences
-        await this.update(existing.id, {
-          bodyWeightUnit: preferencesData.bodyWeightUnit,
-          strengthTrainingUnit: preferencesData.strengthTrainingUnit,
-          bodyMeasurementUnit: preferencesData.bodyMeasurementUnit,
-          distanceUnit: preferencesData.distanceUnit,
-          advancedLoggingEnabled: preferencesData.advancedLoggingEnabled,
-        });
-        
-        // Return updated preferences
-        const updated = await this.findById(existing.id);
-        return updated!;
-      } else {
-        // Create new preferences
-        const preferencesId = await this.create(preferencesData);
-        const created = await this.findById(preferencesId);
-        return created!;
+      // Use PostgreSQL's UPSERT (INSERT ... ON CONFLICT ... DO UPDATE) for atomic operation
+      const { data, error } = await supabase
+        .from('user_preferences')
+        .upsert({
+          user_id: preferencesData.userId,
+          body_weight_unit: preferencesData.bodyWeightUnit,
+          strength_training_unit: preferencesData.strengthTrainingUnit,
+          body_measurement_unit: preferencesData.bodyMeasurementUnit,
+          distance_unit: preferencesData.distanceUnit,
+          advanced_logging_enabled: preferencesData.advancedLoggingEnabled,
+        }, {
+          onConflict: 'user_id', // Handle conflict on user_id (assuming it's unique)
+          ignoreDuplicates: false, // Update on conflict rather than ignore
+        })
+        .select('*')
+        .single();
+
+      if (error) {
+        throw new Error(`Error upserting user preferences: ${error.message}`);
       }
+
+      return this.mapToUserPreferencesView(data);
     } catch (error) {
       console.error('Error in createOrUpdate:', error);
       throw error;

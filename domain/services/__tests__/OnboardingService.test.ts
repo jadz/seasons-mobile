@@ -2,6 +2,8 @@ import { OnboardingService } from '../onboarding/OnboardingService';
 import { IUserOnboardingRepository } from '../../../db/repositories/UserOnboardingRepository';
 import { IUserRepository } from '../../../db/repositories/UserRepository';
 import { UserOnboardingProgress } from '../../models/userOnboarding';
+import { UserPreferencesService } from '../UserPreferencesService';
+import { BodyWeightUnit, StrengthTrainingUnit, BodyMeasurementUnit, DistanceUnit } from '../../models/userPreferences';
 
 // Mock repositories for testing
 const createMockOnboardingRepository = (): jest.Mocked<IUserOnboardingRepository> => ({
@@ -19,15 +21,23 @@ const createMockUserRepository = (): jest.Mocked<IUserRepository> => ({
   isUsernameAvailable: jest.fn(),
 });
 
+const createMockUserPreferencesService = (): jest.Mocked<UserPreferencesService> => ({
+  getUserPreferences: jest.fn(),
+  createUserPreferences: jest.fn(),
+  updateUserPreferences: jest.fn(),
+} as any);
+
 describe('OnboardingService', () => {
   let service: OnboardingService;
   let mockOnboardingRepository: jest.Mocked<IUserOnboardingRepository>;
   let mockUserRepository: jest.Mocked<IUserRepository>;
+  let mockUserPreferencesService: jest.Mocked<UserPreferencesService>;
 
   beforeEach(() => {
     mockOnboardingRepository = createMockOnboardingRepository();
     mockUserRepository = createMockUserRepository();
-    service = new OnboardingService(mockOnboardingRepository, mockUserRepository);
+    mockUserPreferencesService = createMockUserPreferencesService();
+    service = new OnboardingService(mockOnboardingRepository, mockUserRepository, mockUserPreferencesService);
   });
 
   describe('checkUsernameAvailability', () => {
@@ -355,21 +365,47 @@ describe('OnboardingService', () => {
   });
 
   describe('completeUnitPreferencesStep', () => {
-    it('should upsert progress for unit preferences step', async () => {
+    it('should create user preferences and upsert progress', async () => {
       // Arrange
       const userId = 'test-user-789';
+      const preferencesData = {
+        bodyWeightUnit: BodyWeightUnit.KILOGRAMS,
+        strengthTrainingUnit: StrengthTrainingUnit.KILOGRAMS,
+        bodyMeasurementUnit: BodyMeasurementUnit.CENTIMETERS,
+        distanceUnit: DistanceUnit.KILOMETERS,
+      };
 
+      mockUserPreferencesService.createUserPreferences.mockResolvedValue({} as any);
       mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
 
       // Act
-      await service.completeUnitPreferencesStep(userId);
+      await service.completeUnitPreferencesStep(userId, preferencesData);
 
       // Assert
+      expect(mockUserPreferencesService.createUserPreferences).toHaveBeenCalledWith(userId, preferencesData);
       expect(mockOnboardingRepository.upsert).toHaveBeenCalledWith({
         userId,
         currentStepName: 'unit_preferences',
         currentStepNumber: '3',
       });
+    });
+
+    it('should handle user preferences service errors', async () => {
+      // Arrange
+      const userId = 'test-user-789';
+      const preferencesData = {
+        bodyWeightUnit: BodyWeightUnit.POUNDS,
+        strengthTrainingUnit: StrengthTrainingUnit.POUNDS,
+        bodyMeasurementUnit: BodyMeasurementUnit.INCHES,
+        distanceUnit: DistanceUnit.MILES,
+      };
+
+      const error = new Error('Database connection failed');
+      mockUserPreferencesService.createUserPreferences.mockRejectedValue(error);
+
+      // Act & Assert
+      await expect(service.completeUnitPreferencesStep(userId, preferencesData))
+        .rejects.toThrow('Database connection failed');
     });
   });
 

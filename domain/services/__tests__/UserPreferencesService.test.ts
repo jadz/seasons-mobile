@@ -108,35 +108,51 @@ describe('UserPreferencesService', () => {
         updatedAt: new Date(),
       };
 
-      mockRepository.create.mockResolvedValue('prefs-789');
-      mockRepository.findById.mockResolvedValue(createdPreferences);
+      mockRepository.createOrUpdate.mockResolvedValue(createdPreferences);
 
       // Act
       const result = await service.createUserPreferences(userId, onboardingData);
 
       // Assert
       expect(result).toEqual(createdPreferences);
-      expect(mockRepository.create).toHaveBeenCalledWith({
+      expect(mockRepository.createOrUpdate).toHaveBeenCalledWith(userId, {
         userId,
         ...onboardingData,
         advancedLoggingEnabled: false,
       });
     });
 
-    it('should throw error if user already has preferences', async () => {
+    it('should update existing preferences if user already has preferences', async () => {
       // Arrange
       const userId = 'existing-user';
       const onboardingData: UserPreferencesOnboardingData = {
-        bodyWeightUnit: BodyWeightUnit.KILOGRAMS,
-        strengthTrainingUnit: StrengthTrainingUnit.KILOGRAMS,
-        bodyMeasurementUnit: BodyMeasurementUnit.CENTIMETERS,
-        distanceUnit: DistanceUnit.KILOMETERS,
+        bodyWeightUnit: BodyWeightUnit.POUNDS,
+        strengthTrainingUnit: StrengthTrainingUnit.POUNDS,
+        bodyMeasurementUnit: BodyMeasurementUnit.INCHES,
+        distanceUnit: DistanceUnit.MILES,
       };
 
-      mockRepository.create.mockRejectedValue(new Error('User preferences already exist'));
+      const updatedPreferences: UserPreferencesView = {
+        id: 'prefs-456',
+        userId,
+        ...onboardingData,
+        advancedLoggingEnabled: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
 
-      // Act & Assert
-      await expect(service.createUserPreferences(userId, onboardingData)).rejects.toThrow('User already has preferences');
+      mockRepository.createOrUpdate.mockResolvedValue(updatedPreferences);
+
+      // Act
+      const result = await service.createUserPreferences(userId, onboardingData);
+
+      // Assert
+      expect(result).toEqual(updatedPreferences);
+      expect(mockRepository.createOrUpdate).toHaveBeenCalledWith(userId, {
+        userId,
+        ...onboardingData,
+        advancedLoggingEnabled: false,
+      });
     });
   });
 

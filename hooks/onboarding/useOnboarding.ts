@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react';
 import { onboardingService } from '../../domain/services/onboarding/OnboardingService';
 import { UserOnboardingProgress } from '../../domain/models/userOnboarding';
+import { UserPreferencesOnboardingData } from '../../domain/views/userPreferencesViews';
+import { onboardingLogger } from '../../utils/logger';
 
 /**
  * Hook for managing user onboarding flow
@@ -81,20 +83,35 @@ export const useOnboarding = () => {
   /**
    * Complete the unit preferences step
    */
-  const completeUnitPreferencesStep = useCallback(async (userId: string): Promise<boolean> => {
+  const completeUnitPreferencesStep = useCallback(async (
+    userId: string, 
+    preferencesData: UserPreferencesOnboardingData
+  ): Promise<boolean> => {
+    onboardingLogger.debug('useOnboarding.completeUnitPreferencesStep called', {
+      userId,
+      preferencesData,
+    });
+
     setIsLoading(true);
     setError(null);
 
     try {
-      await onboardingService.completeUnitPreferencesStep(userId);
+      onboardingLogger.debug('useOnboarding: Calling onboardingService.completeUnitPreferencesStep');
+      await onboardingService.completeUnitPreferencesStep(userId, preferencesData);
+      
+      onboardingLogger.info('useOnboarding: Unit preferences step completed successfully');
       return true;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to save preferences';
+      onboardingLogger.error('useOnboarding: Error completing unit preferences step', {
+        error: err,
+        errorMessage,
+      });
       setError(errorMessage);
-      console.error('Error completing unit preferences step:', err);
       return false;
     } finally {
       setIsLoading(false);
+      onboardingLogger.debug('useOnboarding: Loading state set to false');
     }
   }, []);
 
