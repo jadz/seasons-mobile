@@ -146,6 +146,22 @@ export const useOnboarding = () => {
     }
   }, []);
 
+  /**
+   * Get user's current username
+   */
+  const getCurrentUsername = useCallback(async (userId: string): Promise<string | null> => {
+    onboardingLogger.debug('useOnboarding.getCurrentUsername called', { userId });
+    
+    try {
+      const username = await onboardingService.getCurrentUsername(userId);
+      onboardingLogger.debug('useOnboarding: Current username retrieved', { username });
+      return username;
+    } catch (err) {
+      onboardingLogger.error('useOnboarding: Error getting current username', { error: err });
+      return null;
+    }
+  }, []);
+
   return {
     checkUsernameAvailability,
     completeUsernameStep,
@@ -153,6 +169,7 @@ export const useOnboarding = () => {
     completeUnitPreferencesStep,
     getProgress,
     checkCompletion,
+    getCurrentUsername,
     isLoading,
     error,
   };

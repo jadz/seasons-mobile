@@ -38,37 +38,75 @@ export class OnboardingService {
   }
 
   /**
-   * Complete the username step
+   * Complete the username step - supports upsert for onboarding flexibility
    * @param userId The user ID
    * @param username The chosen username
    * @throws Error if username is empty, taken, or update fails
    */
   async completeUsernameStep(userId: string, username: string): Promise<void> {
+    onboardingLogger.debug('OnboardingService.completeUsernameStep called', {
+      userId,
+      username,
+    });
+
     if (!username || username.trim().length === 0) {
+      onboardingLogger.error('OnboardingService: Username is required');
       throw new Error('Username is required');
     }
 
-    try {
-      // Check if username is available before saving
-      const isAvailable = await this.userRepository.isUsernameAvailable(username.trim());
-      if (!isAvailable) {
-        throw new Error('Username is already taken');
-      }
+    const trimmedUsername = username.trim();
 
+    try {
       // Check if profile exists, create if not
+      onboardingLogger.debug('OnboardingService: Ensuring user profile exists');
       await this.ensureUserProfile(userId);
 
-      // Save username to user profile
-      await this.userRepository.updateProfile(userId, { username: username.trim() });
+      // Get current profile to check if username is changing
+      const currentProfile = await this.userRepository.findProfileByUserId(userId);
+      const isChangingUsername = !currentProfile?.username || currentProfile.username !== trimmedUsername;
+
+      onboardingLogger.debug('OnboardingService: Username change analysis', {
+        currentUsername: currentProfile?.username,
+        newUsername: trimmedUsername,
+        isChangingUsername,
+      });
+
+      // Only check availability if username is changing to a different value
+      if (isChangingUsername) {
+        onboardingLogger.debug('OnboardingService: Checking username availability');
+        const isAvailable = await this.userRepository.isUsernameAvailable(trimmedUsername);
+        if (!isAvailable) {
+          onboardingLogger.error('OnboardingService: Username is already taken', { username: trimmedUsername });
+          throw new Error('Username is already taken');
+        }
+        onboardingLogger.info('OnboardingService: Username is available', { username: trimmedUsername });
+      } else {
+        onboardingLogger.info('OnboardingService: Re-saving same username, skipping availability check');
+      }
+
+      // Save username to user profile (upsert)
+      onboardingLogger.debug('OnboardingService: Updating user profile with username');
+      await this.userRepository.updateProfile(userId, { username: trimmedUsername });
 
       // Update onboarding progress (upsert - creates or updates)
+      onboardingLogger.debug('OnboardingService: Updating onboarding progress');
       await this.onboardingRepository.upsert({
         userId,
         currentStepName: 'username',
         currentStepNumber: '1',
       });
+
+      onboardingLogger.info('OnboardingService: Username step completed successfully', {
+        userId,
+        username: trimmedUsername,
+        wasUpdate: !isChangingUsername,
+      });
     } catch (error) {
-      console.error('Error completing username step:', error);
+      onboardingLogger.error('OnboardingService: Error completing username step', {
+        userId,
+        username: trimmedUsername,
+        error,
+      });
       throw error;
     }
   }
@@ -182,6 +220,34 @@ export class OnboardingService {
       return await this.onboardingRepository.findByUserId(userId);
     } catch (error) {
       console.error('Error getting onboarding progress:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get user's current username if they have one
+   * @param userId The user ID
+   * @returns Current username or null if not set
+   */
+  async getCurrentUsername(userId: string): Promise<string | null> {
+    onboardingLogger.debug('OnboardingService.getCurrentUsername called', { userId });
+    
+    try {
+      const profile = await this.userRepository.findProfileByUserId(userId);
+      const username = profile?.username || null;
+      
+      onboardingLogger.debug('OnboardingService: Current username retrieved', {
+        userId,
+        username,
+        hasProfile: !!profile,
+      });
+      
+      return username;
+    } catch (error) {
+      onboardingLogger.error('OnboardingService: Error getting current username', {
+        userId,
+        error,
+      });
       throw error;
     }
   }
