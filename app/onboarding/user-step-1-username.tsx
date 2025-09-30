@@ -1,35 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, ScrollView } from 'react-native';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@shopify/restyle';
 import { Box, Text, Button, Header, WizardBar, TextInput } from '../../components/ui';
 import { Theme } from '../../components/ui/foundation/theme';
+import { useAuth } from '../../hooks/auth/useAuth';
+import { useOnboarding } from '../../hooks/onboarding/useOnboarding';
 
 export default function UserUsernameScreen() {
   const [username, setUsername] = useState('');
   const [isChecking, setIsChecking] = useState(false);
+  const [isAvailable, setIsAvailable] = useState<boolean | null>(null);
+  const [availabilityMessage, setAvailabilityMessage] = useState<string>('');
   const insets = useSafeAreaInsets();
   const theme = useTheme<Theme>();
+  
+  const { user } = useAuth();
+  const { checkUsernameAvailability, completeUsernameStep, isLoading, error } = useOnboarding();
 
   const handleBackPress = () => {
     router.back();
   };
 
+  // Debounced username availability check
+  useEffect(() => {
+    const trimmedUsername = username.trim();
+    
+    // Reset state if username is too short
+    if (trimmedUsername.length < 3) {
+      setIsAvailable(null);
+      setAvailabilityMessage('');
+      return;
+    }
+
+    // Debounce the check
+    const timeoutId = setTimeout(async () => {
+      setIsChecking(true);
+      setAvailabilityMessage('');
+      
+      try {
+        const available = await checkUsernameAvailability(trimmedUsername);
+        setIsAvailable(available);
+        setAvailabilityMessage(
+          available ? '✓ Username is available' : '✗ Username is already taken'
+        );
+      } catch (err) {
+        setIsAvailable(null);
+        setAvailabilityMessage('');
+      } finally {
+        setIsChecking(false);
+      }
+    }, 500); // Wait 500ms after user stops typing
+
+    return () => clearTimeout(timeoutId);
+  }, [username, checkUsernameAvailability]);
+
   const handleContinue = async () => {
-    if (!username.trim()) return;
+    if (!username.trim() || !user || !isAvailable) return;
     
-    // TODO: Add username validation/checking logic here
-    setIsChecking(true);
+    const success = await completeUsernameStep(user.id, username);
     
-    // Simulate API check
-    setTimeout(() => {
-      setIsChecking(false);
+    if (success) {
       router.push('/onboarding/user-step-2-personal-info');
-    }, 500);
+    }
   };
 
   const isValidUsername = username.trim().length >= 3;
+  const canContinue = isValidUsername && isAvailable === true && !isLoading && !isChecking;
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors['bg/page'] }}>
@@ -76,7 +114,37 @@ export default function UserUsernameScreen() {
               returnKeyType="done"
               onSubmitEditing={handleContinue}
               maxLength={30}
+              editable={!isLoading}
             />
+            
+            {/* Availability Status */}
+            {isChecking && (
+              <Box marginTop="m">
+                <Text variant="caption" color="text/secondary">
+                  Checking availability...
+                </Text>
+              </Box>
+            )}
+            
+            {!isChecking && availabilityMessage && (
+              <Box marginTop="m">
+                <Text 
+                  variant="caption" 
+                  color={isAvailable ? "text/primary" : "text/secondary"}
+                >
+                  {availabilityMessage}
+                </Text>
+              </Box>
+            )}
+            
+            {/* Error Message */}
+            {error && (
+              <Box marginTop="m" backgroundColor="state/error" padding="m" borderRadius="sm">
+                <Text variant="caption" color="text/inverse">
+                  {error}
+                </Text>
+              </Box>
+            )}
             
             {/* Username Guidelines */}
             <Box marginTop="m">
@@ -96,10 +164,10 @@ export default function UserUsernameScreen() {
           <Button
             variant="primary"
             onPress={handleContinue}
-            disabled={!isValidUsername || isChecking}
+            disabled={!canContinue || !user}
             fullWidth
           >
-            {isChecking ? 'Checking availability...' : 'Continue'}
+            {isLoading ? 'Saving...' : 'Continue'}
           </Button>
           
           {/* Bottom Spacing */}

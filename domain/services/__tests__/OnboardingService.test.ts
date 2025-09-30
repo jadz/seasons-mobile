@@ -16,6 +16,7 @@ const createMockUserRepository = (): jest.Mocked<IUserRepository> => ({
   createProfile: jest.fn(),
   updateProfile: jest.fn(),
   findUserWithProfile: jest.fn(),
+  isUsernameAvailable: jest.fn(),
 });
 
 describe('OnboardingService', () => {
@@ -29,12 +30,62 @@ describe('OnboardingService', () => {
     service = new OnboardingService(mockOnboardingRepository, mockUserRepository);
   });
 
+  describe('checkUsernameAvailability', () => {
+    it('should return true when username is available', async () => {
+      // Arrange
+      const username = 'availableuser';
+      mockUserRepository.isUsernameAvailable.mockResolvedValue(true);
+
+      // Act
+      const result = await service.checkUsernameAvailability(username);
+
+      // Assert
+      expect(result).toBe(true);
+      expect(mockUserRepository.isUsernameAvailable).toHaveBeenCalledWith('availableuser');
+    });
+
+    it('should return false when username is taken', async () => {
+      // Arrange
+      const username = 'takenuser';
+      mockUserRepository.isUsernameAvailable.mockResolvedValue(false);
+
+      // Act
+      const result = await service.checkUsernameAvailability(username);
+
+      // Assert
+      expect(result).toBe(false);
+      expect(mockUserRepository.isUsernameAvailable).toHaveBeenCalledWith('takenuser');
+    });
+
+    it('should trim whitespace from username', async () => {
+      // Arrange
+      const username = '  testuser  ';
+      mockUserRepository.isUsernameAvailable.mockResolvedValue(true);
+
+      // Act
+      await service.checkUsernameAvailability(username);
+
+      // Assert
+      expect(mockUserRepository.isUsernameAvailable).toHaveBeenCalledWith('testuser');
+    });
+
+    it('should throw error if username is empty', async () => {
+      // Arrange
+      const username = '';
+
+      // Act & Assert
+      await expect(service.checkUsernameAvailability(username))
+        .rejects.toThrow('Username is required');
+    });
+  });
+
   describe('completeUsernameStep', () => {
-    it('should save username to user profile and upsert progress', async () => {
+    it('should check availability and save username when available', async () => {
       // Arrange
       const userId = 'test-user-123';
       const username = 'testuser';
 
+      mockUserRepository.isUsernameAvailable.mockResolvedValue(true);
       mockUserRepository.updateProfile.mockResolvedValue();
       mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
 
@@ -42,12 +93,29 @@ describe('OnboardingService', () => {
       await service.completeUsernameStep(userId, username);
 
       // Assert
-      expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, { username });
+      expect(mockUserRepository.isUsernameAvailable).toHaveBeenCalledWith('testuser');
+      expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, { username: 'testuser' });
       expect(mockOnboardingRepository.upsert).toHaveBeenCalledWith({
         userId,
         currentStepName: 'username',
         currentStepNumber: '1',
       });
+    });
+
+    it('should throw error if username is already taken', async () => {
+      // Arrange
+      const userId = 'test-user-123';
+      const username = 'takenuser';
+
+      mockUserRepository.isUsernameAvailable.mockResolvedValue(false);
+
+      // Act & Assert
+      await expect(service.completeUsernameStep(userId, username))
+        .rejects.toThrow('Username is already taken');
+
+      // Verify we didn't try to save
+      expect(mockUserRepository.updateProfile).not.toHaveBeenCalled();
+      expect(mockOnboardingRepository.upsert).not.toHaveBeenCalled();
     });
 
     it('should throw error if username is empty', async () => {
@@ -60,21 +128,21 @@ describe('OnboardingService', () => {
         .rejects.toThrow('Username is required');
     });
 
-    it('should handle multiple calls gracefully (upsert updates existing record)', async () => {
+    it('should trim whitespace from username before saving', async () => {
       // Arrange
       const userId = 'test-user-123';
-      const username1 = 'testuser';
-      const username2 = 'updateduser';
+      const username = '  testuser  ';
 
+      mockUserRepository.isUsernameAvailable.mockResolvedValue(true);
       mockUserRepository.updateProfile.mockResolvedValue();
       mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
 
-      // Act - call twice
-      await service.completeUsernameStep(userId, username1);
-      await service.completeUsernameStep(userId, username2);
+      // Act
+      await service.completeUsernameStep(userId, username);
 
-      // Assert - upsert called twice, same record updated
-      expect(mockOnboardingRepository.upsert).toHaveBeenCalledTimes(2);
+      // Assert
+      expect(mockUserRepository.isUsernameAvailable).toHaveBeenCalledWith('testuser');
+      expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, { username: 'testuser' });
     });
   });
 
@@ -198,10 +266,22 @@ describe('OnboardingService', () => {
       // Arrange
       const userId = 'error-user';
       const username = 'erroruser';
+      
+      mockUserRepository.isUsernameAvailable.mockResolvedValue(true);
       mockUserRepository.updateProfile.mockRejectedValue(new Error('Database error'));
 
       // Act & Assert
       await expect(service.completeUsernameStep(userId, username))
+        .rejects.toThrow('Database error');
+    });
+
+    it('should handle errors when checking username availability', async () => {
+      // Arrange
+      const username = 'erroruser';
+      mockUserRepository.isUsernameAvailable.mockRejectedValue(new Error('Database error'));
+
+      // Act & Assert
+      await expect(service.checkUsernameAvailability(username))
         .rejects.toThrow('Database error');
     });
 

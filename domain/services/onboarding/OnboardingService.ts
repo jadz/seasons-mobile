@@ -15,10 +15,28 @@ export class OnboardingService {
   ) {}
 
   /**
+   * Check if a username is available
+   * @param username The username to check
+   * @returns True if available, false if taken
+   */
+  async checkUsernameAvailability(username: string): Promise<boolean> {
+    if (!username || username.trim().length === 0) {
+      throw new Error('Username is required');
+    }
+
+    try {
+      return await this.userRepository.isUsernameAvailable(username.trim());
+    } catch (error) {
+      console.error('Error checking username availability:', error);
+      throw error;
+    }
+  }
+
+  /**
    * Complete the username step
    * @param userId The user ID
    * @param username The chosen username
-   * @throws Error if username is empty or update fails
+   * @throws Error if username is empty, taken, or update fails
    */
   async completeUsernameStep(userId: string, username: string): Promise<void> {
     if (!username || username.trim().length === 0) {
@@ -26,6 +44,12 @@ export class OnboardingService {
     }
 
     try {
+      // Check if username is available before saving
+      const isAvailable = await this.userRepository.isUsernameAvailable(username.trim());
+      if (!isAvailable) {
+        throw new Error('Username is already taken');
+      }
+
       // Save username to user profile
       await this.userRepository.updateProfile(userId, { username: username.trim() });
 

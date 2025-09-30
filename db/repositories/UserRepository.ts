@@ -7,6 +7,7 @@ export interface IUserRepository {
   createProfile(userId: string, profileData: UserProfileData): Promise<string>;
   updateProfile(userId: string, updateData: Partial<UserProfileData>): Promise<void>;
   findUserWithProfile(userId: string): Promise<UserWithProfile | null>;
+  isUsernameAvailable(username: string): Promise<boolean>;
 }
 
 class UserRepository implements IUserRepository {
@@ -102,6 +103,26 @@ class UserRepository implements IUserRepository {
     }
   }
 
+  async isUsernameAvailable(username: string): Promise<boolean> {
+    try {
+      const { data, error } = await supabase
+        .from('user_profiles')
+        .select('id')
+        .eq('username', username)
+        .maybeSingle();
+
+      if (error) {
+        throw new Error(`Error checking username availability: ${error.message}`);
+      }
+
+      // If data is null, username is available
+      return data === null;
+    } catch (error) {
+      console.error('Error in isUsernameAvailable:', error);
+      throw error;
+    }
+  }
+
   private mapToUserProfile(data: any): UserProfile {
     return {
       id: data.id,
@@ -115,3 +136,4 @@ class UserRepository implements IUserRepository {
 }
 
 export const userRepository = new UserRepository();
+export { UserRepository };
