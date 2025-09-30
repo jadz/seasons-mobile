@@ -116,18 +116,61 @@ class UserRepository implements IUserRepository {
 
   async isUsernameAvailable(username: string): Promise<boolean> {
     try {
-      const { data, error } = await supabase
+      console.debug('UserRepository: isUsernameAvailable called', { username });
+      
+      // Try RPC function first (bypasses RLS)
+      try {
+        const { data, error } = await supabase
+          .rpc('check_username_availability', { 
+            target_username: username.trim() 
+          });
+
+        if (!error) {
+          console.debug('UserRepository: RPC success', { 
+            username: username.trim(),
+            isAvailable: data 
+          });
+          return data === true;
+        }
+        
+        console.warn('UserRepository: RPC failed, falling back to direct query', { error });
+      } catch (rpcError) {
+        console.warn('UserRepository: RPC not available, falling back to direct query', { rpcError });
+      }
+
+      // Fallback: Use service role or direct query with detailed debugging
+      console.debug('UserRepository: Using fallback direct query method');
+      
+      const { data, error, count } = await supabase
         .from('user_profiles')
-        .select('id')
-        .eq('username', username)
-        .maybeSingle();
+        .select('id, username', { count: 'exact' })
+        .eq('username', username.trim())
+        .limit(1);
+
+      console.debug('UserRepository: Direct query result', { 
+        username: username.trim(),
+        data, 
+        error, 
+        count,
+        dataLength: data?.length,
+        hasData: !!data && data.length > 0
+      });
 
       if (error) {
+        console.error('UserRepository: Direct query error', { error });
         throw new Error(`Error checking username availability: ${error.message}`);
       }
 
-      // If data is null, username is available
-      return data === null;
+      // Username is available if no records found
+      const isAvailable = !data || data.length === 0;
+      
+      console.debug('UserRepository: Final availability result', { 
+        username: username.trim(),
+        isAvailable,
+        foundRecords: data?.length || 0
+      });
+
+      return isAvailable;
     } catch (error) {
       console.error('Error in isUsernameAvailable:', error);
       throw error;

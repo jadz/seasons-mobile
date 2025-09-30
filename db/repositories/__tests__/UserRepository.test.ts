@@ -63,6 +63,7 @@ describe('UserRepository Integration Tests', () => {
 
       // Act
       const isAvailable = await repository.isUsernameAvailable(takenUsername);
+      console.debug(isAvailable);
 
       // Assert
       expect(isAvailable).toBe(false);

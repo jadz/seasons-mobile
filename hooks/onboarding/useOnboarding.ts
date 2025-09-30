@@ -22,6 +22,7 @@ export const useOnboarding = () => {
     setError(null);
 
     try {
+      console.debug('useOnboarding.checkUsernameAvailability called', { username });
       return await onboardingService.checkUsernameAvailability(username);
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to check username';

@@ -30,6 +30,7 @@ export class OnboardingService {
     }
 
     try {
+      console.debug('OnboardingService: Checking username availability', { username });
       return await this.userRepository.isUsernameAvailable(username.trim());
     } catch (error) {
       console.error('Error checking username availability:', error);
