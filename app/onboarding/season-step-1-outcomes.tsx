@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, ActivityIndicator } from 'react-native';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Box, Text, Button, WizardBar, SelectionCard, Header } from '../../components/ui';
+import { useSeasonFocus } from '../../hooks/onboarding/useSeasonFocus';
 
 export default function SeasonFocusScreen() {
   const [selectedFocus, setSelectedFocus] = useState<string | null>(null);
   const insets = useSafeAreaInsets();
+  const { pillars, isLoading, error } = useSeasonFocus();
 
-  const handleFocusSelection = (focusId: string) => {
-    setSelectedFocus(focusId);
+  const handleFocusSelection = (areaOfFocusId: string) => {
+    setSelectedFocus(areaOfFocusId);
     
-    // Immediate navigation based on selection
-    if (focusId === 'stronger') {
-      // Small delay for visual feedback, then navigate
-      setTimeout(() => {
-        // router.push('/onboarding/season-step-5-set-other-metrics');
-        router.push('/onboarding/season-step-2-strength');
-      }, 15);
-    }
-    // For other focuses, we could add different navigation paths later
+    // Small delay for visual feedback, then navigate
+    setTimeout(() => {
+      router.push('/onboarding/season-step-2-strength');
+    }, 150);
   };
 
   const handleBackPress = () => {
@@ -37,7 +34,6 @@ export default function SeasonFocusScreen() {
         showBackButton={true}
         onBackPress={handleBackPress}
         variant="transparent"
-        backgroundColor="bg/page"
       />
       
       {/* Progress Indicator */}
@@ -55,52 +51,47 @@ export default function SeasonFocusScreen() {
             </Text>
           </Box>
           
+          {/* Loading State */}
+          {isLoading && (
+            <Box paddingVertical="xl" alignItems="center">
+              <ActivityIndicator size="large" />
+              <Text variant="body" color="text/secondary" marginTop="m">
+                Loading focus options...
+              </Text>
+            </Box>
+          )}
+
+          {/* Error State */}
+          {error && !isLoading && (
+            <Box paddingVertical="xl" alignItems="center">
+              <Text variant="body" color="state/error" textAlign="center">
+                {error}
+              </Text>
+              <Text variant="caption" color="text/secondary" marginTop="s" textAlign="center">
+                Please check your connection and try again
+              </Text>
+            </Box>
+          )}
+          
           {/* Focus Selection Cards */}
-          <Box marginBottom="xl">
-            <SelectionCard 
-              title="Strength"
-              colorVariant="coral"
-              label="STRENGTH FOCUS"
-              largeDescription="The outcome I want: Lift heavier and build muscle"
-              isSelected={selectedFocus === 'stronger'}
-              onPress={() => handleFocusSelection('stronger')}
-            />
-            
-            <Box style={{ opacity: 0.6 }}>
-              <SelectionCard 
-                title="Speed" 
-                colorVariant="purple"
-                label="SPEED FOCUS"
-                largeDescription="The outcome I want: Run faster with better endurance"
-                isSelected={selectedFocus === 'faster'}
-                onPress={() => {}}
-                isDisabled={true}
-              />
+          {!isLoading && !error && (
+            <Box marginBottom="xl">
+              {pillars.map((pillar) => (
+                pillar.areasOfFocus?.map((area) => (
+                  <SelectionCard 
+                    key={area.id}
+                    title={area.name}
+                    customColor={area.colorHex}
+                    // label={pillar.displayName.toUpperCase()}
+                    label={area.name.toUpperCase()}
+                    largeDescription={area.description || `Focus on ${area.name.toLowerCase()}`}
+                    isSelected={selectedFocus === area.id}
+                    onPress={() => handleFocusSelection(area.id)}
+                  />
+                ))
+              ))}
             </Box>
-            
-            <Box style={{ opacity: 0.6 }}>
-              <SelectionCard 
-                title="Body Composition"
-                colorVariant="navy"
-                label="COMPOSITION FOCUS"
-                largeDescription="The outcome I want: Lose fat and get leaner"
-                isSelected={selectedFocus === 'leaner'}
-                onPress={() => {}}
-                isDisabled={true}
-              />
-            </Box>
-            
-            <Box style={{ opacity: 0.6 }}>
-              <SelectionCard 
-                title="Something Else"
-                colorVariant="default"
-                description="More focuses coming soon"
-                isSelected={selectedFocus === 'custom'}
-                onPress={() => {}}
-                isDisabled={true}
-              />
-            </Box>
-          </Box>
+          )}
         </Box>
       </ScrollView>
     </Box>

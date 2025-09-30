@@ -41,7 +41,7 @@ export interface IUserOnboardingRepository {
  * Supabase implementation of user onboarding repository
  */
 class UserOnboardingRepository implements IUserOnboardingRepository {
-  private readonly TOTAL_STEPS = 3;
+  private readonly TOTAL_STEPS = 10;
 
   async upsert(progressData: UserOnboardingProgressData): Promise<string> {
     try {

@@ -268,6 +268,20 @@ export class OnboardingService {
   }
 
   /**
+   * Get current onboarding progress for a user
+   * @param userId The user ID
+   * @returns The current progress or null if not found
+   */
+  async getCurrentProgress(userId: string): Promise<UserOnboardingProgress | null> {
+    try {
+      return await this.onboardingRepository.findByUserId(userId);
+    } catch (error) {
+      console.error('Error getting current progress:', error);
+      throw error;
+    }
+  }
+
+  /**
    * Ensure user profile exists, create if it doesn't
    * @param userId The user ID
    * @private

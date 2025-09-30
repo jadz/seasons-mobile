@@ -13,6 +13,7 @@ export interface SelectionCardProps extends Omit<TouchableOpacityProps, 'onPress
   selectionType?: 'radio' | 'checkbox';
   size?: 'small' | 'medium' | 'large';
   colorVariant?: 'default' | 'coral' | 'purple' | 'navy';
+  customColor?: string; // Custom hex color (overrides colorVariant)
   label?: string; // Small label in top left
   largeDescription?: string; // Larger descriptive text
 }
@@ -27,6 +28,7 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
   selectionType = 'radio',
   size = 'medium',
   colorVariant = 'default',
+  customColor,
   label,
   largeDescription,
   ...touchableProps
@@ -38,6 +40,16 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
   };
 
   const getColorStyles = () => {
+    // If custom color is provided, use it
+    if (customColor) {
+      return {
+        backgroundColor: customColor,
+        textColor: '#FFFFFF',
+        descriptionColor: '#FFFFFF',
+      };
+    }
+
+    // Otherwise use colorVariant
     switch (colorVariant) {
       case 'coral':
         return {
@@ -110,8 +122,8 @@ export const SelectionCard: React.FC<SelectionCardProps> = ({
         style={{
           backgroundColor: colorStyles.backgroundColor,
           borderRadius: 16,
-          borderWidth: colorVariant !== 'default' ? 0 : 1,
-          borderColor: colorVariant !== 'default' ? 'transparent' : (isSelected ? '#4E7166' : '#C9D0C3'),
+          borderWidth: (colorVariant !== 'default' || customColor) ? 0 : 1,
+          borderColor: (colorVariant !== 'default' || customColor) ? 'transparent' : (isSelected ? '#4E7166' : '#C9D0C3'),
         }}
         paddingHorizontal={sizeStyles.paddingHorizontal as any}
         paddingVertical={sizeStyles.paddingVertical as any}
