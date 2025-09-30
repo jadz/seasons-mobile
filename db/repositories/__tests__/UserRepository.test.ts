@@ -178,6 +178,30 @@ describe('UserRepository Integration Tests', () => {
       expect(created?.username).toBe(profileData.username);
     });
 
+    it('should create profile with personal info fields (sex and birthYear)', async () => {
+      // Arrange
+      const profileData: UserProfileData = {
+        firstName: 'Jane',
+        username: `jane_${Date.now()}`,
+        sex: 'female' as const,
+        birthYear: 1990,
+      };
+
+      // Act
+      const profileId = await repository.createProfile(testUser.id, profileData);
+
+      // Assert
+      expect(profileId).toBeDefined();
+
+      // Verify it was created with all fields
+      const created = await repository.findProfileByUserId(testUser.id);
+      expect(created).toBeDefined();
+      expect(created?.firstName).toBe('Jane');
+      expect(created?.username).toBe(profileData.username);
+      expect(created?.sex).toBe('female');
+      expect(created?.birthYear).toBe(1990);
+    });
+
     it('should throw error when creating duplicate profile for same user', async () => {
       // Arrange
       const profileData: UserProfileData = {
@@ -294,6 +318,25 @@ describe('UserRepository Integration Tests', () => {
       const updated = await repository.findProfileByUserId(testUser.id);
       expect(updated?.firstName).toBe('Jonathan');
       expect(updated?.username).toBe(newUsername);
+    });
+
+    it('should update personal info fields (sex and birthYear)', async () => {
+      // Arrange - create profile first
+      await repository.createProfile(testUser.id, {
+        firstName: 'Test',
+        username: `test_${Date.now()}`,
+      });
+
+      // Act
+      await repository.updateProfile(testUser.id, {
+        sex: 'male' as const,
+        birthYear: 1985,
+      });
+
+      // Assert
+      const updated = await repository.findProfileByUserId(testUser.id);
+      expect(updated?.sex).toBe('male');
+      expect(updated?.birthYear).toBe(1985);
     });
   });
 

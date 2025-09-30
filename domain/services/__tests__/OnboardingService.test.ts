@@ -86,6 +86,8 @@ describe('OnboardingService', () => {
       const username = 'testuser';
 
       mockUserRepository.isUsernameAvailable.mockResolvedValue(true);
+      mockUserRepository.findProfileByUserId.mockResolvedValue(null);
+      mockUserRepository.createProfile.mockResolvedValue('profile-id-1');
       mockUserRepository.updateProfile.mockResolvedValue();
       mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
 
@@ -94,6 +96,8 @@ describe('OnboardingService', () => {
 
       // Assert
       expect(mockUserRepository.isUsernameAvailable).toHaveBeenCalledWith('testuser');
+      expect(mockUserRepository.findProfileByUserId).toHaveBeenCalledWith(userId);
+      expect(mockUserRepository.createProfile).toHaveBeenCalledWith(userId, {});
       expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, { username: 'testuser' });
       expect(mockOnboardingRepository.upsert).toHaveBeenCalledWith({
         userId,
@@ -134,6 +138,8 @@ describe('OnboardingService', () => {
       const username = '  testuser  ';
 
       mockUserRepository.isUsernameAvailable.mockResolvedValue(true);
+      mockUserRepository.findProfileByUserId.mockResolvedValue(null);
+      mockUserRepository.createProfile.mockResolvedValue('profile-id-1');
       mockUserRepository.updateProfile.mockResolvedValue();
       mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
 
@@ -144,22 +150,61 @@ describe('OnboardingService', () => {
       expect(mockUserRepository.isUsernameAvailable).toHaveBeenCalledWith('testuser');
       expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, { username: 'testuser' });
     });
-  });
 
-  describe('completePersonalInfoStep', () => {
-    it('should save first name to user profile and upsert progress', async () => {
+    it('should not create profile if one already exists', async () => {
       // Arrange
-      const userId = 'test-user-456';
-      const firstName = 'John';
+      const userId = 'test-user-123';
+      const username = 'testuser';
+      const existingProfile = {
+        id: 'profile-1',
+        userId,
+        firstName: 'John',
+        username: 'oldusername',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
 
+      mockUserRepository.isUsernameAvailable.mockResolvedValue(true);
+      mockUserRepository.findProfileByUserId.mockResolvedValue(existingProfile);
       mockUserRepository.updateProfile.mockResolvedValue();
       mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
 
       // Act
-      await service.completePersonalInfoStep(userId, firstName);
+      await service.completeUsernameStep(userId, username);
 
       // Assert
-      expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, { firstName });
+      expect(mockUserRepository.findProfileByUserId).toHaveBeenCalledWith(userId);
+      expect(mockUserRepository.createProfile).not.toHaveBeenCalled();
+      expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, { username });
+    });
+  });
+
+  describe('completePersonalInfoStep', () => {
+    it('should save personal info to user profile and upsert progress', async () => {
+      // Arrange
+      const userId = 'test-user-456';
+      const personalInfo = {
+        firstName: 'John',
+        sex: 'male' as const,
+        birthYear: 1990,
+      };
+
+      mockUserRepository.findProfileByUserId.mockResolvedValue(null);
+      mockUserRepository.createProfile.mockResolvedValue('profile-id-1');
+      mockUserRepository.updateProfile.mockResolvedValue();
+      mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
+
+      // Act
+      await service.completePersonalInfoStep(userId, personalInfo);
+
+      // Assert
+      expect(mockUserRepository.findProfileByUserId).toHaveBeenCalledWith(userId);
+      expect(mockUserRepository.createProfile).toHaveBeenCalledWith(userId, {});
+      expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, {
+        firstName: 'John',
+        sex: 'male',
+        birthYear: 1990,
+      });
       expect(mockOnboardingRepository.upsert).toHaveBeenCalledWith({
         userId,
         currentStepName: 'personal_info',
@@ -167,14 +212,145 @@ describe('OnboardingService', () => {
       });
     });
 
-    it('should throw error if firstName is empty', async () => {
+    it('should save personal info without firstName if not provided', async () => {
       // Arrange
       const userId = 'test-user-456';
-      const firstName = '';
+      const personalInfo = {
+        sex: 'female' as const,
+        birthYear: 1985,
+      };
+
+      mockUserRepository.findProfileByUserId.mockResolvedValue(null);
+      mockUserRepository.createProfile.mockResolvedValue('profile-id-1');
+      mockUserRepository.updateProfile.mockResolvedValue();
+      mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
+
+      // Act
+      await service.completePersonalInfoStep(userId, personalInfo);
+
+      // Assert
+      expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, {
+        sex: 'female',
+        birthYear: 1985,
+      });
+    });
+
+    it('should trim whitespace from firstName', async () => {
+      // Arrange
+      const userId = 'test-user-456';
+      const personalInfo = {
+        firstName: '  John  ',
+        sex: 'male' as const,
+        birthYear: 1990,
+      };
+
+      mockUserRepository.updateProfile.mockResolvedValue();
+      mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
+
+      // Act
+      await service.completePersonalInfoStep(userId, personalInfo);
+
+      // Assert
+      expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, {
+        firstName: 'John',
+        sex: 'male',
+        birthYear: 1990,
+      });
+    });
+
+    it('should skip firstName if empty string after trimming', async () => {
+      // Arrange
+      const userId = 'test-user-456';
+      const personalInfo = {
+        firstName: '   ',
+        sex: 'other' as const,
+        birthYear: 1995,
+      };
+
+      mockUserRepository.updateProfile.mockResolvedValue();
+      mockOnboardingRepository.upsert.mockResolvedValue('progress-id-1');
+
+      // Act
+      await service.completePersonalInfoStep(userId, personalInfo);
+
+      // Assert
+      expect(mockUserRepository.updateProfile).toHaveBeenCalledWith(userId, {
+        sex: 'other',
+        birthYear: 1995,
+      });
+    });
+
+    it('should throw error if sex is not provided', async () => {
+      // Arrange
+      const userId = 'test-user-456';
+      const personalInfo = {
+        firstName: 'John',
+        sex: '' as any,
+        birthYear: 1990,
+      };
 
       // Act & Assert
-      await expect(service.completePersonalInfoStep(userId, firstName))
-        .rejects.toThrow('First name is required');
+      await expect(service.completePersonalInfoStep(userId, personalInfo))
+        .rejects.toThrow('Sex is required');
+    });
+
+    it('should throw error if birthYear is not provided', async () => {
+      // Arrange
+      const userId = 'test-user-456';
+      const personalInfo = {
+        firstName: 'John',
+        sex: 'male' as const,
+        birthYear: null as any,
+      };
+
+      // Act & Assert
+      await expect(service.completePersonalInfoStep(userId, personalInfo))
+        .rejects.toThrow('Valid birth year is required');
+    });
+
+    it('should throw error if birthYear is too old', async () => {
+      // Arrange
+      const userId = 'test-user-456';
+      const personalInfo = {
+        firstName: 'John',
+        sex: 'male' as const,
+        birthYear: 1850,
+      };
+
+      // Act & Assert
+      await expect(service.completePersonalInfoStep(userId, personalInfo))
+        .rejects.toThrow('Valid birth year is required');
+    });
+
+    it('should throw error if birthYear is in the future', async () => {
+      // Arrange
+      const userId = 'test-user-456';
+      const personalInfo = {
+        firstName: 'John',
+        sex: 'male' as const,
+        birthYear: new Date().getFullYear() + 1,
+      };
+
+      // Act & Assert
+      await expect(service.completePersonalInfoStep(userId, personalInfo))
+        .rejects.toThrow('Valid birth year is required');
+    });
+
+    it('should handle repository errors gracefully', async () => {
+      // Arrange
+      const userId = 'test-user-456';
+      const personalInfo = {
+        firstName: 'John',
+        sex: 'male' as const,
+        birthYear: 1990,
+      };
+
+      const repositoryError = new Error('Database connection failed');
+      mockUserRepository.updateProfile.mockRejectedValue(repositoryError);
+
+      // Act & Assert
+      await expect(service.completePersonalInfoStep(userId, personalInfo))
+        .rejects.toThrow('Database connection failed');
     });
   });
 

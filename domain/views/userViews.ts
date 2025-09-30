@@ -5,6 +5,8 @@ export type UserWithProfile = User & {
 };
 
 export interface UserProfileData {
-  firstName: string;
+  firstName?: string;
   username?: string;
+  sex?: 'male' | 'female' | 'other';
+  birthYear?: number;
 }

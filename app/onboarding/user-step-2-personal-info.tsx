@@ -6,29 +6,43 @@ import { useTheme } from '@shopify/restyle';
 import { Box, Text, Button, Header, WizardBar, TextInput } from '../../components/ui';
 import { SimpleSelectionButton } from '../../components/ui/selection/SimpleSelectionButton';
 import { Theme } from '../../components/ui/foundation/theme';
+import { useAuth } from '../../hooks/auth/useAuth';
+import { useOnboarding } from '../../hooks/onboarding/useOnboarding';
 
 export default function UserPersonalInfoScreen() {
   const [firstName, setFirstName] = useState('');
-  const [selectedSex, setSelectedSex] = useState<string | null>(null);
+  const [selectedSex, setSelectedSex] = useState<'male' | 'female' | 'other' | null>(null);
   const [birthYear, setBirthYear] = useState('');
   const [showPrivacyModal, setShowPrivacyModal] = useState(false);
   const insets = useSafeAreaInsets();
   const theme = useTheme<Theme>();
+  
+  const { user } = useAuth();
+  const { completePersonalInfoStep, isLoading, error } = useOnboarding();
 
   const handleBackPress = () => {
     router.back();
   };
 
-  const handleContinue = () => {
-    if (!selectedSex || !birthYear) {
+  const handleContinue = async () => {
+    if (!selectedSex || !birthYear || !user) {
       Alert.alert('Required Fields', 'Please select your sex and enter your birth year.');
       return;
     }
-    
-    router.push('/onboarding/user-step-3-unit-preferences');
+
+    const birthYearNum = parseInt(birthYear);
+    const success = await completePersonalInfoStep(user.id, {
+      firstName: firstName.trim() || undefined,
+      sex: selectedSex,
+      birthYear: birthYearNum,
+    });
+
+    if (success) {
+      router.push('/onboarding/user-step-3-unit-preferences');
+    }
   };
 
-  const handleSexSelection = (sex: string) => {
+  const handleSexSelection = (sex: 'male' | 'female' | 'other') => {
     setSelectedSex(sex);
   };
 
@@ -39,7 +53,7 @@ export default function UserPersonalInfoScreen() {
   };
 
   const isValidYear = birthYear.length === 4 && parseInt(birthYear) >= 1900 && parseInt(birthYear) <= new Date().getFullYear();
-  const canContinue = selectedSex && isValidYear;
+  const canContinue = selectedSex && isValidYear && !isLoading;
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors['bg/page'] }}>
@@ -146,14 +160,23 @@ export default function UserPersonalInfoScreen() {
             </Text>
           </Box>
 
+          {/* Error Message */}
+          {error && (
+            <Box marginBottom="l" backgroundColor="state/error" padding="m" borderRadius="sm">
+              <Text variant="caption" color="text/inverse">
+                {error}
+              </Text>
+            </Box>
+          )}
+
           {/* Continue Button */}
           <Button
             variant="primary"
             onPress={handleContinue}
-            disabled={!canContinue}
+            disabled={!canContinue || !user}
             fullWidth
           >
-            Continue
+            {isLoading ? 'Saving...' : 'Continue'}
           </Button>
           
           {/* Bottom Spacing */}

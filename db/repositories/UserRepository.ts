@@ -35,13 +35,18 @@ class UserRepository implements IUserRepository {
 
   async createProfile(userId: string, profileData: UserProfileData): Promise<string> {
     try {
+      const insertData: any = {
+        user_id: userId,
+      };
+
+      if (profileData.firstName) insertData.first_name = profileData.firstName;
+      if (profileData.username) insertData.username = profileData.username;
+      if (profileData.sex) insertData.sex = profileData.sex;
+      if (profileData.birthYear) insertData.birth_year = profileData.birthYear;
+
       const { data, error } = await supabase
         .from('user_profiles')
-        .insert({
-          user_id: userId,
-          first_name: profileData.firstName,
-          username: profileData.username,
-        })
+        .insert(insertData)
         .select('id')
         .single();
 
@@ -58,12 +63,16 @@ class UserRepository implements IUserRepository {
 
   async updateProfile(userId: string, updateData: Partial<UserProfileData>): Promise<void> {
     try {
+      const updateFields: any = {};
+      
+      if (updateData.firstName) updateFields.first_name = updateData.firstName;
+      if (updateData.username) updateFields.username = updateData.username;
+      if (updateData.sex) updateFields.sex = updateData.sex;
+      if (updateData.birthYear) updateFields.birth_year = updateData.birthYear;
+
       const { error } = await supabase
         .from('user_profiles')
-        .update({
-          ...(updateData.firstName && { first_name: updateData.firstName }),
-          ...(updateData.username && { username: updateData.username }),
-        })
+        .update(updateFields)
         .eq('user_id', userId);
 
       if (error) {
@@ -92,6 +101,8 @@ class UserRepository implements IUserRepository {
         email: authUser.email!,
         firstName: profile?.firstName,
         username: profile?.username,
+        sex: profile?.sex,
+        birthYear: profile?.birthYear,
         isNewUser: !profile,
         createdAt: new Date(authUser.created_at),
         updatedAt: new Date(authUser.updated_at || authUser.created_at),
@@ -129,6 +140,8 @@ class UserRepository implements IUserRepository {
       userId: data.user_id,
       firstName: data.first_name || '',
       username: data.username || '',
+      sex: data.sex,
+      birthYear: data.birth_year,
       createdAt: new Date(data.created_at),
       updatedAt: new Date(data.updated_at),
     };

@@ -50,6 +50,9 @@ export class OnboardingService {
         throw new Error('Username is already taken');
       }
 
+      // Check if profile exists, create if not
+      await this.ensureUserProfile(userId);
+
       // Save username to user profile
       await this.userRepository.updateProfile(userId, { username: username.trim() });
 
@@ -68,17 +71,42 @@ export class OnboardingService {
   /**
    * Complete the personal info step
    * @param userId The user ID
-   * @param firstName The user's first name
-   * @throws Error if firstName is empty or update fails
+   * @param personalInfo The personal information data
+   * @throws Error if required fields are missing or update fails
    */
-  async completePersonalInfoStep(userId: string, firstName: string): Promise<void> {
-    if (!firstName || firstName.trim().length === 0) {
-      throw new Error('First name is required');
+  async completePersonalInfoStep(
+    userId: string, 
+    personalInfo: {
+      firstName?: string;
+      sex: 'male' | 'female' | 'other';
+      birthYear: number;
+    }
+  ): Promise<void> {
+    if (!personalInfo.sex) {
+      throw new Error('Sex is required');
+    }
+
+    if (!personalInfo.birthYear || personalInfo.birthYear < 1900 || personalInfo.birthYear > new Date().getFullYear()) {
+      throw new Error('Valid birth year is required');
     }
 
     try {
-      // Save first name to user profile
-      await this.userRepository.updateProfile(userId, { firstName: firstName.trim() });
+      // Check if profile exists, create if not
+      await this.ensureUserProfile(userId);
+
+      // Prepare profile update data
+      const profileUpdate: any = {
+        sex: personalInfo.sex,
+        birthYear: personalInfo.birthYear,
+      };
+
+      // Add first name if provided
+      if (personalInfo.firstName && personalInfo.firstName.trim().length > 0) {
+        profileUpdate.firstName = personalInfo.firstName.trim();
+      }
+
+      // Save personal info to user profile
+      await this.userRepository.updateProfile(userId, profileUpdate);
 
       // Update onboarding progress
       await this.onboardingRepository.upsert({
@@ -135,6 +163,25 @@ export class OnboardingService {
       return await this.onboardingRepository.hasCompletedOnboarding(userId);
     } catch (error) {
       console.error('Error checking onboarding completion:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Ensure user profile exists, create if it doesn't
+   * @param userId The user ID
+   * @private
+   */
+  private async ensureUserProfile(userId: string): Promise<void> {
+    try {
+      const existingProfile = await this.userRepository.findProfileByUserId(userId);
+      
+      if (!existingProfile) {
+        // Create a minimal profile - fields will be updated in subsequent steps
+        await this.userRepository.createProfile(userId, {});
+      }
+    } catch (error) {
+      console.error('Error ensuring user profile exists:', error);
       throw error;
     }
   }

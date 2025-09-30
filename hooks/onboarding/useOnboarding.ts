@@ -54,12 +54,19 @@ export const useOnboarding = () => {
   /**
    * Complete the personal info step
    */
-  const completePersonalInfoStep = useCallback(async (userId: string, firstName: string): Promise<boolean> => {
+  const completePersonalInfoStep = useCallback(async (
+    userId: string, 
+    personalInfo: {
+      firstName?: string;
+      sex: 'male' | 'female' | 'other';
+      birthYear: number;
+    }
+  ): Promise<boolean> => {
     setIsLoading(true);
     setError(null);
 
     try {
-      await onboardingService.completePersonalInfoStep(userId, firstName);
+      await onboardingService.completePersonalInfoStep(userId, personalInfo);
       return true;
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Failed to save personal info';
