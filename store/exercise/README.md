@@ -46,16 +46,37 @@ await exerciseStore.loadExercises();
 
 ```typescript
 import { exerciseStore } from '@/store/exercise';
-import { useObservable } from '@legendapp/state/react';
+import { useState, useEffect } from 'react';
 
-// Get all exercises
-const exercises = useObservable(exerciseStore.exercises);
+function MyComponent() {
+  const [exercises, setExercises] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-// Get specific exercise
+  useEffect(() => {
+    // Initial load
+    setExercises(exerciseStore.exercises.get());
+    setIsLoading(exerciseStore.isLoading.get());
+    
+    // Subscribe to changes
+    const unsubExercises = exerciseStore.exercises.onChange(() => {
+      setExercises(exerciseStore.exercises.get());
+    });
+    
+    const unsubLoading = exerciseStore.isLoading.onChange(() => {
+      setIsLoading(exerciseStore.isLoading.get());
+    });
+    
+    return () => {
+      unsubExercises();
+      unsubLoading();
+    };
+  }, []);
+  
+  // Use exercises and isLoading in your component...
+}
+
+// Or use store getter methods directly (non-reactive)
 const exercise = exerciseStore.getExerciseById('00251201');
-
-// Check loading state
-const isLoading = useObservable(exerciseStore.isLoading);
 ```
 
 ### Using the Service Directly (if needed)

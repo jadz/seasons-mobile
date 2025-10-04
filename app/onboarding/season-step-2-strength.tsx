@@ -1,48 +1,56 @@
-import React, { useState } from 'react';
-import { ScrollView } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Box, Text, Button, WizardBar, Header } from '../../components/ui';
 import { SimpleSelectionButton } from '../../components/ui/selection/SimpleSelectionButton';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ThemeSwitcher } from '../../components/ui/forms';
+import { ExerciseLibraryModal, ExerciseLibraryModalRef } from '../../components/exercise';
+import { Exercise } from '../../domain/models/exercise';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function SeasonStrengthScreen() {
-  const [selectedLifts, setSelectedLifts] = useState<string[]>([]);
+  const [selectedExercises, setSelectedExercises] = useState<Exercise[]>([]);
   const [focusOverallStrength, setFocusOverallStrength] = useState(false);
+  const [shouldRenderSheet, setShouldRenderSheet] = useState(false);
   const insets = useSafeAreaInsets();
+  const exerciseLibraryModalRef = useRef<ExerciseLibraryModalRef>(null);
 
-  const handleLiftSelection = (liftId: string) => {
-    if (focusOverallStrength) {
-      return; // Don't allow individual lift selection if overall strength is selected
+  const handleExerciseSelection = (exercises: Exercise[]) => {
+    setSelectedExercises(exercises);
+    if (exercises.length > 0) {
+      setFocusOverallStrength(false);
     }
-    
-    setSelectedLifts(prev => {
-      if (prev.includes(liftId)) {
-        return prev.filter(id => id !== liftId);
-      } else {
-        // Cap at 3 lifts maximum
-        if (prev.length >= 3) {
-          return prev; // Don't add more if already at limit
-        }
-        return [...prev, liftId];
-      }
-    });
   };
 
   const handleOverallStrengthToggle = () => {
     if (!focusOverallStrength) {
-      // Clear individual lift selections when selecting overall strength
-      setSelectedLifts([]);
+      // Clear individual exercise selections when selecting overall strength
+      setSelectedExercises([]);
       setFocusOverallStrength(true);
     } else {
       setFocusOverallStrength(false);
     }
   };
 
-  const handleAddAnotherLift = () => {
-    // Simple mock - just show an alert for now
-    console.log('Add another lift pressed');
+  const handleAddExercisesPress = () => {
+    if (!focusOverallStrength) {
+      // Lazy render the sheet component on first open
+      if (!shouldRenderSheet) {
+        setShouldRenderSheet(true);
+        // Wait for next frame to ensure component is mounted before opening
+        setTimeout(() => {
+          exerciseLibraryModalRef.current?.open();
+        }, 100);
+      } else {
+        exerciseLibraryModalRef.current?.open();
+      }
+    }
+  };
+
+  const handleRemoveExercise = (exerciseId: string) => {
+    setSelectedExercises(prev => prev.filter(ex => ex.id !== exerciseId));
   };
 
   const handleBackPress = () => {
@@ -51,6 +59,7 @@ export default function SeasonStrengthScreen() {
   
 
   return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
     <Box flex={1} backgroundColor="bg/page">
       {/* Header Gradient Overlay - Balanced Visibility */}
       <LinearGradient
@@ -92,57 +101,78 @@ export default function SeasonStrengthScreen() {
         </Box>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Box paddingHorizontal="l">
-            {/* Specific Lifts Section */}
+            {/* Specific Exercises Section */}
             <Box marginBottom="xs">
               <Text variant="h1" color="text/primary" marginBottom="m">
                 For my strength focus, I want to improve:
               </Text>
-              <Box flexDirection="row" flexWrap="wrap" alignItems="flex-start" marginBottom="m">
-                <SimpleSelectionButton 
-                  title="Bench Press"
-                  isSelected={selectedLifts.includes('bench')}
-                  onPress={() => handleLiftSelection('bench')}
-                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('bench'))}
-                />
-                <SimpleSelectionButton 
-                  title="Overhead Press"
-                  isSelected={selectedLifts.includes('overhead')}
-                  onPress={() => handleLiftSelection('overhead')}
-                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('overhead'))}
-                />
-                <SimpleSelectionButton 
-                  title="Squat"
-                  isSelected={selectedLifts.includes('squat')}
-                  onPress={() => handleLiftSelection('squat')}
-                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('squat'))}
-                />
-                <SimpleSelectionButton 
-                  title="Deadlift"
-                  isSelected={selectedLifts.includes('deadlift')}
-                  onPress={() => handleLiftSelection('deadlift')}
-                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('deadlift'))}
-                />
-                <SimpleSelectionButton 
-                  title="Barbell Row"
-                  isSelected={selectedLifts.includes('row')}
-                  onPress={() => handleLiftSelection('row')}
-                  isDisabled={focusOverallStrength || (selectedLifts.length >= 3 && !selectedLifts.includes('row'))}
-                />
+              
+              {/* Selected Exercises */}
+              {selectedExercises.length > 0 && (
+                <Box marginBottom="m">
+                  {selectedExercises.map((exercise) => (
+                    <TouchableOpacity
+                      key={exercise.id}
+                      onPress={() => handleRemoveExercise(exercise.id)}
+                      activeOpacity={0.7}
+                    >
+                      <Box
+                        backgroundColor="brand/primary"
+                        borderRadius="md"
+                        paddingHorizontal="m"
+                        paddingVertical="m"
+                        marginBottom="s"
+                        flexDirection="row"
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
+                        <Box flex={1} marginRight="s">
+                          <Text variant="body" color="brand/onPrimary" style={{ fontWeight: '600' }}>
+                            {exercise.name}
+                          </Text>
+                          <Text variant="small" color="brand/onPrimary" style={{ opacity: 0.8 }}>
+                            {exercise.primaryMuscleGroup.charAt(0).toUpperCase() + exercise.primaryMuscleGroup.slice(1)}
+                          </Text>
+                        </Box>
+                        <Text variant="body" color="brand/onPrimary">
+                          ✕
+                        </Text>
+                      </Box>
+                    </TouchableOpacity>
+                  ))}
+                </Box>
+              )}
+              
+              {/* Add Exercise Button */}
+              <Box marginBottom="m">
+                <Button 
+                  variant={selectedExercises.length === 0 ? "primary" : "secondary"}
+                  fullWidth
+                  disabled={focusOverallStrength || selectedExercises.length >= 3}
+                  onPress={handleAddExercisesPress}
+                >
+                  {selectedExercises.length === 0 
+                    ? "Select exercises" 
+                    : selectedExercises.length >= 3
+                    ? "Maximum 3 exercises selected"
+                    : `Add more exercises (${selectedExercises.length}/3)`
+                  }
+                </Button>
               </Box>
               
               {/* Selection limit message */}
               <Box marginBottom="l">
-                {selectedLifts.length >= 3 ? (
+                {selectedExercises.length >= 3 ? (
                   <Text variant="caption" color="text/secondary" textAlign="center">
-                    Perfect! Focus on these 3 lifts to get started. You can add more lifts later in your season.
+                    Perfect! Focus on these 3 exercises to get started. You can add more later in your season.
                   </Text>
-                ) : selectedLifts.length > 0 ? (
+                ) : selectedExercises.length > 0 ? (
                   <Text variant="caption" color="text/secondary" textAlign="center">
-                    {selectedLifts.length} of 3 lifts selected • Pick up to 3 to get started
+                    {selectedExercises.length} of 3 exercises selected • Pick up to 3 to get started
                   </Text>
                 ) : (
                   <Text variant="caption" color="text/secondary" textAlign="center">
-                    Pick up to 3 lifts to focus on this season
+                    Pick up to 3 exercises to focus on this season
                   </Text>
                 )}
               </Box>
@@ -172,7 +202,7 @@ export default function SeasonStrengthScreen() {
             </Box>
             
             {/* Help Text */}
-            {selectedLifts.length === 0 && !focusOverallStrength && (
+            {selectedExercises.length === 0 && !focusOverallStrength && (
               <Box marginBottom="m" alignItems="center">
                 <Text variant="caption" color="text/secondary" textAlign="center">
                   Choose what you want to focus on this season
@@ -185,10 +215,10 @@ export default function SeasonStrengthScreen() {
               <Button 
                 variant="primary" 
                 fullWidth
-                disabled={selectedLifts.length === 0 && !focusOverallStrength}
+                disabled={selectedExercises.length === 0 && !focusOverallStrength}
                 onPress={() => router.push('/onboarding/season-step-3-strength-numbers')}
               >
-                {selectedLifts.length > 0 || focusOverallStrength 
+                {selectedExercises.length > 0 || focusOverallStrength 
                   ? `Set my strength focus` 
                   : "Choose your focus above"
                 }
@@ -197,6 +227,17 @@ export default function SeasonStrengthScreen() {
           </Box>
         </ScrollView>
       </Box>
+      
+      {/* Exercise Library Modal - Lazy loaded for performance */}
+      {shouldRenderSheet && (
+        <ExerciseLibraryModal
+          ref={exerciseLibraryModalRef}
+          maxSelection={3}
+          preselectedExerciseIds={selectedExercises.map(ex => ex.id)}
+          onApply={handleExerciseSelection}
+        />
+      )}
     </Box>
+    </GestureHandlerRootView>
   );
 }

@@ -1,6 +1,6 @@
 [
   {
-    "exerciseId": "00251201",
+    "exerciseId": "a78e466f-6d0a-4cda-9736-19be9da63713",
     "name": "Bench Press (Barbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -20,7 +20,7 @@
     ]
   },
   {
-    "exerciseId": "11651201",
+    "exerciseId": "d877c222-93e0-4937-9f3e-20cda62f6d1b",
     "name": "Overhead Press (Barbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -39,7 +39,7 @@
     ]
   },
   {
-    "exerciseId": "00301201",
+    "exerciseId": "655b290b-cff2-4ee9-9c6a-61451a535c0d",
     "name": "Bench Press - Close Grip (Barbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -59,7 +59,7 @@
     ]
   },
   {
-    "exerciseId": "03341201",
+    "exerciseId": "09dca2db-2726-472b-a502-6c704691fc55",
     "name": "Lateral Raise (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -75,23 +75,7 @@
     ]
   },
   {
-    "exerciseId": "04471201",
-    "name": "EZ Bar Biceps Curl",
-    "primary_muscle_group": "biceps",
-    "other_muscles": [],
-    "equipment_category": "barbell",
-    "video_url": "04471201-EZ-Barbell-Curl_Upper-Arms.mp4",
-    "thumbnail_image": "04471201-EZ-Barbell-Curl_Upper-Arms_thumbnail@3x.jpg",
-    "steps": [
-      "Step:1 Stand tall holding the bar with an underhand grip at shoulder-width.",
-      "Step:2 Keep your elbows close to your torso and chest lifted.",
-      "Step:3 Curl the bar upward while squeezing your biceps.",
-      "Step:4 Pause briefly at the top, then slowly lower the bar back down.",
-      "Step:5 Avoid swinging your body and repeat for reps."
-    ]
-  },
-  {
-    "exerciseId": "00601201",
+    "exerciseId": "0007c3e4-4505-4fd8-aec1-2e2cccfb9c67",
     "name": "Skullcrusher (Barbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -107,7 +91,7 @@
     ]
   },
   {
-    "exerciseId": "05981201",
+    "exerciseId": "0e17f1ee-40f5-4667-b9e2-85d1ce93cfad",
     "name": "Hip Adduction (Machine)",
     "primary_muscle_group": "adductors",
     "other_muscles": [],
@@ -123,7 +107,7 @@
     ]
   },
   {
-    "exerciseId": "37851201",
+    "exerciseId": "2d07ccfc-a7b1-4bf2-96a8-ef7066481516",
     "name": "Incline Push Ups",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -142,7 +126,7 @@
     ]
   },
   {
-    "exerciseId": "10821201",
+    "exerciseId": "f0d37496-22a9-4c85-af4d-9f34a5a09e2c",
     "name": "Jack Knife (Suspension)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -158,7 +142,7 @@
     ]
   },
   {
-    "exerciseId": "38841201",
+    "exerciseId": "ee34aa94-0431-4295-976e-a098931becbb",
     "name": "Jackknife Sit Up",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -174,7 +158,7 @@
     ]
   },
   {
-    "exerciseId": "9e4201ff-41d8-471b-adfe-5778b1609696",
+    "exerciseId": "cec8446e-89a5-43c9-a428-bd70e5b15000",
     "name": "Jump Rope",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -190,7 +174,7 @@
     ]
   },
   {
-    "exerciseId": "00521201",
+    "exerciseId": "2bfd0646-2464-493c-a796-479d50179cdf",
     "name": "JM Press (Barbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -209,7 +193,7 @@
     ]
   },
   {
-    "exerciseId": "49641201",
+    "exerciseId": "01333d3c-e7aa-4cc8-b92a-25a1b0b6ce84",
     "name": "Jump Shrug",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -225,7 +209,7 @@
     ]
   },
   {
-    "exerciseId": "05141201",
+    "exerciseId": "b4301095-6e2a-44ba-b736-bcaa3f955245",
     "name": "Jump Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -247,7 +231,7 @@
     ]
   },
   {
-    "exerciseId": "30941201",
+    "exerciseId": "33bc8a12-17a8-4009-8401-25d4e03b135b",
     "name": "Jumping Jack",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -263,7 +247,7 @@
     ]
   },
   {
-    "exerciseId": "11661201",
+    "exerciseId": "22421d87-434d-460c-a95c-84e6078c45aa",
     "name": "Jumping Lunge",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -283,7 +267,7 @@
     ]
   },
   {
-    "exerciseId": "45341201",
+    "exerciseId": "cca1e2f8-3682-4f1a-95a4-6f6be85abce2",
     "name": "Kettlebell Around the World",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -303,7 +287,7 @@
     ]
   },
   {
-    "exerciseId": "45301201",
+    "exerciseId": "e9b35afe-6cfd-48bd-a478-92903b0296db",
     "name": "Kettlebell Clean",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -319,7 +303,7 @@
     ]
   },
   {
-    "exerciseId": "23561201",
+    "exerciseId": "895b12d3-9029-4932-acfe-837201b9ee08",
     "name": "Kettlebell Goblet Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -340,7 +324,7 @@
     ]
   },
   {
-    "exerciseId": "69331201",
+    "exerciseId": "a9963b23-4393-4792-bc65-ab07061f441e",
     "name": "Kettlebell Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -356,7 +340,7 @@
     ]
   },
   {
-    "exerciseId": "29391201",
+    "exerciseId": "c78206a0-339e-404f-ac87-5ad041b86e8a",
     "name": "Kettlebell Halo",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -375,7 +359,7 @@
     ]
   },
   {
-    "exerciseId": "05481201",
+    "exerciseId": "ae89eb49-fced-4933-bbdf-e1abe721238c",
     "name": "Kettlebell High Pull",
     "primary_muscle_group": "full_body",
     "other_muscles": [
@@ -393,7 +377,7 @@
     ]
   },
   {
-    "exerciseId": "05421201",
+    "exerciseId": "0577d8cb-965f-49e5-9412-7651921568b5",
     "name": "Kettlebell Snatch",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -409,7 +393,7 @@
     ]
   },
   {
-    "exerciseId": "99571201",
+    "exerciseId": "18463b9b-d382-45ec-9b7e-608ee58adc71",
     "name": "Kettlebell Shoulder Press",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -427,7 +411,7 @@
     ]
   },
   {
-    "exerciseId": "00311201",
+    "exerciseId": "f2c8ea74-8c9e-4432-9747-6dff4e28b052",
     "name": "21s Bicep Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -443,7 +427,7 @@
     ]
   },
   {
-    "exerciseId": "62141201",
+    "exerciseId": "11802775-7dbf-4779-9457-2d87914c319b",
     "name": "Ab Scissors",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -459,7 +443,7 @@
     ]
   },
   {
-    "exerciseId": "08571201",
+    "exerciseId": "c662046c-1c16-49c7-9854-2f2abf7f22d0",
     "name": "Ab Wheel",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -475,7 +459,7 @@
     ]
   },
   {
-    "exerciseId": "352c3d23-782c-4d5b-8a26-f29692f9c744",
+    "exerciseId": "5adbdc36-1839-4c09-afd7-4f4851702919",
     "name": "Air Bike",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -491,7 +475,7 @@
     ]
   },
   {
-    "exerciseId": "02871201",
+    "exerciseId": "8c479e50-f447-4618-abba-c7ac3efe56e3",
     "name": "Arnold Press (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -509,7 +493,7 @@
     ]
   },
   {
-    "exerciseId": "02881201",
+    "exerciseId": "be6dd389-e1ac-44ca-953e-af1a26531eee",
     "name": "Around The World",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -529,7 +513,7 @@
     ]
   },
   {
-    "exerciseId": "23751201",
+    "exerciseId": "2fee5bd1-0dc8-46e4-9e12-c94dc440015a",
     "name": "Assisted Pistol Squats",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -550,7 +534,7 @@
     ]
   },
   {
-    "exerciseId": "18601201",
+    "exerciseId": "e4ef5a32-4aec-4731-b3ce-8b9b50b562db",
     "name": "Back Extension (Hyperextension)",
     "primary_muscle_group": "lower_back",
     "other_muscles": [
@@ -569,7 +553,7 @@
     ]
   },
   {
-    "exerciseId": "05731201",
+    "exerciseId": "27b90e77-7586-471d-84bf-338451aa5207",
     "name": "Back Extension (Machine)",
     "primary_muscle_group": "lower_back",
     "other_muscles": [],
@@ -585,7 +569,7 @@
     ]
   },
   {
-    "exerciseId": "57821201",
+    "exerciseId": "09679bcc-e9a7-4728-863c-019ffc315779",
     "name": "Back Extension (Weighted Hyperextension)",
     "primary_muscle_group": "lower_back",
     "other_muscles": [
@@ -604,7 +588,7 @@
     ]
   },
   {
-    "exerciseId": "45681201",
+    "exerciseId": "e913c26c-f92a-4ecd-a502-2ab591580fc7",
     "name": "Band Pullaparts",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -622,7 +606,7 @@
     ]
   },
   {
-    "exerciseId": "01281201",
+    "exerciseId": "146a4b0f-5dda-411a-bdb8-a168f8ee9de6",
     "name": "Battle Ropes",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -638,7 +622,7 @@
     ]
   },
   {
-    "exerciseId": "63651201",
+    "exerciseId": "8085bcaf-ca75-40cf-b5b6-ecbbd195bf5e",
     "name": "Behind the Back Bicep Wrist Curl (Barbell)",
     "primary_muscle_group": "forearms",
     "other_muscles": [],
@@ -654,7 +638,7 @@
     ]
   },
   {
-    "exerciseId": "48381201",
+    "exerciseId": "93316ba0-0e9c-426a-aa59-fa0a7561f120",
     "name": "Behind the Back Curl (Cable)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -670,7 +654,7 @@
     ]
   },
   {
-    "exerciseId": "29501201",
+    "exerciseId": "ebf0c041-c7dd-4ac1-9187-18dc0e929838",
     "name": "Belt Squat (Machine)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -691,7 +675,7 @@
     ]
   },
   {
-    "exerciseId": "13991201",
+    "exerciseId": "8105cabc-1def-42c3-8c6e-fafe3f089ba4",
     "name": "Bench Dip",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -710,7 +694,7 @@
     ]
   },
   {
-    "exerciseId": "01221201",
+    "exerciseId": "a5c7c0ca-64fe-488d-8aff-0c3eda1be969",
     "name": "Bench Press - Wide Grip (Barbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -730,7 +714,7 @@
     ]
   },
   {
-    "exerciseId": "01511201",
+    "exerciseId": "20bc9bfe-8b1e-4306-bf84-04b431cdd3ee",
     "name": "Bench Press (Cable)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -750,7 +734,7 @@
     ]
   },
   {
-    "exerciseId": "02891201",
+    "exerciseId": "2088c5ef-b908-4a01-8a11-6e75122d6bef",
     "name": "Bench Press (Dumbbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -770,7 +754,7 @@
     ]
   },
   {
-    "exerciseId": "07481201",
+    "exerciseId": "cf6bcaa6-1876-44b7-9f5c-38f28094c2e8",
     "name": "Bench Press (Smith Machine)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -790,7 +774,7 @@
     ]
   },
   {
-    "exerciseId": "38991201",
+    "exerciseId": "d66145dd-0795-4198-83ae-2efd3318dd88",
     "name": "Bent Over Row (Band)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -811,7 +795,7 @@
     ]
   },
   {
-    "exerciseId": "00271201",
+    "exerciseId": "cda39522-b666-48e9-b80f-d747d1d9f58d",
     "name": "Bent Over Row (Barbell)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -832,7 +816,7 @@
     ]
   },
   {
-    "exerciseId": "00311201",
+    "exerciseId": "b5eb5555-f86f-4941-abdf-f203d84b6026",
     "name": "Bicep Curl (Barbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -848,7 +832,7 @@
     ]
   },
   {
-    "exerciseId": "02941201",
+    "exerciseId": "490e2354-da66-4cc7-823b-76f738345133",
     "name": "Bicep Curl (Dumbbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -864,7 +848,7 @@
     ]
   },
   {
-    "exerciseId": "10321201",
+    "exerciseId": "b7979ff5-f2d5-4c0b-b6dd-3cc73231e77e",
     "name": "Bicep Curl (Machine)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -880,7 +864,7 @@
     ]
   },
   {
-    "exerciseId": "10701201",
+    "exerciseId": "5b785953-9420-4e62-92f5-b34a1d5936ab",
     "name": "Bicep Curl (Suspension)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -896,7 +880,7 @@
     ]
   },
   {
-    "exerciseId": "00031201",
+    "exerciseId": "47d68580-d930-4612-ab10-2943f053ddce",
     "name": "Bicycle Crunch",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -912,7 +896,7 @@
     ]
   },
   {
-    "exerciseId": "01471201",
+    "exerciseId": "05b1a219-2261-411d-917a-7077425f0970",
     "name": "Bicycle Crunch Raised Legs",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -928,7 +912,7 @@
     ]
   },
   {
-    "exerciseId": "51821201",
+    "exerciseId": "1ab370c2-76a3-4660-a682-c4d05b77bd36",
     "name": "Bird Dog",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -947,7 +931,7 @@
     ]
   },
   {
-    "exerciseId": "71591201",
+    "exerciseId": "2c3d675d-32fc-442a-bd6f-5a19a8c5a36e",
     "name": "Box Jump",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -967,7 +951,7 @@
     ]
   },
   {
-    "exerciseId": "49621201",
+    "exerciseId": "9a9e25e8-8407-43c6-b94a-e29582e50832",
     "name": "Box Squat (Barbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -988,7 +972,7 @@
     ]
   },
   {
-    "exerciseId": "eb26f213-a628-4f05-b4a2-fc2209365039",
+    "exerciseId": "4d9944e3-cab3-4e22-b8d1-2db301f7051b",
     "name": "Boxing",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -1004,7 +988,7 @@
     ]
   },
   {
-    "exerciseId": "22901201",
+    "exerciseId": "739b0952-15d5-4627-8980-a3954ba0fe45",
     "name": "Bulgarian Split Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -1025,7 +1009,7 @@
     ]
   },
   {
-    "exerciseId": "11601201",
+    "exerciseId": "bf45affe-6d4b-4b38-94b1-77a4df987508",
     "name": "Burpee",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -1041,7 +1025,7 @@
     ]
   },
   {
-    "exerciseId": "101811201",
+    "exerciseId": "33319605-01c3-45e2-bd02-0a73fa5342a6",
     "name": "Burpee Over the Bar",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -1057,7 +1041,7 @@
     ]
   },
   {
-    "exerciseId": "10301201",
+    "exerciseId": "668c4589-8d68-443c-8f28-ba9568e5a366",
     "name": "Butterfly (Pec Deck)",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -1073,7 +1057,7 @@
     ]
   },
   {
-    "exerciseId": "12021201",
+    "exerciseId": "2cfef6ca-bd32-41fe-9ae1-1e3872feba3a",
     "name": "Cable Core Palloff Press",
     "primary_muscle_group": "abdominals",
     "other_muscles": [
@@ -1093,7 +1077,7 @@
     ]
   },
   {
-    "exerciseId": "01751201",
+    "exerciseId": "2fc1d963-799b-4da1-9e86-6f38237ff0bc",
     "name": "Cable Crunch",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -1109,7 +1093,7 @@
     ]
   },
   {
-    "exerciseId": "12691201",
+    "exerciseId": "adf9f67c-6c6d-4dc3-8fc1-5bd8f2552d77",
     "name": "Cable Fly Crossovers",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -1125,7 +1109,7 @@
     ]
   },
   {
-    "exerciseId": "12061201",
+    "exerciseId": "9d22e2f8-c23d-4db6-8d8e-14cf83744cad",
     "name": "Cable Pull Through",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -1144,7 +1128,7 @@
     ]
   },
   {
-    "exerciseId": "12071201",
+    "exerciseId": "c235dde2-3944-4ff8-817b-a892f9ea65a3",
     "name": "Cable Twist (Down to up)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -1160,7 +1144,7 @@
     ]
   },
   {
-    "exerciseId": "08621201",
+    "exerciseId": "d08a210f-42c6-41f3-8515-ce331c28d0b1",
     "name": "Cable Twist (Up to down)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -1176,7 +1160,7 @@
     ]
   },
   {
-    "exerciseId": "23151201",
+    "exerciseId": "1660bf64-cb67-43c3-a9bc-1fed5924702e",
     "name": "Calf Extension (Machine)",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -1192,7 +1176,7 @@
     ]
   },
   {
-    "exerciseId": "07381201",
+    "exerciseId": "5191acd1-3813-4e51-a482-11b7513a3f36",
     "name": "Calf Press (Machine)",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -1208,7 +1192,7 @@
     ]
   },
   {
-    "exerciseId": "02511201",
+    "exerciseId": "811e3f43-87f0-4d3d-bd7e-4fcfdcdbe75b",
     "name": "Chest Dip",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1227,7 +1211,7 @@
     ]
   },
   {
-    "exerciseId": "00091201",
+    "exerciseId": "0802cce0-d557-4310-8d0f-9611e16967c1",
     "name": "Chest Dip (Assisted)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1246,7 +1230,7 @@
     ]
   },
   {
-    "exerciseId": "09131201",
+    "exerciseId": "d7bbdde6-9f4a-4e32-b63e-63b2677a733e",
     "name": "Chest Fly (Band)",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -1262,7 +1246,7 @@
     ]
   },
   {
-    "exerciseId": "17551201",
+    "exerciseId": "d3eaa8ca-19d4-4418-bde3-1691dbaac5e2",
     "name": "Chest Dip (Weighted)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1281,7 +1265,7 @@
     ]
   },
   {
-    "exerciseId": "03081201",
+    "exerciseId": "2167a802-1a0e-45e6-8cb1-6d912ae9809c",
     "name": "Chest Fly (Dumbbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -1297,7 +1281,7 @@
     ]
   },
   {
-    "exerciseId": "05961201",
+    "exerciseId": "fe09c4f5-a658-4e64-aa8a-85a96da06b01",
     "name": "Chest Fly (Machine)",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -1313,7 +1297,7 @@
     ]
   },
   {
-    "exerciseId": "57371201",
+    "exerciseId": "0acee909-98e7-49fc-af16-09526668bd77",
     "name": "Chest Fly (Suspension)",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -1329,7 +1313,7 @@
     ]
   },
   {
-    "exerciseId": "09201201",
+    "exerciseId": "a3873d99-993c-41f5-8382-92075bc52479",
     "name": "Chest Press (Band)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1348,7 +1332,7 @@
     ]
   },
   {
-    "exerciseId": "05771201",
+    "exerciseId": "f1135ce4-e925-4701-87e8-77a1b61f4d48",
     "name": "Chest Press (Machine)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1367,7 +1351,7 @@
     ]
   },
   {
-    "exerciseId": "03271201",
+    "exerciseId": "e77ec702-a5d4-46f1-a4c0-a3cc56d21241",
     "name": "Chest Supported Incline Row (Dumbbell)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -1388,7 +1372,7 @@
     ]
   },
   {
-    "exerciseId": "03831201",
+    "exerciseId": "ac4f134c-e781-403e-910a-e5ba23bc4f78",
     "name": "Chest Supported Reverse Fly (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -1406,7 +1390,7 @@
     ]
   },
   {
-    "exerciseId": "35411201",
+    "exerciseId": "e3c59630-9807-400f-9f69-9563d3b02afc",
     "name": "Chest Supported Y Raise (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -1424,7 +1408,7 @@
     ]
   },
   {
-    "exerciseId": "13261201",
+    "exerciseId": "6aac16cf-390c-4bd5-a36b-8f74ddb9bc0b",
     "name": "Chin Up",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -1444,7 +1428,7 @@
     ]
   },
   {
-    "exerciseId": "05721201",
+    "exerciseId": "c2881862-2301-4ab1-9dd6-3460e1853522",
     "name": "Chin Up (Assisted)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -1464,7 +1448,7 @@
     ]
   },
   {
-    "exerciseId": "41811201",
+    "exerciseId": "f217c8ba-ce53-44b1-b173-c2c19317a34c",
     "name": "Chin Up (Weighted)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -1484,7 +1468,7 @@
     ]
   },
   {
-    "exerciseId": "98491201",
+    "exerciseId": "511533ce-590e-4996-880d-29f6915c9da1",
     "name": "Clamshell",
     "primary_muscle_group": "glutes",
     "other_muscles": [],
@@ -1500,7 +1484,7 @@
     ]
   },
   {
-    "exerciseId": "12731201",
+    "exerciseId": "378d343f-d4aa-421f-afd7-92f151e9123c",
     "name": "Clap Push Ups",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1519,7 +1503,7 @@
     ]
   },
   {
-    "exerciseId": "449fcec7-924b-4e98-89fc-fea23269fc0a",
+    "exerciseId": "df18753b-8c92-4b7d-915f-3aeb845848ce",
     "name": "Clean",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -1535,7 +1519,7 @@
     ]
   },
   {
-    "exerciseId": "00281201",
+    "exerciseId": "232ac434-c3ef-480b-8338-921652688ba6",
     "name": "Clean and Jerk",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -1551,7 +1535,7 @@
     ]
   },
   {
-    "exerciseId": "00281201",
+    "exerciseId": "2f4ba84a-b931-4b89-898e-47fcfd35f550",
     "name": "Clean and Press",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -1567,7 +1551,7 @@
     ]
   },
   {
-    "exerciseId": "15171201",
+    "exerciseId": "7e00cf74-968d-48dc-938e-a9af63de15b7",
     "name": "Clean Pull",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -1583,7 +1567,7 @@
     ]
   },
   {
-    "exerciseId": "02971201",
+    "exerciseId": "ce890e53-3369-4ecd-8d67-12ea37aac8c8",
     "name": "Concentration Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -1599,7 +1583,7 @@
     ]
   },
   {
-    "exerciseId": "16571201",
+    "exerciseId": "7b666fb2-564e-483f-b654-23f3c9ec1367",
     "name": "Cross Body Hammer Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -1617,7 +1601,7 @@
     ]
   },
   {
-    "exerciseId": "02741201",
+    "exerciseId": "735dad71-7a65-4e71-9b76-8ec4e0fec000",
     "name": "Crunch",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -1633,7 +1617,7 @@
     ]
   },
   {
-    "exerciseId": "05951201",
+    "exerciseId": "61d28bd0-2f08-4901-b924-093dfd2e0380",
     "name": "Crunch (Machine)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -1649,7 +1633,7 @@
     ]
   },
   {
-    "exerciseId": "66031201",
+    "exerciseId": "8d1db9be-fda3-4465-9450-5fac6ed12e60",
     "name": "Crunch (Weighted)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -1665,7 +1649,7 @@
     ]
   },
   {
-    "exerciseId": "08811201",
+    "exerciseId": "fac24059-6a18-4d56-8660-2b8337422102",
     "name": "Curtsy Lunge (Dumbbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -1685,7 +1669,7 @@
     ]
   },
   {
-    "exerciseId": "78391201",
+    "exerciseId": "2154b6b9-e705-4dc0-b3de-cef066b87d38",
     "name": "Dead Bug",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -1701,7 +1685,7 @@
     ]
   },
   {
-    "exerciseId": "cc797d61-9d16-453c-88e5-925b5f0450d8",
+    "exerciseId": "eb282eb8-ea44-4cef-aa1a-4adafe2c04c3",
     "name": "Dead Hang",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -1720,7 +1704,7 @@
     ]
   },
   {
-    "exerciseId": "08951201",
+    "exerciseId": "0c7a91de-b6a9-47ab-9876-f6fa7faebeff",
     "name": "Deadlift (Band)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -1745,7 +1729,7 @@
     ]
   },
   {
-    "exerciseId": "00321201",
+    "exerciseId": "59c080d6-ab27-4375-9da7-a0a885a58d03",
     "name": "Deadlift (Barbell)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -1770,7 +1754,7 @@
     ]
   },
   {
-    "exerciseId": "03001201",
+    "exerciseId": "a6de8e8b-eb8e-476c-a5a7-19965b78a542",
     "name": "Deadlift (Dumbbell)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -1795,7 +1779,7 @@
     ]
   },
   {
-    "exerciseId": "07521201",
+    "exerciseId": "f119faf2-c230-4380-ae8f-243eb403cf69",
     "name": "Deadlift (Smith Machine)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -1820,7 +1804,7 @@
     ]
   },
   {
-    "exerciseId": "08111201",
+    "exerciseId": "df94c4a2-9865-4836-9f3d-3952a7fa17db",
     "name": "Deadlift (Trap bar)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -1845,7 +1829,7 @@
     ]
   },
   {
-    "exerciseId": "11991201",
+    "exerciseId": "81ea7a3f-705f-44a5-b9da-80661e1c9eac",
     "name": "Deadlift High Pull",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -1863,7 +1847,7 @@
     ]
   },
   {
-    "exerciseId": "00331201",
+    "exerciseId": "862b805d-0799-459c-8115-0937f18ad261",
     "name": "Decline Bench Press (Barbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1883,7 +1867,7 @@
     ]
   },
   {
-    "exerciseId": "03011201",
+    "exerciseId": "868fe77a-b6e2-4ff8-8371-c121e0011c55",
     "name": "Decline Bench Press (Dumbbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1903,7 +1887,7 @@
     ]
   },
   {
-    "exerciseId": "13001201",
+    "exerciseId": "354dd522-7d86-4ef8-95ca-2d0059167785",
     "name": "Decline Bench Press (Machine)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1923,7 +1907,7 @@
     ]
   },
   {
-    "exerciseId": "07531201",
+    "exerciseId": "ff52a3f5-f69f-4631-94e2-e6193e06dd5a",
     "name": "Decline Bench Press (Smith Machine)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -1943,7 +1927,7 @@
     ]
   },
   {
-    "exerciseId": "03021201",
+    "exerciseId": "8c458341-3ab8-47e9-9f48-1952e2749b3d",
     "name": "Decline Chest Fly (Dumbbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -1959,7 +1943,7 @@
     ]
   },
   {
-    "exerciseId": "02771201",
+    "exerciseId": "cf31b5ba-952f-4b50-8cb5-1488bd04df2f",
     "name": "Decline Crunch",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -1975,7 +1959,7 @@
     ]
   },
   {
-    "exerciseId": "21301201",
+    "exerciseId": "4e325dc2-b907-4254-9f13-815ba16204c1",
     "name": "Decline Crunch (Weighted)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -1991,7 +1975,7 @@
     ]
   },
   {
-    "exerciseId": "02791201",
+    "exerciseId": "569f71d6-2660-46d3-bfe6-900c46a993f0",
     "name": "Decline Push Up",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -2010,7 +1994,7 @@
     ]
   },
   {
-    "exerciseId": "02831201",
+    "exerciseId": "41fc6b75-9da0-4e0e-8d8b-048504cc2790",
     "name": "Diamond Push Up",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -2029,7 +2013,7 @@
     ]
   },
   {
-    "exerciseId": "52511201",
+    "exerciseId": "59b9d9a3-44f5-4c92-b7b2-520784a76255",
     "name": "Downward Dog",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2045,7 +2029,7 @@
     ]
   },
   {
-    "exerciseId": "00381201",
+    "exerciseId": "7d9a91d5-8971-4d93-acea-710aed5fe187",
     "name": "Drag Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -2061,7 +2045,7 @@
     ]
   },
   {
-    "exerciseId": "40581201",
+    "exerciseId": "617730d0-8033-4018-b0ab-4fd44a888aae",
     "name": "Dragon Flag",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -2077,7 +2061,7 @@
     ]
   },
   {
-    "exerciseId": "40581201",
+    "exerciseId": "3cb76fe1-7772-4f33-9f94-46870cb41079",
     "name": "Dragonfly",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -2093,7 +2077,7 @@
     ]
   },
   {
-    "exerciseId": "02921201",
+    "exerciseId": "ae362679-a6d8-4009-9256-ea38796cf460",
     "name": "Dumbbell Row",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -2114,7 +2098,7 @@
     ]
   },
   {
-    "exerciseId": "38881201",
+    "exerciseId": "6fcf7f0d-44e6-403e-8350-b7709d868c3b",
     "name": "Dumbbell Snatch",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2130,7 +2114,7 @@
     ]
   },
   {
-    "exerciseId": "36811201",
+    "exerciseId": "2f9f7a5a-813b-4968-a79b-9a7ec74de84f",
     "name": "Dumbbell Squeeze Press",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -2149,7 +2133,7 @@
     ]
   },
   {
-    "exerciseId": "58261201",
+    "exerciseId": "ccf6e1f0-ddaf-4a21-b12a-d5a3e44f01b5",
     "name": "Dumbbell Step Up",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -2168,7 +2152,7 @@
     ]
   },
   {
-    "exerciseId": "23121201",
+    "exerciseId": "3d6fb54d-38e1-4d7d-a13d-7752c3d879d2",
     "name": "Elbow to Knee",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -2184,7 +2168,7 @@
     ]
   },
   {
-    "exerciseId": "21921201",
+    "exerciseId": "b4f9c295-436d-405f-bee1-2a7cf8f24147",
     "name": "Elliptical Trainer",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -2200,7 +2184,7 @@
     ]
   },
   {
-    "exerciseId": "04471201",
+    "exerciseId": "d4d5647d-fb35-48b7-94b3-47586d8df0ff",
     "name": "EZ Bar Biceps Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -2216,7 +2200,7 @@
     ]
   },
   {
-    "exerciseId": "77441201",
+    "exerciseId": "e515c5ef-741b-4b19-92dd-02db177fa906",
     "name": "Face Pull",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -2234,7 +2218,7 @@
     ]
   },
   {
-    "exerciseId": "21331201",
+    "exerciseId": "c7c13a59-3139-4d89-9cda-d78bd603f25d",
     "name": "Farmers Walk",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2250,7 +2234,7 @@
     ]
   },
   {
-    "exerciseId": "62701201",
+    "exerciseId": "2a7ae70c-f3f1-4cd0-a70f-efc5d8dccec6",
     "name": "Feet Up Bench Press (Barbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -2270,7 +2254,7 @@
     ]
   },
   {
-    "exerciseId": "14751201",
+    "exerciseId": "bb502d14-21ea-446c-a787-7302a04c9ca4",
     "name": "Fire Hydrants",
     "primary_muscle_group": "glutes",
     "other_muscles": [],
@@ -2286,7 +2270,7 @@
     ]
   },
   {
-    "exerciseId": "37241201",
+    "exerciseId": "b0c6c7ba-e087-4ca8-acff-6858e6fe0415",
     "name": "Floor Press (Barbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -2305,7 +2289,7 @@
     ]
   },
   {
-    "exerciseId": "36681201",
+    "exerciseId": "2c73c6d9-ea9c-4446-bf92-5d905d295088",
     "name": "Floor Press (Dumbbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -2324,7 +2308,7 @@
     ]
   },
   {
-    "exerciseId": "08151201",
+    "exerciseId": "6aee5b8b-58b9-4485-ba69-18136c583ef3",
     "name": "Floor Triceps Dip",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -2342,7 +2326,7 @@
     ]
   },
   {
-    "exerciseId": "12441201",
+    "exerciseId": "fd1d83f6-e0c0-42ec-ab57-699fe9fbdf43",
     "name": "Flutter Kicks",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -2358,7 +2342,7 @@
     ]
   },
   {
-    "exerciseId": "61601201",
+    "exerciseId": "8dab19dc-3221-4a47-b469-0bd3c22950b8",
     "name": "Frog Pumps (Dumbbell)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -2376,7 +2360,7 @@
     ]
   },
   {
-    "exerciseId": "101651201",
+    "exerciseId": "b59cf3e8-a4d9-4639-988a-b17dcd8b6789",
     "name": "Frog Jumps",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -2396,7 +2380,7 @@
     ]
   },
   {
-    "exerciseId": "72511201",
+    "exerciseId": "0bf54cc5-4df4-4ab3-8bc6-1821aa1672c5",
     "name": "Front Lever Hold",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2412,7 +2396,7 @@
     ]
   },
   {
-    "exerciseId": "72511201",
+    "exerciseId": "9a42d5de-4d30-476d-b0bc-f2394d5a4853",
     "name": "Front Lever Raise",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2428,7 +2412,7 @@
     ]
   },
   {
-    "exerciseId": "09781201",
+    "exerciseId": "0b0f493d-367b-4c54-9501-58ba7db76021",
     "name": "Front Raise (Band)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -2444,7 +2428,7 @@
     ]
   },
   {
-    "exerciseId": "00411101",
+    "exerciseId": "a3d92d21-3ef2-4ce7-ab69-0ba4de238040",
     "name": "Front Raise (Barbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -2460,7 +2444,7 @@
     ]
   },
   {
-    "exerciseId": "01621201",
+    "exerciseId": "9bd151e2-2fd0-4433-a703-547060c20aaf",
     "name": "Front Raise (Cable)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -2476,7 +2460,7 @@
     ]
   },
   {
-    "exerciseId": "03101201",
+    "exerciseId": "ab7f15d0-eab0-4d59-830e-6bcc49df8211",
     "name": "Front Raise (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -2492,7 +2476,7 @@
     ]
   },
   {
-    "exerciseId": "10751201",
+    "exerciseId": "9d2788b8-ee0a-47b3-9758-7f07c7f4b7a5",
     "name": "Front Raise (Suspension)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -2508,7 +2492,7 @@
     ]
   },
   {
-    "exerciseId": "00421201",
+    "exerciseId": "20f436e0-3539-4765-99dd-5682f618a197",
     "name": "Front Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -2529,7 +2513,7 @@
     ]
   },
   {
-    "exerciseId": "00431201",
+    "exerciseId": "d83c60f3-3db7-4fdc-9322-40449cdab55a",
     "name": "Full Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -2550,7 +2534,7 @@
     ]
   },
   {
-    "exerciseId": "101801201",
+    "exerciseId": "8e5b43e8-4a48-4d2c-b0cd-529493f42d71",
     "name": "Glute Bridge",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -2569,7 +2553,7 @@
     ]
   },
   {
-    "exerciseId": "57771201",
+    "exerciseId": "f3a68000-285b-4b95-aa12-873099218bb0",
     "name": "Glute Ham Raise",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -2587,7 +2571,7 @@
     ]
   },
   {
-    "exerciseId": "10371201",
+    "exerciseId": "e59e1baf-e698-406c-ba32-c2fb51d2f4a0",
     "name": "Glute Kickback (Machine)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -2605,7 +2589,7 @@
     ]
   },
   {
-    "exerciseId": "14741201",
+    "exerciseId": "10e7415f-24ee-4579-921d-1cd4e8f39fec",
     "name": "Glute Kickback on Floor",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -2623,7 +2607,7 @@
     ]
   },
   {
-    "exerciseId": "22811201",
+    "exerciseId": "be1f862d-d63e-4372-9cb4-1f407b244bec",
     "name": "Goblet Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -2644,7 +2628,7 @@
     ]
   },
   {
-    "exerciseId": "72301201",
+    "exerciseId": "38ff1f73-40a0-430f-ba3f-8bc396725545",
     "name": "Gorilla Row (Kettlebell)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -2665,7 +2649,7 @@
     ]
   },
   {
-    "exerciseId": "00441201",
+    "exerciseId": "951e08fa-dd8a-4c5a-a720-595980750c8a",
     "name": "Good Morning (Barbell)",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -2686,7 +2670,7 @@
     ]
   },
   {
-    "exerciseId": "00461201",
+    "exerciseId": "81f93dd2-1599-4f7c-8852-407284ef4593",
     "name": "Hack Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -2707,7 +2691,7 @@
     ]
   },
   {
-    "exerciseId": "07431201",
+    "exerciseId": "4f080af6-acb7-4975-9e76-c8d809302617",
     "name": "Hack Squat (Machine)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -2728,7 +2712,7 @@
     ]
   },
   {
-    "exerciseId": "46191201",
+    "exerciseId": "3128aff9-b578-406b-b744-6346f29d891e",
     "name": "Hammer Curl (Band)",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -2746,7 +2730,7 @@
     ]
   },
   {
-    "exerciseId": "01661201",
+    "exerciseId": "2bdd22a7-5f6b-4168-a7ad-13c06448064a",
     "name": "Hammer Curl (Cable)",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -2764,7 +2748,7 @@
     ]
   },
   {
-    "exerciseId": "03121201",
+    "exerciseId": "31fb3ad8-b321-4d5a-b975-5fa665b03a37",
     "name": "Hammer Curl (Dumbbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -2782,7 +2766,7 @@
     ]
   },
   {
-    "exerciseId": "33021201",
+    "exerciseId": "f096db44-4b52-4865-a1c0-8481e884f22c",
     "name": "Handstand Hold",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2798,7 +2782,7 @@
     ]
   },
   {
-    "exerciseId": "04711201",
+    "exerciseId": "6abb35c6-f02a-4a0a-ac53-80a7b5a9f99a",
     "name": "Handstand Push Up",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -2817,7 +2801,7 @@
     ]
   },
   {
-    "exerciseId": "15201201",
+    "exerciseId": "389e8bdc-bd8f-4595-8c82-10e95e2dac61",
     "name": "Hang Clean",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2833,7 +2817,7 @@
     ]
   },
   {
-    "exerciseId": "15231201",
+    "exerciseId": "62bcbad9-c470-4aa3-8d4e-f80b90d97f4d",
     "name": "Hang Snatch",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2849,7 +2833,7 @@
     ]
   },
   {
-    "exerciseId": "98191201",
+    "exerciseId": "ce4cc794-7792-41f4-9954-29c5c3693b9f",
     "name": "Hanging Knee Raise",
     "primary_muscle_group": "abdominals",
     "other_muscles": [
@@ -2867,7 +2851,7 @@
     ]
   },
   {
-    "exerciseId": "17641201",
+    "exerciseId": "42d0fa39-c2f1-489d-a91f-5d749f5db0ca",
     "name": "Hanging Leg Raise",
     "primary_muscle_group": "abdominals",
     "other_muscles": [
@@ -2885,7 +2869,7 @@
     ]
   },
   {
-    "exerciseId": "00061201",
+    "exerciseId": "1449e458-52e7-40cc-857e-a1dd68901145",
     "name": "Heel Taps",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -2901,7 +2885,7 @@
     ]
   },
   {
-    "exerciseId": "36811201",
+    "exerciseId": "9f0d6231-d697-44b4-9a45-94aa5673aedb",
     "name": "Hex Press (Dumbbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -2920,7 +2904,7 @@
     ]
   },
   {
-    "exerciseId": "30911201",
+    "exerciseId": "93aa88c5-bd1e-4500-83ea-6dbb2e1bc638",
     "name": "High Knee Skips",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2936,7 +2920,7 @@
     ]
   },
   {
-    "exerciseId": "30911201",
+    "exerciseId": "365ccde4-31c3-4eae-ab6f-6ee893d5eeef",
     "name": "High Knees",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -2952,7 +2936,7 @@
     ]
   },
   {
-    "exerciseId": "05971201",
+    "exerciseId": "5185a511-69d6-451b-997b-c7c398326490",
     "name": "Hip Abduction (Machine)",
     "primary_muscle_group": "abductors",
     "other_muscles": [],
@@ -2968,7 +2952,7 @@
     ]
   },
   {
-    "exerciseId": "05981201",
+    "exerciseId": "4e3d5b27-8863-4a24-9120-81a0d79e41b8",
     "name": "Hip Adduction (Machine)",
     "primary_muscle_group": "adductors",
     "other_muscles": [],
@@ -2984,7 +2968,7 @@
     ]
   },
   {
-    "exerciseId": "80151201",
+    "exerciseId": "f03b24eb-e1b0-4f41-84c8-aeb572687a3f",
     "name": "Hip Thrust",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -3003,7 +2987,7 @@
     ]
   },
   {
-    "exerciseId": "10601201",
+    "exerciseId": "5c5237fa-f628-489c-b9e7-2b3a86d2a471",
     "name": "Hip Thrust (Barbell)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -3023,7 +3007,7 @@
     ]
   },
   {
-    "exerciseId": "21461201",
+    "exerciseId": "5eebd7a9-1772-494d-887f-adcf897870fd",
     "name": "Hip Thrust (Machine)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -3043,7 +3027,7 @@
     ]
   },
   {
-    "exerciseId": "57611201",
+    "exerciseId": "7848b62a-9e28-4de3-a74c-8a0f58b014ad",
     "name": "Hip Thrust (Smith Machine)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -3063,7 +3047,7 @@
     ]
   },
   {
-    "exerciseId": "56491201",
+    "exerciseId": "b7c615d2-afe1-4dbc-8dd2-165d9d7199d5",
     "name": "Hollow Rock",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -3079,7 +3063,7 @@
     ]
   },
   {
-    "exerciseId": "00471201",
+    "exerciseId": "a36635cf-67b5-4884-8bd2-6b4dfab5ba5e",
     "name": "Incline Bench Press (Barbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -3099,7 +3083,7 @@
     ]
   },
   {
-    "exerciseId": "03141201",
+    "exerciseId": "b4e9c609-a2d4-41fa-a1b7-90fef81ca68a",
     "name": "Incline Bench Press (Dumbbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -3119,7 +3103,7 @@
     ]
   },
   {
-    "exerciseId": "07571201",
+    "exerciseId": "ab826ab6-203a-4142-929f-0dac10afb6d9",
     "name": "Incline Bench Press (Smith Machine)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -3139,7 +3123,7 @@
     ]
   },
   {
-    "exerciseId": "03191201",
+    "exerciseId": "addebbd7-4b30-4c01-a5dd-7188980f66bc",
     "name": "Incline Chest Fly (Dumbbell)",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -3155,7 +3139,7 @@
     ]
   },
   {
-    "exerciseId": "14791201",
+    "exerciseId": "d527db86-1db6-4093-8040-4512a658b6d3",
     "name": "Incline Chest Press (Machine)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -3174,7 +3158,7 @@
     ]
   },
   {
-    "exerciseId": "37851201",
+    "exerciseId": "5549979e-91b1-4266-a968-faea58531e37",
     "name": "Incline Push Ups",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -3193,7 +3177,7 @@
     ]
   },
   {
-    "exerciseId": "04991201",
+    "exerciseId": "5840427f-2780-416e-a186-0045ef6da7d4",
     "name": "Inverted Row",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -3214,7 +3198,7 @@
     ]
   },
   {
-    "exerciseId": "05761201",
+    "exerciseId": "343e1b6a-ee21-4d3d-9209-3a4c94599655",
     "name": "Iso-Lateral Chest Press (Machine)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -3233,7 +3217,7 @@
     ]
   },
   {
-    "exerciseId": "43781201",
+    "exerciseId": "0f8a1ce5-8235-4993-8b4f-7326920c282c",
     "name": "Iso-Lateral High Row (Machine)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -3254,7 +3238,7 @@
     ]
   },
   {
-    "exerciseId": "42141201",
+    "exerciseId": "a0be4690-ebb4-4e8b-95e1-b891e1d03226",
     "name": "Iso-Lateral Low Row",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -3275,7 +3259,7 @@
     ]
   },
   {
-    "exerciseId": "05881201",
+    "exerciseId": "cad8d26a-ac82-411f-bed3-1a827a56225e",
     "name": "Iso-Lateral Row (Machine)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -3296,7 +3280,7 @@
     ]
   },
   {
-    "exerciseId": "10821201",
+    "exerciseId": "f75973d6-4173-4fe8-8cbf-4db359f296a0",
     "name": "Jack Knife (Suspension)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -3312,7 +3296,7 @@
     ]
   },
   {
-    "exerciseId": "38841201",
+    "exerciseId": "93afbc9a-8f73-4ca9-9a9d-47f579582d64",
     "name": "Jackknife Sit Up",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -3328,23 +3312,7 @@
     ]
   },
   {
-    "exerciseId": "333522a7-7dda-468a-b068-2d934579d17c",
-    "name": "Jump Rope",
-    "primary_muscle_group": "cardio",
-    "other_muscles": [],
-    "equipment_category": "other",
-    "video_url": "nan",
-    "thumbnail_image": "05111101-Jump-Rope_Cardio_small_thumbnail@3x.jpg",
-    "steps": [
-      "Step:1 Get into the correct starting position for this exercise.",
-      "Step:2 Engage your core and maintain good posture.",
-      "Step:3 Perform the movement through its full range of motion.",
-      "Step:4 Focus on the target muscles and avoid using momentum.",
-      "Step:5 Return to the starting position with control and repeat."
-    ]
-  },
-  {
-    "exerciseId": "00521201",
+    "exerciseId": "20f8d006-22b6-4455-8a33-85b6d32b2619",
     "name": "JM Press (Barbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -3363,7 +3331,7 @@
     ]
   },
   {
-    "exerciseId": "49641201",
+    "exerciseId": "d506f6ae-bcb8-4a10-9aa4-4aeac843334c",
     "name": "Jump Shrug",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -3379,7 +3347,7 @@
     ]
   },
   {
-    "exerciseId": "05141201",
+    "exerciseId": "e3ff52a5-5d2a-4bf2-b973-11937fbd88b5",
     "name": "Jump Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -3401,7 +3369,7 @@
     ]
   },
   {
-    "exerciseId": "30941201",
+    "exerciseId": "1875969a-4f21-4b07-b65e-85b54e03ad48",
     "name": "Jumping Jack",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -3417,7 +3385,7 @@
     ]
   },
   {
-    "exerciseId": "11661201",
+    "exerciseId": "ee1b62d7-9f6b-4b4b-a36a-9ca0a0960332",
     "name": "Jumping Lunge",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -3437,7 +3405,7 @@
     ]
   },
   {
-    "exerciseId": "45341201",
+    "exerciseId": "c045dfa5-4278-48be-9e34-a0c9288a863c",
     "name": "Kettlebell Around the World",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -3457,7 +3425,7 @@
     ]
   },
   {
-    "exerciseId": "45301201",
+    "exerciseId": "cfb2520d-25f4-416b-9cdd-d3b3d4d7f3aa",
     "name": "Kettlebell Clean",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -3473,7 +3441,7 @@
     ]
   },
   {
-    "exerciseId": "69331201",
+    "exerciseId": "63acb339-9100-4f5c-9e7a-8bff5b5f4efe",
     "name": "Kettlebell Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -3489,7 +3457,7 @@
     ]
   },
   {
-    "exerciseId": "23561201",
+    "exerciseId": "01cb66ca-38f5-4fc7-9aab-b7f539f7974a",
     "name": "Kettlebell Goblet Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -3510,7 +3478,7 @@
     ]
   },
   {
-    "exerciseId": "29391201",
+    "exerciseId": "80d8ee51-6437-4c52-b3e7-df2bef3b89ca",
     "name": "Kettlebell Halo",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -3529,7 +3497,7 @@
     ]
   },
   {
-    "exerciseId": "05481201",
+    "exerciseId": "06481024-2bf5-4fa7-9dcd-b07438b4b22b",
     "name": "Kettlebell High Pull",
     "primary_muscle_group": "full_body",
     "other_muscles": [
@@ -3547,7 +3515,7 @@
     ]
   },
   {
-    "exerciseId": "05421201",
+    "exerciseId": "9e4ed468-3de2-4530-9fc4-ab499ee247d6",
     "name": "Kettlebell Snatch",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -3563,7 +3531,7 @@
     ]
   },
   {
-    "exerciseId": "99571201",
+    "exerciseId": "af2814b4-f4ae-4a6f-873e-9e86f38127de",
     "name": "Kettlebell Shoulder Press",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -3581,7 +3549,7 @@
     ]
   },
   {
-    "exerciseId": "05491201",
+    "exerciseId": "32aecf8e-7fba-4a93-b4b8-655e34debf4e",
     "name": "Kettlebell Swing",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -3597,7 +3565,7 @@
     ]
   },
   {
-    "exerciseId": "05511201",
+    "exerciseId": "f6f1f9b7-a5dd-41f4-a102-272ec900b439",
     "name": "Kettlebell Turkish Get Up",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -3613,7 +3581,7 @@
     ]
   },
   {
-    "exerciseId": "21261201",
+    "exerciseId": "bf307c04-c1ad-4140-beb4-0ea9f326bcc7",
     "name": "Knee Raise Parallel Bars",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -3629,7 +3597,7 @@
     ]
   },
   {
-    "exerciseId": "43581201",
+    "exerciseId": "60439442-7049-4a39-abe0-fcd2d6ccfc4b",
     "name": "Kneeling Pulldown (band)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -3649,7 +3617,7 @@
     ]
   },
   {
-    "exerciseId": "32111201",
+    "exerciseId": "01a9900e-42b3-4e37-bcbe-48eeee8259ae",
     "name": "Kneeling Push Up",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -3668,7 +3636,7 @@
     ]
   },
   {
-    "exerciseId": "14021201",
+    "exerciseId": "3ab0d49c-4131-4b70-9ebe-0c44576377a2",
     "name": "L-Sit Hold",
     "primary_muscle_group": "abdominals",
     "other_muscles": [
@@ -3686,7 +3654,7 @@
     ]
   },
   {
-    "exerciseId": "05621201",
+    "exerciseId": "b8f6e3c2-fe68-409d-9dc4-78dbe5db7c76",
     "name": "Landmine 180",
     "primary_muscle_group": "abdominals",
     "other_muscles": [
@@ -3709,7 +3677,7 @@
     ]
   },
   {
-    "exerciseId": "32001201",
+    "exerciseId": "50735bb7-d69e-47b7-a5dd-eb10586484e0",
     "name": "Landmine Row",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -3730,7 +3698,7 @@
     ]
   },
   {
-    "exerciseId": "29761201",
+    "exerciseId": "50ca230c-b5ad-4e0c-a724-ae7e6813311a",
     "name": "Landmine Squat and Press",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -3748,7 +3716,7 @@
     ]
   },
   {
-    "exerciseId": "63921201",
+    "exerciseId": "3bc578e5-35a8-413f-a356-056770bcce3e",
     "name": "Lat Pulldown - Close Grip (Cable)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -3768,7 +3736,7 @@
     ]
   },
   {
-    "exerciseId": "31161201",
+    "exerciseId": "09a85136-cca2-4700-ab5c-18b2e8166dd8",
     "name": "Lat Pulldown (Band)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -3788,7 +3756,7 @@
     ]
   },
   {
-    "exerciseId": "01501201",
+    "exerciseId": "8d2479bf-381a-4319-8e27-00618246be19",
     "name": "Lat Pulldown (Cable)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -3808,7 +3776,7 @@
     ]
   },
   {
-    "exerciseId": "05791201",
+    "exerciseId": "c212367b-662b-47cb-99f6-9e4be86cd5f9",
     "name": "Lat Pulldown (Machine)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -3828,7 +3796,7 @@
     ]
   },
   {
-    "exerciseId": "24601201",
+    "exerciseId": "d31ade36-c68a-4acf-b6e2-7735af1b3e92",
     "name": "Lateral Band Walks",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -3846,7 +3814,7 @@
     ]
   },
   {
-    "exerciseId": "05641201",
+    "exerciseId": "2e82f84b-da10-4c31-9dc8-a350be5f224d",
     "name": "Lateral Box Jump",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -3866,7 +3834,7 @@
     ]
   },
   {
-    "exerciseId": "86421201",
+    "exerciseId": "520f2e42-5ddf-4e3d-a239-4b473dc3b0fb",
     "name": "Lateral Leg Raises",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -3884,7 +3852,7 @@
     ]
   },
   {
-    "exerciseId": "29721201",
+    "exerciseId": "41843e40-af75-4718-85ad-2b3e2c15d969",
     "name": "Lateral Lunge",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -3904,7 +3872,7 @@
     ]
   },
   {
-    "exerciseId": "09071201",
+    "exerciseId": "6aff4bab-a5e2-4c3c-9a72-f41c4bbb996c",
     "name": "Lateral Raise (Band)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -3920,7 +3888,7 @@
     ]
   },
   {
-    "exerciseId": "01781201",
+    "exerciseId": "e52a96ef-96bf-45d9-bed0-c590778b2dba",
     "name": "Lateral Raise (Cable)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -3936,7 +3904,7 @@
     ]
   },
   {
-    "exerciseId": "03341201",
+    "exerciseId": "4a7df3dc-a459-4535-af6e-bfa9a9b42cca",
     "name": "Lateral Raise (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -3952,7 +3920,7 @@
     ]
   },
   {
-    "exerciseId": "05841201",
+    "exerciseId": "d2bc99c1-f3af-4cc5-ad24-2156f566b634",
     "name": "Lateral Raise (Machine)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -3968,7 +3936,7 @@
     ]
   },
   {
-    "exerciseId": "69241201",
+    "exerciseId": "a5ef4904-8be4-4065-bed6-872327a22392",
     "name": "Lateral Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -3990,7 +3958,7 @@
     ]
   },
   {
-    "exerciseId": "05851201",
+    "exerciseId": "4aee9c9c-a9f5-4a1f-9a5e-4b23481931c9",
     "name": "Leg Extension (Machine)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [],
@@ -4006,7 +3974,7 @@
     ]
   },
   {
-    "exerciseId": "07391201",
+    "exerciseId": "d6e1f56e-625f-4ef0-aad3-9e3a61d487ae",
     "name": "Leg Press (Machine)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -4025,7 +3993,7 @@
     ]
   },
   {
-    "exerciseId": "22671201",
+    "exerciseId": "ad3027d8-1d6c-4790-9c1a-e74bc2152227",
     "name": "Leg Press Horizontal (Machine)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -4044,7 +4012,7 @@
     ]
   },
   {
-    "exerciseId": "29631201",
+    "exerciseId": "98089616-46ff-4bab-ac87-f2b01ce1b298",
     "name": "Leg Raise Parallel Bars",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -4060,7 +4028,7 @@
     ]
   },
   {
-    "exerciseId": "01791201",
+    "exerciseId": "ff393177-2986-442f-9e8c-91f311bdcdce",
     "name": "Low Cable Fly Crossovers",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -4076,7 +4044,7 @@
     ]
   },
   {
-    "exerciseId": "10921201",
+    "exerciseId": "c9f28643-2045-4ba2-be12-c719373a7776",
     "name": "Low Row (Suspension)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -4097,7 +4065,7 @@
     ]
   },
   {
-    "exerciseId": "14601201",
+    "exerciseId": "b4d78e62-7f4c-4bdc-afa0-b7a1fde490b9",
     "name": "Lunge",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -4116,7 +4084,7 @@
     ]
   },
   {
-    "exerciseId": "00541201",
+    "exerciseId": "d0dd0080-cb03-4530-be05-20f6059533bd",
     "name": "Lunge (Barbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -4135,7 +4103,7 @@
     ]
   },
   {
-    "exerciseId": "03361201",
+    "exerciseId": "32d08201-8389-4879-91aa-fd314094adeb",
     "name": "Lunge (Dumbbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -4154,7 +4122,7 @@
     ]
   },
   {
-    "exerciseId": "81941201",
+    "exerciseId": "50403db9-e312-4339-809d-d6817d8fc1b1",
     "name": "Lying Knee Raise",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -4170,7 +4138,7 @@
     ]
   },
   {
-    "exerciseId": "05861201",
+    "exerciseId": "30a951a7-e84b-4f61-b46f-16d8d6ca90d2",
     "name": "Lying Leg Curl (Machine)",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -4188,7 +4156,7 @@
     ]
   },
   {
-    "exerciseId": "11631201",
+    "exerciseId": "2b482279-bac1-4183-bf8f-c937575c22f1",
     "name": "Lying Leg Raise",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -4204,7 +4172,7 @@
     ]
   },
   {
-    "exerciseId": "101661201",
+    "exerciseId": "14fc29e3-a059-4c9a-9422-f008251b87ef",
     "name": "Lying Neck Curls",
     "primary_muscle_group": "neck",
     "other_muscles": [],
@@ -4220,7 +4188,7 @@
     ]
   },
   {
-    "exerciseId": "10431201",
+    "exerciseId": "5a498725-11d1-4ac0-8e54-9158bbd173f4",
     "name": "Lying Neck Curls (Weighted)",
     "primary_muscle_group": "neck",
     "other_muscles": [],
@@ -4236,7 +4204,7 @@
     ]
   },
   {
-    "exerciseId": "101671201",
+    "exerciseId": "cd212a45-7596-4c93-92fd-4ffdc02cf48b",
     "name": "Lying Neck Extension",
     "primary_muscle_group": "neck",
     "other_muscles": [],
@@ -4252,7 +4220,7 @@
     ]
   },
   {
-    "exerciseId": "10421201",
+    "exerciseId": "72670008-59ed-4e9b-999b-0b31c69b73e1",
     "name": "Lying Neck Extension (Weighted)",
     "primary_muscle_group": "neck",
     "other_muscles": [],
@@ -4268,7 +4236,7 @@
     ]
   },
   {
-    "exerciseId": "40381201",
+    "exerciseId": "916f8cd2-ed6c-4636-81e1-c193f6fc3d6e",
     "name": "Meadows Rows (Barbell)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -4289,7 +4257,7 @@
     ]
   },
   {
-    "exerciseId": "75311201",
+    "exerciseId": "8f3577f1-3442-4bfc-bf6b-2a128eaecd99",
     "name": "Mountain Climber",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -4305,7 +4273,7 @@
     ]
   },
   {
-    "exerciseId": "51941201",
+    "exerciseId": "8473c4b8-d030-458a-b3d8-abe85ff070c3",
     "name": "Muscle Up",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -4321,7 +4289,7 @@
     ]
   },
   {
-    "exerciseId": "47741201",
+    "exerciseId": "0c38596c-849b-425c-a2f1-2eba16e48291",
     "name": "Negative Pull Up",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -4341,7 +4309,7 @@
     ]
   },
   {
-    "exerciseId": "77461201",
+    "exerciseId": "691f3379-9b6e-4374-8179-2b88e522a0ba",
     "name": "Nordic Hamstrings Curls",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -4359,7 +4327,7 @@
     ]
   },
   {
-    "exerciseId": "06351201",
+    "exerciseId": "4ec3582a-3160-4bf9-9f54-a4cd77ce2a73",
     "name": "Oblique Crunch",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -4375,7 +4343,7 @@
     ]
   },
   {
-    "exerciseId": "07251201",
+    "exerciseId": "45db2694-1aeb-48a9-b3bb-c1ea376fdabe",
     "name": "One Arm Push Up",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -4394,7 +4362,7 @@
     ]
   },
   {
-    "exerciseId": "16361201",
+    "exerciseId": "ab1a5765-48aa-4b17-b232-e2aa136de98a",
     "name": "Overhead Curl (Cable)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -4410,7 +4378,7 @@
     ]
   },
   {
-    "exerciseId": "50761201",
+    "exerciseId": "5f9ddc77-67b9-4241-b748-ec8f1da3aa27",
     "name": "Overhead Dumbbell Lunge",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -4432,7 +4400,7 @@
     ]
   },
   {
-    "exerciseId": "101141201",
+    "exerciseId": "d886ca91-cbd5-4788-b8ed-a1d791cc4f5a",
     "name": "Overhead Plate Raise",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -4450,7 +4418,7 @@
     ]
   },
   {
-    "exerciseId": "11651201",
+    "exerciseId": "091e73bb-5af1-44c2-b1e1-48448b2a7a0d",
     "name": "Overhead Press (Barbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -4469,7 +4437,7 @@
     ]
   },
   {
-    "exerciseId": "04261201",
+    "exerciseId": "657d731c-b966-4ba3-bbce-a3f4fc626d97",
     "name": "Overhead Press (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -4487,7 +4455,7 @@
     ]
   },
   {
-    "exerciseId": "12241201",
+    "exerciseId": "b0abdc63-ba13-42dc-8122-aa65b0655709",
     "name": "Overhead Press (Smith Machine)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -4505,7 +4473,7 @@
     ]
   },
   {
-    "exerciseId": "00691201",
+    "exerciseId": "8fbf1706-5d00-4443-8ca1-eb0d1ba6dd99",
     "name": "Overhead Squat",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -4523,7 +4491,7 @@
     ]
   },
   {
-    "exerciseId": "01941201",
+    "exerciseId": "8f262e05-571c-458e-869a-4c58b07be556",
     "name": "Overhead Triceps Extension (Cable)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -4539,7 +4507,7 @@
     ]
   },
   {
-    "exerciseId": "54511201",
+    "exerciseId": "8803ed2b-e741-4cf9-8398-509bfdd28f2b",
     "name": "Partial Glute Bridge (Barbell)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -4558,7 +4526,7 @@
     ]
   },
   {
-    "exerciseId": "50161201",
+    "exerciseId": "09157898-ed24-48f1-b80e-e506b290a2b2",
     "name": "Pause Squat (Barbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -4579,7 +4547,7 @@
     ]
   },
   {
-    "exerciseId": "30171201",
+    "exerciseId": "66987393-6a1a-4940-871b-21648e39ef87",
     "name": "Pendlay Row (Barbell)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -4600,7 +4568,7 @@
     ]
   },
   {
-    "exerciseId": "49511201",
+    "exerciseId": "9de863c1-445b-4d02-99b5-e5bb0f7dd7ee",
     "name": "Pendulum Squat (Machine)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -4621,7 +4589,7 @@
     ]
   },
   {
-    "exerciseId": "29211201",
+    "exerciseId": "bfcfc2fc-b3b4-4653-8deb-db1b65f498c3",
     "name": "Pike Pushup",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -4640,7 +4608,7 @@
     ]
   },
   {
-    "exerciseId": "16571201",
+    "exerciseId": "a7f8bcd3-1497-48b5-a078-b40819b295b7",
     "name": "Pinwheel Curl (Dumbbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -4658,7 +4626,7 @@
     ]
   },
   {
-    "exerciseId": "17591201",
+    "exerciseId": "91139951-b82b-41f2-85a9-6456d2ec59a0",
     "name": "Pistol Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -4679,7 +4647,7 @@
     ]
   },
   {
-    "exerciseId": "04631201",
+    "exerciseId": "c4f2e252-e2bd-4d45-b1a7-571d714246cf",
     "name": "Plank",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -4695,7 +4663,7 @@
     ]
   },
   {
-    "exerciseId": "29781201",
+    "exerciseId": "77d56514-8ecf-44da-b659-a3b6776064c8",
     "name": "Plank Pushup",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -4715,7 +4683,7 @@
     ]
   },
   {
-    "exerciseId": "66981201",
+    "exerciseId": "02ccd36b-c5ab-4344-9358-af0c8b7e920d",
     "name": "Plate Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -4733,7 +4701,7 @@
     ]
   },
   {
-    "exerciseId": "08341201",
+    "exerciseId": "808d1a0f-2ddf-4224-86a2-146a8047ecec",
     "name": "Plate Front Raise",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -4749,7 +4717,7 @@
     ]
   },
   {
-    "exerciseId": "12251201",
+    "exerciseId": "cf27602a-43d0-4f87-9b74-7f433a30d745",
     "name": "Plate Press",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -4768,7 +4736,7 @@
     ]
   },
   {
-    "exerciseId": "08561201",
+    "exerciseId": "a9c5a702-c83b-4990-840f-5f891c219039",
     "name": "Plate Squeeze (Svend Press)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -4787,7 +4755,7 @@
     ]
   },
   {
-    "exerciseId": "06481201",
+    "exerciseId": "f07ea169-2edf-49f8-8946-38809e3ffbfd",
     "name": "Power Clean",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -4803,7 +4771,7 @@
     ]
   },
   {
-    "exerciseId": "15301201",
+    "exerciseId": "5974b308-433d-4877-a2e3-9c0cadfb9fc4",
     "name": "Power Snatch",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -4819,7 +4787,7 @@
     ]
   },
   {
-    "exerciseId": "00701201",
+    "exerciseId": "63d8989f-c61e-4277-bb82-a2a4d87e7477",
     "name": "Preacher Curl (Barbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -4835,7 +4803,7 @@
     ]
   },
   {
-    "exerciseId": "04021201",
+    "exerciseId": "4192899a-9e77-4be9-a6af-5356d47ca568",
     "name": "Preacher Curl (Dumbbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -4851,7 +4819,7 @@
     ]
   },
   {
-    "exerciseId": "05921201",
+    "exerciseId": "d106745e-6058-487f-9ea1-3ae961cad762",
     "name": "Preacher Curl (Machine)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -4867,7 +4835,7 @@
     ]
   },
   {
-    "exerciseId": "06521201",
+    "exerciseId": "d8a870b1-21a2-438b-a983-3c821b4983df",
     "name": "Pull Up",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -4887,7 +4855,7 @@
     ]
   },
   {
-    "exerciseId": "00171201",
+    "exerciseId": "1d181f26-ab7c-463e-9863-ad927beb70ce",
     "name": "Pull Up (Assisted)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -4907,7 +4875,7 @@
     ]
   },
   {
-    "exerciseId": "38441201",
+    "exerciseId": "d80d02ad-21cb-4f17-8c53-593565da7296",
     "name": "Pull Up (Band)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -4927,7 +4895,7 @@
     ]
   },
   {
-    "exerciseId": "08411201",
+    "exerciseId": "68a22139-2c21-4ca9-a71d-2dde049faed4",
     "name": "Pull Up (Weighted)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -4947,7 +4915,7 @@
     ]
   },
   {
-    "exerciseId": "03751201",
+    "exerciseId": "b9bbe44d-ffe0-410d-9b69-246b76e8923c",
     "name": "Pullover (Dumbbell)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -4967,7 +4935,7 @@
     ]
   },
   {
-    "exerciseId": "22851201",
+    "exerciseId": "f0efa1c1-8cb1-45ca-8a50-c026ecd9e4cf",
     "name": "Pullover (Machine)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -4987,7 +4955,7 @@
     ]
   },
   {
-    "exerciseId": "12001201",
+    "exerciseId": "89fc4d95-cea6-4e97-a7d7-8b602240474f",
     "name": "Push Press",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5006,7 +4974,7 @@
     ]
   },
   {
-    "exerciseId": "06621201",
+    "exerciseId": "f56fb89f-e9ad-4909-bffa-0298166801da",
     "name": "Push Up",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -5025,7 +4993,7 @@
     ]
   },
   {
-    "exerciseId": "02591201",
+    "exerciseId": "5dd58895-77ca-43eb-984f-ef9e0dfd4479",
     "name": "Push Up - Close Grip",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -5044,7 +5012,7 @@
     ]
   },
   {
-    "exerciseId": "11721201",
+    "exerciseId": "8cbd586d-e286-49b7-ba42-3a7238281c8c",
     "name": "Push Up (Weighted)",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -5063,7 +5031,7 @@
     ]
   },
   {
-    "exerciseId": "00741201",
+    "exerciseId": "cb03f06a-7ba2-45ce-9546-5abb75db73af",
     "name": "Rack Pull",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -5085,7 +5053,7 @@
     ]
   },
   {
-    "exerciseId": "02251201",
+    "exerciseId": "0da77160-8b03-4b5b-a351-b98ddd5e6f38",
     "name": "Rear Delt Reverse Fly (Cable)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5103,7 +5071,7 @@
     ]
   },
   {
-    "exerciseId": "24871201",
+    "exerciseId": "18d9d32f-ba41-4fa4-ae68-1d7778fdec99",
     "name": "Rear Delt Reverse Fly (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5121,7 +5089,7 @@
     ]
   },
   {
-    "exerciseId": "06021201",
+    "exerciseId": "aad67092-42a8-40c8-a2c4-a6251115fb05",
     "name": "Rear Delt Reverse Fly (Machine)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5139,7 +5107,7 @@
     ]
   },
   {
-    "exerciseId": "99041201",
+    "exerciseId": "59c134c9-9660-4cf7-be94-4cd095ee9cfc",
     "name": "Rear Kick (Machine)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -5157,7 +5125,7 @@
     ]
   },
   {
-    "exerciseId": "29811201",
+    "exerciseId": "fc618391-7a71-41c2-aa4f-cdc4f01fc840",
     "name": "Renegade Row (Dumbbell)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -5178,7 +5146,7 @@
     ]
   },
   {
-    "exerciseId": "08721201",
+    "exerciseId": "674752f7-e0fd-4d2a-9775-4bb687b2153e",
     "name": "Reverse Crunch",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -5194,7 +5162,7 @@
     ]
   },
   {
-    "exerciseId": "00801201",
+    "exerciseId": "9f2e864b-84bb-4a17-a8fc-20389b625299",
     "name": "Reverse Curl (Barbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -5212,7 +5180,7 @@
     ]
   },
   {
-    "exerciseId": "02061201",
+    "exerciseId": "90f82fdb-6b6f-4dc9-9e36-55fdd60f193a",
     "name": "Reverse Curl (Cable)",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -5230,7 +5198,7 @@
     ]
   },
   {
-    "exerciseId": "03821201",
+    "exerciseId": "248e916e-134d-43ba-a696-f9a2c15beddd",
     "name": "Reverse Curl (Dumbbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -5248,7 +5216,7 @@
     ]
   },
   {
-    "exerciseId": "98681201",
+    "exerciseId": "dfea33f3-45c9-4164-b75e-df25a50bd756",
     "name": "Reverse Fly Single Arm (Cable)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5266,7 +5234,7 @@
     ]
   },
   {
-    "exerciseId": "04031201",
+    "exerciseId": "176614f1-258e-4597-84bc-9c6e3bdb212c",
     "name": "Reverse Grip Concentration Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -5284,7 +5252,7 @@
     ]
   },
   {
-    "exerciseId": "02081201",
+    "exerciseId": "869b92ac-f046-4f57-8ab8-fc9f19985b92",
     "name": "Reverse Grip Lat Pulldown (Cable)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -5303,7 +5271,7 @@
     ]
   },
   {
-    "exerciseId": "05931201",
+    "exerciseId": "15e85db5-44e6-4104-8f90-d1b7ee0483d2",
     "name": "Reverse Hyperextension",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -5322,7 +5290,7 @@
     ]
   },
   {
-    "exerciseId": "63881201",
+    "exerciseId": "2a49dc0d-534e-4167-a060-70b313951eae",
     "name": "Reverse Lunge",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -5341,7 +5309,7 @@
     ]
   },
   {
-    "exerciseId": "22261201",
+    "exerciseId": "afc650d8-9565-4551-86bf-f8a6fba137d1",
     "name": "Reverse Lunge (Barbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -5360,7 +5328,7 @@
     ]
   },
   {
-    "exerciseId": "03811201",
+    "exerciseId": "161c722c-da0d-4a21-a740-82ca815fbb67",
     "name": "Reverse Lunge (Dumbbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -5379,7 +5347,7 @@
     ]
   },
   {
-    "exerciseId": "08671201",
+    "exerciseId": "015272ec-8c4e-4d3f-b624-496b3766527f",
     "name": "Reverse Plank",
     "primary_muscle_group": "abdominals",
     "other_muscles": [
@@ -5397,7 +5365,7 @@
     ]
   },
   {
-    "exerciseId": "06771201",
+    "exerciseId": "c2249e34-3089-4b5a-a0b0-459697b4952e",
     "name": "Ring Dips",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -5416,7 +5384,7 @@
     ]
   },
   {
-    "exerciseId": "55221201",
+    "exerciseId": "44abcf0e-58cd-4941-b634-cf38c918c124",
     "name": "Ring Pull Up",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -5436,7 +5404,7 @@
     ]
   },
   {
-    "exerciseId": "08061201",
+    "exerciseId": "1fc2fc96-abeb-4c93-89bc-bec9ec70847e",
     "name": "Ring Push Up",
     "primary_muscle_group": "chest",
     "other_muscles": [
@@ -5455,7 +5423,7 @@
     ]
   },
   {
-    "exerciseId": "00851201",
+    "exerciseId": "f67eb08f-ab46-4256-a47b-f17a9da51d0b",
     "name": "Romanian Deadlift (Barbell)",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -5478,7 +5446,7 @@
     ]
   },
   {
-    "exerciseId": "01651201",
+    "exerciseId": "fd201dc1-c37e-4402-8569-ee0b1718556d",
     "name": "Rope Cable Curl",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -5496,7 +5464,7 @@
     ]
   },
   {
-    "exerciseId": "14591201",
+    "exerciseId": "83a5acd7-e5cf-4f72-99bf-0638ae53e14b",
     "name": "Romanian Deadlift (Dumbbell)",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -5519,7 +5487,7 @@
     ]
   },
   {
-    "exerciseId": "02371201",
+    "exerciseId": "b2fa9902-ed49-45f4-b29f-33aaa76ac450",
     "name": "Rope Straight Arm Pulldown",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -5537,7 +5505,7 @@
     ]
   },
   {
-    "exerciseId": "22701201",
+    "exerciseId": "dfce767e-c630-43e1-80f1-5c2cd3eecb1b",
     "name": "Rowing Machine",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -5554,7 +5522,7 @@
     ]
   },
   {
-    "exerciseId": "21961201",
+    "exerciseId": "bf7abbd3-12f8-485c-803f-82ede07d0072",
     "name": "Running",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -5570,7 +5538,7 @@
     ]
   },
   {
-    "exerciseId": "06871201",
+    "exerciseId": "a782f059-feeb-4678-8cf7-edd4639697f2",
     "name": "Russian Twist (Bodyweight)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -5586,7 +5554,7 @@
     ]
   },
   {
-    "exerciseId": "23711201",
+    "exerciseId": "a2bdc8a4-db02-4a60-8dd8-46dfca5627e3",
     "name": "Russian Twist (Weighted)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -5602,7 +5570,7 @@
     ]
   },
   {
-    "exerciseId": "06881201",
+    "exerciseId": "8d48341a-5aba-4dff-91df-a97f6e4df5f5",
     "name": "Scapular Pull Ups",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -5621,7 +5589,7 @@
     ]
   },
   {
-    "exerciseId": "01801201",
+    "exerciseId": "a22fae10-2d5e-44a4-b652-1694c6eb5894",
     "name": "Seated Cable Row - Bar Grip",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -5642,7 +5610,7 @@
     ]
   },
   {
-    "exerciseId": "02181201",
+    "exerciseId": "f317066d-1589-46e2-bd2f-073090453257",
     "name": "Seated Cable Row - Bar Wide Grip",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -5664,7 +5632,7 @@
     ]
   },
   {
-    "exerciseId": "26611201",
+    "exerciseId": "701e80da-fcfc-407e-802e-11c728ae3ab4",
     "name": "Seated Cable Row - V Grip (Cable)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -5685,7 +5653,7 @@
     ]
   },
   {
-    "exerciseId": "05941201",
+    "exerciseId": "33e04430-d062-474e-b904-226d4ac78bc4",
     "name": "Seated Calf Raise",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -5701,7 +5669,7 @@
     ]
   },
   {
-    "exerciseId": "38691201",
+    "exerciseId": "8e3b041a-fbb6-4f7c-abbc-c94a24a9ca79",
     "name": "Seated Chest Flys (Cable)",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -5717,7 +5685,7 @@
     ]
   },
   {
-    "exerciseId": "14511201",
+    "exerciseId": "fd727c1c-39b6-48ea-a5be-ad6fe89a8f15",
     "name": "Seated Dip Machine",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -5736,7 +5704,7 @@
     ]
   },
   {
-    "exerciseId": "03151201",
+    "exerciseId": "2d60f74c-4741-447f-bea1-7072ac1c024f",
     "name": "Seated Incline Curl (Dumbbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -5752,7 +5720,7 @@
     ]
   },
   {
-    "exerciseId": "03961201",
+    "exerciseId": "a9ef442e-3997-40ec-87c0-996ee6ab0fee",
     "name": "Seated Lateral Raise (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -5768,7 +5736,7 @@
     ]
   },
   {
-    "exerciseId": "05991201",
+    "exerciseId": "0197bf1d-10e1-4fe1-9dd5-c88c75f03b04",
     "name": "Seated Leg Curl (Machine)",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -5786,7 +5754,7 @@
     ]
   },
   {
-    "exerciseId": "68771201",
+    "exerciseId": "2c97a166-1925-45b6-a3ec-1426f3a6470d",
     "name": "Seated Overhead Press (Barbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5804,7 +5772,7 @@
     ]
   },
   {
-    "exerciseId": "02901201",
+    "exerciseId": "4524a827-7bcc-47e7-bb61-7a79e28dcca9",
     "name": "Seated Overhead Press (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5822,7 +5790,7 @@
     ]
   },
   {
-    "exerciseId": "26331201",
+    "exerciseId": "332dd8a7-ca4d-48a0-936d-13870cc01281",
     "name": "Seated Palms Up Wrist Curl",
     "primary_muscle_group": "forearms",
     "other_muscles": [],
@@ -5838,7 +5806,7 @@
     ]
   },
   {
-    "exerciseId": "22651201",
+    "exerciseId": "19d3a1cc-1419-41a3-99e3-44c1009ec9d8",
     "name": "Seated Row (Machine)",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -5859,7 +5827,7 @@
     ]
   },
   {
-    "exerciseId": "14541201",
+    "exerciseId": "5c2a7b39-84f0-4536-b017-2141351bd8a3",
     "name": "Seated Shoulder Press (Machine)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5877,7 +5845,7 @@
     ]
   },
   {
-    "exerciseId": "18711201",
+    "exerciseId": "0aeceff8-1e37-4175-bd7c-58bf2943857e",
     "name": "Seated Triceps Press",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -5893,7 +5861,7 @@
     ]
   },
   {
-    "exerciseId": "00791201",
+    "exerciseId": "94c9a22a-9872-48cb-88c1-c48075df79a7",
     "name": "Seated Wrist Extension (Barbell)",
     "primary_muscle_group": "forearms",
     "other_muscles": [],
@@ -5909,7 +5877,7 @@
     ]
   },
   {
-    "exerciseId": "04051201",
+    "exerciseId": "dd7a4e43-4ff8-407b-b7f5-299704897570",
     "name": "Shoulder Press (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5927,7 +5895,7 @@
     ]
   },
   {
-    "exerciseId": "05871201",
+    "exerciseId": "7ee4e4e6-9932-480f-a512-451b99498d3d",
     "name": "Shoulder Press (Machine Plates)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5945,7 +5913,7 @@
     ]
   },
   {
-    "exerciseId": "06991201",
+    "exerciseId": "f985c9e2-58b5-4029-a035-573585d05668",
     "name": "Shoulder Taps",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -5964,7 +5932,7 @@
     ]
   },
   {
-    "exerciseId": "00951201",
+    "exerciseId": "b43a25d3-5bba-4c69-a75a-b816665d038e",
     "name": "Shrug (Barbell)",
     "primary_muscle_group": "traps",
     "other_muscles": [
@@ -5982,7 +5950,7 @@
     ]
   },
   {
-    "exerciseId": "02201201",
+    "exerciseId": "62f0ca6d-aa5b-4227-a934-77bd509bf2b6",
     "name": "Shrug (Cable)",
     "primary_muscle_group": "traps",
     "other_muscles": [
@@ -6000,7 +5968,7 @@
     ]
   },
   {
-    "exerciseId": "04061201",
+    "exerciseId": "9d98a5d4-b63d-4582-af31-3396be1afaff",
     "name": "Shrug (Dumbbell)",
     "primary_muscle_group": "traps",
     "other_muscles": [
@@ -6018,7 +5986,7 @@
     ]
   },
   {
-    "exerciseId": "06041201",
+    "exerciseId": "d57780c5-a034-4e12-89b8-e83ecf8cdb22",
     "name": "Shrug (Machine)",
     "primary_muscle_group": "traps",
     "other_muscles": [
@@ -6036,7 +6004,7 @@
     ]
   },
   {
-    "exerciseId": "00021201",
+    "exerciseId": "5eb39477-3105-4d5b-8f2b-949a1b35c773",
     "name": "Side Bend",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -6052,7 +6020,7 @@
     ]
   },
   {
-    "exerciseId": "07461201",
+    "exerciseId": "e0561834-5eb8-4c9f-a448-e61685d1896a",
     "name": "Shrug (Smith Machine)",
     "primary_muscle_group": "traps",
     "other_muscles": [
@@ -6070,7 +6038,7 @@
     ]
   },
   {
-    "exerciseId": "04071201",
+    "exerciseId": "96ff5673-e706-4d04-8dd1-dadf18e26fc2",
     "name": "Side Bend (Dumbbell)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -6086,7 +6054,7 @@
     ]
   },
   {
-    "exerciseId": "07151201",
+    "exerciseId": "9c6a3475-5346-4ea3-b659-cd52f20563ab",
     "name": "Side Plank",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -6102,7 +6070,7 @@
     ]
   },
   {
-    "exerciseId": "62191201",
+    "exerciseId": "962ddaa3-939e-4eb1-90ee-a4081694d74e",
     "name": "Single Arm Cable Crossover",
     "primary_muscle_group": "chest",
     "other_muscles": [],
@@ -6118,7 +6086,7 @@
     ]
   },
   {
-    "exerciseId": "75641201",
+    "exerciseId": "4993ddf7-e95f-4c37-9eb2-58fea1f15bba",
     "name": "Single Arm Cable Row",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -6139,7 +6107,7 @@
     ]
   },
   {
-    "exerciseId": "01901201",
+    "exerciseId": "5953a519-f436-4998-a0fb-eb7bff24e68e",
     "name": "Single Arm Curl (Cable)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -6155,7 +6123,7 @@
     ]
   },
   {
-    "exerciseId": "50941201",
+    "exerciseId": "bcd145a2-c4d2-4864-a6b8-3620e21f6d1b",
     "name": "Single Arm Landmine Press (Barbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -6174,7 +6142,7 @@
     ]
   },
   {
-    "exerciseId": "12041201",
+    "exerciseId": "833ad43e-8760-4bec-8144-e9d9cba02674",
     "name": "Single Arm Lat Pulldown",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -6194,7 +6162,7 @@
     ]
   },
   {
-    "exerciseId": "03621201",
+    "exerciseId": "05ec71d8-236b-4ff4-91f6-dd534d51061f",
     "name": "Single Arm Tricep Extension (Dumbbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -6210,7 +6178,7 @@
     ]
   },
   {
-    "exerciseId": "50331201",
+    "exerciseId": "0647e559-164f-44f3-ae8e-b35a0c2d6f3c",
     "name": "Single Arm Triceps Pushdown (Cable)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -6226,7 +6194,7 @@
     ]
   },
   {
-    "exerciseId": "01921201",
+    "exerciseId": "604c83a5-6db2-4556-9cb3-1bcbd3cbc7ff",
     "name": "Single Arm Lateral Raise (Cable)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [],
@@ -6242,7 +6210,7 @@
     ]
   },
   {
-    "exerciseId": "71081201",
+    "exerciseId": "10f16a75-0c93-43de-a9bc-8a39a4067d37",
     "name": "Single Leg Extensions",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [],
@@ -6258,7 +6226,7 @@
     ]
   },
   {
-    "exerciseId": "60001201",
+    "exerciseId": "9ac3f30f-e305-4ddc-9af4-526eb4e2ec71",
     "name": "Single Leg Glute Bridge",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -6277,7 +6245,7 @@
     ]
   },
   {
-    "exerciseId": "80751201",
+    "exerciseId": "8d46ee16-3aa7-4b4a-a30e-4cb30b877d8a",
     "name": "Single Leg Hip Thrust (Dumbbell)",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -6296,7 +6264,7 @@
     ]
   },
   {
-    "exerciseId": "20711201",
+    "exerciseId": "1de2b63e-8dbb-4586-8228-a5f7e9f39844",
     "name": "Single Leg Hip Thrust",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -6315,7 +6283,7 @@
     ]
   },
   {
-    "exerciseId": "08831201",
+    "exerciseId": "da936e7e-7465-40b7-81ac-daa8aa8c7cfe",
     "name": "Single Leg Press (Machine)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6334,7 +6302,7 @@
     ]
   },
   {
-    "exerciseId": "17561201",
+    "exerciseId": "54522e59-9e89-4ed3-b824-d107243fd500",
     "name": "Single Leg Romanian Deadlift (Barbell)",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -6357,7 +6325,7 @@
     ]
   },
   {
-    "exerciseId": "97541201",
+    "exerciseId": "f1d53d9d-57b4-4679-a4f2-53a3bf8360dc",
     "name": "Single Leg Romanian Deadlift (Dumbbell)",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -6378,7 +6346,7 @@
     ]
   },
   {
-    "exerciseId": "50521201",
+    "exerciseId": "e2ddfd5e-067f-4d8a-ab5e-6de52678a48d",
     "name": "Single Leg Standing Calf Raise",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -6394,7 +6362,7 @@
     ]
   },
   {
-    "exerciseId": "101691201",
+    "exerciseId": "6f5af881-f619-4ede-9e92-da0f483a6856",
     "name": "Single Leg Standing Calf Raise (Barbell)",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -6410,7 +6378,7 @@
     ]
   },
   {
-    "exerciseId": "39731201",
+    "exerciseId": "ab8acb6f-171e-40c8-b304-7d0a3c231e72",
     "name": "Single Leg Standing Calf Raise (Dumbbell)",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -6426,7 +6394,7 @@
     ]
   },
   {
-    "exerciseId": "100761201",
+    "exerciseId": "7720fe78-21d4-41d1-b04e-e636d3097cbf",
     "name": "Single Leg Standing Calf Raise (Machine)",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -6442,7 +6410,7 @@
     ]
   },
   {
-    "exerciseId": "08511201",
+    "exerciseId": "72d4680f-d5fd-4318-a163-664af45b9317",
     "name": "Sissy Squat (Weighted)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [],
@@ -6460,7 +6428,7 @@
     ]
   },
   {
-    "exerciseId": "00011201",
+    "exerciseId": "35f58bb0-b8aa-4588-b477-7f203612b75f",
     "name": "Sit Up",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -6476,7 +6444,7 @@
     ]
   },
   {
-    "exerciseId": "47561201",
+    "exerciseId": "afa79a10-9a20-40e1-95d5-29d720c05b09",
     "name": "Sit Up (Weighted)",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -6492,7 +6460,7 @@
     ]
   },
   {
-    "exerciseId": "00601201",
+    "exerciseId": "3c293b28-2694-441c-bbd2-7b2998c09f40",
     "name": "Skullcrusher (Barbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -6508,7 +6476,7 @@
     ]
   },
   {
-    "exerciseId": "22511201",
+    "exerciseId": "a4f90046-b466-4ef2-a03a-69c3f6ac8b51",
     "name": "Skullcrusher (Dumbbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -6524,7 +6492,7 @@
     ]
   },
   {
-    "exerciseId": "25241201",
+    "exerciseId": "1a490f88-6427-4dba-9ae0-a9bfd83ef4d9",
     "name": "Sled Push",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -6540,7 +6508,7 @@
     ]
   },
   {
-    "exerciseId": "15331201",
+    "exerciseId": "fdbd88a8-f5c4-44a3-940d-a2a84b9ad752",
     "name": "Snatch",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -6556,7 +6524,7 @@
     ]
   },
   {
-    "exerciseId": "00721201",
+    "exerciseId": "2c68513a-6b6f-4d46-bfe0-753e8d0286db",
     "name": "Spider Curl (Barbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -6572,7 +6540,7 @@
     ]
   },
   {
-    "exerciseId": "03741201",
+    "exerciseId": "aa2528af-8a7e-46cd-966f-205e7ea637bc",
     "name": "Spider Curl (Dumbbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [],
@@ -6588,7 +6556,7 @@
     ]
   },
   {
-    "exerciseId": "48791201",
+    "exerciseId": "52b546d4-83bb-48dc-97fc-ed51de25ee2c",
     "name": "Spiderman",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -6604,7 +6572,7 @@
     ]
   },
   {
-    "exerciseId": "22791201",
+    "exerciseId": "ce434e0c-1258-414f-8675-88dd4a7150de",
     "name": "Spinning",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -6620,7 +6588,7 @@
     ]
   },
   {
-    "exerciseId": "15381201",
+    "exerciseId": "87ed4c6c-a6fb-4b4c-8947-d5a87319186f",
     "name": "Split Jerk",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -6636,7 +6604,7 @@
     ]
   },
   {
-    "exerciseId": "29601201",
+    "exerciseId": "14c4ff10-0dce-4f00-ac44-7a80fb3de0dc",
     "name": "Split Squat (Dumbbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6657,7 +6625,7 @@
     ]
   },
   {
-    "exerciseId": "57491201",
+    "exerciseId": "b25b8214-5374-4fd9-bfde-fd03d2571193",
     "name": "Squat (Band)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6678,7 +6646,7 @@
     ]
   },
   {
-    "exerciseId": "00431201",
+    "exerciseId": "567f7fe2-12a5-4e74-a0e0-fdbc6f1f5cff",
     "name": "Squat (Barbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6699,7 +6667,7 @@
     ]
   },
   {
-    "exerciseId": "11971201",
+    "exerciseId": "04ab530c-5893-45ba-a43b-ccabcb129331",
     "name": "Squat (Bodyweight)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6720,7 +6688,7 @@
     ]
   },
   {
-    "exerciseId": "04131201",
+    "exerciseId": "51384d35-d52c-4a84-bac1-c73f63ed79a8",
     "name": "Squat (Dumbbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6741,7 +6709,7 @@
     ]
   },
   {
-    "exerciseId": "57881201",
+    "exerciseId": "8de88ecc-b9ba-4264-8781-952b7a5c4cd2",
     "name": "Squat (Machine)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6762,7 +6730,7 @@
     ]
   },
   {
-    "exerciseId": "07501201",
+    "exerciseId": "69fc6e9d-0ae8-4832-a405-68d73483eac9",
     "name": "Squat (Smith Machine)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6783,7 +6751,7 @@
     ]
   },
   {
-    "exerciseId": "11431201",
+    "exerciseId": "818acf35-b930-4cb7-9d84-e2a54236f97c",
     "name": "Squat (Suspension)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6804,7 +6772,7 @@
     ]
   },
   {
-    "exerciseId": "23111201",
+    "exerciseId": "24fcfb1a-259a-4c60-8499-ea30261775df",
     "name": "Stair Machine (Floors)",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -6820,7 +6788,7 @@
     ]
   },
   {
-    "exerciseId": "17171201",
+    "exerciseId": "38ba9494-522e-4e8b-abca-ee89e3440e8e",
     "name": "Squat Row",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -6838,7 +6806,7 @@
     ]
   },
   {
-    "exerciseId": "60401201",
+    "exerciseId": "7a0371f0-78f4-4054-8fe8-3b0110e5375b",
     "name": "Standing Cable Glute Kickbacks",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -6856,7 +6824,7 @@
     ]
   },
   {
-    "exerciseId": "dcf4b3f3-c501-4919-b7c8-70fd41fb4de2",
+    "exerciseId": "d95d14e4-1f54-48d4-99f5-51000f2c1e3f",
     "name": "Standing Calf Raise",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -6872,7 +6840,7 @@
     ]
   },
   {
-    "exerciseId": "01081201",
+    "exerciseId": "f76ee98f-cc60-4b97-b040-e6feb675852f",
     "name": "Standing Calf Raise (Barbell)",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -6888,7 +6856,7 @@
     ]
   },
   {
-    "exerciseId": "04171201",
+    "exerciseId": "27c632fd-4bf7-4f2d-a745-3ee58225b313",
     "name": "Standing Calf Raise (Dumbbell)",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -6904,7 +6872,7 @@
     ]
   },
   {
-    "exerciseId": "06051201",
+    "exerciseId": "b63a7a5a-7a55-4c5c-870a-0b50db63d9dc",
     "name": "Standing Calf Raise (Machine)",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -6920,7 +6888,7 @@
     ]
   },
   {
-    "exerciseId": "11641201",
+    "exerciseId": "ccf0b1ff-c200-4733-9b76-110099f2e161",
     "name": "Standing Calf Raise (Smith)",
     "primary_muscle_group": "calves",
     "other_muscles": [],
@@ -6936,7 +6904,7 @@
     ]
   },
   {
-    "exerciseId": "51811201",
+    "exerciseId": "7d1d29ca-32db-41ba-afb0-f4299797619f",
     "name": "Standing Leg Curls",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -6954,7 +6922,7 @@
     ]
   },
   {
-    "exerciseId": "11651201",
+    "exerciseId": "589b717a-a4c4-429f-9284-860ed7522d43",
     "name": "Standing Military Press (Barbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -6972,7 +6940,7 @@
     ]
   },
   {
-    "exerciseId": "94901201",
+    "exerciseId": "6f6bf035-dd5e-401b-8495-2e24e45bdcb5",
     "name": "Step Up",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -6991,7 +6959,7 @@
     ]
   },
   {
-    "exerciseId": "04661201",
+    "exerciseId": "30d68c1e-fdab-425f-9601-85e9f556737b",
     "name": "Sternum Pull up (Gironda)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -7011,7 +6979,7 @@
     ]
   },
   {
-    "exerciseId": "02381201",
+    "exerciseId": "87a6bd88-a92f-4509-90df-2ab62abccf4c",
     "name": "Straight Arm Lat Pulldown (Cable)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -7029,7 +6997,7 @@
     ]
   },
   {
-    "exerciseId": "01161201",
+    "exerciseId": "c485c660-2dfa-4eaa-906d-fb76661fbc24",
     "name": "Straight Leg Deadlift",
     "primary_muscle_group": "hamstrings",
     "other_muscles": [
@@ -7053,7 +7021,7 @@
     ]
   },
   {
-    "exerciseId": "01171201",
+    "exerciseId": "66eea796-01f3-4287-8b98-6564a92c72f0",
     "name": "Sumo Deadlift",
     "primary_muscle_group": "glutes",
     "other_muscles": [
@@ -7079,7 +7047,7 @@
     ]
   },
   {
-    "exerciseId": "10641201",
+    "exerciseId": "7883f142-e227-4666-a50c-b3f248397acc",
     "name": "Sumo Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -7101,7 +7069,7 @@
     ]
   },
   {
-    "exerciseId": "10631201",
+    "exerciseId": "1209761c-a43f-4519-ad27-2734906a521a",
     "name": "Sumo Squat (Barbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -7123,7 +7091,7 @@
     ]
   },
   {
-    "exerciseId": "23221201",
+    "exerciseId": "5e0f700e-7ce0-4a71-88be-be3c020f52cb",
     "name": "Sumo Squat (Dumbbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -7145,7 +7113,7 @@
     ]
   },
   {
-    "exerciseId": "50731201",
+    "exerciseId": "4c3fc900-6f36-49a9-84df-ee3a70411292",
     "name": "Sumo Squat (Kettlebell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -7167,7 +7135,7 @@
     ]
   },
   {
-    "exerciseId": "68861201",
+    "exerciseId": "b04e2363-e996-4877-893b-87d9be5ec087",
     "name": "Superman",
     "primary_muscle_group": "lower_back",
     "other_muscles": [
@@ -7186,7 +7154,7 @@
     ]
   },
   {
-    "exerciseId": "06061201",
+    "exerciseId": "8c5ce915-b6f1-4003-be30-9b66e30b1074",
     "name": "T Bar Row",
     "primary_muscle_group": "upper_back",
     "other_muscles": [
@@ -7207,7 +7175,7 @@
     ]
   },
   {
-    "exerciseId": "33051201",
+    "exerciseId": "90ffab9a-1d8b-4ed6-83f6-b02e746d77c7",
     "name": "Thruster (Barbell)",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -7223,7 +7191,7 @@
     ]
   },
   {
-    "exerciseId": "05501201",
+    "exerciseId": "a6870a26-fa1c-4b5d-998e-9da62550f0d2",
     "name": "Thruster (Kettlebell)",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -7239,7 +7207,7 @@
     ]
   },
   {
-    "exerciseId": "52751201",
+    "exerciseId": "3be59837-8298-4657-822a-9bda614b121e",
     "name": "Toe Touch",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -7255,7 +7223,7 @@
     ]
   },
   {
-    "exerciseId": "04741201",
+    "exerciseId": "93eae209-d377-4549-bf27-b77e8c7b39b7",
     "name": "Toes to Bar",
     "primary_muscle_group": "abdominals",
     "other_muscles": [
@@ -7273,7 +7241,7 @@
     ]
   },
   {
-    "exerciseId": "100651201",
+    "exerciseId": "2945d088-46b5-4ea6-9970-e8ecc10da954",
     "name": "Torso Rotation",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -7289,7 +7257,7 @@
     ]
   },
   {
-    "exerciseId": "21971201",
+    "exerciseId": "4216f003-b28c-416c-8550-d74221fc997f",
     "name": "Treadmill",
     "primary_muscle_group": "cardio",
     "other_muscles": [],
@@ -7305,7 +7273,7 @@
     ]
   },
   {
-    "exerciseId": "08141201",
+    "exerciseId": "5d744a9e-5992-4175-84e3-a8068bd82a52",
     "name": "Triceps Dip",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -7324,7 +7292,7 @@
     ]
   },
   {
-    "exerciseId": "00191201",
+    "exerciseId": "f228b9d1-e6b7-480c-8310-f99a62863f05",
     "name": "Triceps Dip (Assisted)",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -7343,7 +7311,7 @@
     ]
   },
   {
-    "exerciseId": "17551201",
+    "exerciseId": "21423fd8-aa60-45f1-b6e6-ef7682505d05",
     "name": "Triceps Dip (Weighted)",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -7362,7 +7330,7 @@
     ]
   },
   {
-    "exerciseId": "00921201",
+    "exerciseId": "7ac3e6cb-14fa-400a-b6de-ff55b2843c30",
     "name": "Triceps Extension (Barbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7378,7 +7346,7 @@
     ]
   },
   {
-    "exerciseId": "01491201",
+    "exerciseId": "738bdabf-dfa3-4260-961c-9e320cfe08b2",
     "name": "Triceps Extension (Cable)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7394,7 +7362,7 @@
     ]
   },
   {
-    "exerciseId": "04301201",
+    "exerciseId": "7003c089-a624-413b-bebd-a83c25d08333",
     "name": "Triceps Extension (Dumbbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7410,7 +7378,7 @@
     ]
   },
   {
-    "exerciseId": "10331201",
+    "exerciseId": "33e02a0d-05f6-4b8e-831b-560e08362a95",
     "name": "Triceps Extension (Machine)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7426,7 +7394,7 @@
     ]
   },
   {
-    "exerciseId": "58761201",
+    "exerciseId": "e8f049dc-fec7-4824-9606-3f421d5b4df3",
     "name": "Triceps Extension (Suspension)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7442,7 +7410,7 @@
     ]
   },
   {
-    "exerciseId": "45661201",
+    "exerciseId": "3deeb048-332f-4442-a695-52e9866aeb2d",
     "name": "Triceps Kickback (Cable)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7458,7 +7426,7 @@
     ]
   },
   {
-    "exerciseId": "03331201",
+    "exerciseId": "d5e5c0f8-a82a-4c84-9b96-988dc0d67def",
     "name": "Triceps Kickback (Dumbbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7474,7 +7442,7 @@
     ]
   },
   {
-    "exerciseId": "16051201",
+    "exerciseId": "6ba0e1bd-fafb-4813-87c3-ded647778477",
     "name": "Triceps Pressdown",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7490,7 +7458,7 @@
     ]
   },
   {
-    "exerciseId": "02011201",
+    "exerciseId": "cf0683af-3767-4230-b9ac-a9397c50fc2d",
     "name": "Triceps Pushdown",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7506,7 +7474,7 @@
     ]
   },
   {
-    "exerciseId": "24381201",
+    "exerciseId": "5eef8932-9b80-4fe3-90f0-ea6c8535eebd",
     "name": "Triceps Rope Pushdown",
     "primary_muscle_group": "triceps",
     "other_muscles": [],
@@ -7522,7 +7490,7 @@
     ]
   },
   {
-    "exerciseId": "01211201",
+    "exerciseId": "2c5a53f1-afa4-4532-9a12-a2f43ac23743",
     "name": "Upright Row (Barbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -7544,7 +7512,7 @@
     ]
   },
   {
-    "exerciseId": "02461201",
+    "exerciseId": "b1fc925f-3d72-4a44-b23a-a827f94934a0",
     "name": "Upright Row (Cable)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -7566,7 +7534,7 @@
     ]
   },
   {
-    "exerciseId": "04371201",
+    "exerciseId": "09391396-feb6-413d-8370-129c593fe827",
     "name": "Upright Row (Dumbbell)",
     "primary_muscle_group": "shoulders",
     "other_muscles": [
@@ -7588,7 +7556,7 @@
     ]
   },
   {
-    "exerciseId": "08251201",
+    "exerciseId": "06429c9c-255b-4822-964f-da6d163acb3a",
     "name": "V Up",
     "primary_muscle_group": "abdominals",
     "other_muscles": [],
@@ -7604,7 +7572,7 @@
     ]
   },
   {
-    "exerciseId": "71791201",
+    "exerciseId": "592284a8-4c27-4962-87a2-18505a5f91cf",
     "name": "Vertical Traction (Machine)",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -7624,7 +7592,7 @@
     ]
   },
   {
-    "exerciseId": "52011201",
+    "exerciseId": "16c840cd-b5be-4fc3-8037-9777cb5f0b0c",
     "name": "Waiter Curl (Dumbbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [
@@ -7642,7 +7610,7 @@
     ]
   },
   {
-    "exerciseId": "14601201",
+    "exerciseId": "a996f741-8328-4bdb-847c-85b9eff215ce",
     "name": "Walking Lunge",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -7661,7 +7629,7 @@
     ]
   },
   {
-    "exerciseId": "15571201",
+    "exerciseId": "d16e3bc1-0653-4fcc-a9e1-18b772396d70",
     "name": "Walking Lunge (Dumbbell)",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -7680,7 +7648,7 @@
     ]
   },
   {
-    "exerciseId": "51611201",
+    "exerciseId": "1d9d2120-7235-40db-8d83-76803c76b192",
     "name": "Wall Ball",
     "primary_muscle_group": "full_body",
     "other_muscles": [],
@@ -7696,7 +7664,7 @@
     ]
   },
   {
-    "exerciseId": "66961201",
+    "exerciseId": "f14987b0-bb3f-4a27-a977-dbb857738fa7",
     "name": "Wall Sit",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -7714,7 +7682,7 @@
     ]
   },
   {
-    "exerciseId": "14291201",
+    "exerciseId": "ac95bd00-3b6f-4c8a-a02e-f3c3156427a3",
     "name": "Wide Pull Up",
     "primary_muscle_group": "lats",
     "other_muscles": [
@@ -7734,7 +7702,7 @@
     ]
   },
   {
-    "exerciseId": "04361201",
+    "exerciseId": "fe1d65a6-0af5-4a6e-bd7e-cf63d33cf14c",
     "name": "Wide-Elbow Triceps Press (Dumbbell)",
     "primary_muscle_group": "triceps",
     "other_muscles": [
@@ -7753,7 +7721,7 @@
     ]
   },
   {
-    "exerciseId": "08591201",
+    "exerciseId": "95d4af45-cf6f-4a59-bc8b-28c89894ac55",
     "name": "Wrist Roller",
     "primary_muscle_group": "forearms",
     "other_muscles": [
@@ -7771,7 +7739,7 @@
     ]
   },
   {
-    "exerciseId": "15451201",
+    "exerciseId": "27c98784-fbfd-4e5b-9659-bd553e169327",
     "name": "Zercher Squat",
     "primary_muscle_group": "quadriceps",
     "other_muscles": [
@@ -7793,7 +7761,7 @@
     ]
   },
   {
-    "exerciseId": "04391201",
+    "exerciseId": "fc5728df-767e-4bc2-aabc-1f067574b399",
     "name": "Zottman Curl (Dumbbell)",
     "primary_muscle_group": "biceps",
     "other_muscles": [
