@@ -56,7 +56,7 @@ export default function UserUnitPreferencesScreen() {
 
     if (success) {
       onboardingLogger.info('handleContinue: Success! Navigating to season overview');
-      router.push('/onboarding/season-overview');
+      router.push('/onboarding/health/strength/season-overview');
     } else {
       onboardingLogger.error('handleContinue: Failed to complete unit preferences step');
     }

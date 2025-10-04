@@ -1,48 +1,28 @@
-import { useState, useEffect } from 'react';
-import { seasonFocusService } from '../../domain/services/SeasonFocusService';
+import { useEffect } from 'react';
+import { useSelector } from '@legendapp/state/react';
+import { seasonFocusStore } from '../../store/seasonFocus/seasonFocusStore';
 import { PillarWithAreas } from '../../domain/views/pillarViews';
 
 /**
- * Custom hook for fetching season focus options (pillars and areas)
+ * Custom hook for accessing season focus options (pillars and areas)
  * Used during season creation onboarding
+ * 
+ * Data is prefetched by AppDataProvider and cached in seasonFocusStore.
+ * This hook provides a simple interface to access the cached data.
  */
 export const useSeasonFocus = () => {
-  const [pillars, setPillars] = useState<PillarWithAreas[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // Subscribe to store state
+  const pillars = useSelector(seasonFocusStore.pillarsWithAreas);
+  const isLoading = useSelector(seasonFocusStore.isLoading);
+  const error = useSelector(seasonFocusStore.error);
+  const isInitialized = useSelector(seasonFocusStore.isInitialized);
 
+  // Lazy load if not already initialized (fallback for edge cases)
   useEffect(() => {
-    let isMounted = true;
-
-    const fetchPillarsWithAreas = async () => {
-      try {
-        setIsLoading(true);
-        setError(null);
-        
-        const data = await seasonFocusService.getPillarsWithAreas();
-        
-        if (isMounted) {
-          setPillars(data);
-        }
-      } catch (err) {
-        if (isMounted) {
-          setError(err instanceof Error ? err.message : 'Failed to load focus options');
-          console.error('Error loading pillars with areas:', err);
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    fetchPillarsWithAreas();
-
-    // Cleanup function
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+    if (!isInitialized && !isLoading) {
+      seasonFocusStore.loadPillarsWithAreas();
+    }
+  }, [isInitialized, isLoading]);
 
   return {
     pillars,

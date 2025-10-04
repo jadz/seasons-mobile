@@ -30,3 +30,4 @@ $$ language plpgsql security definer;
 
 -- Add comment for the function
 COMMENT ON FUNCTION check_username_availability(text) IS 'Checks if a username is available by bypassing RLS policies. Returns true if available, false if taken.';
+

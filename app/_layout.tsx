@@ -3,6 +3,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { Slot } from 'expo-router';
 import { useEffect } from 'react';
 import { AuthProvider } from '../store/auth/AuthProvider';
+import { AppDataProvider } from '../store/appData/AppDataProvider';
 import {
   Geist_300Light,
   Geist_400Regular,
@@ -41,7 +42,9 @@ export default function RootLayout() {
 
   return (
     <AuthProvider>
-      <Slot />
+      <AppDataProvider>
+        <Slot />
+      </AppDataProvider>
     </AuthProvider>
   );
 }
