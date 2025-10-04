@@ -1,6 +1,6 @@
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { Slot } from 'expo-router';
+import { Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { AuthProvider } from '../store/auth/AuthProvider';
 import { AppDataProvider } from '../store/appData/AppDataProvider';
@@ -14,6 +14,19 @@ import {
 
 SplashScreen.preventAutoHideAsync();
 
+/**
+ * Root Layout
+ * 
+ * Defines the top-level navigation structure for the entire app.
+ * Uses Stack instead of Slot to provide proper navigation control and screen management.
+ * 
+ * Navigation Structure:
+ * - index: Entry point that redirects based on auth/onboarding state
+ * - (auth): Authentication flows (sign-in, etc.)
+ * - onboarding: User and season onboarding flows
+ * - (tabs): Main authenticated app experience
+ * - playground: Development/testing screen
+ */
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     Geist_300Light,
@@ -43,7 +56,60 @@ export default function RootLayout() {
   return (
     <AuthProvider>
       <AppDataProvider>
-        <Slot />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          {/* Entry point - handles auth/onboarding routing logic */}
+          <Stack.Screen 
+            name="index"
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          {/* Authentication flow (grouped) */}
+          <Stack.Screen 
+            name="(auth)"
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          {/* Onboarding flow (grouped) */}
+          <Stack.Screen 
+            name="onboarding"
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          {/* Main app (grouped tabs) */}
+          <Stack.Screen 
+            name="(tabs)"
+            options={{
+              headerShown: false,
+            }}
+          />
+
+          {/* Development/testing screens */}
+          <Stack.Screen 
+            name="playground"
+            options={{
+              headerShown: false,
+              presentation: 'modal',
+            }}
+          />
+
+          {/* Legacy onboarding entry (if still needed) */}
+          <Stack.Screen 
+            name="user-onboarding"
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack>
       </AppDataProvider>
     </AuthProvider>
   );

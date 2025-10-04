@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { seasonFocusStore } from '../seasonFocus/seasonFocusStore';
+import { exerciseStore } from '../exercise/exerciseStore';
 
 /**
  * AppDataProvider - Orchestrates prefetching of reference/system data
@@ -38,8 +39,8 @@ export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) =>
         // Prefetch all reference data in parallel
         await Promise.all([
           seasonFocusStore.loadPillarsWithAreas(),
+          exerciseStore.loadExercises(),
           // Add more reference data here as needed:
-          // exerciseStore.loadExercises(),
           // trainingTemplateStore.loadTemplates(),
         ]);
         
